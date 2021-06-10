@@ -1,4 +1,4 @@
-﻿===Accordions or FAQs ===
+﻿=== Accordions - Multiple Accordions or FAQs Builder ===
 Contributors: biplob018
 Donate link: https://www.oxilab.org
 Tags: Accordion, accordions, accordion plugin, FAQ, collapse, accordion plugin jquery, accordions plugin wordpress, accordions shortcode
