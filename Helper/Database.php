@@ -1,6 +1,6 @@
 <?php
 
-namespace OXI_TABS_PLUGINS\Helper;
+namespace OXI_ACCORDIONS_PLUGINS\Helper;
 
 /**
  *
@@ -11,28 +11,28 @@ Class Database {
     /**
      * Define $wpdb
      *
-     * @since 3.3.0
+     * @since 2.0.1
      */
     public $wpdb;
 
     /**
      * Database Parent Table
      *
-     * @since 3.3.0
+     * @since 2.0.1
      */
     public $parent_table;
 
     /**
      * Database Import Table
      *
-     * @since 3.3.0
+     * @since 2.0.1
      */
     public $import_table;
 
     /**
      * Database Import Table
      *
-     * @since 3.3.0
+     * @since 2.0.1
      */
     public $child_table;
     protected static $lfe_instance = NULL;
@@ -50,8 +50,8 @@ Class Database {
     public function __construct() {
         global $wpdb;
         $this->wpdb = $wpdb;
-        $this->parent_table = $wpdb->prefix . 'content_tabs_ultimate_style';
-        $this->child_table = $wpdb->prefix . 'content_tabs_ultimate_list';
+        $this->parent_table = $wpdb->prefix . 'oxi_div_style';
+        $this->child_table = $wpdb->prefix . 'oxi_div_list';
         $this->import_table = $wpdb->prefix . 'oxi_div_import';
     }
 
@@ -61,26 +61,31 @@ Class Database {
         $sql1 = "CREATE TABLE $this->parent_table (
 		id mediumint(5) NOT NULL AUTO_INCREMENT,
                 name varchar(50) NOT NULL,
-		style_name varchar(10) NOT NULL,
+                type varchar(50) NOT NULL,
+                style_name varchar(40),
                 rawdata longtext,
                 stylesheet longtext,
                 font_family text,
 		PRIMARY KEY  (id)
 	) $charset_collate;";
+
         $sql2 = "CREATE TABLE $this->child_table (
-                id mediumint(5) NOT NULL AUTO_INCREMENT,
+		id mediumint(5) NOT NULL AUTO_INCREMENT,
                 styleid mediumint(6) NOT NULL,
-		rawdata longtext,
+                type varchar(50) NOT NULL,
+                rawdata text,
+                stylesheet text,
 		PRIMARY KEY  (id)
-	)$charset_collate;";
-        
-          $sql3 = "CREATE TABLE $this->import_table (
+	) $charset_collate;";
+
+        $sql3 = "CREATE TABLE $this->import_table (
 		id mediumint(5) NOT NULL AUTO_INCREMENT,
                 type varchar(50) NULL,
                 name varchar(100) NULL,
                 font varchar(200) NULL,
 		PRIMARY KEY  (id)
 	) $charset_collate;";
+
         require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
         dbDelta($sql1);
         dbDelta($sql2);

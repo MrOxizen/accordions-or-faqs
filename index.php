@@ -1,7 +1,7 @@
 <?php
 
 /*
-  Plugin Name: Accordions - Multiple Accordions or FAQs Builder
+  Plugin Name: Accordions - Multiple Accordions or FAQs Builders
   Plugin URI: https://www.oxilab.org/
   Description: Accordions, Most easiest accordions or faqs builder Plugin. Create multiple accordion or  collapse faqs with this.
   Author: Biplob Adhikari
@@ -16,7 +16,8 @@ define('OXI_ACCORDIONS_BASENAME', plugin_basename(__FILE__));
 define('OXI_ACCORDIONS_PATH', plugin_dir_path(__FILE__));
 define('OXI_ACCORDIONS_URL', plugins_url('/', __FILE__));
 define('OXI_ACCORDIONS_PLUGIN_VERSION', '2.0.1');
-define('OXI_ACCORDIONS_TEXTDOMAIN', 'oxi-accordions-plugin');
+define('OXI_ACCORDIONS_TEXTDOMAIN', 'accordions-or-faqs');
+define('OXI_ACCORDIONS_PREMIUM', 'oxi-accordions-plugin/pro_version');
 
 /**
  * Including composer autoloader globally.
@@ -34,14 +35,13 @@ add_action('plugins_loaded', function () {
     \OXI_ACCORDIONS_PLUGINS\Classes\Bootstrap::instance();
 });
 
-
 /**
  * Activation hook
  *
  * @since 2.0.1
  */
 register_activation_hook(__FILE__, function () {
-    $Installation = new \OXI_ACCORDIONS_PLUGINS\Classes\Installation();
+    $Installation = new \OXI_ACCORDIONS_PLUGINS\Helper\Installation();
     $Installation->plugin_activation_hook();
 });
 
@@ -51,7 +51,7 @@ register_activation_hook(__FILE__, function () {
  * @since 2.0.1
  */
 register_deactivation_hook(__FILE__, function () {
-    $Installation = new \OXI_ACCORDIONS_PLUGINS\Classes\Installation();
+    $Installation = new \OXI_ACCORDIONS_PLUGINS\Helper\Installation();
     $Installation->plugin_deactivation_hook();
 });
 
@@ -61,7 +61,7 @@ register_deactivation_hook(__FILE__, function () {
  * @since 2.0.1
  */
 add_action('upgrader_process_complete', function ($upgrader_object, $options) {
-    $Installation = new \OXI_ACCORDIONS_PLUGINS\Classes\Installation();
+    $Installation = new \OXI_ACCORDIONS_PLUGINS\Helper\Installation();
     $Installation->plugin_upgrade_hook($upgrader_object, $options);
 }, 10, 2);
 
