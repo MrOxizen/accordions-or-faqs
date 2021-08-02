@@ -12,6 +12,31 @@ use OXI_ACCORDIONS_PLUGINS\Helper\Controls as Controls;
 
 class Helper extends Admin {
 
+    public function modal_opener() {
+        $this->add_substitute_control('', [], [
+            'type' => Controls::MODALOPENER,
+            'title' => __('Accordions Data Form', OXI_ACCORDIONS_TEXTDOMAIN),
+            'sub-title' => __('Open Form', OXI_ACCORDIONS_TEXTDOMAIN),
+            'condition' => [
+                'oxi-accordions-content-type' => 'content'
+            ],
+            'showing' => TRUE,
+        ]);
+    }
+
+    public function shortcode_rearrange() {
+        $rearrange = $this->Rearrange();
+        if (!empty($rearrange)):
+            $this->add_substitute_control($rearrange, [], [
+                'type' => Controls::REARRANGE,
+                'showing' => TRUE,
+                'condition' => [
+                    'oxi-accordions-content-type' => 'content'
+                ],
+            ]);
+        endif;
+    }
+
     use \OXI_ACCORDIONS_PLUGINS\Helper\Post_Query;
 
     public function register_controls() {
@@ -419,7 +444,7 @@ class Helper extends Admin {
                 'display-post',
                 [
                     'label' => esc_html__('Post Query', OXI_ACCORDIONS_TEXTDOMAIN),
-                    'showing' => false,
+                    'showing' => true,
                     'condition' => [
                         'oxi-accordions-content-type' => 'post'
                     ],
@@ -3411,13 +3436,8 @@ class Helper extends Admin {
             'default' => 'wysiwyg',
             'options' => [
                 'wysiwyg' => __('WYSIWYG Editor', OXI_ACCORDIONS_TEXTDOMAIN),
-                'nested-tabs' => __('Nested Tabs', OXI_ACCORDIONS_TEXTDOMAIN),
                 'nested-accordions' => __('Nested Accordions', OXI_ACCORDIONS_TEXTDOMAIN),
                 'link' => __('Custom Link', OXI_ACCORDIONS_TEXTDOMAIN),
-                'popular-post' => __('Polular Post', OXI_ACCORDIONS_TEXTDOMAIN),
-                'recent-post' => __('Recent Post', OXI_ACCORDIONS_TEXTDOMAIN),
-                'recent-comment' => __('Recent Comment', OXI_ACCORDIONS_TEXTDOMAIN),
-                'tag' => __('Post Tag', OXI_ACCORDIONS_TEXTDOMAIN),
             ],
             'description' => 'Se the accordions’s Content type as Content or Custom Link.',
                 ]
@@ -3443,18 +3463,7 @@ class Helper extends Admin {
             'description' => 'Add your Tab’s Description.',
                 ]
         );
-        $this->add_control(
-                'oxi-accordions-modal-nested-tabs', [], [
-            'label' => __('Select Tabs', OXI_ACCORDIONS_TEXTDOMAIN),
-            'type' => Controls::SELECT,
-            'default' => '',
-            'options' => $this->Get_Nested_Tabs,
-            'condition' => [
-                'oxi-accordions-modal-components-type' => 'nested-tabs',
-            ],
-            'description' => 'Select Tabs to Create Nested.',
-                ]
-        );
+
         $this->add_control(
                 'oxi-accordions-modal-nested-accordions', [], [
             'label' => __('Select Accordions', OXI_ACCORDIONS_TEXTDOMAIN),

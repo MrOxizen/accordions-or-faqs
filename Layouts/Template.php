@@ -168,7 +168,7 @@ class Template {
         $inlinecss = $this->inline_public_css() . $this->inline_css . (array_key_exists('oxi-accordions-custom-css', $this->style) ? $this->style['oxi-accordions-custom-css'] : '');
         $inlinejs = $this->inline_public_jquery();
         if ($this->CSSDATA == '' && $this->admin == 'admin') {
-            $cls = '\OXI_ACCORDIONS_PLUGINS\Layouts\Admin\\' . str_replace('-', '_', $this->style_name);
+            $cls = '\OXI_ACCORDIONS_PLUGINS\Layouts\Admin\\' .  $this->style_name;
             $CLASS = new $cls('admin');
             $inlinecss .= $CLASS->inline_template_css_render($this->style);
         } else {
@@ -208,9 +208,9 @@ class Template {
      */
     public function public_frontend_loader() {
         wp_enqueue_script("jquery");
-        wp_enqueue_style('oxi-accordions-ultimate', OXI_ACCORDIONS_URL . 'assets/frontend/accordions/style.css', false, OXI_ACCORDIONS_PLUGIN_VERSION);
+        wp_enqueue_style('oxi-accordions-ultimate', OXI_ACCORDIONS_URL . 'assets/frontend/css/style.css', false, OXI_ACCORDIONS_PLUGIN_VERSION);
         wp_enqueue_style('oxi-plugin-animate', OXI_ACCORDIONS_URL . 'assets/frontend/css/animate.css', false, OXI_ACCORDIONS_PLUGIN_VERSION);
-        wp_enqueue_style('oxi-accordions-' . strtolower($this->style_name), OXI_ACCORDIONS_URL . 'assets/frontend/accordions/' . strtolower($this->style_name) . '.css', false, OXI_ACCORDIONS_PLUGIN_VERSION);
+        wp_enqueue_style('oxi-accordions-' . strtolower(str_replace('_', '-', $this->style_name)), OXI_ACCORDIONS_URL . 'assets/frontend/css/' . strtolower(str_replace('_', '-', $this->style_name)) . '.css', false, OXI_ACCORDIONS_PLUGIN_VERSION);
         wp_enqueue_script('oxi-accordions-collapse.min', OXI_ACCORDIONS_URL . 'assets/frontend/js/collapse.min.js', false, OXI_ACCORDIONS_PLUGIN_VERSION);
         wp_enqueue_script('oxi-accordions-ultimate', OXI_ACCORDIONS_URL . 'assets/frontend/js/accordions.js', false, OXI_ACCORDIONS_PLUGIN_VERSION);
     }

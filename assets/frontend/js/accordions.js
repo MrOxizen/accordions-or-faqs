@@ -1,39 +1,41 @@
 jQuery.noConflict();
 (function ($) {
     $(document).ready(function () {
+        $('.oxi-accordions-preloader').each(function () {
+            $(this).css("opacity", "1");
+        });
+    });
+
+    $(document).ready(function () {
         /* Check Url if there have any ID*/
         var trigger = '', hash_link = window.location.hash;
-        if (hash_link.includes("oxi-tabs-trigger-")) {
+        if (hash_link.includes("oxi-accordions-trigger-")) {
             var explode = hash_link.split("-"), parent = explode[3], child = explode[4];
-            console.log(parent);
-            console.log(child);
-            OxiTabsEqualHeight(parent, child);
-            OxiTabsController(parent, child);
+            OxiAccordionsController(parent, child);
         } else {
-            $('[class*=oxi-tabs-wrapper-]').each(function () {
+            $('[class*=oxi-accordions-wrapper-]').each(function () {
                 var This = $(this), id = This.attr('id'), explode = id.split("-"), parent = explode[3];
-                OxiTabsEqualHeight(parent, child);
-                OxiTabsController(parent);
+                OxiAccordionsController(parent);
             });
         }
         /* Check any btn click for confirm event for tabs*/
-        $(document).on('click', '[id^="oxi-tabs-trigger-"]', function (e) {
+        $(document).on('click', '[id^="oxi-accordions-trigger-"]', function (e) {
             e.preventDefault();
             var wrapper = $(this).attr('id'), explode = wrapper.split("-"), parent = explode[3], child = explode[4];
-            OxiTabsController(parent, child);
+            OxiAccordionsController(parent, child);
         });
 
 
-        $('a[href*="#oxi-tabs-trigger-"]').click(function (e) {
+        $('a[href*="#oxi-accordions-trigger-"]').click(function (e) {
             e.preventDefault();
             var wrapper = $(this).attr('href'), explode = wrapper.split("-"), parent = explode[3], child = explode[4];
-            OxiTabsController(parent, child);
+            OxiAccordionsController(parent, child);
         });
 
 
 
         /* Tabs Header Hover  Data Confirmation*/
-        $(".oxi-tabs-hover-event .oxi-tabs-header-li").hover(function () {
+        $(".oxi-accordions-hover-event .oxi-accordions-header-body").hover(function () {
             var link = $(this).data("link");
             if (typeof link !== typeof undefined && link !== false && $(".shortcode-addons-template-body").length === 0) {
                 var target = '_self';
@@ -42,12 +44,13 @@ jQuery.noConflict();
                 }
                 window.open("" + link.url + "", "" + target + "");
             } else {
-                var t = $(this).attr('ref'), explode = t.split("-"), parent = explode[3], child = explode[4];
-                OxiTabsController(parent, child);
+                var t = $(this).data('oxitarget'), explode = t.split("-"), parent = explode[3], child = explode[4];
+                OxiAccordionsController(parent, child);
+               
             }
         });
         /* Tabs Header Click Data Confirmation*/
-        $(document).on('click', '.oxi-tabs-click-event .oxi-tabs-header-li', function () {
+        $(document).on('click', '.oxi-accordions-click-event .oxi-accordions-header-body', function () {
             var link = $(this).data("link");
             if (typeof link !== typeof undefined && link !== false && $(".shortcode-addons-template-body").length === 0) {
                 var target = '_self';
@@ -56,68 +59,48 @@ jQuery.noConflict();
                 }
                 window.open("" + link.url + "", "" + target + "");
             } else {
-                var t = $(this).attr('ref'), explode = t.split("-"), parent = explode[3], child = explode[4];
-                OxiTabsController(parent, child);
+                var t = $(this).data('oxitarget'), explode = t.split("-"), parent = explode[3], child = explode[4];
+                OxiAccordionsController(parent, child);
             }
         });
-        function OxiTabsController(p = '', c = '') {
-            var cls = '#oxi-tabs-wrapper-' + p + " .oxi-tabs-ultimate-style";
-            var title = '#oxi-tabs-wrapper-' + p + " .oxi-tabs-ultimate-style .oxi-tabs-ultimate-header-" + p + " .oxi-tabs-header-li";
-            var mtitle = '#oxi-tabs-wrapper-' + p + " .oxi-tabs-ultimate-style .oxi-tabs-ultimate-header-" + p + " .oxi-tabs-body-header";
-            var content = '#oxi-tabs-wrapper-' + p + " .oxi-tabs-ultimate-style .oxi-tabs-body-" + p;
-            var j = $(cls).data('oxi-tabs');
+        function OxiAccordionsController(p = '', c = '') {
+            var cls = '#oxi-accordions-wrapper-' + p + " > .oxi-addons-row > .oxi-accordions-ultimate-style";
+            var accordions = '#oxi-accordions-wrapper-' + p + " > .oxi-addons-row > .oxi-accordions-ultimate-style > .oxi-accordions-single-card-" + p;
+            var content = '#oxi-accordions-wrapper-' + p + " > .oxi-addons-row >  .oxi-accordions-ultimate-style > #oxi-accordions-content-card-" + p + '-' + c;
+            var j = $(cls).data('oxi-accordions');
             if (c === '') {
-                $(title + j.initial).addClass("active");
-                $(mtitle + j.initial).addClass("active");
-                $(content + j.initial).addClass("active");
+                $(accordions).each(function () {
+                    var ref = $(this).find(".oxi-accordions-header-body");
+                    var attr = $(ref).attr('default-opening');
+                    if (typeof attr !== 'undefined' && attr === 'yes') {
+                        $(this).addClass("oxi-accordions-expand");
+                        $(this).children('.oxi-accordions-content-card').oxicollapse("show");
+                    }
+                });
             } else {
-                var header = '.oxi-tabs-header-li-' + p + '-' + c,
-                        contentbody = '#oxi-tabs-body-' + p + '-' + c;
-                if ($(header).hasClass('active')) {
-                    if (j.trigger === '1' && j.type !== 'oxi-tabs-hover-event') {
-                        $(header).removeClass("active");
-                        $(contentbody).removeClass(j.animation).toggleClass("active");
+                console.log(p, c);
+                var contentbody = '#oxi-accordions-content-' + p + '-' + c + ' > .oxi-accordions-content-body';
+                var Headerbody = '.oxi-accordions-single-card-' + p + '-' + c;
+                if ($(Headerbody).hasClass('oxi-accordions-expand')) {
+                    if (j.type === 'oxi-accordions-toggle' && !$(accordions).hasClass('oxi-accordions-hover-event')) {
+                        $(Headerbody).removeClass("oxi-accordions-expand");
+                        $(contentbody).removeClass(j.animation);
+                        $(content).oxicollapse("hide");
                     }
                     return false;
                 } else {
-                    $(title).removeClass("active");
-                    $(header).addClass("active");
-                    $(content).removeClass(j.animation).removeClass("active");
-                    $(contentbody).addClass(j.animation).addClass("active");
+                    if (j.type === 'oxi-accordions-toggle') {
+                        $(content).oxicollapse("show");
+                        $(contentbody).addClass(j.animation);
+                        $(Headerbody).addClass("oxi-accordions-expand");
+                    } else {
+                        $(accordions).removeClass("oxi-accordions-expand");
+                        $(Headerbody).addClass("oxi-accordions-expand");
+                        $(content).removeClass(j.animation);
+                        $(contentbody).addClass(j.animation);
+                       
+                    }
                 }
-        }
-        }
-
-        function OxiTabsEqualHeight(p = '', c = '') {
-            var cls = '#oxi-tabs-wrapper-' + p + " .oxi-tabs-ultimate-style", tabs = cls + ' .oxi-tabs-body-tabs', j = $(cls).data('oxi-tabs'), w = $(window).width();
-            $(tabs).css({height: ''});
-            if (w > 993 && j.lap === 'yes') {
-                var highestBox = 0;
-                $(tabs).each(function () {
-                    if ($(this).height() > highestBox) {
-                        highestBox = $(this).height();
-
-                    }
-                });
-                $(tabs).height(highestBox);
-            } else if (w < 994 && w > 768 && j.tab === 'yes') {
-                var highestBox = 0;
-                $(tabs).each(function () {
-                    if ($(this).height() > highestBox) {
-                        highestBox = $(this).height();
-
-                    }
-                });
-                $(tabs).height(highestBox);
-            } else if (w < 769 && j.mob === 'yes') {
-                var highestBox = 0;
-                $(tabs).each(function () {
-                    if ($(this).height() > highestBox) {
-                        highestBox = $(this).height();
-
-                    }
-                });
-                $(tabs).height(highestBox);
         }
         }
 
@@ -125,9 +108,5 @@ jQuery.noConflict();
             var value = $('#oxi-addons-iframe-background-color').val();
             $('.shortcode-addons-template-body').css('background', value);
         }
-
-
-
-    }
-    );
+    });
 })(jQuery);

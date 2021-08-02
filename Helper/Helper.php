@@ -187,13 +187,19 @@ trait Helper {
     public function create_new() {
         $styleid = (!empty($_GET['styleid']) ? (int) $_GET['styleid'] : '');
         if (!empty($styleid) && $styleid > 0):
-             $database = new \OXI_ACCORDIONS_PLUGINS\Helper\Database();
+            $database = new \OXI_ACCORDIONS_PLUGINS\Helper\Database();
             $style = $database->wpdb->get_row($database->wpdb->prepare('SELECT * FROM ' . $database->parent_table . ' WHERE id = %d ', $styleid), ARRAY_A);
-            $template = ucfirst(str_replace('-', '_', $style['style_name']));
-            $cls = '\OXI_ACCORDIONS_PLUGINS\Layouts\Admin\\' . $template;
-            if (class_exists($cls)):
-                new $cls();
+            if (is_array($style)):
+                $template = ucfirst($style['style_name']);
+
+                $cls = '\OXI_ACCORDIONS_PLUGINS\Layouts\Admin\\' . $template;
+                if (class_exists($cls)):
+                    new $cls();
+                endif;
+            else:
+                new \OXI_ACCORDIONS_PLUGINS\Includes\Templates();
             endif;
+
         else:
             new \OXI_ACCORDIONS_PLUGINS\Includes\Templates();
         endif;

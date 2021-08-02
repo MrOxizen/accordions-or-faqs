@@ -31,6 +31,9 @@ class Bootstrap {
         $this->public_filter();
         if (is_admin()) {
             $this->User_Admin();
+            if (isset($_GET['page']) && 'oxi-accordions-style-view' === $_GET['page']) {
+                new \OXI_ACCORDIONS_PLUGINS\Includes\Frontend();
+            }
         }
     }
 

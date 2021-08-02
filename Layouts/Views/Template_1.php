@@ -53,7 +53,10 @@ class Template_1 extends Template {
             echo '  <div class="oxicollapse oxi-accordions-content-card oxi-accordions-content-card-' . $this->oxiid . '  ' . ($this->admin == 'admin' ? 'oxi-addons-admin-edit-list' : '') . '" id="oxi-accordions-content-' . $this->oxiid . '-' . $number . '">';
             echo '     <div class="oxi-accordions-content-body animate__animated ' . $content_height . '">';
             echo $this->accordions_content_render($style, $value);
-            echo $this->admin_edit_panel($val['id']);
+            
+            if($style['oxi-accordions-content-type'] == 'content'):
+                 echo $this->admin_edit_panel($val['id']);
+            endif;
             echo '      </div>';
             echo '  </div>';
 

@@ -6,9 +6,11 @@ jQuery.noConflict();
     var styleid = urlParams.get("styleid");
     var childid = "";
     var WRAPPER = $('#oxi-addons-preview-data').attr('template-wrapper');
+    console.log(WRAPPER);
     var IFRAME = $("#oxi-addons-preview-iframe");
     var IFRAMEBODYCLASS = '.shortcode-addons-template-body';
-    var IFRAMETABSWRAPPER = '#oxi-tabs-wrapper-' + styleid;
+    var IFRAMETABSWRAPPER = '#oxi-accordions-wrapper-' + styleid;
+    var plugin_name = 'accordions';
     function NEWRegExp(par = '') {
         return new RegExp(par, "g");
     }
@@ -20,7 +22,7 @@ jQuery.noConflict();
         return str;
     }
 
-    async function OxiAddonsTemplateSettings(functionname, rawdata, styleid, childid, callback) {
+    async function OxiAccordionsRestApi(functionname, rawdata, styleid, childid, callback) {
         if (functionname === "") {
             alert('Confirm Function Name');
             return false;
@@ -28,11 +30,11 @@ jQuery.noConflict();
         let result;
         try {
             result = await $.ajax({
-                url: oxilabtabsultimate.root + 'oxilabtabsultimate/v1/' + functionname,
+                url: oxiaccordionsultimate.root + 'oxiaccordionsultimate/v1/' + functionname,
                 method: 'POST',
                 dataType: "json",
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader('X-WP-Nonce', oxilabtabsultimate.nonce);
+                    xhr.setRequestHeader('X-WP-Nonce', oxiaccordionsultimate.nonce);
                 },
                 data: {
                     styleid: styleid,
@@ -218,68 +220,11 @@ jQuery.noConflict();
     });
 
 
-    $(".OXIAddonsElementsDeleteSubmit").submit(function () {
-        var status = confirm("Do you Want to Deactive this Elements?");
-        if (status == false) {
-            return false;
-        } else {
-            return true;
-        }
-    });
-    $(".oxi-addons-style-delete .btn.btn-danger").on("click", function () {
-        var status = confirm("Do you want to Delete this Shortcode? Before delete kindly confirm that you don't use or already replaced this Shortcode. If deleted will never Restored.");
-        if (status == false) {
-            return false;
-        } else {
-            return true;
-        }
-    });
-    $(".btn btn-warning.oxi-addons-addons-style-btn-warning").on("click", function () {
-        var status = confirm("Do you Want to Deactive This Layouts?");
-        if (status == false) {
-            return false;
-        } else {
-            return true;
-        }
-    });
-
-    function oxiequalHeight(group) {
-        tallest = 0;
-        group.each(function () {
-            thisHeight = $(this).height();
-            if (thisHeight > tallest) {
-                tallest = thisHeight;
-            }
-        });
-        group.height(tallest);
-    }
-    setTimeout(function () {
-        oxiequalHeight($(".oxiequalHeight"));
-    }, 500);
-
-    oxiequalHeight($(".oxiaddonsoxiequalHeight"));
-
-    setTimeout(function () {
-        if ($(".table").hasClass("oxi_addons_table_data")) {
-            $(".oxi_addons_table_data").DataTable({
-                "aLengthMenu": [[7, 25, 50, -1], [7, 25, 50, "All"]],
-                "initComplete": function (settings, json) {
-                    $(".oxi-addons-row.table-responsive").css("opacity", "1").animate({height: $(".oxi-addons-row.table-responsive").get(0).scrollHeight}, 1000);
-                    ;
-                }
-            });
-        }
-    }, 500);
-
-
-
-
-
 
 
 
     function OxiAddonsPreviewDataLoader() {
-        OxiAddonsTemplateSettings(
+        OxiAccordionsRestApi(
                 'elements_template_render_data',
                 JSON.stringify($("#oxi-addons-form-submit").serializeJSON({checkboxUncheckedValue: "0"})),
                 styleid, childid,
@@ -308,7 +253,7 @@ jQuery.noConflict();
         var rawdata = JSON.stringify($("#shortcode-addons-name-change-submit").serializeJSON({checkboxUncheckedValue: "0"}));
         var functionname = "template_name";
         $(this).html('<span class="dashicons dashicons-admin-generic"></span>');
-        OxiAddonsTemplateSettings(functionname, rawdata, styleid, childid, function (callback) {
+        OxiAccordionsRestApi(functionname, rawdata, styleid, childid, function (callback) {
             if (callback === "success") {
                 $("#OXIAADDONSCHANGEDPOPUP .icon-box").html('<span class="dashicons dashicons-yes"></span>');
                 $("#OXIAADDONSCHANGEDPOPUP .modal-body.text-center h4").html("Superb!");
@@ -335,7 +280,7 @@ jQuery.noConflict();
         $("#oxi-addons-modal-rearrange").html('');
         var d = $("#modal-rearrange-store-file").html();
         $("#oxi-addons-list-rearrange-data").val('');
-        OxiAddonsTemplateSettings(functionname, rawdata, styleid, childid, function (callback) {
+        OxiAccordionsRestApi(functionname, rawdata, styleid, childid, function (callback) {
             var $number = 1;
             $.each($.parseJSON(callback), function (key, value) {
                 data = d.replace(NEWRegExp("{{id}}"), key);
@@ -361,11 +306,11 @@ jQuery.noConflict();
             return false;
         }
         var functionname = "elements_template_rearrange_save_data";
-        OxiAddonsTemplateSettings(functionname, rawdata, styleid, childid, function (callback) {
+        OxiAccordionsRestApi(functionname, rawdata, styleid, childid, function (callback) {
             if (callback === "success") {
                 $("#OXIAADDONSCHANGEDPOPUP .icon-box").html('<span class="dashicons dashicons-yes"></span>');
                 $("#OXIAADDONSCHANGEDPOPUP .modal-body.text-center h4").html("Great!");
-                $("#OXIAADDONSCHANGEDPOPUP .modal-body.text-center p").html("Rearrange Flipbox has been saved successfully.");
+                $("#OXIAADDONSCHANGEDPOPUP .modal-body.text-center p").html("Rearrange has been saved successfully.");
                 $("#OXIAADDONSCHANGEDPOPUP").modal("show");
                 OxiAddonsModalConfirm("#oxi-addons-list-rearrange-submit", "Save");
                 $("#oxi-addons-list-rearrange-submit").val('Save');
@@ -381,7 +326,7 @@ jQuery.noConflict();
             var rawdata = "edit";
             var functionname = "elements_template_modal_data_edit";
             var childid = $(this).attr("value");
-            OxiAddonsTemplateSettings(functionname, rawdata, styleid, childid, function (callback) {
+            OxiAccordionsRestApi(functionname, rawdata, styleid, childid, function (callback) {
                 if (callback === "Go to hell") {
                     alert("Data Error");
                 } else {
@@ -436,13 +381,13 @@ jQuery.noConflict();
         IFRAME.contents().on("click", ".shortcode-addons-template-item-delete", function (e) {
             e.preventDefault();
             var rawdata = "delete";
-            var functionname = "elements_template_modal_data_delete"
+            var functionname = "elements_template_modal_data_delete";
             var childid = $(this).attr("value");
             var status = confirm("Do you Want to Delete this?");
             if (status === false) {
                 return false;
             } else {
-                OxiAddonsTemplateSettings(functionname, rawdata, styleid, childid, function (callback) {
+                OxiAccordionsRestApi(functionname, rawdata, styleid, childid, function (callback) {
                     if (callback === "done") {
                         $("#OXIAADDONSCHANGEDPOPUP .icon-box").html('<span class="dashicons dashicons-trash"></span>');
                         $("#OXIAADDONSCHANGEDPOPUP .modal-body.text-center h4").html("Deleted :(");
@@ -482,7 +427,7 @@ jQuery.noConflict();
         var rawdata = JSON.stringify($("#oxi-addons-form-submit").serializeJSON({checkboxUncheckedValue: "0"}));
         var functionname = "elements_template_style";
         $(this).html('<span class="dashicons dashicons-admin-generic"></span>');
-        OxiAddonsTemplateSettings(functionname, rawdata, styleid, childid, function (callback) {
+        OxiAccordionsRestApi(functionname, rawdata, styleid, childid, function (callback) {
             if (callback === "success") {
                 $("#OXIAADDONSCHANGEDPOPUP .icon-box").html('<span class="dashicons dashicons-yes"></span>');
                 $("#OXIAADDONSCHANGEDPOPUP .modal-body.text-center h4").html("Great!");
@@ -507,7 +452,7 @@ jQuery.noConflict();
         var functionname = "elements_template_modal_data";
         var childid = $("#shortcodeitemid").val();
         $(this).html('<span class="dashicons dashicons-admin-generic"></span>');
-        OxiAddonsTemplateSettings(functionname, rawdata, styleid, childid, function (callback) {
+        OxiAccordionsRestApi(functionname, rawdata, styleid, childid, function (callback) {
             $("#oxi-addons-list-data-modal").modal("hide");
             $("#OXIAADDONSCHANGEDPOPUP .icon-box").html('<span class="dashicons dashicons-yes"></span>');
             $("#OXIAADDONSCHANGEDPOPUP .modal-body.text-center h4").html("Great!");

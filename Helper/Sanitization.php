@@ -612,7 +612,7 @@ trait Sanitization {
         $value = array_key_exists($id, $data) ? $data[$id] : $arg['default'];
         $retunvalue = array_key_exists('selector', $arg) ? htmlspecialchars(json_encode($arg['selector'])) : '';
         echo '<div class="shortcode-form-control-input-wrapper">
-                 <textarea  name="' . $id . '" id="' . $id . '" retundata=\'' . $retunvalue . '\' class="shortcode-form-control-tag-area" rows="' . (int) ((strlen($value) / 50) + 2) . '" placeholder="' . $arg['placeholder'] . '">' . str_replace('&nbsp;', '  ', str_replace('<br>', '&#13;&#10;', $value)) . '</textarea>
+                 <textarea  name="' . $id . '" id="' . $id . '" retundata=\'' . $retunvalue . '\' class="shortcode-form-control-tag-area" rows="' . (int) ((strlen($value) / 50) + 4) . '" placeholder="' . $arg['placeholder'] . '">' . str_replace('&nbsp;', '  ', str_replace('<br>', '&#13;&#10;', $value)) . '</textarea>
               </div>';
     }
 
@@ -2508,7 +2508,9 @@ trait Sanitization {
          * $arg['sub-title'] = 'Add New Items 02';
          * 
          */
-        echo ' <div class="oxi-addons-item-form shortcode-addons-templates-right-panel ' . (($arg['showing']) ? '' : 'oxi-admin-head-d-none') . '">
+
+        $condition = $this->forms_condition($arg);
+        echo ' <div class="oxi-addons-item-form shortcode-addons-templates-right-panel ' . (($arg['showing']) ? '' : 'oxi-admin-head-d-none') . '" ' . $condition . '>
                     <div class="oxi-addons-item-form-heading shortcode-addons-templates-right-panel-heading">
                         ' . $arg['title'] . '
                          <div class="oxi-head-toggle"></div>
@@ -2534,7 +2536,9 @@ trait Sanitization {
          * $arg['sub-title'] = 'Add New Items 02';
          * 
          */
-        echo ' <div class="oxi-addons-shortcode  shortcode-addons-templates-right-panel ' . (($arg['showing']) ? '' : 'oxi-admin-head-d-none') . '">
+
+        $condition = $this->forms_condition($arg);
+        echo ' <div class="oxi-addons-shortcode  shortcode-addons-templates-right-panel ' . (($arg['showing']) ? '' : 'oxi-admin-head-d-none') . '" ' . $condition . '>
                 <div class="oxi-addons-shortcode-heading  shortcode-addons-templates-right-panel-heading">
                     ' . $arg['title'] . '
                     <div class="oxi-head-toggle"></div>
@@ -2570,7 +2574,8 @@ trait Sanitization {
          * $arg['sub-title'] = 'Add New Items 02';
          * 
          */
-        echo ' <div class="oxi-addons-shortcode shortcode-addons-templates-right-panel ' . (($arg['showing']) ? '' : 'oxi-admin-head-d-none') . '">
+        $condition = $this->forms_condition($arg);
+        echo ' <div class="oxi-addons-shortcode shortcode-addons-templates-right-panel ' . (($arg['showing']) ? '' : 'oxi-admin-head-d-none') . '" ' . $condition . '>
                 <div class="oxi-addons-shortcode-heading  shortcode-addons-templates-right-panel-heading">
                     ' . $arg['title'] . '
                     <div class="oxi-head-toggle"></div>
@@ -2593,7 +2598,7 @@ trait Sanitization {
     public function rearrange_substitute_control($id, array $data = [], array $arg = []) {
         $default = [
             'showing' => FALSE,
-            'title' => 'Tabs Rearrange',
+            'title' => 'Accordions Rearrange',
             'sub-title' => 'Tabs Rearrange'
         ];
         $arg = array_merge($default, $arg);
@@ -2602,7 +2607,8 @@ trait Sanitization {
          * $arg['sub-title'] = 'Add New Items 02';
          * 
          */
-        echo '  <div class="oxi-addons-item-form shortcode-addons-templates-right-panel ' . (($arg['showing']) ? '' : 'oxi-admin-head-d-none') . '">
+        $condition = $this->forms_condition($arg);
+        echo '  <div class="oxi-addons-item-form shortcode-addons-templates-right-panel ' . (($arg['showing']) ? '' : 'oxi-admin-head-d-none') . '" ' . $condition . '>
                     <div class="oxi-addons-item-form-heading shortcode-addons-templates-right-panel-heading">
                         ' . $arg['title'] . '
                         <div class="oxi-head-toggle"></div>
@@ -2615,11 +2621,11 @@ trait Sanitization {
                     </div>
                 </div>
                 <div id="oxi-addons-list-rearrange-modal" class="modal fade bd-example-modal-sm" role="dialog">
-                    <div class="modal-dialog modal-sm">
+                    <div class="modal-dialog">
                         <form id="oxi-addons-form-rearrange-submit">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h4 class="modal-title">Tabs Rearrange</h4>
+                                    <h4 class="modal-title">Rearrange Content</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;
                                     </button>
                                 </div>
