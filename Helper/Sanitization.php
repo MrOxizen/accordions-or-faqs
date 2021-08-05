@@ -318,9 +318,9 @@ trait Sanitization {
             'type' => 'text',
             'label' => 'Input Text',
             'default' => '',
-            'label_on' => __('Yes', OXI_TABS_TEXTDOMAIN),
-            'label_off' => __('No', OXI_TABS_TEXTDOMAIN),
-            'placeholder' => __('', OXI_TABS_TEXTDOMAIN),
+            'label_on' => __('Yes', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label_off' => __('No', OXI_ACCORDIONS_TEXTDOMAIN),
+            'placeholder' => __('', OXI_ACCORDIONS_TEXTDOMAIN),
             'selector-data' => TRUE,
             'render' => TRUE,
             'responsive' => 'laptop',
@@ -339,16 +339,16 @@ trait Sanitization {
         if ($arg['type'] == 'animation'):
             $arg['type'] = 'select';
             $arg['options'] = [
-                '' => __('None', OXI_TABS_TEXTDOMAIN),
-                'bounce' => __('Bounce', OXI_TABS_TEXTDOMAIN),
-                'flash' => __('Flash', OXI_TABS_TEXTDOMAIN),
-                'pulse' => __('Pulse', OXI_TABS_TEXTDOMAIN),
-                'rubberBand' => __('RubberBand', OXI_TABS_TEXTDOMAIN),
-                'shake' => __('Shake', OXI_TABS_TEXTDOMAIN),
-                'swing' => __('Swing', OXI_TABS_TEXTDOMAIN),
-                'tada' => __('Tada', OXI_TABS_TEXTDOMAIN),
-                'wobble' => __('Wobble', OXI_TABS_TEXTDOMAIN),
-                'jello' => __('Jello', OXI_TABS_TEXTDOMAIN),
+                '' => __('None', OXI_ACCORDIONS_TEXTDOMAIN),
+                'bounce' => __('Bounce', OXI_ACCORDIONS_TEXTDOMAIN),
+                'flash' => __('Flash', OXI_ACCORDIONS_TEXTDOMAIN),
+                'pulse' => __('Pulse', OXI_ACCORDIONS_TEXTDOMAIN),
+                'rubberBand' => __('RubberBand', OXI_ACCORDIONS_TEXTDOMAIN),
+                'shake' => __('Shake', OXI_ACCORDIONS_TEXTDOMAIN),
+                'swing' => __('Swing', OXI_ACCORDIONS_TEXTDOMAIN),
+                'tada' => __('Tada', OXI_ACCORDIONS_TEXTDOMAIN),
+                'wobble' => __('Wobble', OXI_ACCORDIONS_TEXTDOMAIN),
+                'jello' => __('Jello', OXI_ACCORDIONS_TEXTDOMAIN),
             ];
         endif;
 
@@ -1132,7 +1132,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-font', $data, [
-            'label' => __('Font Family', OXI_TABS_TEXTDOMAIN),
+            'label' => __('Font Family', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::FONT,
             $selectorvalue => 'font-family:\'{{VALUE}}\';',
             $selector_key => $selector,
@@ -1142,7 +1142,7 @@ trait Sanitization {
         if (!array_key_exists('typo-font-size', $arg) || $arg['typo-font-size'] == true):
             $this->add_responsive_control(
                     $id . '-size', $data, [
-                'label' => __('Size', OXI_TABS_TEXTDOMAIN),
+                'label' => __('Size', OXI_ACCORDIONS_TEXTDOMAIN),
                 'type' => Controls::SLIDER,
                 'default' => [
                     'unit' => 'px',
@@ -1179,38 +1179,38 @@ trait Sanitization {
 
         $this->add_control(
                 $id . '-weight', $data, [
-            'label' => __('Weight', OXI_TABS_TEXTDOMAIN),
+            'label' => __('Weight', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SELECT,
             $selectorvalue => 'font-weight: {{VALUE}};',
             $loader => $loadervalue,
             $selector_key => $selector,
             'options' => [
-                '100' => __('100', OXI_TABS_TEXTDOMAIN),
-                '200' => __('200', OXI_TABS_TEXTDOMAIN),
-                '300' => __('300', OXI_TABS_TEXTDOMAIN),
-                '400' => __('400', OXI_TABS_TEXTDOMAIN),
-                '500' => __('500', OXI_TABS_TEXTDOMAIN),
-                '600' => __('600', OXI_TABS_TEXTDOMAIN),
-                '700' => __('700', OXI_TABS_TEXTDOMAIN),
-                '800' => __('800', OXI_TABS_TEXTDOMAIN),
-                '900' => __('900', OXI_TABS_TEXTDOMAIN),
-                '' => __('Default', OXI_TABS_TEXTDOMAIN),
-                'normal' => __('Normal', OXI_TABS_TEXTDOMAIN),
-                'bold' => __('Bold', OXI_TABS_TEXTDOMAIN)
+                '100' => __('100', OXI_ACCORDIONS_TEXTDOMAIN),
+                '200' => __('200', OXI_ACCORDIONS_TEXTDOMAIN),
+                '300' => __('300', OXI_ACCORDIONS_TEXTDOMAIN),
+                '400' => __('400', OXI_ACCORDIONS_TEXTDOMAIN),
+                '500' => __('500', OXI_ACCORDIONS_TEXTDOMAIN),
+                '600' => __('600', OXI_ACCORDIONS_TEXTDOMAIN),
+                '700' => __('700', OXI_ACCORDIONS_TEXTDOMAIN),
+                '800' => __('800', OXI_ACCORDIONS_TEXTDOMAIN),
+                '900' => __('900', OXI_ACCORDIONS_TEXTDOMAIN),
+                '' => __('Default', OXI_ACCORDIONS_TEXTDOMAIN),
+                'normal' => __('Normal', OXI_ACCORDIONS_TEXTDOMAIN),
+                'bold' => __('Bold', OXI_ACCORDIONS_TEXTDOMAIN)
             ],
                 ]
         );
         $this->add_control(
                 $id . '-transform', $data, [
-            'label' => __('Transform', OXI_TABS_TEXTDOMAIN),
+            'label' => __('Transform', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SELECT,
             'default' => '',
             'options' => [
-                '' => __('Default', OXI_TABS_TEXTDOMAIN),
-                'uppercase' => __('Uppercase', OXI_TABS_TEXTDOMAIN),
-                'lowercase' => __('Lowercase', OXI_TABS_TEXTDOMAIN),
-                'capitalize' => __('Capitalize', OXI_TABS_TEXTDOMAIN),
-                'none' => __('Normal', OXI_TABS_TEXTDOMAIN),
+                '' => __('Default', OXI_ACCORDIONS_TEXTDOMAIN),
+                'uppercase' => __('Uppercase', OXI_ACCORDIONS_TEXTDOMAIN),
+                'lowercase' => __('Lowercase', OXI_ACCORDIONS_TEXTDOMAIN),
+                'capitalize' => __('Capitalize', OXI_ACCORDIONS_TEXTDOMAIN),
+                'none' => __('Normal', OXI_ACCORDIONS_TEXTDOMAIN),
             ],
             $loader => $loadervalue,
             $selectorvalue => 'text-transform: {{VALUE}};',
@@ -1219,14 +1219,14 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-style', $data, [
-            'label' => __('Style', OXI_TABS_TEXTDOMAIN),
+            'label' => __('Style', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SELECT,
             'default' => '',
             'options' => [
-                '' => __('Default', OXI_TABS_TEXTDOMAIN),
-                'normal' => __('normal', OXI_TABS_TEXTDOMAIN),
-                'italic' => __('Italic', OXI_TABS_TEXTDOMAIN),
-                'oblique' => __('Oblique', OXI_TABS_TEXTDOMAIN),
+                '' => __('Default', OXI_ACCORDIONS_TEXTDOMAIN),
+                'normal' => __('normal', OXI_ACCORDIONS_TEXTDOMAIN),
+                'italic' => __('Italic', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oblique' => __('Oblique', OXI_ACCORDIONS_TEXTDOMAIN),
             ],
             $loader => $loadervalue,
             $selectorvalue => 'font-style: {{VALUE}};',
@@ -1235,15 +1235,15 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-decoration', $data, [
-            'label' => __('Decoration', OXI_TABS_TEXTDOMAIN),
+            'label' => __('Decoration', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SELECT,
             'default' => '',
             'options' => [
-                '' => __('Default', OXI_TABS_TEXTDOMAIN),
-                'underline' => __('Underline', OXI_TABS_TEXTDOMAIN),
-                'overline' => __('Overline', OXI_TABS_TEXTDOMAIN),
-                'line-through' => __('Line Through', OXI_TABS_TEXTDOMAIN),
-                'none' => __('None', OXI_TABS_TEXTDOMAIN),
+                '' => __('Default', OXI_ACCORDIONS_TEXTDOMAIN),
+                'underline' => __('Underline', OXI_ACCORDIONS_TEXTDOMAIN),
+                'overline' => __('Overline', OXI_ACCORDIONS_TEXTDOMAIN),
+                'line-through' => __('Line Through', OXI_ACCORDIONS_TEXTDOMAIN),
+                'none' => __('None', OXI_ACCORDIONS_TEXTDOMAIN),
             ],
             $loader => $loadervalue,
             $selectorvalue => 'text-decoration: {{VALUE}};',
@@ -1254,14 +1254,14 @@ trait Sanitization {
             if ($arg['include'] == 'align_normal') :
                 $this->add_responsive_control(
                         $id . '-align', $data, [
-                    'label' => __('Text Align', OXI_TABS_TEXTDOMAIN),
+                    'label' => __('Text Align', OXI_ACCORDIONS_TEXTDOMAIN),
                     'type' => Controls::SELECT,
                     'default' => '',
                     'options' => [
-                        '' => __('Default', OXI_TABS_TEXTDOMAIN),
-                        'left' => __('Left', OXI_TABS_TEXTDOMAIN),
-                        'center' => __('Center', OXI_TABS_TEXTDOMAIN),
-                        'right' => __('Right', OXI_TABS_TEXTDOMAIN),
+                        '' => __('Default', OXI_ACCORDIONS_TEXTDOMAIN),
+                        'left' => __('Left', OXI_ACCORDIONS_TEXTDOMAIN),
+                        'center' => __('Center', OXI_ACCORDIONS_TEXTDOMAIN),
+                        'right' => __('Right', OXI_ACCORDIONS_TEXTDOMAIN),
                     ],
                     $loader => $loadervalue,
                     $selectorvalue => 'text-align: {{VALUE}};',
@@ -1271,16 +1271,16 @@ trait Sanitization {
             else :
                 $this->add_responsive_control(
                         $id . '-justify', $data, [
-                    'label' => __('Justify Content', OXI_TABS_TEXTDOMAIN),
+                    'label' => __('Justify Content', OXI_ACCORDIONS_TEXTDOMAIN),
                     'type' => Controls::SELECT,
                     'default' => '',
                     'options' => [
-                        '' => __('Default', OXI_TABS_TEXTDOMAIN),
-                        'flex-start' => __('Flex Start', OXI_TABS_TEXTDOMAIN),
-                        'flex-end' => __('Flex End', OXI_TABS_TEXTDOMAIN),
-                        'center' => __('Center', OXI_TABS_TEXTDOMAIN),
-                        'space-around' => __('Space Around', OXI_TABS_TEXTDOMAIN),
-                        'space-between' => __('Space Between', OXI_TABS_TEXTDOMAIN),
+                        '' => __('Default', OXI_ACCORDIONS_TEXTDOMAIN),
+                        'flex-start' => __('Flex Start', OXI_ACCORDIONS_TEXTDOMAIN),
+                        'flex-end' => __('Flex End', OXI_ACCORDIONS_TEXTDOMAIN),
+                        'center' => __('Center', OXI_ACCORDIONS_TEXTDOMAIN),
+                        'space-around' => __('Space Around', OXI_ACCORDIONS_TEXTDOMAIN),
+                        'space-between' => __('Space Between', OXI_ACCORDIONS_TEXTDOMAIN),
                     ],
                     $loader => $loadervalue,
                     $selectorvalue => 'justify-content: {{VALUE}};',
@@ -1289,16 +1289,16 @@ trait Sanitization {
                 );
                 $this->add_responsive_control(
                         $id . '-align', $data, [
-                    'label' => __('Align Items', OXI_TABS_TEXTDOMAIN),
+                    'label' => __('Align Items', OXI_ACCORDIONS_TEXTDOMAIN),
                     'type' => Controls::SELECT,
                     'default' => '',
                     'options' => [
-                        '' => __('Default', OXI_TABS_TEXTDOMAIN),
-                        'stretch' => __('Stretch', OXI_TABS_TEXTDOMAIN),
-                        'baseline' => __('Baseline', OXI_TABS_TEXTDOMAIN),
-                        'center' => __('Center', OXI_TABS_TEXTDOMAIN),
-                        'flex-start' => __('Flex Start', OXI_TABS_TEXTDOMAIN),
-                        'flex-end' => __('Flex End', OXI_TABS_TEXTDOMAIN),
+                        '' => __('Default', OXI_ACCORDIONS_TEXTDOMAIN),
+                        'stretch' => __('Stretch', OXI_ACCORDIONS_TEXTDOMAIN),
+                        'baseline' => __('Baseline', OXI_ACCORDIONS_TEXTDOMAIN),
+                        'center' => __('Center', OXI_ACCORDIONS_TEXTDOMAIN),
+                        'flex-start' => __('Flex Start', OXI_ACCORDIONS_TEXTDOMAIN),
+                        'flex-end' => __('Flex End', OXI_ACCORDIONS_TEXTDOMAIN),
                     ],
                     $loader => $loadervalue,
                     $selectorvalue => 'align-items: {{VALUE}};',
@@ -1310,7 +1310,7 @@ trait Sanitization {
 
         $this->add_responsive_control(
                 $id . '-l-height', $data, [
-            'label' => __('Line Height', OXI_TABS_TEXTDOMAIN),
+            'label' => __('Line Height', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SLIDER,
             'default' => [
                 'unit' => 'px',
@@ -1335,7 +1335,7 @@ trait Sanitization {
         );
         $this->add_responsive_control(
                 $id . '-l-spacing', $data, [
-            'label' => __('Letter Spacing', OXI_TABS_TEXTDOMAIN),
+            'label' => __('Letter Spacing', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SLIDER,
             'default' => [
                 'unit' => 'px',
@@ -1377,18 +1377,18 @@ trait Sanitization {
         echo '<div class="shortcode-form-control" style="padding: 0;" ' . $this->forms_condition($arg) . '>';
         $this->add_control(
                 $id . '-select', $data, [
-            'label' => __($level, OXI_TABS_TEXTDOMAIN),
+            'label' => __($level, OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::CHOOSE,
             'loader' => TRUE,
             'default' => $type,
             'separator' => $separator,
             'options' => [
                 'media-library' => [
-                    'title' => __('Media Library', OXI_TABS_TEXTDOMAIN),
+                    'title' => __('Media Library', OXI_ACCORDIONS_TEXTDOMAIN),
                     'icon' => 'fa fa-align-left',
                 ],
                 'custom-url' => [
-                    'title' => __('Custom URL', OXI_TABS_TEXTDOMAIN),
+                    'title' => __('Custom URL', OXI_ACCORDIONS_TEXTDOMAIN),
                     'icon' => 'fa fa-align-center',
                 ]
             ],
@@ -1396,7 +1396,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-image', $data, [
-            'label' => __('Image', OXI_TABS_TEXTDOMAIN),
+            'label' => __('Image', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::IMAGE,
             'loader' => TRUE,
             'default' => $value,
@@ -1409,7 +1409,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-url', $data, [
-            'label' => __('Image URL', OXI_TABS_TEXTDOMAIN),
+            'label' => __('Image URL', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::TEXT,
             'default' => $value,
             'loader' => TRUE,
@@ -1475,7 +1475,7 @@ trait Sanitization {
         endif;
         $this->start_popover_control(
                 $id, [
-            'label' => __('Box Shadow', OXI_TABS_TEXTDOMAIN),
+            'label' => __('Box Shadow', OXI_ACCORDIONS_TEXTDOMAIN),
             $cond => $condition,
             'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
             'separator' => $separator,
@@ -1484,26 +1484,26 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-shadow', $data, [
-            'label' => __('Shadow', OXI_TABS_TEXTDOMAIN),
+            'label' => __('Shadow', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SWITCHER,
             'default' => '',
-            'label_on' => __('Yes', OXI_TABS_TEXTDOMAIN),
-            'label_off' => __('None', OXI_TABS_TEXTDOMAIN),
+            'label_on' => __('Yes', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label_off' => __('None', OXI_ACCORDIONS_TEXTDOMAIN),
             'return_value' => 'yes',
                 ]
         );
         $this->add_control(
                 $id . '-type', $data, [
-            'label' => __('Type', OXI_TABS_TEXTDOMAIN),
+            'label' => __('Type', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::CHOOSE,
             'default' => '',
             'options' => [
                 '' => [
-                    'title' => __('Outline', OXI_TABS_TEXTDOMAIN),
+                    'title' => __('Outline', OXI_ACCORDIONS_TEXTDOMAIN),
                     'icon' => 'fa fa-align-left',
                 ],
                 'inset' => [
-                    'title' => __('Inset', OXI_TABS_TEXTDOMAIN),
+                    'title' => __('Inset', OXI_ACCORDIONS_TEXTDOMAIN),
                     'icon' => 'fa fa-align-center',
                 ],
             ],
@@ -1513,7 +1513,7 @@ trait Sanitization {
 
         $this->add_control(
                 $id . '-horizontal', $data, [
-            'label' => __('Horizontal', OXI_TABS_TEXTDOMAIN),
+            'label' => __('Horizontal', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SLIDER,
             'default' => [
                 'unit' => 'px',
@@ -1535,7 +1535,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-vertical', $data, [
-            'label' => __('Vertical', OXI_TABS_TEXTDOMAIN),
+            'label' => __('Vertical', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SLIDER,
             'default' => [
                 'unit' => 'px',
@@ -1557,7 +1557,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-blur', $data, [
-            'label' => __('Blur', OXI_TABS_TEXTDOMAIN),
+            'label' => __('Blur', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SLIDER,
             'default' => [
                 'unit' => 'px',
@@ -1579,7 +1579,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-spread', $data, [
-            'label' => __('Spread', OXI_TABS_TEXTDOMAIN),
+            'label' => __('Spread', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SLIDER,
             'default' => [
                 'unit' => 'px',
@@ -1601,7 +1601,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-color', $data, [
-            'label' => __('Color', OXI_TABS_TEXTDOMAIN),
+            'label' => __('Color', OXI_ACCORDIONS_TEXTDOMAIN),
             'separator' => TRUE,
             'type' => Controls::COLOR,
             'oparetor' => 'RGB',
@@ -1649,7 +1649,7 @@ trait Sanitization {
         endif;
         $this->start_popover_control(
                 $id, [
-            'label' => __('Text Shadow', OXI_TABS_TEXTDOMAIN),
+            'label' => __('Text Shadow', OXI_ACCORDIONS_TEXTDOMAIN),
             $cond => $condition,
             'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
             'separator' => $separator,
@@ -1658,7 +1658,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-color', $data, [
-            'label' => __('Color', OXI_TABS_TEXTDOMAIN),
+            'label' => __('Color', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::COLOR,
             'oparetor' => 'RGB',
             'default' => '#FFF',
@@ -1670,7 +1670,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-blur', $data, [
-            'label' => __('Blur', OXI_TABS_TEXTDOMAIN),
+            'label' => __('Blur', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SLIDER,
             'separator' => TRUE,
             'custom' => $id . '|||||text-shadow',
@@ -1692,7 +1692,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-horizontal', $data, [
-            'label' => __('Horizontal', OXI_TABS_TEXTDOMAIN),
+            'label' => __('Horizontal', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SLIDER,
             'custom' => $id . '|||||text-shadow',
             'render' => FALSE,
@@ -1713,7 +1713,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-vertical', $data, [
-            'label' => __('Vertical', OXI_TABS_TEXTDOMAIN),
+            'label' => __('Vertical', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SLIDER,
             'custom' => $id . '|||||text-shadow',
             'render' => FALSE,
@@ -1754,7 +1754,7 @@ trait Sanitization {
 
         $this->start_popover_control(
                 $id, [
-            'label' => __('Animation', OXI_TABS_TEXTDOMAIN),
+            'label' => __('Animation', OXI_ACCORDIONS_TEXTDOMAIN),
             $cond => $condition,
             'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
             'separator' => $separator,
@@ -1764,80 +1764,80 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-type', $data, [
-            'label' => __('Type', OXI_TABS_TEXTDOMAIN),
+            'label' => __('Type', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SELECT,
             'default' => '',
             'options' => [
                 'optgroup0' => [true, 'Attention Seekers'],
-                '' => __('None', OXI_TABS_TEXTDOMAIN),
+                '' => __('None', OXI_ACCORDIONS_TEXTDOMAIN),
                 'optgroup1' => [false],
                 'optgroup2' => [true, 'Attention Seekers'],
-                'bounce' => __('Bounce', OXI_TABS_TEXTDOMAIN),
-                'flash' => __('Flash', OXI_TABS_TEXTDOMAIN),
-                'pulse' => __('Pulse', OXI_TABS_TEXTDOMAIN),
-                'rubberBand' => __('RubberBand', OXI_TABS_TEXTDOMAIN),
-                'shake' => __('Shake', OXI_TABS_TEXTDOMAIN),
-                'swing' => __('Swing', OXI_TABS_TEXTDOMAIN),
-                'tada' => __('Tada', OXI_TABS_TEXTDOMAIN),
-                'wobble' => __('Wobble', OXI_TABS_TEXTDOMAIN),
-                'jello' => __('Jello', OXI_TABS_TEXTDOMAIN),
+                'bounce' => __('Bounce', OXI_ACCORDIONS_TEXTDOMAIN),
+                'flash' => __('Flash', OXI_ACCORDIONS_TEXTDOMAIN),
+                'pulse' => __('Pulse', OXI_ACCORDIONS_TEXTDOMAIN),
+                'rubberBand' => __('RubberBand', OXI_ACCORDIONS_TEXTDOMAIN),
+                'shake' => __('Shake', OXI_ACCORDIONS_TEXTDOMAIN),
+                'swing' => __('Swing', OXI_ACCORDIONS_TEXTDOMAIN),
+                'tada' => __('Tada', OXI_ACCORDIONS_TEXTDOMAIN),
+                'wobble' => __('Wobble', OXI_ACCORDIONS_TEXTDOMAIN),
+                'jello' => __('Jello', OXI_ACCORDIONS_TEXTDOMAIN),
                 'optgroup3' => [false],
                 'optgroup4' => [true, 'Bouncing Entrances'],
-                'bounceIn' => __('BounceIn', OXI_TABS_TEXTDOMAIN),
-                'bounceInDown' => __('BounceInDown', OXI_TABS_TEXTDOMAIN),
-                'bounceInLeft' => __('BounceInLeft', OXI_TABS_TEXTDOMAIN),
-                'bounceInRight' => __('BounceInRight', OXI_TABS_TEXTDOMAIN),
-                'bounceInUp' => __('BounceInUp', OXI_TABS_TEXTDOMAIN),
+                'bounceIn' => __('BounceIn', OXI_ACCORDIONS_TEXTDOMAIN),
+                'bounceInDown' => __('BounceInDown', OXI_ACCORDIONS_TEXTDOMAIN),
+                'bounceInLeft' => __('BounceInLeft', OXI_ACCORDIONS_TEXTDOMAIN),
+                'bounceInRight' => __('BounceInRight', OXI_ACCORDIONS_TEXTDOMAIN),
+                'bounceInUp' => __('BounceInUp', OXI_ACCORDIONS_TEXTDOMAIN),
                 'optgroup5' => [false],
                 'optgroup6' => [true, 'Fading Entrances'],
-                'fadeIn' => __('FadeIn', OXI_TABS_TEXTDOMAIN),
-                'fadeInDown' => __('FadeInDown', OXI_TABS_TEXTDOMAIN),
-                'fadeInDownBig' => __('FadeInDownBig', OXI_TABS_TEXTDOMAIN),
-                'fadeInLeft' => __('FadeInLeft', OXI_TABS_TEXTDOMAIN),
-                'fadeInLeftBig' => __('FadeInLeftBig', OXI_TABS_TEXTDOMAIN),
-                'fadeInRight' => __('FadeInRight', OXI_TABS_TEXTDOMAIN),
-                'fadeInRightBig' => __('FadeInRightBig', OXI_TABS_TEXTDOMAIN),
-                'fadeInUp' => __('FadeInUp', OXI_TABS_TEXTDOMAIN),
-                'fadeInUpBig' => __('FadeInUpBig', OXI_TABS_TEXTDOMAIN),
+                'fadeIn' => __('FadeIn', OXI_ACCORDIONS_TEXTDOMAIN),
+                'fadeInDown' => __('FadeInDown', OXI_ACCORDIONS_TEXTDOMAIN),
+                'fadeInDownBig' => __('FadeInDownBig', OXI_ACCORDIONS_TEXTDOMAIN),
+                'fadeInLeft' => __('FadeInLeft', OXI_ACCORDIONS_TEXTDOMAIN),
+                'fadeInLeftBig' => __('FadeInLeftBig', OXI_ACCORDIONS_TEXTDOMAIN),
+                'fadeInRight' => __('FadeInRight', OXI_ACCORDIONS_TEXTDOMAIN),
+                'fadeInRightBig' => __('FadeInRightBig', OXI_ACCORDIONS_TEXTDOMAIN),
+                'fadeInUp' => __('FadeInUp', OXI_ACCORDIONS_TEXTDOMAIN),
+                'fadeInUpBig' => __('FadeInUpBig', OXI_ACCORDIONS_TEXTDOMAIN),
                 'optgroup7' => [false],
                 'optgroup8' => [true, 'Flippers'],
-                'flip' => __('Flip', OXI_TABS_TEXTDOMAIN),
-                'flipInX' => __('FlipInX', OXI_TABS_TEXTDOMAIN),
-                'flipInY' => __('FlipInY', OXI_TABS_TEXTDOMAIN),
+                'flip' => __('Flip', OXI_ACCORDIONS_TEXTDOMAIN),
+                'flipInX' => __('FlipInX', OXI_ACCORDIONS_TEXTDOMAIN),
+                'flipInY' => __('FlipInY', OXI_ACCORDIONS_TEXTDOMAIN),
                 'optgroup9' => [false],
                 'optgroup10' => [true, 'Lightspeed'],
-                'lightSpeedIn' => __('LightSpeedIn', OXI_TABS_TEXTDOMAIN),
+                'lightSpeedIn' => __('LightSpeedIn', OXI_ACCORDIONS_TEXTDOMAIN),
                 'optgroup11' => [false],
                 'optgroup12' => [true, 'Rotating Entrances'],
-                'rotateIn' => __('RotateIn', OXI_TABS_TEXTDOMAIN),
-                'rotateInDownLeft' => __('RotateInDownLeft', OXI_TABS_TEXTDOMAIN),
-                'rotateInDownRight' => __('RotateInDownRight', OXI_TABS_TEXTDOMAIN),
-                'rotateInUpLeft' => __('RotateInUpLeft', OXI_TABS_TEXTDOMAIN),
-                'rotateInUpRight' => __('RotateInUpRight', OXI_TABS_TEXTDOMAIN),
+                'rotateIn' => __('RotateIn', OXI_ACCORDIONS_TEXTDOMAIN),
+                'rotateInDownLeft' => __('RotateInDownLeft', OXI_ACCORDIONS_TEXTDOMAIN),
+                'rotateInDownRight' => __('RotateInDownRight', OXI_ACCORDIONS_TEXTDOMAIN),
+                'rotateInUpLeft' => __('RotateInUpLeft', OXI_ACCORDIONS_TEXTDOMAIN),
+                'rotateInUpRight' => __('RotateInUpRight', OXI_ACCORDIONS_TEXTDOMAIN),
                 'optgroup13' => [false],
                 'optgroup14' => [true, 'Sliding Entrances'],
-                'slideInUp' => __('SlideInUp', OXI_TABS_TEXTDOMAIN),
-                'slideInDown' => __('SlideInDown', OXI_TABS_TEXTDOMAIN),
-                'slideInLeft' => __('SlideInLeft', OXI_TABS_TEXTDOMAIN),
-                'slideInRight' => __('SlideInRight', OXI_TABS_TEXTDOMAIN),
+                'slideInUp' => __('SlideInUp', OXI_ACCORDIONS_TEXTDOMAIN),
+                'slideInDown' => __('SlideInDown', OXI_ACCORDIONS_TEXTDOMAIN),
+                'slideInLeft' => __('SlideInLeft', OXI_ACCORDIONS_TEXTDOMAIN),
+                'slideInRight' => __('SlideInRight', OXI_ACCORDIONS_TEXTDOMAIN),
                 'optgroup15' => [false],
                 'optgroup16' => [true, 'Zoom Entrances'],
-                'zoomIn' => __('ZoomIn', OXI_TABS_TEXTDOMAIN),
-                'zoomInDown' => __('ZoomInDown', OXI_TABS_TEXTDOMAIN),
-                'zoomInLeft' => __('ZoomInLeft', OXI_TABS_TEXTDOMAIN),
-                'zoomInRight' => __('ZoomInRight', OXI_TABS_TEXTDOMAIN),
-                'zoomInUp' => __('ZoomInUp', OXI_TABS_TEXTDOMAIN),
+                'zoomIn' => __('ZoomIn', OXI_ACCORDIONS_TEXTDOMAIN),
+                'zoomInDown' => __('ZoomInDown', OXI_ACCORDIONS_TEXTDOMAIN),
+                'zoomInLeft' => __('ZoomInLeft', OXI_ACCORDIONS_TEXTDOMAIN),
+                'zoomInRight' => __('ZoomInRight', OXI_ACCORDIONS_TEXTDOMAIN),
+                'zoomInUp' => __('ZoomInUp', OXI_ACCORDIONS_TEXTDOMAIN),
                 'optgroup17' => [false],
                 'optgroup18' => [true, 'Specials'],
-                'hinge' => __('Hinge', OXI_TABS_TEXTDOMAIN),
-                'rollIn' => __('RollIn', OXI_TABS_TEXTDOMAIN),
+                'hinge' => __('Hinge', OXI_ACCORDIONS_TEXTDOMAIN),
+                'rollIn' => __('RollIn', OXI_ACCORDIONS_TEXTDOMAIN),
                 'optgroup19' => [false],
             ],
                 ]
         );
         $this->add_control(
                 $id . '-duration', $data, [
-            'label' => __('Duration (ms)', OXI_TABS_TEXTDOMAIN),
+            'label' => __('Duration (ms)', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SLIDER,
             'default' => [
                 'unit' => 'px',
@@ -1857,7 +1857,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-delay', $data, [
-            'label' => __('Delay (ms)', OXI_TABS_TEXTDOMAIN),
+            'label' => __('Delay (ms)', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SLIDER,
             'default' => [
                 'unit' => 'px',
@@ -1877,7 +1877,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-offset', $data, [
-            'label' => __('Offset', OXI_TABS_TEXTDOMAIN),
+            'label' => __('Offset', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SLIDER,
             'default' => [
                 'unit' => 'px',
@@ -1897,12 +1897,12 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-looping', $data, [
-            'label' => __('Looping', OXI_TABS_TEXTDOMAIN),
+            'label' => __('Looping', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SWITCHER,
             'default' => '',
             'loader' => TRUE,
-            'label_on' => __('Yes', OXI_TABS_TEXTDOMAIN),
-            'label_off' => __('No', OXI_TABS_TEXTDOMAIN),
+            'label_on' => __('Yes', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label_off' => __('No', OXI_ACCORDIONS_TEXTDOMAIN),
             'return_value' => 'yes',
             'condition' => [
                 $id . '-type' => 'EMPTY',
@@ -1951,7 +1951,7 @@ trait Sanitization {
 
         $this->start_popover_control(
                 $id, [
-            'label' => __('Border', OXI_TABS_TEXTDOMAIN),
+            'label' => __('Border', OXI_ACCORDIONS_TEXTDOMAIN),
             $cond => $condition,
             'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
             'separator' => $separator,
@@ -1961,20 +1961,20 @@ trait Sanitization {
 
         $this->add_control(
                 $id . '-type', $data, [
-            'label' => __('Type', OXI_TABS_TEXTDOMAIN),
+            'label' => __('Type', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SELECT,
             'default' => '',
             'options' => [
-                '' => __('None', OXI_TABS_TEXTDOMAIN),
-                'solid' => __('Solid', OXI_TABS_TEXTDOMAIN),
-                'dotted' => __('Dotted', OXI_TABS_TEXTDOMAIN),
-                'dashed' => __('Dashed', OXI_TABS_TEXTDOMAIN),
-                'double' => __('Double', OXI_TABS_TEXTDOMAIN),
-                'groove' => __('Groove', OXI_TABS_TEXTDOMAIN),
-                'ridge' => __('Ridge', OXI_TABS_TEXTDOMAIN),
-                'inset' => __('Inset', OXI_TABS_TEXTDOMAIN),
-                'outset' => __('Outset', OXI_TABS_TEXTDOMAIN),
-                'hidden' => __('Hidden', OXI_TABS_TEXTDOMAIN),
+                '' => __('None', OXI_ACCORDIONS_TEXTDOMAIN),
+                'solid' => __('Solid', OXI_ACCORDIONS_TEXTDOMAIN),
+                'dotted' => __('Dotted', OXI_ACCORDIONS_TEXTDOMAIN),
+                'dashed' => __('Dashed', OXI_ACCORDIONS_TEXTDOMAIN),
+                'double' => __('Double', OXI_ACCORDIONS_TEXTDOMAIN),
+                'groove' => __('Groove', OXI_ACCORDIONS_TEXTDOMAIN),
+                'ridge' => __('Ridge', OXI_ACCORDIONS_TEXTDOMAIN),
+                'inset' => __('Inset', OXI_ACCORDIONS_TEXTDOMAIN),
+                'outset' => __('Outset', OXI_ACCORDIONS_TEXTDOMAIN),
+                'hidden' => __('Hidden', OXI_ACCORDIONS_TEXTDOMAIN),
             ],
             $loader => $loadervalue,
             $selectorvalue => 'border-style: {{VALUE}};',
@@ -1983,7 +1983,7 @@ trait Sanitization {
         );
         $this->add_responsive_control(
                 $id . '-width', $data, [
-            'label' => __('Width', OXI_TABS_TEXTDOMAIN),
+            'label' => __('Width', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
             $render => FALSE,
             'default' => [
@@ -2011,7 +2011,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-color', $data, [
-            'label' => __('Color', OXI_TABS_TEXTDOMAIN),
+            'label' => __('Color', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::COLOR,
             $render => FALSE,
             'default' => '#fff',
@@ -2071,20 +2071,20 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-type', $data, [
-            'label' => __('Type', OXI_TABS_TEXTDOMAIN),
+            'label' => __('Type', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SELECT,
             'default' => '',
             'options' => [
-                '' => __('None', OXI_TABS_TEXTDOMAIN),
-                'solid' => __('Solid', OXI_TABS_TEXTDOMAIN),
-                'dotted' => __('Dotted', OXI_TABS_TEXTDOMAIN),
-                'dashed' => __('Dashed', OXI_TABS_TEXTDOMAIN),
-                'double' => __('Double', OXI_TABS_TEXTDOMAIN),
-                'groove' => __('Groove', OXI_TABS_TEXTDOMAIN),
-                'ridge' => __('Ridge', OXI_TABS_TEXTDOMAIN),
-                'inset' => __('Inset', OXI_TABS_TEXTDOMAIN),
-                'outset' => __('Outset', OXI_TABS_TEXTDOMAIN),
-                'hidden' => __('Hidden', OXI_TABS_TEXTDOMAIN),
+                '' => __('None', OXI_ACCORDIONS_TEXTDOMAIN),
+                'solid' => __('Solid', OXI_ACCORDIONS_TEXTDOMAIN),
+                'dotted' => __('Dotted', OXI_ACCORDIONS_TEXTDOMAIN),
+                'dashed' => __('Dashed', OXI_ACCORDIONS_TEXTDOMAIN),
+                'double' => __('Double', OXI_ACCORDIONS_TEXTDOMAIN),
+                'groove' => __('Groove', OXI_ACCORDIONS_TEXTDOMAIN),
+                'ridge' => __('Ridge', OXI_ACCORDIONS_TEXTDOMAIN),
+                'inset' => __('Inset', OXI_ACCORDIONS_TEXTDOMAIN),
+                'outset' => __('Outset', OXI_ACCORDIONS_TEXTDOMAIN),
+                'hidden' => __('Hidden', OXI_ACCORDIONS_TEXTDOMAIN),
             ],
             $loader => $loadervalue,
             $selector_key => $selector,
@@ -2092,7 +2092,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-width', $data, [
-            'label' => __('Size', OXI_TABS_TEXTDOMAIN),
+            'label' => __('Size', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SLIDER,
             'default' => [
                 'unit' => 'px',
@@ -2114,7 +2114,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-color', $data, [
-            'label' => __('Color', OXI_TABS_TEXTDOMAIN),
+            'label' => __('Color', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::COLOR,
             $render => FALSE,
             'default' => '',
@@ -2176,7 +2176,7 @@ trait Sanitization {
         $separator = array_key_exists('separator', $arg) ? $arg['separator'] : FALSE;
         $this->start_popover_control(
                 $id, [
-            'label' => __('Background', OXI_TABS_TEXTDOMAIN),
+            'label' => __('Background', OXI_ACCORDIONS_TEXTDOMAIN),
             'condition' => array_key_exists('condition', $arg) ? $arg['condition'] : '',
             'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
             'separator' => $separator,
@@ -2186,7 +2186,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-color', $data, [
-            'label' => __('Color', OXI_TABS_TEXTDOMAIN),
+            'label' => __('Color', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::GRADIENT,
             'gradient' => $id,
             'oparetor' => 'RGB',
@@ -2198,28 +2198,28 @@ trait Sanitization {
 
         $this->add_control(
                 $id . '-img', $data, [
-            'label' => __('Image', OXI_TABS_TEXTDOMAIN),
+            'label' => __('Image', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SWITCHER,
             'loader' => TRUE,
-            'label_on' => __('Yes', OXI_TABS_TEXTDOMAIN),
-            'label_off' => __('No', OXI_TABS_TEXTDOMAIN),
+            'label_on' => __('Yes', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label_off' => __('No', OXI_ACCORDIONS_TEXTDOMAIN),
             'return_value' => 'yes',
                 ]
         );
         $this->add_control(
                 $id . '-select', $data, [
-            'label' => __('Photo Source', OXI_TABS_TEXTDOMAIN),
+            'label' => __('Photo Source', OXI_ACCORDIONS_TEXTDOMAIN),
             'separator' => TRUE,
             'loader' => TRUE,
             'type' => Controls::CHOOSE,
             'default' => 'media-library',
             'options' => [
                 'media-library' => [
-                    'title' => __('Media Library', OXI_TABS_TEXTDOMAIN),
+                    'title' => __('Media Library', OXI_ACCORDIONS_TEXTDOMAIN),
                     'icon' => 'fa fa-align-left',
                 ],
                 'custom-url' => [
-                    'title' => __('Custom URL', OXI_TABS_TEXTDOMAIN),
+                    'title' => __('Custom URL', OXI_ACCORDIONS_TEXTDOMAIN),
                     'icon' => 'fa fa-align-center',
                 ]
             ],
@@ -2230,7 +2230,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-image', $data, [
-            'label' => __('Image', OXI_TABS_TEXTDOMAIN),
+            'label' => __('Image', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::IMAGE,
             'default' => '',
             'loader' => TRUE,
@@ -2242,7 +2242,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-url', $data, [
-            'label' => __('Image URL', OXI_TABS_TEXTDOMAIN),
+            'label' => __('Image URL', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::TEXT,
             'default' => '',
             'loader' => TRUE,
@@ -2255,21 +2255,21 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-position', $data, [
-            'label' => __('Position', OXI_TABS_TEXTDOMAIN),
+            'label' => __('Position', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SELECT,
             'default' => 'center center',
             'render' => $render,
             'options' => [
-                '' => __('Default', OXI_TABS_TEXTDOMAIN),
-                'top left' => __('Top Left', OXI_TABS_TEXTDOMAIN),
-                'top center' => __('Top Center', OXI_TABS_TEXTDOMAIN),
-                'top right' => __('Top Right', OXI_TABS_TEXTDOMAIN),
-                'center left' => __('Center Left', OXI_TABS_TEXTDOMAIN),
-                'center center' => __('Center Center', OXI_TABS_TEXTDOMAIN),
-                'center right' => __('Center Right', OXI_TABS_TEXTDOMAIN),
-                'bottom left' => __('Bottom Left', OXI_TABS_TEXTDOMAIN),
-                'bottom center' => __('Bottom Center', OXI_TABS_TEXTDOMAIN),
-                'bottom right' => __('Bottom Right', OXI_TABS_TEXTDOMAIN),
+                '' => __('Default', OXI_ACCORDIONS_TEXTDOMAIN),
+                'top left' => __('Top Left', OXI_ACCORDIONS_TEXTDOMAIN),
+                'top center' => __('Top Center', OXI_ACCORDIONS_TEXTDOMAIN),
+                'top right' => __('Top Right', OXI_ACCORDIONS_TEXTDOMAIN),
+                'center left' => __('Center Left', OXI_ACCORDIONS_TEXTDOMAIN),
+                'center center' => __('Center Center', OXI_ACCORDIONS_TEXTDOMAIN),
+                'center right' => __('Center Right', OXI_ACCORDIONS_TEXTDOMAIN),
+                'bottom left' => __('Bottom Left', OXI_ACCORDIONS_TEXTDOMAIN),
+                'bottom center' => __('Bottom Center', OXI_ACCORDIONS_TEXTDOMAIN),
+                'bottom right' => __('Bottom Right', OXI_ACCORDIONS_TEXTDOMAIN),
             ],
             'loader' => TRUE,
             'condition' => [
@@ -2280,14 +2280,14 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-attachment', $data, [
-            'label' => __('Attachment', OXI_TABS_TEXTDOMAIN),
+            'label' => __('Attachment', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SELECT,
             'default' => '',
             'render' => $render,
             'options' => [
-                '' => __('Default', OXI_TABS_TEXTDOMAIN),
-                'scroll' => __('Scroll', OXI_TABS_TEXTDOMAIN),
-                'fixed' => __('Fixed', OXI_TABS_TEXTDOMAIN),
+                '' => __('Default', OXI_ACCORDIONS_TEXTDOMAIN),
+                'scroll' => __('Scroll', OXI_ACCORDIONS_TEXTDOMAIN),
+                'fixed' => __('Fixed', OXI_ACCORDIONS_TEXTDOMAIN),
             ],
             $loader => $loadervalue,
             $selectorvalue => 'background-attachment: {{VALUE}};',
@@ -2300,16 +2300,16 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-repeat', $data, [
-            'label' => __('Repeat', OXI_TABS_TEXTDOMAIN),
+            'label' => __('Repeat', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SELECT,
             'default' => 'no-repeat',
             'render' => $render,
             'options' => [
-                '' => __('Default', OXI_TABS_TEXTDOMAIN),
-                'no-repeat' => __('No-Repeat', OXI_TABS_TEXTDOMAIN),
-                'repeat' => __('Repeat', OXI_TABS_TEXTDOMAIN),
-                'repeat-x' => __('Repeat-x', OXI_TABS_TEXTDOMAIN),
-                'repeat-y' => __('Repeat-y', OXI_TABS_TEXTDOMAIN),
+                '' => __('Default', OXI_ACCORDIONS_TEXTDOMAIN),
+                'no-repeat' => __('No-Repeat', OXI_ACCORDIONS_TEXTDOMAIN),
+                'repeat' => __('Repeat', OXI_ACCORDIONS_TEXTDOMAIN),
+                'repeat-x' => __('Repeat-x', OXI_ACCORDIONS_TEXTDOMAIN),
+                'repeat-y' => __('Repeat-y', OXI_ACCORDIONS_TEXTDOMAIN),
             ],
             'loader' => TRUE,
             'condition' => [
@@ -2320,15 +2320,15 @@ trait Sanitization {
         );
         $this->add_responsive_control(
                 $id . '-size', $data, [
-            'label' => __('Size', OXI_TABS_TEXTDOMAIN),
+            'label' => __('Size', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SELECT,
             'default' => 'cover',
             'render' => $render,
             'options' => [
-                '' => __('Default', OXI_TABS_TEXTDOMAIN),
-                'auto' => __('Auto', OXI_TABS_TEXTDOMAIN),
-                'cover' => __('Cover', OXI_TABS_TEXTDOMAIN),
-                'contain' => __('Contain', OXI_TABS_TEXTDOMAIN),
+                '' => __('Default', OXI_ACCORDIONS_TEXTDOMAIN),
+                'auto' => __('Auto', OXI_ACCORDIONS_TEXTDOMAIN),
+                'cover' => __('Cover', OXI_ACCORDIONS_TEXTDOMAIN),
+                'contain' => __('Contain', OXI_ACCORDIONS_TEXTDOMAIN),
             ],
             $loader => $loadervalue,
             $selectorvalue => 'background-size: {{VALUE}};',
@@ -2360,7 +2360,7 @@ trait Sanitization {
         $separator = array_key_exists('separator', $arg) ? $arg['separator'] : FALSE;
         $this->add_control(
                 $id . '-url', $data, [
-            'label' => __('Link', OXI_TABS_TEXTDOMAIN),
+            'label' => __('Link', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::TEXT,
             'link' => TRUE,
             'separator' => $separator,
@@ -2373,11 +2373,11 @@ trait Sanitization {
 
         $this->add_control(
                 $id . '-target', $data, [
-            'label' => __('New Window?', OXI_TABS_TEXTDOMAIN),
+            'label' => __('New Window?', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SWITCHER,
             'default' => '',
-            'label_on' => __('Yes', OXI_TABS_TEXTDOMAIN),
-            'label_off' => __('No', OXI_TABS_TEXTDOMAIN),
+            'label_on' => __('Yes', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label_off' => __('No', OXI_ACCORDIONS_TEXTDOMAIN),
             'return_value' => 'yes',
                 ]
         );
@@ -2402,20 +2402,20 @@ trait Sanitization {
         endif;
         $this->add_control(
                 $lap = $id . '-lap', $data, [
-            'label' => __('Column Size', OXI_TABS_TEXTDOMAIN),
+            'label' => __('Column Size', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SELECT,
             'responsive' => 'laptop',
             'description' => $arg['description'],
             'default' => 'oxi-bt-col-lg-12',
             'options' => [
-                'oxi-bt-col-lg-12' => __('Col 1', OXI_TABS_TEXTDOMAIN),
-                'oxi-bt-col-lg-6' => __('Col 2', OXI_TABS_TEXTDOMAIN),
-                'oxi-bt-col-lg-4' => __('Col 3', OXI_TABS_TEXTDOMAIN),
-                'oxi-bt-col-lg-3' => __('Col 4', OXI_TABS_TEXTDOMAIN),
-                'oxi-bt-col-lg-5' => __('Col 5', OXI_TABS_TEXTDOMAIN),
-                'oxi-bt-col-lg-2' => __('Col 6', OXI_TABS_TEXTDOMAIN),
-                'oxi-bt-col-lg-8' => __('Col 8', OXI_TABS_TEXTDOMAIN),
-                'oxi-bt-col-lg-1' => __('Col 12', OXI_TABS_TEXTDOMAIN),
+                'oxi-bt-col-lg-12' => __('Col 1', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oxi-bt-col-lg-6' => __('Col 2', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oxi-bt-col-lg-4' => __('Col 3', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oxi-bt-col-lg-3' => __('Col 4', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oxi-bt-col-lg-5' => __('Col 5', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oxi-bt-col-lg-2' => __('Col 6', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oxi-bt-col-lg-8' => __('Col 8', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oxi-bt-col-lg-1' => __('Col 12', OXI_ACCORDIONS_TEXTDOMAIN),
             ],
             'description' => 'Define how much column you want to show into single rows. Customize possible with desktop or tab or mobile Settings.',
             $select => $selector,
@@ -2425,19 +2425,19 @@ trait Sanitization {
         );
         $this->add_control(
                 $tab = $id . '-tab', $data, [
-            'label' => __('Column Size', OXI_TABS_TEXTDOMAIN),
+            'label' => __('Column Size', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SELECT,
             'responsive' => 'tab',
             'default' => 'oxi-bt-col-md-12',
             'description' => $arg['description'],
             'options' => [
-                '' => __('Default', OXI_TABS_TEXTDOMAIN),
-                'oxi-bt-col-md-12' => __('Col 1', OXI_TABS_TEXTDOMAIN),
-                'oxi-bt-col-md-6' => __('Col 2', OXI_TABS_TEXTDOMAIN),
-                'oxi-bt-col-md-4' => __('Col 3', OXI_TABS_TEXTDOMAIN),
-                'oxi-bt-col-md-3' => __('Col 4', OXI_TABS_TEXTDOMAIN),
-                'oxi-bt-col-md-2' => __('Col 6', OXI_TABS_TEXTDOMAIN),
-                'oxi-bt-col-md-1' => __('Col 12', OXI_TABS_TEXTDOMAIN),
+                '' => __('Default', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oxi-bt-col-md-12' => __('Col 1', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oxi-bt-col-md-6' => __('Col 2', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oxi-bt-col-md-4' => __('Col 3', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oxi-bt-col-md-3' => __('Col 4', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oxi-bt-col-md-2' => __('Col 6', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oxi-bt-col-md-1' => __('Col 12', OXI_ACCORDIONS_TEXTDOMAIN),
             ],
             'description' => 'Define how much column you want to show into single rows. Customize possible with desktop or tab or mobile Settings.',
             $select => $selector,
@@ -2447,20 +2447,20 @@ trait Sanitization {
         );
         $this->add_control(
                 $mob = $id . '-mob', $data, [
-            'label' => __('Column Size', OXI_TABS_TEXTDOMAIN),
+            'label' => __('Column Size', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SELECT,
             'default' => 'oxi-bt-col-lg-12',
             'responsive' => 'mobile',
             'description' => $arg['description'],
             'options' => [
-                '' => __('Default', OXI_TABS_TEXTDOMAIN),
-                'oxi-bt-col-sm-12' => __('Col 1', OXI_TABS_TEXTDOMAIN),
-                'oxi-bt-col-sm-6' => __('Col 2', OXI_TABS_TEXTDOMAIN),
-                'oxi-bt-col-sm-4' => __('Col 3', OXI_TABS_TEXTDOMAIN),
-                'oxi-bt-col-sm-3' => __('Col 4', OXI_TABS_TEXTDOMAIN),
-                'oxi-bt-col-sm-5' => __('Col 5', OXI_TABS_TEXTDOMAIN),
-                'oxi-bt-col-sm-2' => __('Col 6', OXI_TABS_TEXTDOMAIN),
-                'oxi-bt-col-sm-1' => __('Col 12', OXI_TABS_TEXTDOMAIN),
+                '' => __('Default', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oxi-bt-col-sm-12' => __('Col 1', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oxi-bt-col-sm-6' => __('Col 2', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oxi-bt-col-sm-4' => __('Col 3', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oxi-bt-col-sm-3' => __('Col 4', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oxi-bt-col-sm-5' => __('Col 5', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oxi-bt-col-sm-2' => __('Col 6', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oxi-bt-col-sm-1' => __('Col 12', OXI_ACCORDIONS_TEXTDOMAIN),
             ],
             'description' => 'Define how much column you want to show into single rows. Customize possible with desktop or tab or mobile Settings.',
             $select => $selector,

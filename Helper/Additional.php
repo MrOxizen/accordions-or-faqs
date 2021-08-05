@@ -45,7 +45,7 @@ trait Additional {
         wp_enqueue_script('jquery-ui-draggable');
         wp_enqueue_script('jquery.dataTables.min', OXI_ACCORDIONS_URL . 'assets/backend/js/jquery.dataTables.min.js', false, OXI_ACCORDIONS_PLUGIN_VERSION);
         wp_enqueue_script('dataTables.bootstrap.min', OXI_ACCORDIONS_URL . 'assets/backend/js/dataTables.bootstrap.min.js', false, OXI_ACCORDIONS_PLUGIN_VERSION);
-        wp_enqueue_script('oxi-accordions-front-page', OXI_ACCORDIONS_URL . '/assets/backend/custom/front-page.js', false, OXI_TABS_TEXTDOMAIN);
+        wp_enqueue_script('oxi-accordions-front-page', OXI_ACCORDIONS_URL . '/assets/backend/custom/front-page.js', false, OXI_ACCORDIONS_TEXTDOMAIN);
     }
 
     public function admin_template_additional() {
@@ -59,7 +59,7 @@ trait Additional {
         wp_enqueue_script('jquery-ui-autocomplete');
         wp_enqueue_script('jquery-ui-slider');
         wp_enqueue_script('jquery-ui-draggable');
-        wp_enqueue_script('oxi-accordions-front-page', OXI_ACCORDIONS_URL . '/assets/backend/custom/template.js', false, OXI_TABS_TEXTDOMAIN);
+        wp_enqueue_script('oxi-accordions-front-page', OXI_ACCORDIONS_URL . '/assets/backend/custom/template.js', false, OXI_ACCORDIONS_TEXTDOMAIN);
     }
 
     public function admin_elements_editior_loader() {

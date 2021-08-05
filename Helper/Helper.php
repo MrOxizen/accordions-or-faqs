@@ -190,8 +190,7 @@ trait Helper {
             $database = new \OXI_ACCORDIONS_PLUGINS\Helper\Database();
             $style = $database->wpdb->get_row($database->wpdb->prepare('SELECT * FROM ' . $database->parent_table . ' WHERE id = %d ', $styleid), ARRAY_A);
             if (is_array($style)):
-                $template = ucfirst($style['style_name']);
-
+                $template = ucfirst(str_replace('-', '_', $style['style_name']));
                 $cls = '\OXI_ACCORDIONS_PLUGINS\Layouts\Admin\\' . $template;
                 if (class_exists($cls)):
                     new $cls();
