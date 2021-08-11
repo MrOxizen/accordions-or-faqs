@@ -168,7 +168,7 @@ class Template {
         $inlinecss = $this->inline_public_css() . $this->inline_css . (array_key_exists('oxi-accordions-custom-css', $this->style) ? $this->style['oxi-accordions-custom-css'] : '');
         $inlinejs = $this->inline_public_jquery();
         if ($this->CSSDATA == '' && $this->admin == 'admin') {
-            $cls = '\OXI_ACCORDIONS_PLUGINS\Layouts\Admin\\' .  $this->style_name;
+            $cls = '\OXI_ACCORDIONS_PLUGINS\Layouts\Admin\\' . str_replace('-', '_', $this->style_name);
             $CLASS = new $cls('admin');
             $inlinecss .= $CLASS->inline_template_css_render($this->style);
         } else {
@@ -211,7 +211,7 @@ class Template {
         wp_enqueue_style('oxi-accordions-ultimate', OXI_ACCORDIONS_URL . 'assets/frontend/css/style.css', false, OXI_ACCORDIONS_PLUGIN_VERSION);
         wp_enqueue_style('oxi-plugin-animate', OXI_ACCORDIONS_URL . 'assets/frontend/css/animate.css', false, OXI_ACCORDIONS_PLUGIN_VERSION);
         wp_enqueue_style('oxi-accordions-' . strtolower(str_replace('_', '-', $this->style_name)), OXI_ACCORDIONS_URL . 'assets/frontend/css/' . strtolower(str_replace('_', '-', $this->style_name)) . '.css', false, OXI_ACCORDIONS_PLUGIN_VERSION);
-        wp_enqueue_script('oxi-accordions-collapse.min', OXI_ACCORDIONS_URL . 'assets/frontend/js/collapse.min.js', false, OXI_ACCORDIONS_PLUGIN_VERSION);
+      //wp_enqueue_script('oxi-accordions-collapse.min', OXI_ACCORDIONS_URL . 'assets/frontend/js/collapse.min.js', false, OXI_ACCORDIONS_PLUGIN_VERSION);
         wp_enqueue_script('oxi-accordions-ultimate', OXI_ACCORDIONS_URL . 'assets/frontend/js/accordions.js', false, OXI_ACCORDIONS_PLUGIN_VERSION);
     }
 
@@ -394,7 +394,7 @@ class Template {
     }
 
     public function accordions_url_render($style) {
-        if ($style['oxi-accordions-modal-components-type'] == 'link'):
+        if (isset($style['oxi-accordions-modal-components-type']) && $style['oxi-accordions-modal-components-type'] == 'link'):
             $data = $this->url_render('oxi-accordions-modal-link', $style);
             if (count($data) >= 1):
                 return ' data-link=\'' . json_encode($data) . '\'';

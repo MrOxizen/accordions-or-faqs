@@ -7,8 +7,8 @@ namespace OXI_ACCORDIONS_PLUGINS\Layouts;
  *
  * @author biplo
  */
-
 use OXI_ACCORDIONS_PLUGINS\Helper\Controls as Controls;
+
 class Admin {
 
     use \OXI_ACCORDIONS_PLUGINS\Helper\Additional;
@@ -104,7 +104,6 @@ class Admin {
      * @since 2.0.1
      */
     public $Popover_Condition = true;
-    
     public $Get_Nested_Accordions = [];
 
     public function __construct($type = '') {
@@ -126,7 +125,7 @@ class Admin {
     public function hooks() {
         $this->admin_elements_editior_loader();
         $this->dbdata = $this->database->wpdb->get_row($this->database->wpdb->prepare('SELECT * FROM ' . $this->database->parent_table . ' WHERE id = %d ', $this->oxiid), ARRAY_A);
-        
+
         $Get_Nested_Accordions = $this->database->wpdb->get_results($this->database->wpdb->prepare("SELECT id, name FROM {$this->database->parent_table} WHERE type = %s ORDER by id ASC", OXI_ACCORDIONS_TEXTDOMAIN), ARRAY_A);
         foreach ($Get_Nested_Accordions as $key => $value) {
             if ($value['id'] != $this->oxiid):
@@ -156,6 +155,9 @@ class Admin {
             'type' => Controls::MODALOPENER,
             'title' => __('Accordions Data Form', OXI_ACCORDIONS_TEXTDOMAIN),
             'sub-title' => __('Open Form', OXI_ACCORDIONS_TEXTDOMAIN),
+            'condition' => [
+                'oxi-accordions-content-type' => 'content'
+            ],
             'showing' => TRUE,
         ]);
     }
@@ -242,6 +244,9 @@ class Admin {
             $this->add_substitute_control($rearrange, [], [
                 'type' => Controls::REARRANGE,
                 'showing' => TRUE,
+                'condition' => [
+                    'oxi-accordions-content-type' => 'content'
+                ],
             ]);
         endif;
     }
@@ -345,12 +350,12 @@ class Admin {
         <div class="wrap">  
             <div class="oxi-addons-wrapper">
                 <?php
-                 apply_filters('oxi-accordions-plugin/admin_menu', TRUE);
+                apply_filters('oxi-accordions-plugin/admin_menu', TRUE);
                 ?>
                 <div class="oxi-addons-style-20-spacer"></div>
                 <div class="oxi-addons-row">
                     <?php
-                     apply_filters('oxi-accordions-plugin/support-and-comments', TRUE);
+                    apply_filters('oxi-accordions-plugin/support-and-comments', TRUE);
                     ?>
                     <div class="oxi-addons-wrapper oxi-addons-image-tabs-mode">
                         <div class="oxi-addons-settings" id="oxisettingsreload">

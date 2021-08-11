@@ -73,13 +73,14 @@ class Shortcode {
     public function get_data() {
         //style Data
         $this->style_table = $this->database->wpdb->get_row($this->database->wpdb->prepare('SELECT * FROM ' . $this->database->parent_table . ' WHERE id = %d ', $this->styleid), ARRAY_A);
+
+        if (!is_array($this->style_table)):
+            return;
+        endif;
         //Trasient
         $this->get_transient();
         //Child Data
         $this->child_table = $this->database->wpdb->get_results($this->database->wpdb->prepare("SELECT * FROM {$this->database->child_table} WHERE styleid = %d ORDER by id ASC", $this->styleid), ARRAY_A);
-        if (!is_array($this->style_table)):
-            return;
-        endif;
 
         $this->render_html();
     }
@@ -98,13 +99,13 @@ class Shortcode {
                     'stylesheet' => '',
                     'font_family' => ''
                 ];
-                $style = array_merge($this->style_table, $new);
+                $this->style_table = array_merge($this->style_table, $new);
             endif;
         endif;
     }
 
     public function render_html() {
-        $template = ucfirst($this->style_table['style_name']);
+        $template = ucfirst(str_replace('-', '_', $this->style_table['style_name']));
         $CLASS = '\OXI_ACCORDIONS_PLUGINS\Layouts\Views\\' . $template;
         if (class_exists($CLASS)):
             new $CLASS($this->style_table, $this->child_table, $this->define_user);

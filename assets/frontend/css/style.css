@@ -48,7 +48,7 @@
     align-items: center;
     align-content: stretch;
 }
-.oxi-accordions-header-card.oxi-accordions-head-expand-collapse-right-position > .oxi-accordions-header-body{
+.oxi-accordions-head-expand-collapse-right-position > .oxi-accordions-header-card > .oxi-accordions-header-body{
     display: flex;
     -webkit-flex-flow: row-reverse nowrap;
     justify-content: flex-end;
@@ -157,8 +157,14 @@
 .oxi-accordions-content-body.oxi-accordions-content-height{
     overflow: auto
 }
-.oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-content-card.oxicollapse:not(.show) {
-    display: none;
+.oxi-accordions-ultimate-style .oxi-accordions-single-card  .oxi-accordions-content-card{
+    max-height: 10000px;
+    transition: max-height 0.15s ease-out;
+    overflow: hidden;
+}
+.oxi-accordions-ultimate-style  .oxi-accordions-single-card:not(.oxi-accordions-expand)  .oxi-accordions-content-card{
+    max-height: 0;
+    overflow: hidden;
 }
 
 .oxi-accordions-content-card .oxi-accordions-comment-avatar{

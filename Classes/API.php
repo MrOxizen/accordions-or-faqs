@@ -236,7 +236,7 @@ class API {
             $transient = 'accordions-or-faqs-template-' . $this->styleid;
             delete_transient($transient);
             $this->database->wpdb->query($this->database->wpdb->prepare("UPDATE {$this->database->parent_table} SET rawdata = %s, stylesheet = %s WHERE id = %d", $this->rawdata, $stylesheet, $this->styleid));
-            $CLASS = '\OXI_ACCORDIONS_PLUGINS\Layouts\Admin\\' . $template;
+            $CLASS = '\OXI_ACCORDIONS_PLUGINS\Layouts\Admin\\' . str_replace('-', '_', $template);
             $CLASS = new $CLASS('admin');
             return $CLASS->template_css_render($settings);
         endif;
