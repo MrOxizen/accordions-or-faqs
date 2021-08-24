@@ -64,4 +64,3 @@ add_action('upgrader_process_complete', function ($upgrader_object, $options) {
     $Installation = new \OXI_ACCORDIONS_PLUGINS\Helper\Installation();
     $Installation->plugin_upgrade_hook($upgrader_object, $options);
 }, 10, 2);
-

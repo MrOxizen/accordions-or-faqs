@@ -37,6 +37,21 @@ trait Helper {
 
     }
 
+    public function accordions_shortcode($atts) {
+        extract(shortcode_atts(array('id' => ' ',), $atts));
+        $styleid = $atts['id'];
+        ob_start();
+        $CLASS = '\OXI_ACCORDIONS_PLUGINS\Includes\Shortcode';
+        if (class_exists($CLASS)):
+            new $CLASS($styleid, 'user');
+        endif;
+        return ob_get_clean();
+    }
+
+    public function shortcode_render($id, $user) {
+        return;
+    }
+
     /**
      * Plugin check Current Tabs
      *
@@ -205,7 +220,7 @@ trait Helper {
     }
 
     public function user_settings() {
-        //   new \OXI_TABS_PLUGINS\Page\Settings();
+          new \OXI_ACCORDIONS_PLUGINS\Includes\Settings();
     }
 
     public function oxilab_plugins() {

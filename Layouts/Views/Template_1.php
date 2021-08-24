@@ -13,7 +13,7 @@ class Template_1 extends Template {
 
     public function default_render($style, $child, $admin) {
        
-        echo '<div class="oxi-accordions-ultimate-style oxi-accordions-ultimate-template-1  oxi-accordions-clearfix oxi-accordions-preloader" data-oxi-accordions=\'' . json_encode($this->attribute) . '\' ' . $this->accordions_preloader . '>';
+        echo '<div class="oxi-accordions-ultimate-style oxi-accordions-ultimate-template-1  oxi-accordions-clearfix oxi-accordions-preloader" ' . $this->public_attribute() . ' ' . $this->accordions_preloader . '>';
         $number = 1;
 
         foreach ($child as $key => $val) {

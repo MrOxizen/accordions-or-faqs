@@ -131,147 +131,7 @@ class Helper extends Admin {
             'description' => 'Select either your Accordions will open on Click or Hover.',
                 ]
         );
-        $this->add_control(
-                'oxi-accordions-gen-animation', $this->style, [
-            'label' => __('Animation', OXI_ACCORDIONS_TEXTDOMAIN),
-            'type' => Controls::SELECT,
-            'default' => '',
-            'loader' => TRUE,
-            'options' => [
-                'optgroup0' => [true, 'Attention Seekers'],
-                '' => __('No Animation', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__bounce' => __('Bounce', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__flash' => __('Flash', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__pulse' => __('Pulse', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__rubberBand' => __('Rubber Band', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__shakeX' => __('ShakeX', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__headShake' => __('Head Shake', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__swing' => __('Swing', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__tada' => __('Tada', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__wobble' => __('Wobble', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__jello' => __('Jello', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__heartBeat' => __('Heart Beat', OXI_ACCORDIONS_TEXTDOMAIN),
-                'optgroup1' => [false],
-                'optgroup2' => [true, 'Back Entrances'],
-                'animate__backInDown' => __('Back In Down', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__backInLeft' => __('Back In Left', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__backInRight' => __('Back In Right', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__backInUp' => __('Back In Up', OXI_ACCORDIONS_TEXTDOMAIN),
-                'optgroup3' => [false],
-                'optgroup4' => [true, 'Bouncing Entrances'],
-                'animate__bounceIn' => __('Bounce In', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__bounceInDown' => __('Bounce In Down', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__bounceInLeft' => __('Bounce In Left', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__bounceInRight' => __('Bounce In Right', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__bounceInUp' => __('Bounce In Up', OXI_ACCORDIONS_TEXTDOMAIN),
-                'optgroup5' => [false],
-                'optgroup6' => [true, 'Fading Entrances'],
-                'animate__fadeIn' => __('Fade In', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__fadeInDown' => __('Fade In Down', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__fadeInDownBig' => __('Fade In Down Big', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__fadeInLeft' => __('Fade In Left', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__fadeInLeftBig' => __('Fade In Left Big', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__fadeInRight' => __('Fade In Right', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__fadeInRightBig' => __('Fade In Right Big', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__fadeInUp' => __('Fade In Up', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__fadeInUpBig' => __('Fade In Up Big', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__fadeInTopLeft' => __('Fade In Top Left', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__fadeInTopRight' => __('Fade In Top Right', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__fadeInBottomLeft' => __('Fade In Bottom Left', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__fadeInBottomRight' => __('Fade In Bottom Right', OXI_ACCORDIONS_TEXTDOMAIN),
-                'optgroup7' => [false],
-                'optgroup8' => [true, 'Flippers'],
-                'animate__flip' => __('Flip', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__flipInX' => __('Flip In X', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__flipInY' => __('Flip In Y', OXI_ACCORDIONS_TEXTDOMAIN),
-                'optgroup9' => [false],
-                'optgroup10' => [true, 'Lightspeed'],
-                'animate__lightSpeedInRight' => __('Light Speed In Right', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__lightSpeedInLeft' => __('Light Speed In Left', OXI_ACCORDIONS_TEXTDOMAIN),
-                'optgroup11' => [false],
-                'optgroup12' => [true, 'Rotating Entrances'],
-                'animate__rotateIn' => __('Rotate In', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__rotateInDownLeft' => __('Rotate In Down Left', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__rotateInDownRight' => __('Rotate In Down Right', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__rotateInUpLeft' => __('Rotate In Up Left', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__rotateInUpRight' => __('Rotate In Up Right', OXI_ACCORDIONS_TEXTDOMAIN),
-                'optgroup13' => [false],
-                'optgroup14' => [true, 'Specials'],
-                'animate__hinge' => __('Hinge', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__jackInTheBox' => __('Jack In The Box', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__rollIn' => __('Roll In', OXI_ACCORDIONS_TEXTDOMAIN),
-                'optgroup15' => [false],
-                'optgroup16' => [true, 'Zooming Entrances'],
-                'animate__zoomIn' => __('Zoom In', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__zoomInDown' => __('Zoom In Down', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__zoomInLeft' => __('Zoom In Left', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__zoomInRight' => __('Zoom In Right', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__zoomInUp' => __('Zoom In Up', OXI_ACCORDIONS_TEXTDOMAIN),
-                'optgroup17' => [false],
-                'optgroup18' => [true, 'Sliding Entrances'],
-                'animate__slideInDown' => __('Slide In Down', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__slideInLeft' => __('Slide In Left', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__slideInUp' => __('Slide In Up', OXI_ACCORDIONS_TEXTDOMAIN),
-                'optgroup19' => [false],
-            ],
-            'description' => 'Add Animation Effect on Accordions opening.',
-                ]
-        );
-        $this->add_control(
-                'oxi-accordions-animation-duration', $this->style, [
-            'label' => __('Animation Duration', OXI_ACCORDIONS_TEXTDOMAIN),
-            'type' => Controls::SLIDER,
-            'default' => [
-                'unit' => 's',
-                'size' => '',
-            ],
-            'range' => [
-                's' => [
-                    'min' => 0,
-                    'max' => 10,
-                    'step' => 0.01,
-                ],
-            ],
-            'condition' => [
-                'oxi-accordions-gen-animation' => 'EMPTY',
-            ],
-            'selector' => [
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style .oxi-accordions-single-card > .oxi-accordions-content-card > .animate__animated' => '-webkit-animation-duration: {{SIZE}}s;animation-duration: {{SIZE}}s;',
-            ],
-            'description' => 'Set fixed accordion content panel height.',
-                ]
-        );
-        $this->add_responsive_control(
-                'oxi-accordions-general-padding', $this->style, [
-            'label' => __('Padding', OXI_ACCORDIONS_TEXTDOMAIN),
-            'type' => Controls::DIMENSIONS,
-            'default' => [
-                'unit' => 'px',
-                'size' => '',
-            ],
-            'range' => [
-                'px' => [
-                    'min' => 0,
-                    'max' => 500,
-                    'step' => 1,
-                ],
-                '%' => [
-                    'min' => 0,
-                    'max' => 100,
-                    'step' => 1,
-                ],
-                'em' => [
-                    'min' => 0,
-                    'max' => 100,
-                    'step' => .1,
-                ],
-            ],
-            'selector' => [
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ],
-            'description' => 'Create some Space inside each Accordions Body.',
-                ]
-        );
+     
         $this->add_responsive_control(
                 'oxi-accordions-general-margin', $this->style, [
             'label' => __('Margin', OXI_ACCORDIONS_TEXTDOMAIN),
@@ -298,11 +158,12 @@ class Helper extends Admin {
                 ],
             ],
             'selector' => [
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style' => 'margin:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card' => 'margin:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
-            'description' => 'Create some Space outside of the Accordions Body.',
+            'description' => 'Create some Space at Outside each Accordions.',
                 ]
         );
+       
         $this->end_controls_section();
     }
 

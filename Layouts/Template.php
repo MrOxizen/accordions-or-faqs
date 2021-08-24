@@ -1,5 +1,7 @@
 <?php
+
 namespace OXI_ACCORDIONS_PLUGINS\Layouts;
+
 /**
  * Description of Template
  *
@@ -211,7 +213,7 @@ class Template {
         wp_enqueue_style('oxi-accordions-ultimate', OXI_ACCORDIONS_URL . 'assets/frontend/css/style.css', false, OXI_ACCORDIONS_PLUGIN_VERSION);
         wp_enqueue_style('oxi-plugin-animate', OXI_ACCORDIONS_URL . 'assets/frontend/css/animate.css', false, OXI_ACCORDIONS_PLUGIN_VERSION);
         wp_enqueue_style('oxi-accordions-' . strtolower(str_replace('_', '-', $this->style_name)), OXI_ACCORDIONS_URL . 'assets/frontend/css/' . strtolower(str_replace('_', '-', $this->style_name)) . '.css', false, OXI_ACCORDIONS_PLUGIN_VERSION);
-      //wp_enqueue_script('oxi-accordions-collapse.min', OXI_ACCORDIONS_URL . 'assets/frontend/js/collapse.min.js', false, OXI_ACCORDIONS_PLUGIN_VERSION);
+        wp_enqueue_script('oxi-accordions-collapse.min', OXI_ACCORDIONS_URL . 'assets/frontend/js/collapse.js', false, OXI_ACCORDIONS_PLUGIN_VERSION);
         wp_enqueue_script('oxi-accordions-ultimate', OXI_ACCORDIONS_URL . 'assets/frontend/js/accordions.js', false, OXI_ACCORDIONS_PLUGIN_VERSION);
     }
 
@@ -221,8 +223,6 @@ class Template {
      * @since 2.0.1
      */
     public function render() {
-
-        $this->public_attribute($this->style);
 
         echo '<div class="oxi-addons-container ' . $this->WRAPPER . '" id="' . $this->WRAPPER . '">
                  <div class="oxi-addons-row">';
@@ -239,21 +239,22 @@ class Template {
      *
      * @since 2.0.1
      */
-    public function public_attribute($style) {
-        $this->attribute = [
-            'animation' => array_key_exists('oxi-accordions-gen-animation', $style) ? $style['oxi-accordions-gen-animation'] : '',
-            'type' => array_key_exists('oxi-accordions-type', $style) ? $style['oxi-accordions-type'] : '',
-            'preloader' => array_key_exists('oxi-accordions-preloader', $style) ? $style['oxi-accordions-preloader'] : '',
-        ];
-        $this->headerclass = $style['oxi-accordions-trigger'] . ' '
-                . ( $style['oxi-accordions-head-expand-collapse-location'] != false ? $style['oxi-accordions-head-expand-collapse-location'] : '') . ' '
-                . ( $style['oxi-accordions-head-aditional-location'] != false ? $style['oxi-accordions-head-aditional-location'] : '');
+    public function public_attribute() {
+        $this->style;
+        $data = array_key_exists('oxi-accordions-gen-animation', $this->style) ? 'oxi-animation="' . $this->style['oxi-accordions-gen-animation'] . '" ' : ' ';
+        $data .= array_key_exists('oxi-accordions-type', $this->style) ? 'oxi-accordions-toggle="' . $this->style['oxi-accordions-type'] . '" ' : ' ';
+        $data .= array_key_exists('oxi-accordions-type', $this->style) ? 'oxi-preloader="' . $this->style['oxi-accordions-preloader'] . '" ' : ' ';
 
-        $this->accordions_preloader = isset($style['oxi-accordions-preloader']) && $style['oxi-accordions-preloader'] == 'yes' ? 'style="opacity:0"' : '';
+        $this->headerclass = $this->style['oxi-accordions-trigger'] . ' '
+                . ( $this->style['oxi-accordions-head-expand-collapse-location'] != false ? $this->style['oxi-accordions-head-expand-collapse-location'] : '') . ' '
+                . ( $this->style['oxi-accordions-head-aditional-location'] != false ? $this->style['oxi-accordions-head-aditional-location'] : '');
 
-        if (isset($style['oxi-accordions-content-type']) && $style['oxi-accordions-content-type'] === 'post'):
+        $this->accordions_preloader = isset($this->style['oxi-accordions-preloader']) && $this->style['oxi-accordions-preloader'] == 'yes' ? 'style="opacity:0"' : '';
+
+        if (isset($this->style['oxi-accordions-content-type']) && $this->style['oxi-accordions-content-type'] === 'post'):
             $this->post_query();
         endif;
+        return $data;
     }
 
     /**

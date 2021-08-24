@@ -28,6 +28,8 @@ class Bootstrap {
         // Load translation
         add_action('init', array($this, 'i18n'));
         new \OXI_ACCORDIONS_PLUGINS\Classes\API();
+        $this->load_shortcode();
+
         $this->public_filter();
         if (is_admin()) {
             $this->User_Admin();
@@ -45,6 +47,13 @@ class Bootstrap {
      */
     public function i18n() {
         load_plugin_textdomain('oxi-accordions-plugin');
+    }
+
+    public function load_shortcode() {
+        add_shortcode('oxi_ultimate_accordions', [$this, 'accordions_shortcode']);
+        $Widget = new \OXI_ACCORDIONS_PLUGINS\Includes\Widget();
+        add_filter('widget_text', 'do_shortcode');
+        add_action('widgets_init', array($Widget, 'register_accordions_widget'));
     }
 
     public function public_filter() {

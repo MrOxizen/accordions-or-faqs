@@ -31,6 +31,22 @@ trait Additional {
             'nonce' => wp_create_nonce('wp_rest')
         ));
     }
+    public function admin_settings_additional() {
+        $this->admin_css();
+        $this->admin_jquery();
+        wp_enqueue_script("jquery");
+        wp_enqueue_script('jquery-ui-core');
+        wp_enqueue_script('jquery-ui-widget');
+        wp_enqueue_script('jquery-ui-mouse');
+        wp_enqueue_script('jquery-ui-accordion');
+        wp_enqueue_script('jquery-ui-autocomplete');
+        wp_enqueue_script('jquery-ui-slider');
+        wp_enqueue_script('jquery-ui-draggable');
+        wp_enqueue_script('jquery.dataTables.min', OXI_ACCORDIONS_URL . 'assets/backend/js/jquery.dataTables.min.js', false, OXI_ACCORDIONS_PLUGIN_VERSION);
+        wp_enqueue_script('dataTables.bootstrap.min', OXI_ACCORDIONS_URL . 'assets/backend/js/dataTables.bootstrap.min.js', false, OXI_ACCORDIONS_PLUGIN_VERSION);
+    }
+    
+    
 
     public function admin_front_additional() {
         $this->admin_css();
