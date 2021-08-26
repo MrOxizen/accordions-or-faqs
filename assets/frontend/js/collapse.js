@@ -154,7 +154,7 @@
             SHOW: 'show',
             COLLAPSE: 'oxicollapse',
             COLLAPSING: 'oxicollapsing',
-            COLLAPSED: 'oxicollapsed'
+            COLLAPSED: 'collapsed'
         };
         var Dimension = {
             WIDTH: 'width',

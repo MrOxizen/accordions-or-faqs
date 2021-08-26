@@ -114,6 +114,13 @@ class Template {
     public $headerclass;
 
     /**
+     * Define Accordions Type as Toggle or Accordions 
+     *
+     * @since 2.0.1
+     */
+    public $accordions_type;
+
+    /**
      * Public arg
      *
      * @since 2.0.1
@@ -224,7 +231,7 @@ class Template {
      */
     public function render() {
 
-        echo '<div class="oxi-addons-container ' . $this->WRAPPER . '" id="' . $this->WRAPPER . '">
+        echo '<div class="oxi-addons-container oxi-accordions-wrapper ' . $this->WRAPPER . '" id="' . $this->WRAPPER . '">
                  <div class="oxi-addons-row">';
         if ($this->admin == 'admin'):
             echo '<input type="hidden" id="oxi-addons-iframe-background-color" name="oxi-addons-iframe-background-color" value="' . (is_array($this->style) ? array_key_exists('oxilab-preview-color', $this->style) ? $this->style['oxilab-preview-color'] : '#FFF' : '#FFF') . '">';
@@ -241,15 +248,15 @@ class Template {
      */
     public function public_attribute() {
         $this->style;
-        $data = array_key_exists('oxi-accordions-gen-animation', $this->style) ? 'oxi-animation="' . $this->style['oxi-accordions-gen-animation'] . '" ' : ' ';
-        $data .= array_key_exists('oxi-accordions-type', $this->style) ? 'oxi-accordions-toggle="' . $this->style['oxi-accordions-type'] . '" ' : ' ';
-        $data .= array_key_exists('oxi-accordions-type', $this->style) ? 'oxi-preloader="' . $this->style['oxi-accordions-preloader'] . '" ' : ' ';
+        $data = ' data-oxi-trigger="' . (array_key_exists('oxi-accordions-trigger', $this->style) ? $this->style['oxi-accordions-trigger'] . '' : 'click') . '" ';
+        $data .= 'data-oxi-accordions-type="' . (array_key_exists('oxi-accordions-type', $this->style) ? '' . $this->style['oxi-accordions-type'] . '' : 'toggle') . '" ';
+        $data .= 'data-oxi-auto-play="' . (array_key_exists('oxi-accordions-auto-play-duration-size', $this->style) ? '' . $this->style['oxi-accordions-auto-play-duration-size'] . '' : '3000') . '" ';
 
-        $this->headerclass = $this->style['oxi-accordions-trigger'] . ' '
-                . ( $this->style['oxi-accordions-head-expand-collapse-location'] != false ? $this->style['oxi-accordions-head-expand-collapse-location'] : '') . ' '
+        $this->headerclass = ( $this->style['oxi-accordions-head-expand-collapse-location'] != false ? $this->style['oxi-accordions-head-expand-collapse-location'] : '') . ' '
                 . ( $this->style['oxi-accordions-head-aditional-location'] != false ? $this->style['oxi-accordions-head-aditional-location'] : '');
 
         $this->accordions_preloader = isset($this->style['oxi-accordions-preloader']) && $this->style['oxi-accordions-preloader'] == 'yes' ? 'style="opacity:0"' : '';
+        $this->accordions_type = isset($this->style['oxi-accordions-type']) && $this->style['oxi-accordions-type'] == 'accordions' ? 'data-parent="#' . $this->WRAPPER . '"' : '';
 
         if (isset($this->style['oxi-accordions-content-type']) && $this->style['oxi-accordions-content-type'] === 'post'):
             $this->post_query();
@@ -398,6 +405,7 @@ class Template {
         if (isset($style['oxi-accordions-modal-components-type']) && $style['oxi-accordions-modal-components-type'] == 'link'):
             $data = $this->url_render('oxi-accordions-modal-link', $style);
             if (count($data) >= 1):
+                echo $data;
                 return ' data-link=\'' . json_encode($data) . '\'';
             endif;
         endif;
@@ -405,7 +413,7 @@ class Template {
 
     public function default_open($value) {
         if (isset($value['oxi-accordions-modal-default']) && $value['oxi-accordions-modal-default'] == 'yes'):
-            return ' default-opening="yes"';
+            return 'show';
         endif;
     }
 

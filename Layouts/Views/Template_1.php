@@ -12,7 +12,7 @@ use OXI_ACCORDIONS_PLUGINS\Layouts\Template;
 class Template_1 extends Template {
 
     public function default_render($style, $child, $admin) {
-       
+
         echo '<div class="oxi-accordions-ultimate-style oxi-accordions-ultimate-template-1  oxi-accordions-clearfix oxi-accordions-preloader" ' . $this->public_attribute() . ' ' . $this->accordions_preloader . '>';
         $number = 1;
 
@@ -23,8 +23,8 @@ class Template_1 extends Template {
              * Header Child Loop Start
              */
 
-            echo '<div class=\'oxi-accordions-header-card\'>';
-            echo '  <div class="oxi-accordions-header-body oxi-accordions-header oxi-accordions-clearfix" data-oxitarget="#oxi-accordions-content-' . $this->oxiid . '-' . $number . '" ' . $this->accordions_url_render($value) . ' ' . $this->default_open($value) . '>';
+            echo '<div class="oxi-accordions-header-card">';
+            echo '  <div class="oxi-accordions-header-body  oxi-accordions-header oxi-accordions-clearfix"   data-oxitoggle="oxicollapse" data-oxitarget="#oxi-accordions-content-' . $this->oxiid . '-' . $number . '" aria-expanded="false" ' . $this->accordions_url_render($value) . '>';
             echo '      <div class="oxi-accordions-expand-collapse ' . $style['oxi-accordions-expand-collapse'] . ' ' . $style['oxi-accordions-head-expand-collapse-type'] . '">';
             echo $this->expand_collapse_icon_number_render($style, $number);
             echo '      </div>';
@@ -45,14 +45,15 @@ class Template_1 extends Template {
             /*
              * Content Child Loop Start
              */
-            $content_height = isset($style['oxi-accordions-content-height']) ? $style['oxi-accordions-content-height'] : '';
+            $content_height = (isset($style['oxi-accordions-content-height']) ? $style['oxi-accordions-content-height'] : '') . ' ';
+            $animation = isset($style['oxi-accordions-desc-animation']) ? $style['oxi-accordions-desc-animation'] : '';
 
-            echo '  <div class="oxi-accordions-content-card oxi-accordions-content-card-' . $this->oxiid . '  ' . ($this->admin == 'admin' ? 'oxi-addons-admin-edit-list' : '') . '" id="oxi-accordions-content-' . $this->oxiid . '-' . $number . '">';
-            echo '     <div class="oxi-accordions-content-body animate__animated ' . $content_height . '">';
+            echo '  <div class="oxicollapse ' . $this->default_open($value) . ' oxi-accordions-content-card oxi-accordions-content-card-' . $this->oxiid . '  ' . ($this->admin == 'admin' ? 'oxi-addons-admin-edit-list' : '') . '" id="oxi-accordions-content-' . $this->oxiid . '-' . $number . '" ' . $this->accordions_type . '>';
+            echo '     <div class="oxi-accordions-content-body ' . $content_height . '"  oxi-animation="' . $animation . '">';
             echo $this->accordions_content_render($style, $value);
-            
-            if($this->admin == 'admin'):
-                 echo $this->admin_edit_panel($val['id']);
+
+            if ($this->admin == 'admin'):
+                echo $this->admin_edit_panel($val['id']);
             endif;
             echo '      </div>';
             echo '  </div>';
