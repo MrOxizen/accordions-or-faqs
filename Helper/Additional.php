@@ -28,7 +28,8 @@ trait Additional {
         wp_enqueue_script('jquery.serializejson.min', OXI_ACCORDIONS_URL . 'assets/backend/js/jquery.serializejson.min.js', false, OXI_ACCORDIONS_PLUGIN_VERSION);
         wp_localize_script('oxi-accordions-bootstrap', 'oxiaccordionsultimate', array(
             'root' => esc_url_raw(rest_url()),
-            'nonce' => wp_create_nonce('wp_rest')
+            'nonce' => wp_create_nonce('wp_rest'),
+            'plugin' => OXI_ACCORDIONS_URL
         ));
     }
     public function admin_settings_additional() {

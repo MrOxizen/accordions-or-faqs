@@ -6,7 +6,7 @@ jQuery.noConflict();
     var styleid = urlParams.get("styleid");
     var childid = "";
     var WRAPPER = $('#oxi-addons-preview-data').attr('template-wrapper');
-    console.log(WRAPPER);
+
     var IFRAME = $("#oxi-addons-preview-iframe");
     var IFRAMEBODYCLASS = '.shortcode-addons-template-body';
     var IFRAMETABSWRAPPER = '#oxi-accordions-wrapper-' + styleid;
@@ -96,9 +96,95 @@ jQuery.noConflict();
         e.preventDefault();
         return false;
     });
+    function formatState(state) {
+        if (!state.id) {
+            return state.text;
+        }
+        var baseUrl = oxiaccordionsultimate.plugin + "assets/backend/img/icons";
+        var $state = $(
+                '<span><img src="' + baseUrl + '/' + state.element.value.toLowerCase() + '.png" class="oxi-accordions-icon-admin-style" /> ' + state.text + '</span>'
+                );
+        return $state;
+
+
+    }
+    $("#oxi-accordions-icon-style").on("change", function (e) {
+        _This = $(this);
+        _Value = _This.val();
+
+
+        if (_Value === 'angle') {
+            _Open = 'fas fa-angle-down';
+            _Close = 'fas fa-angle-right';
+        } else if (_Value === 'agnle-2') {
+            _Open = 'fas fa-angle-up';
+            _Close = 'fas fa-angle-down';
+        } else if (_Value === 'angle-3') {
+            _Open = 'fas fa-angle-down';
+            _Close = 'fas fa-angle-up';
+        } else if (_Value === 'angle-double') {
+            _Open = 'fas fa-angle-double-down';
+            _Close = 'fas fa-angle-double-right';
+        } else if (_Value === 'angle-double-down') {
+            _Open = 'fas fa-angle-double-down';
+            _Close = 'fas fa-angle-double-up';
+        } else if (_Value === 'angle-double-up') {
+            _Open = 'fas fa-angle-double-up';
+            _Close = 'fas fa-angle-double-down';
+        } else if (_Value === 'arrow') {
+            _Open = 'fas fa-arrow-down';
+            _Close = 'fas fa-arrow-right';
+        } else if (_Value === 'arrow-up') {
+            _Open = 'fas fa-arrow-up';
+            _Close = 'fas fa-arrow-down';
+        } else if (_Value === 'carret') {
+            _Open = 'fas fa-caret-down';
+            _Close = 'fas fa-caret-right';
+        } else if (_Value === 'carret-up') {
+            _Open = 'fas fa-caret-up';
+            _Close = 'fas fa-caret-down';
+        } else if (_Value === 'chevron') {
+            _Open = 'fas fa-chevron-down';
+            _Close = 'fas fa-chevron-right';
+        } else if (_Value === 'hand') {
+            _Open = 'far fa-hand-point-down';
+            _Close = 'far fa-hand-point-right';
+        } else if (_Value === 'plus') {
+            _Open = 'fas fa-plus';
+            _Close = 'fas fa-minus';
+        } else if (_Value === 'tick') {
+            _Open = 'fas fa-check';
+            _Close = 'fas fa-times';
+        }
+        if (_Value !== 'custom') {
+            _Open_id = "#oxi-accordions-head-expand-icon";
+            _Close_id = "#oxi-accordions-head-collapse-icon";
+            $(_Open_id).changeVal(_Open);
+            $(_Close_id).changeVal(_Close);
+        }
+    });
+
+
+    $.fn.changeVal = function (v) {
+        return this.val(v).trigger("change");
+
+    };
+
+
     $('.shortcode-control-type-select .shortcode-addons-select-input').each(function (e) {
         if (!$(this).parents('.shortcode-addons-form-repeater-store').length) {
-            $(this).select2({width: '100%'});
+
+            if ($(this).attr('id') === 'oxi-accordions-icon-style') {
+                $(this).select2({
+                    width: '100%',
+                    templateResult: formatState
+                });
+            } else {
+                $(this).select2({width: '100%'});
+            }
+
+
+
         }
     });
     $('.shortcode-form-control').each(function (e) {
@@ -648,6 +734,40 @@ jQuery.noConflict();
             });
         }
     });
+    $(document.body).on("click", ".shortcode-control-type-switcher input", function (e) {
+
+        name = $(this).attr('name');
+        $value = $(this).val();
+        $checked = false;
+        if ($(this).is(":checked"))
+        {
+            $checked = true;
+        }
+
+        if ($(this).attr("retundata") !== '') {
+            var arr = [];
+            $("input[name=" + name + "]").each(function () {
+                arr.push($(this).val());
+            });
+            var $data = JSON.parse($(this).attr("retundata"));
+            $.each($data, function (key, obj) {
+                if (key.indexOf('{{KEY}}') != -1) {
+                    key = key.replace(NEWRegExp("{{KEY}}"), name.split('saarsa')[1]);
+                }
+                $.each(obj, function (k, o) {
+                    var cls = key.replace(NEWRegExp("{{WRAPPER}}"), WRAPPER);
+                    IFRAME.contents().find(cls).removeClass($value);
+                    if ($checked) {
+                        IFRAME.contents().find(cls).addClass($value);
+                    }
+
+                });
+            });
+        }
+    });
+
+
+
     $(".shortcode-control-type-color input").on("keyup, change", function () {
         $input = $(this);
         $custom = $input.attr("custom");
@@ -1080,6 +1200,30 @@ jQuery.noConflict();
 
     });
     $('.oxi-admin-icon-selector').iconpicker();
+    $(document.body).on("keyup, change", ".shortcode-control-type-icon input", function (e) {
+
+        name = $(this).attr('name');
+        $value = $(this).val();
+
+        if ($(this).attr("retundata") !== '') {
+            console.log($value);
+            var $data = JSON.parse($(this).attr("retundata"));
+            $.each($data, function (key, obj) {
+
+                if (key.indexOf('{{KEY}}') != -1) {
+                    key = key.replace(NEWRegExp("{{KEY}}"), name.split('saarsa')[1]);
+                }
+
+
+                var cls = key.replace(NEWRegExp("{{WRAPPER}}"), WRAPPER);
+                IFRAME.contents().find(cls).attr('class','oxi-icons');
+                IFRAME.contents().find(cls).addClass($value);
+
+
+            });
+        }
+    });
+
     $('.shortcode-addons-form-conditionize').conditionize();
     $(document.body).on("change", ".shortcode-addons-control-loader  input", function () {
         if ($(this).parents('.modal-body').length === 0) {

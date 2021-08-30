@@ -33,6 +33,9 @@
     max-width: 100%;
     width: auto;
 }
+.oxi-accordions-content-card{
+   overflow: hidden;
+}
 .oxi-accordions-header-card .oxi-accordions-header-body{
     overflow: hidden;
 }
@@ -92,7 +95,7 @@
     align-items: center;
     align-content: stretch;
 }
-.oxi-accordions-header-aditional-right-position > .oxi-accordions-header-card > .oxi-accordions-header-body  .oxi-accordions-header-content{
+.oxi-accordions-single-card > .oxi-accordions-header-card > .oxi-accordions-header-body  .oxi-accordions-header-content.oxi-accordions-header-aditional-right-position{
     display: flex;
     -webkit-flex-flow: row-reverse nowrap;
     justify-content: flex-end;
@@ -117,6 +120,11 @@
     font-weight: 300;
     text-align: left;
     margin: 0px 0px 0px 0px;
+}
+.oxi-accordions-header-card > .oxi-accordions-header-body .oxi-accordions-header-content:not(.oxi-accordions-headding-additional-active) .oxi-accordions-additional-icon,
+.oxi-accordions-header-card > .oxi-accordions-header-body .oxi-accordions-header-content:not(.oxi-accordions-headding-additional-active) .oxi-accordions-header-li-number,
+.oxi-accordions-header-card > .oxi-accordions-header-body .oxi-accordions-header-content:not(.oxi-accordions-headding-additional-active) .oxi-accordions-header-li-image{
+    display: none;
 }
 
 .oxi-accordions-ultimate-style .oxi-accordions-header-card .oxi-accordions-header-content .oxi-accordions-additional-icon{

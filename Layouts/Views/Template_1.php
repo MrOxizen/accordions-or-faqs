@@ -28,7 +28,7 @@ class Template_1 extends Template {
             echo '      <div class="oxi-accordions-expand-collapse ' . $style['oxi-accordions-expand-collapse'] . ' ' . $style['oxi-accordions-head-expand-collapse-type'] . '">';
             echo $this->expand_collapse_icon_number_render($style, $number);
             echo '      </div>';
-            echo '      <div class="oxi-accordions-header-content">';
+            echo '      <div class="oxi-accordions-header-content ' . $style['oxi-accordions-headding-additional'] . ' ' . $style['oxi-accordions-head-aditional-location'] . '">';
             if ($value['oxi-accordions-modal-title-additional'] == 'icon'):
                 echo $this->icon_special_rander($value['oxi-accordions-modal-icon']);
             elseif ($value['oxi-accordions-modal-title-additional'] == 'number'):
