@@ -926,7 +926,7 @@ trait Sanitization {
     public function icon_admin_control($id, array $data = [], array $arg = []) {
         $id = (array_key_exists('repeater', $arg) ? $id . ']' : $id);
         $value = array_key_exists($id, $data) ? $data[$id] : $arg['default'];
-          $retunvalue = array_key_exists('selector', $arg) ? htmlspecialchars(json_encode($arg['selector'])) : '';
+        $retunvalue = array_key_exists('selector', $arg) ? htmlspecialchars(json_encode($arg['selector'])) : '';
         echo '  <div class="shortcode-form-control-input-wrapper">
                     <input type="text"  class="oxi-admin-icon-selector" id="' . $id . '" name="' . $id . '" value="' . $value . '" retundata="' . $retunvalue . '">
                     <span class="input-group-addon"></span>
@@ -1957,7 +1957,7 @@ trait Sanitization {
             'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
             'separator' => $separator,
             'description' => $arg['description'],
-                ]
+                ], $data
         );
 
         $this->add_control(

@@ -107,13 +107,6 @@ class Template {
     public $accordions_preloader;
 
     /**
-     * Public Header Class
-     *
-     * @since 2.0.1
-     */
-    public $headerclass;
-
-    /**
      * Define Accordions Type as Toggle or Accordions 
      *
      * @since 2.0.1
@@ -170,17 +163,21 @@ class Template {
      * @since 2.0.1
      */
     public function hooks() {
+
         $this->public_jquery();
         $this->public_css();
         $this->public_frontend_loader();
         $this->render();
         $inlinecss = $this->inline_public_css() . $this->inline_css . (array_key_exists('oxi-accordions-custom-css', $this->style) ? $this->style['oxi-accordions-custom-css'] : '');
         $inlinejs = $this->inline_public_jquery();
+
         if ($this->CSSDATA == '' && $this->admin == 'admin') {
+
             $cls = '\OXI_ACCORDIONS_PLUGINS\Layouts\Admin\\' . str_replace('-', '_', $this->style_name);
             $CLASS = new $cls('admin');
             $inlinecss .= $CLASS->inline_template_css_render($this->style);
         } else {
+
             echo $this->font_familly_validation(json_decode(($this->dbdata['font_family'] != '' ? $this->dbdata['font_family'] : "[]"), true));
             $inlinecss .= $this->CSSDATA;
         }
@@ -251,9 +248,6 @@ class Template {
         $data = ' data-oxi-trigger="' . (array_key_exists('oxi-accordions-trigger', $this->style) ? $this->style['oxi-accordions-trigger'] . '' : 'click') . '" ';
         $data .= 'data-oxi-accordions-type="' . (array_key_exists('oxi-accordions-type', $this->style) ? '' . $this->style['oxi-accordions-type'] . '' : 'toggle') . '" ';
         $data .= 'data-oxi-auto-play="' . (array_key_exists('oxi-accordions-auto-play-duration-size', $this->style) ? '' . $this->style['oxi-accordions-auto-play-duration-size'] . '' : '3000') . '" ';
-
-        $this->headerclass = ( $this->style['oxi-accordions-head-expand-collapse-location'] != false ? $this->style['oxi-accordions-head-expand-collapse-location'] : '') . ' '
-                . ( $this->style['oxi-accordions-head-aditional-location'] != false ? $this->style['oxi-accordions-head-aditional-location'] : '');
 
         $this->accordions_preloader = isset($this->style['oxi-accordions-preloader']) && $this->style['oxi-accordions-preloader'] == 'yes' ? 'style="opacity:0"' : '';
         $this->accordions_type = isset($this->style['oxi-accordions-type']) && $this->style['oxi-accordions-type'] == 'accordions' ? 'data-parent="#' . $this->WRAPPER . '"' : '';
@@ -683,7 +677,21 @@ class Template {
 
     public function number_special_charecter($data) {
         if (!empty($data) && $data != ''):
-            return '<div class=\'oxi-accordions-header-li-number\'>' . $this->special_charecter($data) . '</div>';
+            return '<div class="oxi-accordions-header-li-number ' . (isset($this->style['oxi-accordions-head-additional-interface']) ? $this->style['oxi-accordions-head-additional-interface'] : '') . '">' . $this->special_charecter($data) . '</div>';
+        endif;
+    }
+
+    public function image_special_render($id = '', $array = []) {
+        $value = $this->media_render($id, $array);
+        if (!empty($value)):
+            return ' <img  class="oxi-accordions-header-li-image ' . (isset($this->style['oxi-accordions-head-additional-interface']) ? $this->style['oxi-accordions-head-additional-interface'] : '') . '" ' . $value . '>';
+        endif;
+    }
+
+    public function icon_special_rander($id = '') {
+        $value = $this->font_awesome_render($id);
+        if (!empty($value)):
+            return ' <div class="oxi-accordions-additional-icon ' . (isset($this->style['oxi-accordions-head-additional-interface']) ? $this->style['oxi-accordions-head-additional-interface'] : '') . '"> ' . $value . '</div>';
         endif;
     }
 
@@ -697,20 +705,6 @@ class Template {
         endif;
         $files = '<i class="' . $data . ' oxi-icons"></i>';
         return $files;
-    }
-
-    public function image_special_render($id = '', $array = []) {
-        $value = $this->media_render($id, $array);
-        if (!empty($value)):
-            return ' <img  class=\'oxi-accordions-header-li-image\' ' . $value . '>';
-        endif;
-    }
-
-    public function icon_special_rander($id = '') {
-        $value = $this->font_awesome_render($id);
-        if (!empty($value)):
-            return ' <div class="oxi-accordions-additional-icon"> ' . $value . '</div>';
-        endif;
     }
 
     public function expand_collapse_icon_number_render($style = [], $number) {

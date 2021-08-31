@@ -34,7 +34,7 @@
     width: auto;
 }
 .oxi-accordions-content-card{
-   overflow: hidden;
+    overflow: hidden;
 }
 .oxi-accordions-header-card .oxi-accordions-header-body{
     overflow: hidden;
@@ -85,6 +85,102 @@
 .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand > .oxi-accordions-header-card > .oxi-accordions-header-body > .oxi-accordions-expand-collapse.oxi-accordions-expand-collapse-active.oxi-accordions-head-expand-collapse-type-icon .oxi-accordions-expand-icon{
     display: none;
 }
+.oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card > .oxi-accordions-header-body > .oxi-accordions-expand-collapse.oxi-accordions-head-expand-collapse-icon-customizable-interface{
+    position: relative;
+}
+.oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card > .oxi-accordions-header-body > .oxi-accordions-expand-collapse.oxi-accordions-head-expand-collapse-icon-customizable-interface:before{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    content: "";
+    z-index: 10;
+    display: block;
+}
+.oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card > .oxi-accordions-header-body > .oxi-accordions-expand-collapse.oxi-accordions-head-expand-collapse-icon-customizable-interface .oxi-accordions-expand-collapse-number,
+.oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card > .oxi-accordions-header-body > .oxi-accordions-expand-collapse.oxi-accordions-head-expand-collapse-icon-customizable-interface .oxi-accordions-expand-collapse-icon{
+    z-index: 99;
+}
+
+
+.oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card > .oxi-accordions-header-body > .oxi-accordions-expand-collapse.oxi-accordions-head-expand-collapse-icon-customizable-interface:before{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    content: "";
+    z-index: 10;
+    display: block;
+}
+.oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card > .oxi-accordions-header-body > .oxi-accordion-expand-1.oxi-accordions-expand-collapse.oxi-accordions-head-expand-collapse-icon-customizable-interface:before{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    content: "";
+    z-index: 10;
+    display: block;
+}
+.oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-head-expand-collapse-right-position > .oxi-accordions-header-card > .oxi-accordions-header-body > .oxi-accordion-expand-0.oxi-accordions-expand-collapse.oxi-accordions-head-expand-collapse-icon-customizable-interface:after{
+    display: none;
+}
+/*
+Shape 1 Left Position
+.oxi-accordions-ultimate-style > .oxi-accordions-single-card:not(.oxi-accordions-head-expand-collapse-right-position) > .oxi-accordions-header-card > .oxi-accordions-header-body > .oxi-accordion-expand-1.oxi-accordions-expand-collapse.oxi-accordions-head-expand-collapse-icon-customizable-interface:before{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: auto;
+    left: 0;
+    content: "";
+    z-index: 10;
+    display: block;
+    width: 60%;
+}
+.oxi-accordions-ultimate-style > .oxi-accordions-single-card:not(.oxi-accordions-head-expand-collapse-right-position) > .oxi-accordions-header-card > .oxi-accordions-header-body > .oxi-accordion-expand-1.oxi-accordions-expand-collapse.oxi-accordions-head-expand-collapse-icon-customizable-interface:after{
+    content: '';
+    top: 0;
+    bottom: 0;
+    left: 60%;
+    width: 0%;
+    height: 0;
+    border-left-color: transparent !important;
+    border-bottom: none !important;
+    border-right: none !important;
+    position: absolute;
+}
+
+
+Shape 1 Right Position
+.oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-head-expand-collapse-right-position > .oxi-accordions-header-card > .oxi-accordions-header-body > .oxi-accordion-expand-1.oxi-accordions-expand-collapse.oxi-accordions-head-expand-collapse-icon-customizable-interface:before{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: auto;
+    right: 0;
+    content: "";
+    z-index: 10;
+    display: block;
+    width: 60%;
+}
+.oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-head-expand-collapse-right-position > .oxi-accordions-header-card > .oxi-accordions-header-body > .oxi-accordion-expand-1.oxi-accordions-expand-collapse.oxi-accordions-head-expand-collapse-icon-customizable-interface:after{
+    content: '';
+    top: 0;
+    bottom: 0;
+    right: 60%;
+    width: 0%;
+    width: 0;
+    height: 0;
+    border-left-color: transparent !important;
+    border-bottom: none !important;
+    border-right: none !important;
+    position: absolute;
+}*/
+
+
 
 
 .oxi-accordions-header-card > .oxi-accordions-header-body  .oxi-accordions-header-content{
@@ -94,8 +190,10 @@
     justify-content: flex-start;
     align-items: center;
     align-content: stretch;
+    flex-basis: 100%;
+    flex: 1;
 }
-.oxi-accordions-single-card > .oxi-accordions-header-card > .oxi-accordions-header-body  .oxi-accordions-header-content.oxi-accordions-header-aditional-right-position{
+.oxi-accordions-single-card > .oxi-accordions-header-card > .oxi-accordions-header-body  .oxi-accordions-header-content.oxi-accordions-header-additional-right-position{
     display: flex;
     -webkit-flex-flow: row-reverse nowrap;
     justify-content: flex-end;
@@ -109,14 +207,22 @@
 }
 
 .oxi-accordions-ultimate-style .oxi-accordions-header-card .oxi-accordions-header-title{
+    display: flex;
+    -webkit-flex-flow: column nowrap;
+    width: 100%;
+    flex-basis: 100%;
+    flex: 1;
+}
+.oxi-accordions-ultimate-style .oxi-accordions-header-card .oxi-accordions-main-title{
     width: 100%;
     font-size: 16px;
     font-weight: 500;
     margin: 0px 0px 0px 0px;
+
 }
 .oxi-accordions-ultimate-style .oxi-accordions-header-card .oxi-accordions-sub-title{
     width: 100%;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 300;
     text-align: left;
     margin: 0px 0px 0px 0px;
@@ -131,7 +237,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0px 5px 0px 0px;
 }
 .oxi-accordions-ultimate-style .oxi-accordions-header-card .oxi-accordions-header-content .oxi-icons{
     font-size: 16px;
@@ -141,11 +246,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0px 5px 0px 0px;
 }
 .oxi-accordions-ultimate-style .oxi-accordions-header-card .oxi-accordions-header-li-image{
     width: 16px;
-    margin: 0px 5px 0px 0px;
 }
 
 
@@ -170,3 +273,6 @@
     transition-duration: 0.5s;
     transition-timing-function: linear
 }
+
+
+
