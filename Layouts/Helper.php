@@ -123,7 +123,7 @@ class Helper extends Admin {
                 ],
             ],
             'selector' => [
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-content-card' => 'transition-duration:{{SIZE}}{{UNIT}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-content-card' => 'transition-duration:{{SIZE}}{{UNIT}};',
             ],
             'description' => 'Set content on off animation durations as mili seconds.',
                 ]
@@ -408,6 +408,88 @@ class Helper extends Admin {
                 ]
         );
 
+        $this->start_controls_tabs(
+                'oxi-accordions-gen-start-tabs',
+                [
+                    'options' => [
+                        'normal' => esc_html__('Normal ', OXI_ACCORDIONS_TEXTDOMAIN),
+                        'active' => esc_html__('Active', OXI_ACCORDIONS_TEXTDOMAIN),
+                    ]
+                ]
+        );
+
+        $this->start_controls_tab();
+        $this->add_control(
+                'oxi-accordions-gen-bg', $this->style, [
+            'label' => __('Background', OXI_ACCORDIONS_TEXTDOMAIN),
+            'type' => Controls::GRADIENT,
+            'selector' => [
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card:not(.oxi-accordions-head-expand-collapse-position-outside)' => 'background: {{VALUE}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-head-expand-collapse-position-outside .oxi-accordions-head-outside-body' => 'background: {{VALUE}};',
+            ],
+            'description' => 'Set the background of the all bodies on normal mode.',
+                ]
+        );
+        $this->add_group_control(
+                'oxi-accordions-gen-border',
+                $this->style,
+                [
+                    'type' => Controls::BORDER,
+                    'selector' => [
+                        '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card:not(.oxi-accordions-head-expand-collapse-position-outside)' => '',
+                        '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-head-expand-collapse-position-outside .oxi-accordions-head-outside-body' => ''
+                    ],
+                    'description' => 'Customize border of each accordions. Set type, width, and color.',
+                ]
+        );
+        $this->add_group_control(
+                'oxi-accordions-gen-boxshadow', $this->style, [
+            'type' => Controls::BOXSHADOW,
+            'selector' => [
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card:not(.oxi-accordions-head-expand-collapse-position-outside)' => '',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-head-expand-collapse-position-outside .oxi-accordions-head-outside-body' => ''
+            ],
+            'description' => 'Add one or more shadows into each section and customize other box-shadow options.',
+                ]
+        );
+        $this->end_controls_tab();
+        $this->start_controls_tab();
+        $this->add_control(
+                'oxi-accordions-gen-ac-bg', $this->style, [
+            'label' => __('Background', OXI_ACCORDIONS_TEXTDOMAIN),
+            'type' => Controls::GRADIENT,
+            'selector' => [
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand:not(.oxi-accordions-head-expand-collapse-position-outside)' => 'background: {{VALUE}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand.oxi-accordions-head-expand-collapse-position-outside .oxi-accordions-head-outside-body' => 'background: {{VALUE}};',
+            ],
+            'description' => 'Set the background of the accordions on active mode.',
+                ]
+        );
+        $this->add_group_control(
+                'oxi-accordions-gen-hover-border',
+                $this->style,
+                [
+                    'type' => Controls::BORDER,
+                    'selector' => [
+                        '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand:not(.oxi-accordions-head-expand-collapse-position-outside)' => '',
+                        '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand.oxi-accordions-head-expand-collapse-position-outside .oxi-accordions-head-outside-body' => ''
+                    ],
+                    'description' => 'Customize border of the accotdions. Set type, width, and color.',
+                ]
+        );
+        $this->add_group_control(
+                'oxi-accordions-gen-hover-boxshadow', $this->style, [
+            'type' => Controls::BOXSHADOW,
+            'selector' => [
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand:not(.oxi-accordions-head-expand-collapse-position-outside)' => '',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand.oxi-accordions-head-expand-collapse-position-outside .oxi-accordions-head-outside-body' => '',
+            ],
+            'description' => 'Add one or more shadows into accordions section and customize other box-shadow options.',
+                ]
+        );
+        $this->end_controls_tab();
+        $this->end_controls_tabs();
+
         $this->add_responsive_control(
                 'oxi-accordions-general-margin', $this->style, [
             'label' => __('Margin', OXI_ACCORDIONS_TEXTDOMAIN),
@@ -491,9 +573,8 @@ class Helper extends Admin {
                 'oxi-accordions-head-bg', $this->style, [
             'label' => __('Background', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::GRADIENT,
-            'default' => 'rgba(171, 0, 201, 1)',
             'selector' => [
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card .oxi-accordions-header-body' => 'background: {{VALUE}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-header-body' => 'background: {{VALUE}};',
             ],
             'description' => 'Set the background of the header on normal mode.',
                 ]
@@ -504,7 +585,7 @@ class Helper extends Admin {
                 [
                     'type' => Controls::BORDER,
                     'selector' => [
-                        '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card .oxi-accordions-header-body' => ''
+                        '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-header-body' => ''
                     ],
                     'description' => 'Customize border of the header. Set type, width, and color.',
                 ]
@@ -516,7 +597,7 @@ class Helper extends Admin {
             'label' => __('Background', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::GRADIENT,
             'selector' => [
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand > .oxi-accordions-header-card .oxi-accordions-header-body' => 'background: {{VALUE}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-header-body' => 'background: {{VALUE}};',
             ],
             'description' => 'Set the background of the header on active mode.',
                 ]
@@ -527,7 +608,7 @@ class Helper extends Admin {
                 [
                     'type' => Controls::BORDER,
                     'selector' => [
-                        '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand > .oxi-accordions-header-card .oxi-accordions-header-body' => ''
+                        '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-header-body' => ''
                     ],
                     'description' => 'Customize border of the header. Set type, width, and color.',
                 ]
@@ -539,7 +620,7 @@ class Helper extends Admin {
                 'oxi-accordions-head-boxshadow', $this->style, [
             'type' => Controls::BOXSHADOW,
             'selector' => [
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card .oxi-accordions-header-body' => '',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-header-body' => '',
             ],
             'description' => 'Add one or more shadows into header section and customize other box-shadow options.',
                 ]
@@ -570,7 +651,7 @@ class Helper extends Admin {
                 ],
             ],
             'selector' => [
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card .oxi-accordions-header-body' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-header-body' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
             'description' => 'Add rounded corners to the header’s section.',
                 ]
@@ -601,7 +682,7 @@ class Helper extends Admin {
                 ],
             ],
             'selector' => [
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card .oxi-accordions-header-body' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-header-body' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
             'description' => 'Create some space inside of the header section.',
                 ]
@@ -620,8 +701,20 @@ class Helper extends Admin {
                 ]
         );
         $this->add_control(
+                'oxi-accordions-head-expand-collapse-position', $this->style, [
+            'label' => __('Location', OXI_ACCORDIONS_TEXTDOMAIN),
+            'type' => Controls::SWITCHER,
+            'loader' => TRUE,
+            'label_on' => __('Outside', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label_off' => __('Inside', OXI_ACCORDIONS_TEXTDOMAIN),
+            'return_value' => 'oxi-accordions-head-expand-collapse-position-outside',
+            'description' => 'Set the location of expand & collapse as beside title or Outside Title',
+                ]
+        );
+
+        $this->add_control(
                 'oxi-accordions-head-expand-collapse-location', $this->style, [
-            'label' => __('Expand & Collapse Location', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => __('Right or Left', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SWITCHER,
             'label_on' => __('Right', OXI_ACCORDIONS_TEXTDOMAIN),
             'label_off' => __('Left', OXI_ACCORDIONS_TEXTDOMAIN),
@@ -690,7 +783,7 @@ class Helper extends Admin {
                 'oxi-accordions-icon-style' => 'custom',
             ],
             'selector' => [
-                '{{WRAPPER}} .oxi-accordions-single-card .oxi-accordions-header-body .oxi-accordions-expand-icon .oxi-icons' => '',
+                '{{WRAPPER}} .oxi-accordions-single-card .oxi-accordions-expand-icon .oxi-icons' => '',
             ],
             'description' => 'Select expand icon from font awesome icon list panel.',
                 ]
@@ -705,7 +798,7 @@ class Helper extends Admin {
                 'oxi-accordions-icon-style' => 'custom',
             ],
             'selector' => [
-                '{{WRAPPER}} .oxi-accordions-single-card .oxi-accordions-header-body .oxi-accordions-collapse-icon .oxi-icons' => '',
+                '{{WRAPPER}} .oxi-accordions-single-card .oxi-accordions-collapse-icon .oxi-icons' => '',
             ],
             'description' => 'Select collapse icon from font awesome icon list panel.',
                 ]
@@ -747,7 +840,7 @@ class Helper extends Admin {
         );
         $this->add_responsive_control(
                 'oxi-accordions-head-expand-collapse-icon-width', $this->style, [
-            'label' => __('Width', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => __('Width & Height', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SLIDER,
             'condition' => [
                 'oxi-accordions-head-expand-collapse-icon-interface' => 'oxi-accordions-head-expand-collapse-icon-customizable-interface',
@@ -774,44 +867,10 @@ class Helper extends Admin {
                 ],
             ],
             'selector' => [
-                '{{WRAPPER}} .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card > .oxi-accordions-header-body > .oxi-accordions-head-expand-collapse-icon-customizable-interface' => 'width:{{SIZE}}{{UNIT}};',
-                '{{WRAPPER}} .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card > .oxi-accordions-header-body > .oxi-accordions-head-expand-collapse-icon-customizable-interface:after' => 'border: {{SIZE}}{{UNIT}} solid;',
+                '{{WRAPPER}} .oxi-accordions-ultimate-style > .oxi-accordions-single-card .oxi-accordions-expand-collapse-' . $this->oxiid . '.oxi-accordions-head-expand-collapse-icon-customizable-interface' => 'width:{{SIZE}}{{UNIT}};height:{{SIZE}}{{UNIT}};',
+                '{{WRAPPER}} .oxi-accordions-ultimate-style > .oxi-accordions-single-card .oxi-accordions-expand-collapse-' . $this->oxiid . '.oxi-accordions-head-expand-collapse-icon-customizable-interface:after' => 'width: {{SIZE}}{{UNIT}};height:{{SIZE}}{{UNIT}};',
             ],
-            'description' => 'Set the Icon’s Width.',
-                ]
-        );
-        $this->add_responsive_control(
-                'oxi-accordions-head-expand-collapse-icon-height', $this->style, [
-            'label' => __('Height', OXI_ACCORDIONS_TEXTDOMAIN),
-            'type' => Controls::SLIDER,
-            'condition' => [
-                'oxi-accordions-head-expand-collapse-icon-interface' => 'oxi-accordions-head-expand-collapse-icon-customizable-interface',
-            ],
-            'default' => [
-                'unit' => 'px',
-                'size' => '',
-            ],
-            'range' => [
-                'px' => [
-                    'min' => 0,
-                    'max' => 2000,
-                    'step' => 1,
-                ],
-                'em' => [
-                    'min' => 0,
-                    'max' => 200,
-                    'step' => .1,
-                ],
-                'rem' => [
-                    'min' => 0,
-                    'max' => 200,
-                    'step' => 0.1,
-                ],
-            ],
-            'selector' => [
-                '{{WRAPPER}} .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card > .oxi-accordions-header-body > .oxi-accordions-head-expand-collapse-icon-customizable-interface' => 'height:{{SIZE}}{{UNIT}};',
-            ],
-            'description' => 'Set the Icon’s Height.',
+            'description' => 'Set the Icon’s Width and Height.',
                 ]
         );
 
@@ -844,7 +903,7 @@ class Helper extends Admin {
                 'oxi-accordions-head-expand-collapse-type' => 'oxi-accordions-head-expand-collapse-type-icon',
             ],
             'selector' => [
-                '{{WRAPPER}} .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card > .oxi-accordions-header-body > .oxi-accordions-expand-collapse .oxi-icons' => 'font-size:{{SIZE}}{{UNIT}};',
+                '{{WRAPPER}} .oxi-accordions-ultimate-style > .oxi-accordions-single-card .oxi-accordions-expand-collapse-' . $this->oxiid . '.oxi-accordions-expand-collapse .oxi-icons' => 'font-size:{{SIZE}}{{UNIT}};',
             ],
             'description' => 'Set the Icon Size (PX, % or EM).',
                 ]
@@ -854,7 +913,7 @@ class Helper extends Admin {
             'type' => Controls::TYPOGRAPHY,
             'include' => Controls::ALIGNNORMAL,
             'selector' => [
-                '{{WRAPPER}} .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card > .oxi-accordions-header-body > .oxi-accordions-expand-collapse .oxi-accordions-expand-collapse-number' => '',
+                '{{WRAPPER}} .oxi-accordions-ultimate-style > .oxi-accordions-single-card .oxi-accordions-expand-collapse-' . $this->oxiid . '.oxi-accordions-expand-collapse .oxi-accordions-expand-collapse-number' => '',
             ],
             'condition' => [
                 'oxi-accordions-head-expand-collapse-type' => 'oxi-accordions-head-expand-collapse-type-number',
@@ -879,7 +938,7 @@ class Helper extends Admin {
                 'oxi-accordion-expand-4' => __('Shape 04', OXI_ACCORDIONS_TEXTDOMAIN),
             ],
             'selector' => [
-                '{{WRAPPER}} .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card > .oxi-accordions-header-body > .oxi-accordions-head-expand-collapse-icon-customizable-interface' => '',
+                '{{WRAPPER}} .oxi-accordions-ultimate-style > .oxi-accordions-single-card .oxi-accordions-head-expand-collapse-icon-customizable-interface' => '',
             ],
             'description' => 'Choose a expand and collapse icon style.',
                 ]
@@ -901,8 +960,8 @@ class Helper extends Admin {
             'type' => Controls::COLOR,
             'default' => '#ffffff',
             'selector' => [
-                '{{WRAPPER}} .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card > .oxi-accordions-header-body > .oxi-accordions-expand-collapse .oxi-icons' => 'color: {{VALUE}};',
-                '{{WRAPPER}} .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card > .oxi-accordions-header-body > .oxi-accordions-expand-collapse .oxi-accordions-expand-collapse-number' => 'color: {{VALUE}};',
+                '{{WRAPPER}} .oxi-accordions-ultimate-style .oxi-accordions-single-card .oxi-accordions-expand-collapse-' . $this->oxiid . '.oxi-accordions-expand-collapse .oxi-icons' => 'color: {{VALUE}};',
+                '{{WRAPPER}} .oxi-accordions-ultimate-style .oxi-accordions-single-card .oxi-accordions-expand-collapse-' . $this->oxiid . '.oxi-accordions-expand-collapse .oxi-accordions-expand-collapse-number' => 'color: {{VALUE}};',
             ],
             'description' => 'Set the Icon or Number Color on Normal Mode.',
                 ]
@@ -915,8 +974,8 @@ class Helper extends Admin {
                 'oxi-accordions-head-expand-collapse-icon-interface' => 'oxi-accordions-head-expand-collapse-icon-customizable-interface',
             ],
             'selector' => [
-                '{{WRAPPER}} .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card > .oxi-accordions-header-body > .oxi-accordions-head-expand-collapse-icon-customizable-interface:before' => 'background: {{VALUE}};',
-                '{{WRAPPER}} .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card > .oxi-accordions-header-body > .oxi-accordions-head-expand-collapse-icon-customizable-interface:after' => 'border-color: {{VALUE}};',
+                '{{WRAPPER}} .oxi-accordions-ultimate-style > .oxi-accordions-single-card .oxi-accordions-expand-collapse-' . $this->oxiid . '.oxi-accordions-head-expand-collapse-icon-customizable-interface:before' => 'background: {{VALUE}};',
+                '{{WRAPPER}} .oxi-accordions-ultimate-style > .oxi-accordions-single-card .oxi-accordions-expand-collapse-' . $this->oxiid . '.oxi-accordions-head-expand-collapse-icon-customizable-interface:after' => 'background: {{VALUE}};',
             ],
             'description' => 'Customize Icon Background with Color, Gradient or Image properties for Normal Mode.',
                 ]
@@ -930,7 +989,7 @@ class Helper extends Admin {
                 'oxi-accordions-head-expand-collapse-shape' => 'oxi-accordion-expand-0',
             ],
             'selector' => [
-                '{{WRAPPER}} .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card > .oxi-accordions-header-body > .oxi-accordion-expand-0.oxi-accordions-head-expand-collapse-icon-customizable-interface:before' => '',
+                '{{WRAPPER}} .oxi-accordions-ultimate-style > .oxi-accordions-single-card .oxi-accordions-expand-collapse-' . $this->oxiid . '.oxi-accordion-expand-0.oxi-accordions-head-expand-collapse-icon-customizable-interface:before' => '',
             ],
             'description' => 'Customize Border of the Icon. Set Type, Width, and Color.',
                 ]
@@ -943,8 +1002,8 @@ class Helper extends Admin {
             'label' => __('Color', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::COLOR,
             'selector' => [
-                '{{WRAPPER}} .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand > .oxi-accordions-header-card > .oxi-accordions-header-body > .oxi-accordions-expand-collapse .oxi-icons' => 'color: {{VALUE}};',
-                '{{WRAPPER}} .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand > .oxi-accordions-header-card > .oxi-accordions-header-body > .oxi-accordions-expand-collapse .oxi-accordions-expand-collapse-number' => 'color: {{VALUE}};',
+                '{{WRAPPER}} .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand .oxi-accordions-expand-collapse-' . $this->oxiid . '.oxi-accordions-expand-collapse .oxi-icons' => 'color: {{VALUE}};',
+                '{{WRAPPER}} .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand .oxi-accordions-expand-collapse-' . $this->oxiid . '.oxi-accordions-expand-collapse .oxi-accordions-expand-collapse-number' => 'color: {{VALUE}};',
             ],
             'description' => 'Set the Icon’s Color on Active Mode.',
                 ]
@@ -957,8 +1016,8 @@ class Helper extends Admin {
                 'oxi-accordions-head-expand-collapse-icon-interface' => 'oxi-accordions-head-expand-collapse-icon-customizable-interface',
             ],
             'selector' => [
-                '{{WRAPPER}} .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand > .oxi-accordions-header-card > .oxi-accordions-header-body > .oxi-accordions-head-expand-collapse-icon-customizable-interface:before' => 'background: {{VALUE}};',
-                '{{WRAPPER}} .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand > .oxi-accordions-header-card > .oxi-accordions-header-body > .oxi-accordions-head-expand-collapse-icon-customizable-interface:after' => 'border-color: {{VALUE}};',
+                '{{WRAPPER}} .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand .oxi-accordions-expand-collapse-' . $this->oxiid . '.oxi-accordions-head-expand-collapse-icon-customizable-interface:before' => 'background: {{VALUE}};',
+                '{{WRAPPER}} .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand .oxi-accordions-expand-collapse-' . $this->oxiid . '.oxi-accordions-head-expand-collapse-icon-customizable-interface:after' => 'background: {{VALUE}};',
             ],
             'description' => 'Customize Icon Background with Color, Gradient or Image properties for Active Mode.',
                 ]
@@ -972,7 +1031,7 @@ class Helper extends Admin {
                 'oxi-accordions-head-expand-collapse-shape' => 'oxi-accordion-expand-0',
             ],
             'selector' => [
-                '{{WRAPPER}} .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand > .oxi-accordions-header-card > .oxi-accordions-header-body > .oxi-accordion-expand-0.oxi-accordions-head-expand-collapse-icon-customizable-interface:before' => '',
+                '{{WRAPPER}} .oxi-accordions-ultimate-style .oxi-accordions-single-card.oxi-accordions-expand .oxi-accordions-expand-collapse-' . $this->oxiid . '.oxi-accordion-expand-0.oxi-accordions-head-expand-collapse-icon-customizable-interface:before' => '',
             ],
             'description' => 'Customize Border of the Icon. Set Type, Width, and Color for Active Mode.',
                 ]
@@ -1011,8 +1070,8 @@ class Helper extends Admin {
                 ],
             ],
             'selector' => [
-                '{{WRAPPER}} .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card > .oxi-accordions-header-body > .oxi-accordion-expand-0.oxi-accordions-head-expand-collapse-icon-customizable-interface' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                '{{WRAPPER}} .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card > .oxi-accordions-header-body > .oxi-accordion-expand-0.oxi-accordions-head-expand-collapse-icon-customizable-interface:before' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                '{{WRAPPER}} .oxi-accordions-ultimate-style > .oxi-accordions-single-card .oxi-accordions-expand-collapse-' . $this->oxiid . '.oxi-accordion-expand-0.oxi-accordions-head-expand-collapse-icon-customizable-interface' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                '{{WRAPPER}} .oxi-accordions-ultimate-style > .oxi-accordions-single-card .oxi-accordions-expand-collapse-' . $this->oxiid . '.oxi-accordion-expand-0.oxi-accordions-head-expand-collapse-icon-customizable-interface:before' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
             'description' => 'Add rounded corners to the Icon’s  Section.',
                 ]
@@ -1044,7 +1103,7 @@ class Helper extends Admin {
                 ],
             ],
             'selector' => [
-                '{{WRAPPER}} .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card > .oxi-accordions-header-body > .oxi-accordions-expand-collapse ' => 'margin:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                '{{WRAPPER}} .oxi-accordions-ultimate-style > .oxi-accordions-single-card .oxi-accordions-expand-collapse-' . $this->oxiid . '.oxi-accordions-expand-collapse ' => 'margin:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
             'description' => 'Create some Space outside of the Icon.',
                 ]
@@ -1066,7 +1125,7 @@ class Helper extends Admin {
             'type' => Controls::TYPOGRAPHY,
             'include' => Controls::ALIGNNORMAL,
             'selector' => [
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card .oxi-accordions-header-body .oxi-accordions-main-title' => '',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-header-body .oxi-accordions-main-title' => '',
             ],
             'description' => 'Customize the typography options for the accordions’s title.',
                 ]
@@ -1088,7 +1147,7 @@ class Helper extends Admin {
             'type' => Controls::COLOR,
             'default' => '#ffffff',
             'selector' => [
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card .oxi-accordions-header-body .oxi-accordions-main-title' => 'color: {{VALUE}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-header-body .oxi-accordions-main-title' => 'color: {{VALUE}};',
             ],
             'description' => 'Set the title color on normal mode.',
                 ]
@@ -1097,7 +1156,7 @@ class Helper extends Admin {
                 'oxi-accordions-head-title-tx-shadow', $this->style, [
             'type' => Controls::TEXTSHADOW,
             'selector' => [
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card .oxi-accordions-header-body .oxi-accordions-main-title' => '',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-header-body .oxi-accordions-main-title' => '',
             ],
             'description' => 'Add one or more shadows into title texts and customize other text-shadow options.',
                 ]
@@ -1110,7 +1169,7 @@ class Helper extends Admin {
             'label' => __('Color', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::COLOR,
             'selector' => [
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand > .oxi-accordions-header-card .oxi-accordions-header-body .oxi-accordions-main-title' => 'color: {{VALUE}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-header-body .oxi-accordions-main-title' => 'color: {{VALUE}};',
             ],
             'description' => 'Set the title color on active mode.',
                 ]
@@ -1119,7 +1178,7 @@ class Helper extends Admin {
                 'oxi-accordions-head-title-ac-tx-shadow', $this->style, [
             'type' => Controls::TEXTSHADOW,
             'selector' => [
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand > .oxi-accordions-header-card .oxi-accordions-header-body .oxi-accordions-main-title' => '',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-header-body .oxi-accordions-main-title' => '',
             ],
             'description' => 'Add one or more shadows into title texts and customize other text-shadow options.',
                 ]
@@ -1154,7 +1213,7 @@ class Helper extends Admin {
                 ],
             ],
             'selector' => [
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card .oxi-accordions-header-body  .oxi-accordions-main-title' => 'margin:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-header-body  .oxi-accordions-main-title' => 'margin:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
             'description' => 'Create some space outside of the title.',
                 ]
@@ -1178,7 +1237,7 @@ class Helper extends Admin {
             'type' => Controls::TYPOGRAPHY,
             'include' => Controls::ALIGNNORMAL,
             'selector' => [
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card .oxi-accordions-sub-title' => '',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-sub-title' => '',
             ],
             'description' => 'Customize the typography options for the accordions’s sub title.',
                 ]
@@ -1200,7 +1259,7 @@ class Helper extends Admin {
             'type' => Controls::COLOR,
             'default' => '#ffffff',
             'selector' => [
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card .oxi-accordions-sub-title' => 'color: {{VALUE}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-sub-title' => 'color: {{VALUE}};',
             ],
             'description' => 'Set the sub title color on normal mode.',
                 ]
@@ -1209,7 +1268,7 @@ class Helper extends Admin {
                 'oxi-accordions-head-sub-title-tx-shadow', $this->style, [
             'type' => Controls::TEXTSHADOW,
             'selector' => [
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card .oxi-accordions-sub-title' => '',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-sub-title' => '',
             ],
             'description' => 'Add one or more shadows into sub title texts and customize other text-thadow options.',
                 ]
@@ -1222,7 +1281,7 @@ class Helper extends Admin {
             'label' => __('Color', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::COLOR,
             'selector' => [
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand > .oxi-accordions-header-card .oxi-accordions-sub-title' => 'color: {{VALUE}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-sub-title' => 'color: {{VALUE}};',
             ],
             'description' => 'Set the sub title color on active mode.',
                 ]
@@ -1231,7 +1290,7 @@ class Helper extends Admin {
                 'oxi-accordions-head-sub-title-ac-tx-shadow', $this->style, [
             'type' => Controls::TEXTSHADOW,
             'selector' => [
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand > .oxi-accordions-header-card .oxi-accordions-sub-title' => '',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-sub-title' => '',
             ],
             'description' => 'Add one or more shadows into sub title texts and customize other text-shadow options.',
                 ]
@@ -1266,7 +1325,7 @@ class Helper extends Admin {
                 ],
             ],
             'selector' => [
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card .oxi-accordions-sub-title' => 'margin:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-sub-title' => 'margin:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
             'description' => 'Create some space outside of the sub title.',
                 ]
@@ -1318,9 +1377,9 @@ class Helper extends Admin {
                         ],
                     ],
                     'selector' => [
-                        '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card .oxi-accordions-additional-icon' => '',
-                        '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card .oxi-accordions-header-li-number' => '',
-                        '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card .oxi-accordions-header-li-image' => '',
+                        '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-additional-icon' => '',
+                        '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-header-li-number' => '',
+                        '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-header-li-image' => '',
                     ],
                     'description' => 'Set Title’s additionals customization interface either simple or fully customizable.',
                 ]
@@ -1354,9 +1413,9 @@ class Helper extends Admin {
                 ],
             ],
             'selector' => [
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card .oxi-accordions-additional-icon.oxi-accordions-head-additional-customizable-interface' => 'width:{{SIZE}}{{UNIT}};',
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card .oxi-accordions-header-li-number.oxi-accordions-head-additional-customizable-interface' => 'width:{{SIZE}}{{UNIT}};',
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card .oxi-accordions-header-li-image.oxi-accordions-head-additional-customizable-interface' => 'width:{{SIZE}}{{UNIT}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-additional-icon.oxi-accordions-head-additional-customizable-interface' => 'width:{{SIZE}}{{UNIT}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-header-li-number.oxi-accordions-head-additional-customizable-interface' => 'width:{{SIZE}}{{UNIT}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-header-li-image.oxi-accordions-head-additional-customizable-interface' => 'width:{{SIZE}}{{UNIT}};',
             ],
             'description' => 'Set width of Title’s additionals. Works at all bodies .',
                 ]
@@ -1390,8 +1449,8 @@ class Helper extends Admin {
                 ],
             ],
             'selector' => [
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card .oxi-accordions-additional-icon.oxi-accordions-head-additional-customizable-interface' => 'height:{{SIZE}}{{UNIT}};',
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card .oxi-accordions-header-li-number.oxi-accordions-head-additional-customizable-interface' => 'height:{{SIZE}}{{UNIT}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-additional-icon.oxi-accordions-head-additional-customizable-interface' => 'height:{{SIZE}}{{UNIT}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-header-li-number.oxi-accordions-head-additional-customizable-interface' => 'height:{{SIZE}}{{UNIT}};',
             ],
             'description' => 'Set Height of Title’s additionals. Works at icon and number.',
                 ]
@@ -1423,7 +1482,7 @@ class Helper extends Admin {
                 ],
             ],
             'selector' => [
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card .oxi-accordions-header-content .oxi-icons' => 'font-size:{{SIZE}}{{UNIT}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-header-content .oxi-icons' => 'font-size:{{SIZE}}{{UNIT}};',
             ],
             'description' => 'Set the icon size (PX, % or EM).',
                 ]
@@ -1434,7 +1493,7 @@ class Helper extends Admin {
             'type' => Controls::TYPOGRAPHY,
             'include' => Controls::ALIGNNORMAL,
             'selector' => [
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card .oxi-accordions-header-li-number' => '',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-header-li-number' => '',
             ],
             'description' => 'Customize the typography options for the numbers.',
                 ]
@@ -1457,8 +1516,8 @@ class Helper extends Admin {
             'type' => Controls::COLOR,
             'default' => '#ffffff',
             'selector' => [
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card .oxi-accordions-header-content .oxi-icons' => 'color: {{VALUE}};',
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card .oxi-accordions-header-li-number' => 'color: {{VALUE}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-header-content .oxi-icons' => 'color: {{VALUE}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-header-li-number' => 'color: {{VALUE}};',
             ],
             'description' => 'Set the icon or number color on normal mode, works for icon or number',
                 ]
@@ -1471,8 +1530,8 @@ class Helper extends Admin {
                 'oxi-accordions-head-additional-interface' => 'oxi-accordions-head-additional-customizable-interface',
             ],
             'selector' => [
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card .oxi-accordions-header-content .oxi-accordions-additional-icon.oxi-accordions-head-additional-customizable-interface' => 'background: {{VALUE}};',
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card .oxi-accordions-header-content .oxi-accordions-header-li-number.oxi-accordions-head-additional-customizable-interface' => 'background: {{VALUE}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-header-content .oxi-accordions-additional-icon.oxi-accordions-head-additional-customizable-interface' => 'background: {{VALUE}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-header-content .oxi-accordions-header-li-number.oxi-accordions-head-additional-customizable-interface' => 'background: {{VALUE}};',
             ],
             'description' => 'Customize icon or number background with color, gradient or image properties for normal mode.',
                 ]
@@ -1485,9 +1544,9 @@ class Helper extends Admin {
                 'oxi-accordions-head-additional-interface' => 'oxi-accordions-head-additional-customizable-interface',
             ],
             'selector' => [
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card .oxi-accordions-header-content .oxi-accordions-additional-icon.oxi-accordions-head-additional-customizable-interface' => '',
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card .oxi-accordions-header-content .oxi-accordions-header-li-number.oxi-accordions-head-additional-customizable-interface' => '',
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card .oxi-accordions-header-content .oxi-accordions-header-li-image.oxi-accordions-head-additional-customizable-interface' => '',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-header-content .oxi-accordions-additional-icon.oxi-accordions-head-additional-customizable-interface' => '',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-header-content .oxi-accordions-header-li-number.oxi-accordions-head-additional-customizable-interface' => '',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-header-content .oxi-accordions-header-li-image.oxi-accordions-head-additional-customizable-interface' => '',
             ],
             'description' => 'Customize border for all bodies including image.',
                 ]
@@ -1500,8 +1559,8 @@ class Helper extends Admin {
             'label' => __('Color', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::COLOR,
             'selector' => [
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand > .oxi-accordions-header-card .oxi-accordions-header-content .oxi-icons' => 'color: {{VALUE}};',
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand > .oxi-accordions-header-card .oxi-accordions-header-li-number' => 'color: {{VALUE}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-header-content .oxi-icons' => 'color: {{VALUE}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-header-li-number' => 'color: {{VALUE}};',
             ],
             'description' => 'Set the icon or number color on active mode.',
                 ]
@@ -1514,8 +1573,8 @@ class Helper extends Admin {
                 'oxi-accordions-head-additional-interface' => 'oxi-accordions-head-additional-customizable-interface',
             ],
             'selector' => [
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand > .oxi-accordions-header-card .oxi-accordions-header-content .oxi-accordions-additional-icon.oxi-accordions-head-additional-customizable-interface' => 'background: {{VALUE}};',
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand > .oxi-accordions-header-card .oxi-accordions-header-content .oxi-accordions-header-li-number.oxi-accordions-head-additional-customizable-interface' => 'background: {{VALUE}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-header-content .oxi-accordions-additional-icon.oxi-accordions-head-additional-customizable-interface' => 'background: {{VALUE}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-header-content .oxi-accordions-header-li-number.oxi-accordions-head-additional-customizable-interface' => 'background: {{VALUE}};',
             ],
             'description' => 'Customize icon or number background with color, gradient or image properties for active mode.',
                 ]
@@ -1528,9 +1587,9 @@ class Helper extends Admin {
                 'oxi-accordions-head-additional-interface' => 'oxi-accordions-head-additional-customizable-interface',
             ],
             'selector' => [
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand > .oxi-accordions-header-card .oxi-accordions-header-content .oxi-accordions-additional-icon.oxi-accordions-head-additional-customizable-interface' => '',
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand > .oxi-accordions-header-card .oxi-accordions-header-content .oxi-accordions-header-li-number.oxi-accordions-head-additional-customizable-interface' => '',
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand > .oxi-accordions-header-card .oxi-accordions-header-content .oxi-accordions-header-li-image.oxi-accordions-head-additional-customizable-interface' => '',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-header-content .oxi-accordions-additional-icon.oxi-accordions-head-additional-customizable-interface' => '',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-header-content .oxi-accordions-header-li-number.oxi-accordions-head-additional-customizable-interface' => '',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-header-content .oxi-accordions-header-li-image.oxi-accordions-head-additional-customizable-interface' => '',
             ],
             'description' => 'Customize border for all bodies incluging image. Set type, width, and color for active mode.',
                 ]
@@ -1568,9 +1627,9 @@ class Helper extends Admin {
                 ],
             ],
             'selector' => [
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card .oxi-accordions-header-content  .oxi-accordions-additional-icon.oxi-accordions-head-additional-customizable-interface' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card .oxi-accordions-header-content  .oxi-accordions-header-li-number.oxi-accordions-head-additional-customizable-interface' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card .oxi-accordions-header-content  .oxi-accordions-header-li-image.oxi-accordions-head-additional-customizable-interface' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-header-content  .oxi-accordions-additional-icon.oxi-accordions-head-additional-customizable-interface' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-header-content  .oxi-accordions-header-li-number.oxi-accordions-head-additional-customizable-interface' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-header-content  .oxi-accordions-header-li-image.oxi-accordions-head-additional-customizable-interface' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
             'description' => 'Add rounded corners to the all addional bodies section.',
                 ]
@@ -1602,9 +1661,9 @@ class Helper extends Admin {
                 ],
             ],
             'selector' => [
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card .oxi-accordions-header-content .oxi-accordions-additional-icon' => 'margin:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card .oxi-accordions-header-content .oxi-accordions-header-li-number' => 'margin:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-header-card .oxi-accordions-header-content .oxi-accordions-header-li-image' => 'margin:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-header-content .oxi-accordions-additional-icon' => 'margin:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-header-content .oxi-accordions-header-li-number' => 'margin:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-header-content .oxi-accordions-header-li-image' => 'margin:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
             'description' => 'Create some space outside of title additional bodies.',
                 ]
@@ -1647,7 +1706,7 @@ class Helper extends Admin {
             'label' => __('Background', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::GRADIENT,
             'selector' => [
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-content-card' => 'background: {{VALUE}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-content-card' => 'background: {{VALUE}};',
             ],
             'description' => 'Customize the content’s background with color, gradient or image properties.',
                 ]
@@ -1658,7 +1717,7 @@ class Helper extends Admin {
                 [
                     'type' => Controls::BORDER,
                     'selector' => [
-                        '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-content-card' => ''
+                        '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-content-card' => ''
                     ],
                     'description' => 'Customize border of the content body. Set type, width, and color.',
                 ]
@@ -1689,7 +1748,7 @@ class Helper extends Admin {
                 ],
             ],
             'selector' => [
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-content-card' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-content-card' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
             'description' => 'Add rounded corners to the content’s section.',
                 ]
@@ -1781,7 +1840,7 @@ class Helper extends Admin {
                 'optgroup21' => [false],
             ],
             'selector' => [
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-content-card > .oxi-accordions-content-body' => '',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-content-card > .oxi-accordions-content-body' => '',
             ]
                 ]
         );
@@ -1805,7 +1864,7 @@ class Helper extends Admin {
                 ],
             ],
             'selector' => [
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-content-card > .oxi-accordions-content-body' => ' -webkit-animation-duration: {{SIZE}}{{UNIT}};animation-duration: {{SIZE}}{{UNIT}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-content-card > .oxi-accordions-content-body' => ' -webkit-animation-duration: {{SIZE}}{{UNIT}};animation-duration: {{SIZE}}{{UNIT}};',
             ],
             'description' => 'Set content on off animation durations as mili seconds.',
                 ]
@@ -1837,7 +1896,7 @@ class Helper extends Admin {
                 ],
             ],
             'selector' => [
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-content-card > .oxi-accordions-content-body' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-content-card > .oxi-accordions-content-body' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
             'description' => 'Generate some space around the content body including background color.',
                 ]
@@ -1868,7 +1927,7 @@ class Helper extends Admin {
                 ],
             ],
             'selector' => [
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-content-card' => 'margin:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-content-card' => 'margin:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
             'description' => 'Create some space outside of the content body.',
                 ]
@@ -1890,8 +1949,8 @@ class Helper extends Admin {
             'type' => Controls::TYPOGRAPHY,
             'include' => Controls::ALIGNNORMAL,
             'selector' => [
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-content-card > .oxi-accordions-content-body' => '',
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-content-card > .oxi-accordions-content-body > p' => '',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-content-card > .oxi-accordions-content-body' => '',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-content-card > .oxi-accordions-content-body > p' => '',
             ],
             'description' => 'Customize the Typography options for the accordions’s contents.',
                 ]
@@ -1902,8 +1961,8 @@ class Helper extends Admin {
             'type' => Controls::COLOR,
             'default' => '#ffffff',
             'selector' => [
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-content-card > .oxi-accordions-content-body' => 'color: {{VALUE}};',
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-content-card > .oxi-accordions-content-body > p' => 'color: {{VALUE}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-content-card > .oxi-accordions-content-body' => 'color: {{VALUE}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-content-card > .oxi-accordions-content-body > p' => 'color: {{VALUE}};',
             ],
             'description' => 'Select content color of your accordions.',
                 ]
@@ -1912,8 +1971,8 @@ class Helper extends Admin {
                 'oxi-accordions-desc-content-tx-shadow', $this->style, [
             'type' => Controls::TEXTSHADOW,
             'selector' => [
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-content-card > .oxi-accordions-content-body' => '',
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-content-card > .oxi-accordions-content-body > p' => '',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-content-card > .oxi-accordions-content-body' => '',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-content-card > .oxi-accordions-content-body > p' => '',
             ],
             'description' => 'Add  shadows into the content texts and customize other text-shadow options.',
                 ]
@@ -1944,7 +2003,7 @@ class Helper extends Admin {
                 ],
             ],
             'selector' => [
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-content-card > .oxi-accordions-content-body > p' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-content-card > .oxi-accordions-content-body > p' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
             'description' => 'Adjust your content padding for peragraph tag.',
                 ]
@@ -1962,6 +2021,30 @@ class Helper extends Admin {
             ],
                 ]
         );
+        $this->add_control(
+                'oxi-accordions-content-mx-height-interface',
+                $this->style,
+                [
+                    'label' => __('Interface', OXI_ACCORDIONS_TEXTDOMAIN),
+                    'type' => Controls::CHOOSE,
+                    'operator' => Controls::OPERATOR_TEXT,
+                    'toggle' => true,
+                    'default' => '',
+                    'options' => [
+                        '' => [
+                            'title' => __('Scroll', OXI_ACCORDIONS_TEXTDOMAIN),
+                        ],
+                        'oxi-accordions-content-mx-height-interface-button' => [
+                            'title' => __('Button', OXI_ACCORDIONS_TEXTDOMAIN),
+                        ],
+                    ],
+                    'selector' => [
+                        '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-content-card .oxi-accordions-content-body' => '',
+                    ],
+                    'description' => 'Set Title’s additionals customization interface either simple or fully customizable.',
+                ]
+        );
+
         $this->add_responsive_control(
                 'oxi-accordions-content-mx-height', $this->style, [
             'label' => __('Maximum Height', OXI_ACCORDIONS_TEXTDOMAIN),
@@ -1998,6 +2081,16 @@ class Helper extends Admin {
             'description' => 'Set fixed accordion content panel height.',
                 ]
         );
+        $this->add_control(
+                'oxi-accordions-modal-title', [], [
+            'label' => esc_html__('Title', OXI_ACCORDIONS_TEXTDOMAIN),
+            'type' => Controls::TEXT,
+            'default' => 'Lorem Ipsum',
+            'description' => 'Add Title of your Accordions else Make it Blank.',
+                ]
+        );
+        
+        
 
         $this->end_controls_section();
     }

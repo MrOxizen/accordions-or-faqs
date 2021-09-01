@@ -105,10 +105,6 @@ class Installation {
                 'name' => 'Create New',
                 'homepage' => 'oxi-accordions-ultimate-new'
             ];
-            $response['Accordions']['Import Template'] = [
-                'name' => 'Import Template',
-                'homepage' => 'oxi-accordions-ultimate-new&import'
-            ];
             set_transient(self::ADMINMENU, $response, 10 * DAY_IN_SECONDS);
         endif;
     }

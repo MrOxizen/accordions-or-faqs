@@ -9,8 +9,6 @@ namespace OXI_ACCORDIONS_PLUGINS\Includes;
  */
 class Frontend {
 
-
-
     /**
      * Current Elements ID
      *
@@ -80,30 +78,30 @@ class Frontend {
         <html <?php language_attributes(); ?>>
             <meta name="viewport" content="width=device-width"/>
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-            <title><?php esc_html_e('Responsive Tabs &rsaquo; Admin template', OXI_ACCORDIONS_TEXTDOMAIN); ?></title>
-            <?php wp_head(); ?>
+            <title><?php esc_html_e('Accordions - Multiple Accordions or FAQs Builders', OXI_ACCORDIONS_TEXTDOMAIN); ?></title>
+        <?php wp_head(); ?>
         </head>
         <body class="shortcode-addons-template-body" id="shortcode-addons-template-body">
-            <?php
-        }
+        <?php
+    }
 
-        /**
-         * Outputs the content of the current step.
-         */
-        public function template_content() {
-            if ($this->oxiid > 0):
-                $CLASS = '\OXI_ACCORDIONS_PLUGINS\Includes\Shortcode';
-                if (class_exists($CLASS)):
-                    new $CLASS($this->oxiid, 'admin');
-                endif;
+    /**
+     * Outputs the content of the current step.
+     */
+    public function template_content() {
+        if ($this->oxiid > 0):
+            $CLASS = '\OXI_ACCORDIONS_PLUGINS\Includes\Shortcode';
+            if (class_exists($CLASS)):
+                new $CLASS($this->oxiid, 'admin');
             endif;
-        }
+        endif;
+    }
 
-        /**
-         * Outputs the simplified footer.
-         */
-        public function template_footer() {
-            ?>
+    /**
+     * Outputs the simplified footer.
+     */
+    public function template_footer() {
+        ?>
             <?php wp_footer(); ?>
         </body>
         </html>

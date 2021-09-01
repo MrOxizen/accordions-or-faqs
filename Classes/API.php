@@ -79,47 +79,10 @@ class API {
     }
 
     public function post_create_new_accordions() {
-        if (!empty($this->styleid)):
-//            $styleid = (int) $this->styleid;
-//            $newdata = $this->database->wpdb->get_row($this->database->wpdb->prepare('SELECT * FROM ' . $this->database->parent_table . ' WHERE id = %d ', $styleid), ARRAY_A);
-//            $old = false;
-//            if (array_key_exists('css', $newdata) && $newdata['css'] != ''):
-//                $old = true;
-//                $this->database->wpdb->query($this->database->wpdb->prepare("INSERT INTO {$this->database->parent_table} (name, style_name, rawdata, css) VALUES (%s, %s, %s, %s)", array($this->rawdata, $newdata['style_name'], $newdata['rawdata'], $newdata['css'])));
-//            else:
-//                $this->database->wpdb->query($this->database->wpdb->prepare("INSERT INTO {$this->database->parent_table} (name, style_name, rawdata) VALUES ( %s, %s, %s)", array($this->rawdata, $newdata['style_name'], $newdata['rawdata'])));
-//            endif;
-//            $redirect_id = $this->database->wpdb->insert_id;
-//            if ($redirect_id > 0):
-//                if ($old == true):
-//                    $child = $this->database->wpdb->get_results($this->database->wpdb->prepare("SELECT * FROM {$this->database->child_table} WHERE styleid = %d ORDER by id ASC", $styleid), ARRAY_A);
-//                    foreach ($child as $value) {
-//                        $this->database->wpdb->query($this->database->wpdb->prepare("INSERT INTO {$this->database->child_table} (styleid, rawdata, title, files, css) VALUES (%d, %s, %s, %s, %s)", array($redirect_id, $value['rawdata'], $value['title'], $value['files'], $value['css'])));
-//                    }
-//                else:
-//                    $raw = json_decode(stripslashes($newdata['rawdata']), true);
-//                    $raw['style-id'] = $redirect_id;
-//                    $name = ucfirst($newdata['style_name']);
-//                    $CLASS = '\OXI_TABS_PLUGINS\Render\Admin\\' . $name;
-//                    $C = new $CLASS('admin');
-//                    $f = $C->template_css_render($raw);
-//                    $child = $this->database->wpdb->get_results($this->database->wpdb->prepare("SELECT * FROM {$this->database->child_table} WHERE styleid = %d ORDER by id ASC", $styleid), ARRAY_A);
-//                    foreach ($child as $value) {
-//                        $this->database->wpdb->query($this->database->wpdb->prepare("INSERT INTO {$this->database->child_table} (styleid, rawdata) VALUES (%d, %s)", array($redirect_id, $value['rawdata'])));
-//                    }
-//                endif;
-//                return admin_url("admin.php?page=oxi-tabs-ultimate-new&styleid=$redirect_id");
-//            endif;
-        else:
-
-            $params = json_decode(stripslashes($this->rawdata), true);
-
-            $folder = $this->safe_path(OXI_ACCORDIONS_PATH . 'demo-template/');
-            $filename = 'accordions-or-faqs-template-' . $params['template-id'] . '.json';
-
-            return $this->post_json_import($folder, $filename, $params['addons-style-name']);
-
-        endif;
+        $params = json_decode(stripslashes($this->rawdata), true);
+        $folder = $this->safe_path(OXI_ACCORDIONS_PATH . 'demo-template/');
+        $filename = $params['template-id'];
+        return $this->post_json_import($folder, $filename, $params['addons-style-name']);
     }
 
     public function post_json_import($folder, $filename, $name = 'truee') {
@@ -133,18 +96,15 @@ class API {
             if ($name != 'truee'):
                 $style['name'] = $name;
             endif;
-
-            $this->database->wpdb->query($this->database->wpdb->prepare("INSERT INTO {$this->database->parent_table} (name, type, style_name, rawdata) VALUES ( %s, %s, %s, %s)", array($style['name'], OXI_ACCORDIONS_TEXTDOMAIN, $style['style_name'], $style['rawdata'])));
+            $this->database->wpdb->query($this->database->wpdb->prepare("INSERT INTO {$this->database->parent_table} (name, type, rawdata) VALUES ( %s, %s, %s)", array($style['name'], OXI_ACCORDIONS_TEXTDOMAIN, $style['rawdata'])));
             $redirect_id = $this->database->wpdb->insert_id;
 
             if ($redirect_id > 0):
                 $raw = json_decode(stripslashes($style['rawdata']), true);
                 $raw['style-id'] = $redirect_id;
-//                $style_name = ucfirst($style['style_name']);
-////                $CLASS = '\OXI_ACCORDIONS_PLUGINS\Layouts\Admin\\' . $style_name;
-////                $C = new $CLASS('admin');
-////
-                //    $f = $C->template_css_render($raw);
+                $CLASS = '\OXI_ACCORDIONS_PLUGINS\Layouts\Helper';
+                $CLASS = new $CLASS('admin');
+                $CLASS->template_css_render($raw);
                 foreach ($child as $value) {
                     $this->database->wpdb->query($this->database->wpdb->prepare("INSERT INTO {$this->database->child_table} (styleid, rawdata) VALUES (%d,  %s)", array($redirect_id, $value['rawdata'])));
                 }
@@ -230,13 +190,12 @@ class API {
      */
     public function post_elements_template_style() {
         $settings = json_decode(stripslashes($this->rawdata), true);
-        $template = ucfirst(sanitize_text_field($settings['style-name']));
         $stylesheet = '';
         if ((int) $this->styleid):
             $transient = 'accordions-or-faqs-template-' . $this->styleid;
             delete_transient($transient);
             $this->database->wpdb->query($this->database->wpdb->prepare("UPDATE {$this->database->parent_table} SET rawdata = %s, stylesheet = %s WHERE id = %d", $this->rawdata, $stylesheet, $this->styleid));
-            $CLASS = '\OXI_ACCORDIONS_PLUGINS\Layouts\Admin\\' . str_replace('-', '_', $template);
+            $CLASS = '\OXI_ACCORDIONS_PLUGINS\Layouts\Helper';
             $CLASS = new $CLASS('admin');
             return $CLASS->template_css_render($settings);
         endif;

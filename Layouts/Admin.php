@@ -91,12 +91,6 @@ class Admin {
      */
     public $google_font = [];
 
-    /**
-     * Define Oxilab Tabs  Elements Type
-     *
-     * @since 2.0.1
-     */
-    public $StyleName;
 
     /**
      * Define Oxilab Tabs  Elements Type
@@ -140,7 +134,6 @@ class Admin {
                 $this->style = $s;
             endif;
         endif;
-        $this->StyleName = ucfirst($this->dbdata['style_name']);
         $this->import_font_family();
     }
 
@@ -371,7 +364,6 @@ class Admin {
                                             <button type="button" class="btn btn-danger" id="oxi-addons-setting-reload">Reload</button>
                                             <input type="hidden"  id="oxilab-preview-color" name="oxilab-preview-color" value="<?php echo(is_array($this->style) ? array_key_exists('oxilab-preview-color', $this->style) ? $this->style['oxilab-preview-color'] : '#FFF' : '#FFF'); ?>">
                                             <input type="hidden"  id="style-id" name="style-id" value="<?php echo $this->dbdata['id']; ?>">
-                                            <input type="hidden"  id="style-name" name="style-name" value="<?php echo $this->StyleName; ?>">
                                             <button type="button" class="btn btn-success" id="oxi-addons-templates-submit"> Save</button>
                                         </div>
                                     </div> 

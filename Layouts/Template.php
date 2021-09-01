@@ -86,13 +86,6 @@ class Template {
     public $database;
 
     /**
-     * Database Style Name
-     *
-     * @since 2.0.1
-     */
-    public $style_name;
-
-    /**
      * Public Attribute
      *
      * @since 2.0.1
@@ -134,7 +127,6 @@ class Template {
             $this->admin = $admin;
             $this->arg = $arg;
             $this->keys = $keys;
-            $this->style_name = ucfirst($dbdata['style_name']);
             $this->database = new \OXI_ACCORDIONS_PLUGINS\Helper\Database();
             if (array_key_exists('id', $this->dbdata)):
                 $this->oxiid = $this->dbdata['id'];
@@ -170,10 +162,8 @@ class Template {
         $this->render();
         $inlinecss = $this->inline_public_css() . $this->inline_css . (array_key_exists('oxi-accordions-custom-css', $this->style) ? $this->style['oxi-accordions-custom-css'] : '');
         $inlinejs = $this->inline_public_jquery();
-
         if ($this->CSSDATA == '' && $this->admin == 'admin') {
-
-            $cls = '\OXI_ACCORDIONS_PLUGINS\Layouts\Admin\\' . str_replace('-', '_', $this->style_name);
+            $cls = '\OXI_ACCORDIONS_PLUGINS\Layouts\Helper';
             $CLASS = new $cls('admin');
             $inlinecss .= $CLASS->inline_template_css_render($this->style);
         } else {
@@ -216,7 +206,6 @@ class Template {
         wp_enqueue_script("jquery");
         wp_enqueue_style('oxi-accordions-ultimate', OXI_ACCORDIONS_URL . 'assets/frontend/css/style.css', false, OXI_ACCORDIONS_PLUGIN_VERSION);
         wp_enqueue_style('oxi-plugin-animate', OXI_ACCORDIONS_URL . 'assets/frontend/css/animate.css', false, OXI_ACCORDIONS_PLUGIN_VERSION);
-        wp_enqueue_style('oxi-accordions-' . strtolower(str_replace('_', '-', $this->style_name)), OXI_ACCORDIONS_URL . 'assets/frontend/css/' . strtolower(str_replace('_', '-', $this->style_name)) . '.css', false, OXI_ACCORDIONS_PLUGIN_VERSION);
         wp_enqueue_script('oxi-accordions-collapse.min', OXI_ACCORDIONS_URL . 'assets/frontend/js/collapse.js', false, OXI_ACCORDIONS_PLUGIN_VERSION);
         wp_enqueue_script('oxi-accordions-ultimate', OXI_ACCORDIONS_URL . 'assets/frontend/js/accordions.js', false, OXI_ACCORDIONS_PLUGIN_VERSION);
     }
@@ -294,13 +283,74 @@ class Template {
         echo '';
     }
 
-    /**
-     * load default render
-     *
-     * @since 2.0.1
-     */
     public function default_render($style, $child, $admin) {
-        echo '';
+
+        echo '<div class="oxi-accordions-ultimate-style oxi-accordions-ultimate-template-1  oxi-accordions-clearfix oxi-accordions-preloader" ' . $this->public_attribute() . ' ' . $this->accordions_preloader . '>';
+        $number = 1;
+
+        foreach ($child as $key => $val) {
+            $value = json_decode(stripslashes($val['rawdata']), true);
+
+            $expand = '<div class="oxi-accordions-expand-collapse-' . $this->oxiid . ' oxi-accordions-expand-collapse ' . $style['oxi-accordions-head-expand-collapse-icon-interface'] . ' ' . $style['oxi-accordions-expand-collapse'] . ' ' . $style['oxi-accordions-head-expand-collapse-type'] . ' ' . $style['oxi-accordions-head-expand-collapse-shape'] . '">' . $this->expand_collapse_icon_number_render($style, $number) . '</div>';
+
+            echo '<div class="oxi-accordions-single-card oxi-accordions-single-card-' . $this->oxiid . ' ' . ( isset($this->style['oxi-accordions-head-expand-collapse-location']) ? $this->style['oxi-accordions-head-expand-collapse-location'] : '') . ' oxi-accordions-single-card-' . $this->oxiid . '-' . $number . ' ' . $style['oxi-accordions-head-expand-collapse-position'] . '">';
+            if ($style['oxi-accordions-head-expand-collapse-position'] == 'oxi-accordions-head-expand-collapse-position-outside'):
+                echo $expand;
+            endif;
+            echo '<div class="oxi-accordions-head-outside-body">';
+            /*
+             * Header Child Loop Start
+             */
+            echo '<div class="oxi-accordions-header-card">';
+            echo '  <div class="oxi-accordions-header-body  oxi-accordions-header oxi-accordions-clearfix"   data-oxitoggle="oxicollapse" data-oxitarget="#oxi-accordions-content-' . $this->oxiid . '-' . $number . '" aria-expanded="false" ' . $this->accordions_url_render($value) . '>';
+            if ($style['oxi-accordions-head-expand-collapse-position'] != 'oxi-accordions-head-expand-collapse-position-outside'):
+                echo $expand;
+            endif;
+            echo '      <div class="oxi-accordions-header-content ' . $style['oxi-accordions-headding-additional'] . ' ' . $style['oxi-accordions-head-additional-location'] . '">';
+            if ($style['oxi-accordions-content-type'] == 'content'):
+                if ($value['oxi-accordions-modal-title-additional'] == 'icon'):
+                    echo $this->icon_special_rander($value['oxi-accordions-modal-icon']);
+                elseif ($value['oxi-accordions-modal-title-additional'] == 'number'):
+                    echo $this->number_special_charecter($value['oxi-accordions-modal-number']);
+                elseif ($value['oxi-accordions-modal-title-additional'] == 'image'):
+                    echo $this->image_special_render('oxi-accordions-modal-image', $value);
+                endif;
+            endif;
+            echo $this->title_special_charecter($value, 'oxi-accordions-modal-title', 'oxi-accordions-modal-sub-title');
+
+            echo '      </div>';
+            echo '  </div>';
+            echo '</div>';
+
+            /*
+             * Content Child Loop Start
+             */
+            $content_height = (isset($style['oxi-accordions-content-height']) ? $style['oxi-accordions-content-height'] : '') . ' ' . (isset($style['oxi-accordions-content-mx-height-interface']) ? $style['oxi-accordions-content-mx-height-interface'] : '') . ' ';
+            $animation = isset($style['oxi-accordions-desc-animation']) ? $style['oxi-accordions-desc-animation'] : '';
+
+            echo '  <div class="oxicollapse ' . $this->default_open($value) . ' oxi-accordions-content-card oxi-accordions-content-card-' . $this->oxiid . '  ' . ($this->admin == 'admin' ? 'oxi-addons-admin-edit-list' : '') . '" id="oxi-accordions-content-' . $this->oxiid . '-' . $number . '" ' . $this->accordions_type . '>';
+            echo '     <div class="oxi-accordions-content-body ' . $content_height . '"  oxi-animation="' . $animation . '">';
+            echo $this->accordions_content_render($style, $value);
+
+            echo '<div class="oxi-accordions-content-expand-button">'
+            . '        <div class="oxi-accordions-content-expand-body">'
+            . '             <div class="oxi-accordions-content-expand-open">Open</div> '
+            . '             <div class="oxi-accordions-content-expand-close">Close</div>'
+            . '        </div>'
+            . ' </div>';
+
+            if ($this->admin == 'admin'):
+                echo $this->admin_edit_panel($val['id']);
+            endif;
+            echo '      </div>';
+            echo '  </div>';
+
+            echo '</div>';
+            echo '</div>';
+            $number++;
+        }
+
+        echo '</div>';
     }
 
     /**
@@ -411,240 +461,20 @@ class Template {
         endif;
     }
 
-    public function accordions_content_render_tag($style, $child) {
-
-        $number = array_key_exists('oxi-accordions-desc-tags-max', $style) ? $style['oxi-accordions-desc-tags-max'] : 10;
-        $smallest = array_key_exists('oxi-accordions-desc-tags-small', $style) ? $style['oxi-accordions-desc-tags-small'] : 10;
-        $largest = array_key_exists('oxi-accordions-desc-tags-big', $style) ? $style['oxi-accordions-desc-tags-big'] : 10;
-        $show_count = array_key_exists('oxi-accordions-desc-tags-show-count', $style) ? $style['oxi-accordions-desc-tags-show-count'] : 1;
-
-        $tags = get_tags();
-        $args = array(
-            'smallest' => $smallest,
-            'largest' => $largest,
-            'unit' => 'px',
-            'number' => $number,
-            'format' => 'flat',
-            'separator' => " ",
-            'orderby' => 'count',
-            'order' => 'DESC',
-            'show_count' => $show_count,
-            'echo' => false
-        );
-        return wp_generate_tag_cloud($tags, $args);
-    }
-
-    public function accordions_content_render_commment($style, $child) {
-        $number = array_key_exists('oxi-accordions-desc-comment-max', $style) ? $style['oxi-accordions-desc-comment-max'] : 5;
-        $show_avatar = array_key_exists('oxi-accordions-desc-comment-show-avatar', $style) ? $style['oxi-accordions-desc-comment-show-avatar'] : 1;
-        $avatar_size = array_key_exists('oxi-accordions-desc-comment-avatar-size', $style) ? $style['oxi-accordions-desc-comment-avatar-size'] : 65;
-        $comment_length = array_key_exists('oxi-accordions-desc-comment-comment-lenth', $style) ? $style['oxi-accordions-desc-comment-comment-lenth'] : 90;
-
-        $recent_comments = get_comments(array(
-            'number' => $number,
-            'status' => 'approve',
-            'post_status' => 'publish'
-        ));
-        $public = '';
-        if ($recent_comments) : foreach ($recent_comments as $comment) :
-                $public .= '<div class="oxi-accordions-comment">';
-                if ($show_avatar) :
-                    $public .= ' <div class="oxi-accordions-comment-avatar">
-                                    <a href="' . get_comment_link($comment->comment_ID) . '">
-                                        ' . get_avatar($comment->comment_author_email, $avatar_size) . '
-                                    </a>
-                                </div>';
-                endif;
-                $public .= '<div class="oxi-accordions-comment-body">
-                                <div class=oxi-accordions-comment-meta">
-                                    <a href="' . get_comment_link($comment->comment_ID) . '">
-                                        <span class="oxi-accordions-comment-author">' . get_comment_author($comment->comment_ID) . ' </span> - <span class="oxi-accordions-comment-post">' . get_the_title($comment->comment_post_ID) . '</span>
-                                    </a>
-                                </div>
-                                <div class="oxi-accordions-comment-content">
-                                    ' . $this->truncate(strip_tags(apply_filters('get_comment_text', $comment->comment_content)), $comment_length) . '
-                                </div>
-                            </div>
-                            </div>';
-            endforeach;
-        else :
-            $public .= ' <div class="oxi-accordions-comment">
-                            <div class="no-comments">No comments yet</div>
-                        </div>';
-        endif;
-        return $public;
-    }
-
-    public function accordions_content_render_recent($style, $child) {
-        $show_thumb = array_key_exists('oxi-accordions-desc-recent-thumb-condi', $style) ? $style['oxi-accordions-desc-recent-thumb-condi'] : 1;
-        $thumb_size = array_key_exists('oxi-accordions-desc-recent-thumb', $style) ? $style['oxi-accordions-desc-recent-thumb'] : 65;
-        $date = array_key_exists('oxi-accordions-desc-recent-meta-date', $style) ? $style['oxi-accordions-desc-recent-meta-date'] : 1;
-        $comment = array_key_exists('oxi-accordions-desc-recent-meta-comment', $style) ? $style['oxi-accordions-desc-recent-meta-comment'] : 1;
-        $content = array_key_exists('oxi-accordions-desc-recent-content-lenth', $style) ? $style['oxi-accordions-desc-recent-content-lenth'] : 90;
-        $number = array_key_exists('oxi-accordions-desc-recent-post', $style) ? $style['oxi-accordions-desc-recent-post'] : 5;
-        $public = '';
-
-        $query = new \WP_Query('posts_per_page=' . $number);
-
-        if ($query->have_posts()) {
-            while ($query->have_posts()) {
-                $query->the_post();
-                $extra = '';
-                if ($date):
-                    $extra .= '    <div class="oxi-accordions-recent-date">
-                                       ' . get_the_date('M d, Y') . '
-                                    </div>';
-                endif;
-
-                if ($comment):
-                    if (!empty($extra)):
-                        $extra .= '&nbsp&bull;&nbsp';
-                    endif;
-                    $number = (int) get_comments_number($query->post->ID);
-                    $extra .= '    <div class="oxi-accordions-recent-comment">
-                                        ' . ($number > 1 ? $number . ' Comment' : ($number > 0 ? 'One Comment' : 'No Comment')) . '
-                                    </div>';
-                endif;
-                $image_url = wp_get_attachment_image_src(get_post_thumbnail_id(), $thumb_size);
-                $public .= '<div class="oxi-accordions-recent-post">';
-                if ($show_thumb) {
-                    $image = isset($image_url[0]) && $image_url[0] != '' ? $image_url[0] : '';
-                    $public .= '    <div class="oxi-accordions-recent-avatar">
-                                        <a href="' . get_permalink($query->post->ID) . '">
-                                           <img class="oxi-image" src="' . $image . '">
-                                        </a>
-                                    </div>';
-                }
-                $public .= '<div class="oxi-accordions-recent-body">
-                                <div class="oxi-accordions-recent-meta">
-                                    <a href="' . get_permalink($query->post->ID) . '">
-                                        ' . get_the_title($query->post->ID) . '
-                                    </a>
-                                </div>
-                                ' . (!empty($extra) ? '<div class="oxi-accordions-recent-postmeta">' . $extra . '</div>' : '') . '
-                                <div class="oxi-accordions-recent-content">
-                                    ' . $this->truncate(strip_tags(get_the_content()), $content) . '
-                                </div>
-                            </div>';
-                $public .= '</div>';
-                $extra = '';
-            }
-            wp_reset_postdata();
-        }
-
-        return $public;
-    }
-
-    public function accordions_content_render_popular($style, $child) {
-        $show_thumb = array_key_exists('oxi-accordions-desc-popular-thumb-condi', $style) ? $style['oxi-accordions-desc-popular-thumb-condi'] : 1;
-        $thumb_size = array_key_exists('oxi-accordions-desc-popular-thumb', $style) ? $style['oxi-accordions-desc-popular-thumb'] : 65;
-        $date = array_key_exists('oxi-accordions-desc-popular-meta-date', $style) ? $style['oxi-accordions-desc-popular-meta-date'] : 1;
-        $comment = array_key_exists('oxi-accordions-desc-popular-meta-comment', $style) ? $style['oxi-accordions-desc-popular-meta-comment'] : 1;
-        $content = array_key_exists('oxi-accordions-desc-popular-content-lenth', $style) ? $style['oxi-accordions-desc-popular-content-lenth'] : 90;
-        $number = array_key_exists('oxi-accordions-desc-popular-post', $style) ? $style['oxi-accordions-desc-popular-post'] : 5;
-        $public = '';
-
-        $query = new \WP_Query(
-                array('ignore_sticky_posts' => 1,
-            'posts_per_page' => $number,
-            'post_status' => 'publish',
-            'orderby' => 'meta_value_num',
-            'meta_key' => '_oxi_post_view_count',
-            'order' => 'desc')
-        );
-        if ($query->have_posts()) {
-            while ($query->have_posts()) {
-                $query->the_post();
-                $extra = '';
-                if ($date):
-                    $extra .= '    <div class="oxi-accordions-popular-date">
-                                       ' . get_the_date('M d, Y') . '
-                                    </div>';
-                endif;
-
-                if ($comment):
-                    if (!empty($extra)):
-                        $extra .= '&nbsp&bull;&nbsp';
-                    endif;
-                    $number = (int) get_comments_number($query->post->ID);
-                    $extra .= '    <div class="oxi-accordions-popular-comment">
-                                        ' . ($number > 1 ? $number . ' Comment' : ($number > 0 ? 'One Comment' : 'No Comment')) . '
-                                    </div>';
-                endif;
-                $image_url = wp_get_attachment_image_src(get_post_thumbnail_id(), $thumb_size);
-                $public .= '<div class="oxi-accordions-popular-post">';
-                if ($show_thumb) {
-                    $image = isset($image_url[0]) && $image_url[0] != '' ? $image_url[0] : '';
-                    $public .= '    <div class="oxi-accordions-popular-avatar">
-                                        <a href="' . get_permalink($query->post->ID) . '">
-                                           <img class="oxi-image" src="' . $image . '">
-                                        </a>
-                                    </div>';
-                }
-                $public .= '<div class="oxi-accordions-popular-body">
-                                <div class="oxi-accordions-popular-meta">
-                                    <a href="' . get_permalink($query->post->ID) . '">
-                                        ' . get_the_title($query->post->ID) . '
-                                    </a>
-                                </div>
-                                ' . (!empty($extra) ? '<div class="oxi-accordions-popular-postmeta">' . $extra . '</div>' : '') . '
-                                <div class="oxi-accordions-popular-content">
-                                    ' . $this->truncate(strip_tags(get_the_content()), $content) . '
-                                </div>
-                            </div>';
-                $public .= '</div>';
-                $extra = '';
-            }
-            wp_reset_postdata();
-        }
-
-        return $public;
-    }
-
     public function accordions_content_render($style, $child) {
-        if ($child['oxi-accordions-modal-components-type'] == 'popular-post'):
-            return $this->accordions_content_render_popular($style, $child);
-        elseif ($child['oxi-accordions-modal-components-type'] == 'recent-post'):
-            return $this->accordions_content_render_recent($style, $child);
-        elseif ($child['oxi-accordions-modal-components-type'] == 'recent-comment'):
-            return $this->accordions_content_render_commment($style, $child);
-        elseif ($child['oxi-accordions-modal-components-type'] == 'tag'):
-            return $this->accordions_content_render_tag($style, $child);
-        elseif ($child['oxi-accordions-modal-components-type'] == 'nested-tabs'):
-            return $this->accordions_content_render_nested_tabs($style, $child);
-        elseif ($child['oxi-accordions-modal-components-type'] == 'nested-accordions'):
+
+        if ($child['oxi-accordions-modal-components-type'] == 'nested-accordions'):
             return $this->accordions_content_render_nested_accordions($style, $child);
-        elseif ($child['oxi-accordions-modal-components-type'] == 'post'):
-            return $this->accordions_content_render_post($style, $child);
         else:
             return $this->special_charecter($child['oxi-accordions-modal-desc']);
         endif;
-    }
-
-    public function accordions_content_render_post($style, $child) {
-        $id = isset($child['oxi-accordions-modal-components-post']) ? $child['oxi-accordions-modal-components-post'] : false;
-        if ($id != false):
-            $content = apply_filters('the_content', get_post_field('post_content', $id));
-            return $content;
-        endif;
-        return;
-    }
-
-    public function accordions_content_render_nested_tabs($style, $child) {
-        $shortcode = array_key_exists('oxi-accordions-modal-nested-tabs', $child) ? $child['oxi-accordions-modal-nested-tabs'] : '';
-        if ($shortcode > 0):
-            ob_start();
-            echo \OXI_TABS_PLUGINS\Classes\Bootstrap::instance()->shortcode_render($shortcode, 'user');
-            return ob_get_clean();
-        endif;
-        return;
     }
 
     public function accordions_content_render_nested_accordions($style, $child) {
         $shortcode = array_key_exists('oxi-accordions-modal-nested-accordions', $child) ? $child['oxi-accordions-modal-nested-accordions'] : '';
         if ($shortcode > 0):
             ob_start();
-            echo \OXI_TABS_PLUGINS\Classes\Bootstrap::instance()->shortcode_render($shortcode, 'user');
+            new \OXI_ACCORDIONS_PLUGINS\Includes\Shortcode($shortcode, 'user');
             return ob_get_clean();
         endif;
         return;

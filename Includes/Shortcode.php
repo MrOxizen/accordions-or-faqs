@@ -105,8 +105,7 @@ class Shortcode {
     }
 
     public function render_html() {
-        $template = ucfirst(str_replace('-', '_', $this->style_table['style_name']));
-        $CLASS = '\OXI_ACCORDIONS_PLUGINS\Layouts\Views\\' . $template;
+        $CLASS = '\OXI_ACCORDIONS_PLUGINS\Layouts\Template';
         if (class_exists($CLASS)):
             new $CLASS($this->style_table, $this->child_table, $this->define_user);
         endif;

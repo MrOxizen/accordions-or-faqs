@@ -24,7 +24,7 @@ define('OXI_ACCORDIONS_PREMIUM', 'oxi-accordions-plugin/pro_version');
  *
  * @since 2.0.1
  */
-require_once OXI_ACCORDIONS_PATH . 'Helper/Autoloader.php';
+require_once OXI_ACCORDIONS_PATH . 'Helper/autoloader.php';
 
 /**
  * Run plugin after all others plugins

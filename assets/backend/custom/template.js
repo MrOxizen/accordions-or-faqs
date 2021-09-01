@@ -49,38 +49,6 @@ jQuery.noConflict();
                 }, 1000);
             });
         });
-
-        $(".shortcode-addons-template-deactive").submit(function (e) {
-            e.preventDefault();
-            var $This = $(this);
-            var rawdata = JSON.stringify($(this).serializeJSON({checkboxUncheckedValue: "0"}));
-            var functionname = "shortcode_deactive";
-            $(this).append('<span class="spinner sa-spinner-open"></span>');
-            OxiAccordionsRestApi(functionname, rawdata, styleid, childid, function (callback) {
-                setTimeout(function () {
-                    if (callback === "done") {
-                        $This.parents('.oxi-addons-col-1').remove();
-                    }
-                }, 1000);
-            });
-            return false;
-        });
-        $(".shortcode-addons-template-import").submit(function (e) {
-            e.preventDefault();
-            var rawdata = JSON.stringify($(this).serializeJSON({checkboxUncheckedValue: "0"}));
-            var functionname = "shortcode_active";
-            $(this).prepend('<span class="spinner sa-spinner-open-left"></span>');
-            OxiAccordionsRestApi(functionname, rawdata, styleid, childid, function (callback) {
-                setTimeout(function () {
-                    document.location.href = callback;
-                }, 1000);
-            });
-            return false;
-        });
-        $(".shortcode-addons-template-pro-only").submit(function (e) {
-            e.preventDefault();
-            return false;
-        });
     });
 
 })(jQuery)

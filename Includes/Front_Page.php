@@ -64,8 +64,10 @@ class Front_Page {
                         endif;
 
                         move_uploaded_file($_FILES['importaccordionsfile']['tmp_name'], $folder . $filename);
-//                        $ImportApi = new \OXI_TABS_PLUGINS\Classes\Build_Api;
-//                        $ImportApi->post_json_import($folder, $filename);
+                        
+                        
+                        $ImportApi = new \OXI_ACCORDIONS_PLUGINS\Classes\API();
+                        $ImportApi->post_json_import($folder, $filename);
 
                         if (is_file($folder . $filename)):
                             unlink($folder . $filename); // delete file
@@ -182,10 +184,9 @@ class Front_Page {
                         <table class="table table-hover widefat oxi_addons_table_data" style="background-color: #fff; border: 1px solid #ccc">
                             <thead>
                                 <tr>
-                                    <th style="width: 5%">ID</th>
-                                    <th style="width: 20%">Name</th>
-                                    <th style="width: 20%">Templates</th>
-                                    <th style="width: 30%">Shortcode</th>
+                                    <th style="width: 15%">ID</th>
+                                    <th style="width: 25%">Name</th>
+                                    <th style="width: 35%">Shortcode</th>
                                     <th style="width: 25%">Edit Delete</th>
                                 </tr>
                             </thead>
@@ -195,12 +196,10 @@ class Front_Page {
             $return .= _('<tr>');
             $return .= _('<td>' . $id . '</td>');
             $return .= _('<td>' . ucwords($value['name']) . '</td>');
-            $return .= _('<td>' . $this->name_converter($value['style_name']) . '</td>');
             $return .= _('<td><span>Shortcode &nbsp;&nbsp;<input type="text" onclick="this.setSelectionRange(0, this.value.length)" value="[oxi_accordions id=&quot;' . $id . '&quot;]"></span> <br>'
                     . '<span>Php Code &nbsp;&nbsp; <input type="text" onclick="this.setSelectionRange(0, this.value.length)" value="&lt;?php echo do_shortcode(&#039;[oxi_accordions id=&quot;' . $id . '&quot;]&#039;); ?&gt;"></span></td>');
             $return .= _('<td> 
-                        <button type="button" class="btn btn-success oxi-addons-style-clone"  style="float:left" oxiaddonsdataid="' . $id . '">Clone</button>
-                        <a href="' . admin_url("admin.php?page=oxi-accordions-ultimate-new&styleid=$id") . '"  title="Edit"  class="btn btn-info" style="float:left; margin-right: 5px; margin-left: 5px;">Edit</a>
+                       <a href="' . admin_url("admin.php?page=oxi-accordions-ultimate-new&styleid=$id") . '"  title="Edit"  class="btn btn-info" style="float:left; margin-right: 5px; margin-left: 5px;">Edit</a>
                        <form method="post" class="oxi-addons-style-delete">
                                <input type="hidden" name="oxideleteid" id="oxideleteid" value="' . $id . '">
                                <button class="btn btn-danger" style="float:left"  title="Delete"  type="submit" value="delete" name="addonsdatadelete">Delete</button>  
