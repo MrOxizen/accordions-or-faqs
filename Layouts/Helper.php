@@ -2082,15 +2082,33 @@ class Helper extends Admin {
                 ]
         );
         $this->add_control(
-                'oxi-accordions-modal-title', [], [
-            'label' => esc_html__('Title', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oxi-accordions-content-mx-height-expand-text', $this->style, [
+            'label' => esc_html__('Expand Text', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::TEXT,
             'default' => 'Lorem Ipsum',
-            'description' => 'Add Title of your Accordions else Make it Blank.',
+            'condition' => [
+                'oxi-accordions-content-mx-height-interface' => 'oxi-accordions-content-mx-height-interface-button',
+            ],
+            'selector' => [
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card .oxi-accordions-content-expand-open' => '',
+            ],
+            'description' => 'Customize your Expand Button text.',
                 ]
         );
-        
-        
+        $this->add_control(
+                'oxi-accordions-content-mx-height-collapse-text', $this->style, [
+            'label' => esc_html__('Collapse Text', OXI_ACCORDIONS_TEXTDOMAIN),
+            'type' => Controls::TEXT,
+            'default' => 'Close',
+            'condition' => [
+                'oxi-accordions-content-mx-height-interface' => 'oxi-accordions-content-mx-height-interface-button',
+            ],
+            'selector' => [
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card .oxi-accordions-content-expand-close' => '',
+            ],
+            'description' => 'Customize your Expand Button text.',
+                ]
+        );
 
         $this->end_controls_section();
     }

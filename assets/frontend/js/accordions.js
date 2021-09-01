@@ -53,11 +53,30 @@ jQuery.noConflict();
         }
 
 
+        if ($("#" + id + " .oxi-accordions-content-expand-button")[0]) {
+            $.fn.getBg = function () {
+
+                return $(this).parents().filter(function () {
+                    // only checking for IE and Firefox/Chrome. add values as cross-browser compatibility is required
+                    var color = $(this).css('background-color');
+                    return color != 'transparent' && color != 'rgba(0, 0, 0, 0)';
+                }).eq(0).css('background-color');
+            };
+            var value = $('.oxi-accordions-content-expand-button').getBg();
+            console.log(id);
+            var _Style = '#' + id + " .oxi-accordions-content-card-" + _parent + '> .oxi-accordions-content-body.oxi-accordions-content-height.oxi-accordions-content-mx-height-interface-button:not(.oxi-button-expand) > .oxi-accordions-content-expand-button{background: linear-gradient(to top, ' + value + ' 20%, rgba(255,255,255, 0) 100%);}';
+
+            $('<style>' + _Style + '</style>').appendTo("#" + id);
+        }
+
 
     });
 
     $(function () {
         (function () {
+
+
+
 
 
             $('.oxi-accordions-content-expand-body').bind('click', function () {

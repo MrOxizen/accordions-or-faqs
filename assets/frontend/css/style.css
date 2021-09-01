@@ -496,10 +496,11 @@
     margin: 10px;
 }
 
-.oxi-accordions-content-body.oxi-accordions-content-height.oxi-accordions-content-mx-height-interface-button.oxi-button-expand > .oxi-accordions-content-expand-body .oxi-accordions-content-expand-open{
+
+.oxi-accordions-content-height.oxi-accordions-content-mx-height-interface-button.oxi-button-expand > .oxi-accordions-content-expand-button .oxi-accordions-content-expand-body .oxi-accordions-content-expand-open{
     display: none;
 }
 
-.oxi-accordions-content-body.oxi-accordions-content-height.oxi-accordions-content-mx-height-interface-button:not(.oxi-button-expand) > .oxi-accordions-content-expand-body .oxi-accordions-content-expand-close{
+.oxi-accordions-content-height.oxi-accordions-content-mx-height-interface-button:not(.oxi-button-expand) > .oxi-accordions-content-expand-button .oxi-accordions-content-expand-body .oxi-accordions-content-expand-close{
     display: none;
 }
