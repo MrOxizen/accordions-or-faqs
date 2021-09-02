@@ -491,9 +491,9 @@
 .oxi-accordions-content-body.oxi-accordions-content-height.oxi-accordions-content-mx-height-interface-button .oxi-accordions-content-expand-body{
     display: inline-flex;
     cursor: pointer;
-    padding: 10px 20px;
-    background-color: aqua;
-    margin: 10px;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
 }
 
 

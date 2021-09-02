@@ -2109,7 +2109,232 @@ class Helper extends Admin {
             'description' => 'Customize your Expand Button text.',
                 ]
         );
+        $this->add_control(
+                'oxi-accordions-content-mx-height-alignment', $this->style, [
+            'label' => __('Alignment', OXI_ACCORDIONS_TEXTDOMAIN),
+            'type' => Controls::CHOOSE,
+            'operator' => Controls::OPERATOR_ICON,
+            'default' => 'left',
+            'condition' => [
+                'oxi-accordions-content-mx-height-interface' => 'oxi-accordions-content-mx-height-interface-button',
+            ],
+            'options' => [
+                'left' => [
+                    'icon' => __('fas fa-align-left', OXI_ACCORDIONS_TEXTDOMAIN),
+                ],
+                'center' => [
+                    'icon' => __('fas fa-align-center', OXI_ACCORDIONS_TEXTDOMAIN),
+                ],
+                'right' => [
+                    'icon' => __('fas fa-align-right', OXI_ACCORDIONS_TEXTDOMAIN),
+                ],
+            ],
+            'selector' => [
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-content-card > .oxi-accordions-content-body > .oxi-accordions-content-expand-button' => 'text-align: {{VALUE}};',
+            ],
+            'description' => 'Confirm Expand or Collapse alignment as left, center or right',
+                ]
+        );
 
+        $this->add_group_control(
+                'oxi-accordions-content-mx-height-typho', $this->style, [
+            'type' => Controls::TYPOGRAPHY,
+            'condition' => [
+                'oxi-accordions-content-mx-height-interface' => 'oxi-accordions-content-mx-height-interface-button',
+            ],
+            'selector' => [
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-content-card > .oxi-accordions-content-body > .oxi-accordions-content-expand-button' => '',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-content-card > .oxi-accordions-content-body > .oxi-accordions-content-expand-button i' => '',
+            ],
+            'description' => 'Customize the typography options for the numbers.',
+                ]
+        );
+
+        $this->start_controls_tabs(
+                'oxi-accordions-content-mx-height-tabs',
+                [
+                    'options' => [
+                        'expand' => esc_html__('Expand ', OXI_ACCORDIONS_TEXTDOMAIN),
+                        'collapse' => esc_html__('Collapse', OXI_ACCORDIONS_TEXTDOMAIN),
+                    ],
+                    'condition' => [
+                        'oxi-accordions-content-mx-height-interface' => 'oxi-accordions-content-mx-height-interface-button',
+                    ],
+                ]
+        );
+        $this->start_controls_tab();
+
+        $this->add_control(
+                'oxi-accordions-content-mx-height-expand-color', $this->style, [
+            'label' => __('Color', OXI_ACCORDIONS_TEXTDOMAIN),
+            'type' => Controls::COLOR,
+            'default' => '#ffffff',
+            'selector' => [
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-content-card > .oxi-accordions-content-body > .oxi-accordions-content-expand-button .oxi-accordions-content-expand-open' => 'color: {{VALUE}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-content-card > .oxi-accordions-content-body > .oxi-accordions-content-expand-button .oxi-accordions-content-expand-open i' => 'color: {{VALUE}};',
+            ],
+            'description' => 'Set the expand color.',
+                ]
+        );
+        $this->add_control(
+                'oxi-accordions-content-mx-height-expand-background', $this->style, [
+            'type' => Controls::GRADIENT,
+            'label' => __('Background', OXI_ACCORDIONS_TEXTDOMAIN),
+            'selector' => [
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-content-card > .oxi-accordions-content-body > .oxi-accordions-content-expand-button .oxi-accordions-content-expand-body' => 'background: {{VALUE}};',
+            ],
+            'description' => 'Customize expand background with color, gradient or image properties.',
+                ]
+        );
+
+        $this->add_group_control(
+                'oxi-accordions-content-mx-height-expand-border', $this->style, [
+            'type' => Controls::BORDER,
+            'selector' => [
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-content-card > .oxi-accordions-content-body > .oxi-accordions-content-expand-button .oxi-accordions-content-expand-body' => '',
+            ],
+            'description' => 'Customize border for expand body.',
+                ]
+        );
+
+        $this->end_controls_tab();
+        $this->start_controls_tab();
+        $this->add_control(
+                'oxi-accordions-content-mx-height-collapse-color', $this->style, [
+            'label' => __('Color', OXI_ACCORDIONS_TEXTDOMAIN),
+            'type' => Controls::COLOR,
+            'selector' => [
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-content-card > .oxi-accordions-content-body > .oxi-accordions-content-expand-button .oxi-accordions-content-expand-close' => 'color: {{VALUE}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-content-card > .oxi-accordions-content-body > .oxi-accordions-content-expand-button .oxi-accordions-content-expand-close i' => 'color: {{VALUE}};',
+            ],
+            'description' => 'Set the collapse color.',
+                ]
+        );
+        $this->add_control(
+                'oxi-accordions-content-mx-height-collapse-background', $this->style, [
+            'type' => Controls::GRADIENT,
+            'label' => __('Background', OXI_ACCORDIONS_TEXTDOMAIN),
+            'selector' => [
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-content-card > .oxi-accordions-content-body.oxi-button-expand > .oxi-accordions-content-expand-button .oxi-accordions-content-expand-body' => 'background: {{VALUE}};',
+            ],
+            'description' => 'Customize collapse background with color, gradient or image properties.',
+                ]
+        );
+
+        $this->add_group_control(
+                'oxi-accordions-content-mx-height-collapse-border', $this->style, [
+            'type' => Controls::BORDER,
+            'selector' => [
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-content-card > .oxi-accordions-content-body.oxi-button-expand > .oxi-accordions-content-expand-button .oxi-accordions-content-expand-body' => '',
+            ],
+            'description' => 'Customize border for collapse. Set type, width, and color for active mode.',
+                ]
+        );
+
+        $this->end_controls_tab();
+        $this->end_controls_tabs();
+        $this->add_responsive_control(
+                'oxi-accordions-content-mx-height-radius', $this->style, [
+            'label' => __('Border Radius', OXI_ACCORDIONS_TEXTDOMAIN),
+            'type' => Controls::DIMENSIONS,
+            'condition' => [
+                'oxi-accordions-content-mx-height-interface' => 'oxi-accordions-content-mx-height-interface-button',
+            ],
+            'default' => [
+                'unit' => 'px',
+                'size' => '',
+            ],
+            'range' => [
+                'px' => [
+                    'min' => 0,
+                    'max' => 500,
+                    'step' => 1,
+                ],
+                '%' => [
+                    'min' => 0,
+                    'max' => 100,
+                    'step' => 1,
+                ],
+                'em' => [
+                    'min' => 0,
+                    'max' => 100,
+                    'step' => .1,
+                ],
+            ],
+            'selector' => [
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-content-card > .oxi-accordions-content-body > .oxi-accordions-content-expand-button .oxi-accordions-content-expand-body' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+            ],
+            'description' => 'Add rounded corners to the expand or collapse bodies.',
+                ]
+        );
+        $this->add_responsive_control(
+                'oxi-accordions-content-mx-height-padding', $this->style, [
+            'label' => __('Padding', OXI_ACCORDIONS_TEXTDOMAIN),
+            'type' => Controls::DIMENSIONS,
+            'condition' => [
+                'oxi-accordions-content-mx-height-interface' => 'oxi-accordions-content-mx-height-interface-button',
+            ],
+            'default' => [
+                'unit' => 'px',
+                'size' => '',
+            ],
+            'range' => [
+                'px' => [
+                    'min' => 0,
+                    'max' => 500,
+                    'step' => 1,
+                ],
+                '%' => [
+                    'min' => 0,
+                    'max' => 100,
+                    'step' => 1,
+                ],
+                'em' => [
+                    'min' => 0,
+                    'max' => 100,
+                    'step' => .1,
+                ],
+            ],
+            'selector' => [
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-content-card > .oxi-accordions-content-body > .oxi-accordions-content-expand-button > .oxi-accordions-content-expand-body' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+            ],
+            'description' => 'Adjust your padding for expand or collapse.',
+                ]
+        );
+        $this->add_responsive_control(
+                'oxi-accordions-content-mx-height-margin', $this->style, [
+            'label' => __('Margin', OXI_ACCORDIONS_TEXTDOMAIN),
+            'type' => Controls::DIMENSIONS,
+            'condition' => [
+                'oxi-accordions-content-mx-height-interface' => 'oxi-accordions-content-mx-height-interface-button',
+            ],
+            'default' => [
+                'unit' => 'px',
+                'size' => '',
+            ],
+            'range' => [
+                'px' => [
+                    'min' => -100,
+                    'max' => 500,
+                    'step' => 1,
+                ],
+                '%' => [
+                    'min' => -100,
+                    'max' => 100,
+                    'step' => 1,
+                ],
+                'em' => [
+                    'min' => -100,
+                    'max' => 100,
+                    'step' => .1,
+                ],
+            ],
+            'selector' => [
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-content-card > .oxi-accordions-content-body > .oxi-accordions-content-expand-button' => 'margin:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+            ],
+            'description' => 'Adjust your margin for expand or collapse.',
+                ]
+        );
         $this->end_controls_section();
     }
 
