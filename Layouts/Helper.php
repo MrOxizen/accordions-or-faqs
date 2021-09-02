@@ -303,7 +303,7 @@ class Helper extends Admin {
                     'label' => __('Offset', OXI_ACCORDIONS_TEXTDOMAIN),
                     'type' => Controls::NUMBER,
                     'loader' => TRUE,
-                    'description' => 'Confirm Excerpt Word Limit.',
+                    'description' => 'Confirm offset of your Query.',
                 ]
         );
         $this->add_control(
@@ -2403,6 +2403,9 @@ class Helper extends Admin {
             'label' => __('Title Additional', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SELECT,
             'default' => '',
+            'condition' => [
+                'oxi-accordions-headding-additional' => 'oxi-accordions-headding-additional-active',
+            ],
             'options' => [
                 '' => __('None', OXI_ACCORDIONS_TEXTDOMAIN),
                 'icon' => __('Icon', OXI_ACCORDIONS_TEXTDOMAIN),

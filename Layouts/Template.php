@@ -105,6 +105,7 @@ class Template {
      * @since 2.0.1
      */
     public $accordions_type;
+    public $public_attribute;
 
     /**
      * Public arg
@@ -159,6 +160,7 @@ class Template {
         $this->public_jquery();
         $this->public_css();
         $this->public_frontend_loader();
+        $this->public_attribute();
         $this->render();
         $inlinecss = $this->inline_public_css() . $this->inline_css . (array_key_exists('oxi-accordions-custom-css', $this->style) ? $this->style['oxi-accordions-custom-css'] : '');
         $inlinejs = $this->inline_public_jquery();
@@ -285,7 +287,10 @@ class Template {
 
     public function default_render($style, $child, $admin) {
 
-        echo '<div class="oxi-accordions-ultimate-style oxi-accordions-ultimate-template-1  oxi-accordions-clearfix oxi-accordions-preloader" ' . $this->public_attribute() . ' ' . $this->accordions_preloader . '>';
+
+
+
+        echo '<div class="oxi-accordions-ultimate-style oxi-accordions-ultimate-template-1  oxi-accordions-clearfix oxi-accordions-preloader" ' . $this->public_attribute . ' ' . $this->accordions_preloader . '>';
         $number = 1;
 
         foreach ($child as $key => $val) {
@@ -351,6 +356,74 @@ class Template {
         }
 
         echo '</div>';
+    }
+
+    public function post_query() {
+        $style = $this->style;
+        $args = [
+            'post_status' => 'publish',
+            'ignore_sticky_posts' => 1,
+            'post_type' => $style['display_post_post_type'],
+            'orderby' => $style['display_post_orderby'],
+            'order' => $style['display_post_ordertype'],
+            'posts_per_page' => $style['display_post_per_page'],
+            'offset' => $style['display_post_offset'],
+            'tax_query' => [],
+        ];
+
+        if (!empty($style['display_post_author'])):
+            $args['author__in'] = $style['display_post_author'];
+        endif;
+
+        $type = $style['display_post_post_type'];
+
+        if (!empty($style[$type . '_exclude'])) {
+            $args['post__not_in'] = $style[$type . '_exclude'];
+        }
+        if (!empty($style[$type . '_include'])) {
+            $args['post__in'] = $style[$type . '_include'];
+        }
+        if ($type != 'page') :
+            if (!empty($style[$type . '_category'])) :
+                $args['tax_query'][] = [
+                    'taxonomy' => $type == 'post' ? 'category' : $type . '_category',
+                    'field' => 'term_id',
+                    'terms' => $style[$type . '_category'],
+                ];
+            endif;
+            if (!empty($style[$type . '_tag'])) :
+                $args['tax_query'][] = [
+                    'taxonomy' => $type . '_tag',
+                    'field' => 'term_id',
+                    'terms' => $style[$type . '_tag'],
+                ];
+            endif;
+            if (!empty($args['tax_query'])) :
+                $args['tax_query']['relation'] = 'OR';
+            endif;
+        endif;
+
+        $query = new \WP_Query($args);
+        $postdata = [];
+        $i = 1;
+        if ($query->have_posts()) {
+            while ($query->have_posts()) {
+                $data = $this->defualt_value($i);
+                $query->the_post();
+                $data['shortcodeitemid'] = $this->oxiid;
+                $data['oxi-accordions-modal-title'] = get_the_title();
+                $data['oxi-accordions-modal-components-type'] = 'post';
+                $data['oxi-accordions-modal-components-post'] = get_the_ID();
+                $postdata[$i] = [
+                    'id' => '',
+                    'styleid' => $this->oxiid,
+                    'rawdata' => json_encode($data),
+                ];
+                $i++;
+            }
+        }
+
+        $this->child = $postdata;
     }
 
     /**
@@ -465,6 +538,12 @@ class Template {
 
         if ($child['oxi-accordions-modal-components-type'] == 'nested-accordions'):
             return $this->accordions_content_render_nested_accordions($style, $child);
+        elseif ($child['oxi-accordions-modal-components-type'] == 'post'):
+
+            $post_id = $child['oxi-accordions-modal-components-post'];
+            $post_content = get_post($post_id);
+            $content = $post_content->post_content;
+            return apply_filters('the_content', $content);
         else:
             return $this->special_charecter($child['oxi-accordions-modal-desc']);
         endif;
@@ -590,72 +669,6 @@ class Template {
             'oxi-accordions-modal-nested-tabs' => '',
             'oxi-accordions-modal-nested-accordions' => ''
         ];
-    }
-
-    public function post_query() {
-        $style = $this->style;
-        $args = [
-            'post_status' => 'publish',
-            'ignore_sticky_posts' => 1,
-            'post_type' => $style['display_post_post_type'],
-            'orderby' => $style['display_post_orderby'],
-            'order' => $style['display_post_ordertype'],
-            'posts_per_page' => $style['display_post_per_page'],
-            'offset' => $style['display_post_offset'],
-            'tax_query' => [],
-        ];
-        if (!empty($style['display_post_author'])):
-            $args['author__in'] = $style['display_post_author'];
-        endif;
-
-        $type = $style['display_post_post_type'];
-
-        if (!empty($style[$type . '_exclude'])) {
-            $args['post__not_in'] = $style[$type . '_exclude'];
-        }
-        if (!empty($style[$type . '_include'])) {
-            $args['post__in'] = $style[$type . '_include'];
-        }
-        if ($type != 'page') :
-            if (!empty($style[$type . '_category'])) :
-                $args['tax_query'][] = [
-                    'taxonomy' => $type == 'post' ? 'category' : $type . '_category',
-                    'field' => 'term_id',
-                    'terms' => $style[$type . '_category'],
-                ];
-            endif;
-            if (!empty($style[$type . '_tag'])) :
-                $args['tax_query'][] = [
-                    'taxonomy' => $type . '_tag',
-                    'field' => 'term_id',
-                    'terms' => $style[$type . '_tag'],
-                ];
-            endif;
-            if (!empty($args['tax_query'])) :
-                $args['tax_query']['relation'] = 'OR';
-            endif;
-        endif;
-
-        $query = new \WP_Query($args);
-        $postdata = [];
-        $i = 1;
-        if ($query->have_posts()) {
-            while ($query->have_posts()) {
-                $data = $this->defualt_value($i);
-                $query->the_post();
-                $data['shortcodeitemid'] = $this->oxiid;
-                $data['oxi-accordions-modal-title'] = get_the_title();
-                $data['oxi-accordions-modal-components-type'] = 'post';
-                $data['oxi-accordions-modal-components-post'] = get_the_ID();
-                $postdata[$i] = [
-                    'id' => '',
-                    'styleid' => '',
-                    'rawdata' => json_encode($data),
-                ];
-                $i++;
-            }
-        }
-        $this->child = $postdata;
     }
 
 }
