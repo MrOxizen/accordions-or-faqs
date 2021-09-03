@@ -86,7 +86,7 @@ class Templates {
         ?>
         <div class="oxi-addons-row">
             <?php
-            foreach ($this->local_template as $value) {
+            foreach ($this->local_template as $key => $value) {
                 $template_data = json_decode(file_get_contents($this->safe_path(OXI_ACCORDIONS_PATH . 'demo-template/') . $value), true);
                 $Cls = 'OXI_ACCORDIONS_PLUGINS\Layouts\Template';
                 ?>
@@ -118,8 +118,8 @@ class Templates {
     }
 
     public function create_new_modal() {
-       
-        if ($this->imported > $this->totalpage):
+      //  echo '';
+        if (($this->imported + 1) < $this->totalpage):
             echo '<div class="oxi-addons-row">
                         <div class="oxi-addons-col-1 oxi-import">
                             <div class="oxi-addons-style-preview">
