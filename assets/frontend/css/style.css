@@ -504,3 +504,34 @@
 .oxi-accordions-content-height.oxi-accordions-content-mx-height-interface-button:not(.oxi-button-expand) > .oxi-accordions-content-expand-button .oxi-accordions-content-expand-body .oxi-accordions-content-expand-close{
     display: none;
 }
+
+
+
+/*Search Accordions*/
+.oxi-accordions-ultimate-style .oxi-accordions-ultimate-search-options{
+    width: 100%;
+}
+.oxi-accordions-ultimate-style .oxi-accordions-ultimate-search-options  > .oxi-accordions-ultimate-search{
+    display: inline-flex;
+}
+.oxi-accordions-ultimate-style .oxi-accordions-ultimate-search-options > .oxi-accordions-ultimate-search > input.oxi-accordions-ultimate-type-search,
+.oxi-accordions-ultimate-style .oxi-accordions-ultimate-search-options > .oxi-accordions-ultimate-search > input.oxi-accordions-ultimate-type-search:focus,
+.oxi-accordions-ultimate-style .oxi-accordions-ultimate-search-options > .oxi-accordions-ultimate-search > input.oxi-accordions-ultimate-type-search:active,
+.oxi-accordions-ultimate-style .oxi-accordions-ultimate-search-options > .oxi-accordions-ultimate-search > input.oxi-accordions-ultimate-type-search:hover{
+    width: 100%;
+    margin: 0;
+    height: auto;
+    padding: 0;
+    border-radius: 0;
+    border: 0;
+    outline-offset: 0;
+    outline: 0;
+    background: none;
+}
+.oxi-accordions-ultimate-style .oxi-accordions-ultimate-search-options > .oxi-accordions-ultimate-search > input.oxi-accordions-ultimate-type-search::-webkit-input-placeholder { 
+    opacity: 0.5;
+}
+
+.oxi-accordions-ultimate-style > .oxi-accordions-ultimate-search-options > .oxi-accordions-ultimate-search > .oxi-icons{
+    font-family: "Font Awesome 5 Free" !important; 
+}

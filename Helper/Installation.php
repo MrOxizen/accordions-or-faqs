@@ -91,7 +91,7 @@ class Installation {
     }
 
     /**
-     * Get  Oxi Tabs Menu.
+     * Get  Oxi Accordions Menu.
      * @return mixed
      */
     public function active_menu() {

@@ -290,7 +290,20 @@ class Template {
 
 
 
+
+
+
         echo '<div class="oxi-accordions-ultimate-style oxi-accordions-ultimate-template-1  oxi-accordions-clearfix oxi-accordions-preloader" ' . $this->public_attribute . ' ' . $this->accordions_preloader . '>';
+
+        if ($style['oxi-accordions-search-option'] == 'active'):
+            echo '<div class="oxi-accordions-ultimate-search-options">';
+            echo '  <div class="oxi-accordions-ultimate-search">';
+            echo '      <input type="search" class="oxi-accordions-ultimate-type-search" placeholder="Search your FAQ" value="" onkeyup="this.setAttribute(\'value\', this.value);">';
+            echo '      <i class="oxi-icons fas fa-search"></i>';
+            echo '  </div>';
+            echo '</div>';
+        endif;
+
         $number = 1;
 
         foreach ($child as $key => $val) {
@@ -298,7 +311,7 @@ class Template {
 
             $expand = '<div class="oxi-accordions-expand-collapse-' . $this->oxiid . ' oxi-accordions-expand-collapse ' . $style['oxi-accordions-head-expand-collapse-icon-interface'] . ' ' . $style['oxi-accordions-expand-collapse'] . ' ' . $style['oxi-accordions-head-expand-collapse-type'] . ' ' . $style['oxi-accordions-head-expand-collapse-shape'] . '">' . $this->expand_collapse_icon_number_render($style, $number) . '</div>';
 
-            echo '<div class="oxi-accordions-single-card oxi-accordions-single-card-' . $this->oxiid . ' ' . ( isset($this->style['oxi-accordions-head-expand-collapse-location']) ? $this->style['oxi-accordions-head-expand-collapse-location'] : '') . ' oxi-accordions-single-card-' . $this->oxiid . '-' . $number . ' ' . $style['oxi-accordions-head-expand-collapse-position'] . '">';
+            echo '<div class="oxi-accordions-single-card oxi-accordions-single-card-' . $this->oxiid . ' ' . ( isset($this->style['oxi-accordions-head-expand-collapse-location']) ? $this->style['oxi-accordions-head-expand-collapse-location'] : '') . ' oxi-accordions-single-card-' . $this->oxiid . '-' . $number . ' ' . $style['oxi-accordions-head-expand-collapse-position'] . '" id="oxi-accordions-single-card-' . $this->oxiid . '-' . $number . '">';
             if ($style['oxi-accordions-head-expand-collapse-position'] == 'oxi-accordions-head-expand-collapse-position-outside'):
                 echo $expand;
             endif;
@@ -336,15 +349,16 @@ class Template {
             echo '  <div class="oxicollapse ' . $this->default_open($value) . ' oxi-accordions-content-card oxi-accordions-content-card-' . $this->oxiid . '  ' . ($this->admin == 'admin' ? 'oxi-addons-admin-edit-list' : '') . '" id="oxi-accordions-content-' . $this->oxiid . '-' . $number . '" ' . $this->accordions_type . '>';
             echo '     <div class="oxi-accordions-content-body ' . $content_height . '"  oxi-animation="' . $animation . '">';
             echo $this->accordions_content_render($style, $value);
+            if ($style['oxi-accordions-content-height'] == 'oxi-accordions-content-height' && $style['oxi-accordions-content-mx-height-interface'] == 'oxi-accordions-content-mx-height-interface-button'):
+                echo '<div class="oxi-accordions-content-expand-button">'
+                . '        <div class="oxi-accordions-content-expand-body">'
+                . '             <div class="oxi-accordions-content-expand-open">' . $this->text_render($style['oxi-accordions-content-mx-height-expand-text']) . '</div> '
+                . '             <div class="oxi-accordions-content-expand-close">' . $this->text_render($style['oxi-accordions-content-mx-height-collapse-text']) . '</div>'
+                . '        </div>'
+                . ' </div>';
+            endif;
 
-            echo '<div class="oxi-accordions-content-expand-button">'
-            . '        <div class="oxi-accordions-content-expand-body">'
-            . '             <div class="oxi-accordions-content-expand-open">Open</div> '
-            . '             <div class="oxi-accordions-content-expand-close">Close</div>'
-            . '        </div>'
-            . ' </div>';
-
-            if ($this->admin == 'admin'):
+            if ($this->admin == 'admin' && $style['oxi-accordions-content-type'] != 'post'):
                 echo $this->admin_edit_panel($val['id']);
             endif;
             echo '      </div>';

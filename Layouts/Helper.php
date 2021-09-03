@@ -52,6 +52,7 @@ class Helper extends Admin {
         $this->start_section_devider();
         $this->register_gen_general();
         $this->register_post_query_settings();
+        $this->register_search_options();
         $this->end_section_devider();
 
         //Start Divider
@@ -346,6 +347,233 @@ class Helper extends Admin {
         $this->end_controls_section();
     }
 
+    /*
+     * @return void
+     * Start frequently asked questions Query
+     */
+
+    public function register_search_options() {
+        $this->start_controls_section(
+                'search-options',
+                [
+                    'label' => esc_html__('Search Options', OXI_ACCORDIONS_TEXTDOMAIN),
+                    'showing' => true,
+                    'condition' => [
+                        'oxi-accordions-search-option' => 'active'
+                    ],
+                ]
+        );
+        $this->add_control(
+                'oxi-accordions-search-option-text', $this->style, [
+            'label' => esc_html__('Placeholder Text', OXI_ACCORDIONS_TEXTDOMAIN),
+            'type' => Controls::TEXT,
+            'default' => 'Search your FAQ',
+            'description' => 'Customize search option text.',
+                ]
+        );
+        $this->add_control(
+                'oxi-accordions-search-option-alignment', $this->style, [
+            'label' => __('Alignment', OXI_ACCORDIONS_TEXTDOMAIN),
+            'type' => Controls::CHOOSE,
+            'operator' => Controls::OPERATOR_ICON,
+            'default' => 'left',
+            'options' => [
+                'left' => [
+                    'icon' => __('fas fa-align-left', OXI_ACCORDIONS_TEXTDOMAIN),
+                ],
+                'center' => [
+                    'icon' => __('fas fa-align-center', OXI_ACCORDIONS_TEXTDOMAIN),
+                ],
+                'right' => [
+                    'icon' => __('fas fa-align-right', OXI_ACCORDIONS_TEXTDOMAIN),
+                ],
+            ],
+            'selector' => [
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-ultimate-search-options' => 'text-align: {{VALUE}};',
+            ],
+            'description' => 'Confirm Expand or Collapse alignment as left, center or right',
+                ]
+        );
+        $this->add_responsive_control(
+                'oxi-accordions-search-option-width', $this->style, [
+            'label' => __('Width', OXI_ACCORDIONS_TEXTDOMAIN),
+            'type' => Controls::SLIDER,
+            'default' => [
+                'unit' => 'px',
+                'size' => '',
+            ],
+            'range' => [
+                'px' => [
+                    'min' => 0,
+                    'max' => 2000,
+                    'step' => 1,
+                ],
+                '%' => [
+                    'min' => 0,
+                    'max' => 100,
+                    'step' => .1,
+                ],
+                'em' => [
+                    'min' => 0,
+                    'max' => 200,
+                    'step' => .1,
+                ],
+                'rem' => [
+                    'min' => 0,
+                    'max' => 200,
+                    'step' => 0.1,
+                ],
+            ],
+            'selector' => [
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-ultimate-search-options > .oxi-accordions-ultimate-search' => 'width:{{SIZE}}{{UNIT}};',
+            ],
+            'description' => 'Set the Search button’s Width.',
+                ]
+        );
+
+        $this->add_group_control(
+                'oxi-accordions-search-option-typho', $this->style, [
+            'type' => Controls::TYPOGRAPHY,
+            'selector' => [
+                 '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-ultimate-search-options > .oxi-accordions-ultimate-search > .oxi-accordions-ultimate-type-search' => '',
+                 '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-ultimate-search-options > .oxi-accordions-ultimate-search > .oxi-accordions-ultimate-type-search::-webkit-input-placeholder' => '',
+                 '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-ultimate-search-options > .oxi-accordions-ultimate-search > .oxi-icons' => '',
+            ],
+            'description' => 'Customize the typography options for the Search Text.',
+                ]
+        );
+        $this->add_control(
+                'oxi-accordions-search-option-color', $this->style, [
+            'label' => __('Color', OXI_ACCORDIONS_TEXTDOMAIN),
+            'type' => Controls::COLOR,
+            'default' => '#ffffff',
+            'selector' => [
+                 '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-ultimate-search-options > .oxi-accordions-ultimate-search .oxi-accordions-ultimate-type-search' => 'color: {{VALUE}};',
+                 '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-ultimate-search-options > .oxi-accordions-ultimate-search .oxi-accordions-ultimate-type-search:focus' => 'color: {{VALUE}};',
+                 '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-ultimate-search-options > .oxi-accordions-ultimate-search .oxi-accordions-ultimate-type-search:active' => 'color: {{VALUE}};',
+                 '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-ultimate-search-options > .oxi-accordions-ultimate-search .oxi-accordions-ultimate-type-search:hover' => 'color: {{VALUE}};',
+                 '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-ultimate-search-options > .oxi-accordions-ultimate-search > .oxi-accordions-ultimate-type-search::-webkit-input-placeholder' => 'color: {{VALUE}};',
+                 '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-ultimate-search-options > .oxi-accordions-ultimate-search > .oxi-icons' => 'color: {{VALUE}};',
+            ],
+            'description' => 'Set the search button color.',
+                ]
+        );
+        $this->add_control(
+                'oxi-accordions-search-option-background', $this->style, [
+            'type' => Controls::GRADIENT,
+            'label' => __('Background', OXI_ACCORDIONS_TEXTDOMAIN),
+            'selector' => [
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-ultimate-search-options > .oxi-accordions-ultimate-search' => 'background: {{VALUE}};',
+            ],
+            'description' => 'Customize search button with color, gradient or image properties.',
+                ]
+        );
+
+        $this->add_group_control(
+                'oxi-accordions-search-option-border', $this->style, [
+            'type' => Controls::BORDER,
+            'selector' => [
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-ultimate-search-options > .oxi-accordions-ultimate-search' => '',
+            ],
+            'description' => 'Customize border for search button.',
+                ]
+        );
+        $this->add_responsive_control(
+                'oxi-accordions-search-option-radius', $this->style, [
+            'label' => __('Border Radius', OXI_ACCORDIONS_TEXTDOMAIN),
+            'type' => Controls::DIMENSIONS,
+            'default' => [
+                'unit' => 'px',
+                'size' => '',
+            ],
+            'range' => [
+                'px' => [
+                    'min' => 0,
+                    'max' => 500,
+                    'step' => 1,
+                ],
+                '%' => [
+                    'min' => 0,
+                    'max' => 100,
+                    'step' => 1,
+                ],
+                'em' => [
+                    'min' => 0,
+                    'max' => 100,
+                    'step' => .1,
+                ],
+            ],
+            'selector' => [
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-ultimate-search-options > .oxi-accordions-ultimate-search' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+            ],
+            'description' => 'Add rounded corners to the search button.',
+                ]
+        );
+        $this->add_responsive_control(
+                'oxi-accordions-search-option-padding', $this->style, [
+            'label' => __('Padding', OXI_ACCORDIONS_TEXTDOMAIN),
+            'type' => Controls::DIMENSIONS,
+            'default' => [
+                'unit' => 'px',
+                'size' => '',
+            ],
+            'range' => [
+                'px' => [
+                    'min' => 0,
+                    'max' => 500,
+                    'step' => 1,
+                ],
+                '%' => [
+                    'min' => 0,
+                    'max' => 100,
+                    'step' => 1,
+                ],
+                'em' => [
+                    'min' => 0,
+                    'max' => 100,
+                    'step' => .1,
+                ],
+            ],
+            'selector' => [
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-ultimate-search-options > .oxi-accordions-ultimate-search' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+            ],
+            'description' => 'Adjust your padding for search button.',
+                ]
+        );
+        $this->add_responsive_control(
+                'oxi-accordions-search-option-margin', $this->style, [
+            'label' => __('Margin', OXI_ACCORDIONS_TEXTDOMAIN),
+            'type' => Controls::DIMENSIONS,
+            'default' => [
+                'unit' => 'px',
+                'size' => '',
+            ],
+            'range' => [
+                'px' => [
+                    'min' => -100,
+                    'max' => 500,
+                    'step' => 1,
+                ],
+                '%' => [
+                    'min' => -100,
+                    'max' => 100,
+                    'step' => 1,
+                ],
+                'em' => [
+                    'min' => -100,
+                    'max' => 100,
+                    'step' => .1,
+                ],
+            ],
+            'selector' => [
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-ultimate-search-options > .oxi-accordions-ultimate-search' => 'margin:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+            ],
+            'description' => 'Adjust your margin for Search button.',
+                ]
+        );
+        $this->end_controls_section();
+    }
+
     public function register_gen_design() {
         $this->start_controls_section(
                 'oxi-accordions-heading', [
@@ -353,20 +581,6 @@ class Helper extends Admin {
             'showing' => TRUE,
                 ]
         );
-        $this->add_control(
-                'oxi-accordions-content-height', $this->style, [
-            'label' => __('Fixed Content Height', OXI_ACCORDIONS_TEXTDOMAIN),
-            'type' => Controls::SWITCHER,
-            'label_on' => __('True', OXI_ACCORDIONS_TEXTDOMAIN),
-            'label_off' => __('False', OXI_ACCORDIONS_TEXTDOMAIN),
-            'return_value' => 'oxi-accordions-content-height',
-            'selector' => [
-                '{{WRAPPER}} .oxi-accordions-ultimate-style .oxi-accordions-content-body' => '',
-            ],
-            'description' => 'Check to display collapsible accordion content in a limited amount of space. Extra Settings available under Description Settings',
-                ]
-        );
-
         $this->add_control(
                 'oxi-accordions-preloader', $this->style, [
             'label' => __('Preloader', OXI_ACCORDIONS_TEXTDOMAIN),
@@ -390,6 +604,17 @@ class Helper extends Admin {
             'description' => 'Show/hide expand and collapse icon.',
                 ]
         );
+        $this->add_control(
+                'oxi-accordions-search-option', $this->style, [
+            'label' => __('Search Option', OXI_ACCORDIONS_TEXTDOMAIN),
+            'type' => Controls::SWITCHER,
+            'label_on' => __('True', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label_off' => __('False', OXI_ACCORDIONS_TEXTDOMAIN),
+            'return_value' => 'active',
+            'loader' => TRUE,
+            'description' => 'Show/hide search FAQs option or frequently asked questions.',
+                ]
+        );
 
         $this->add_control(
                 'oxi-accordions-headding-additional', $this->style, [
@@ -405,6 +630,20 @@ class Helper extends Admin {
                 'oxi-accordions-content-type' => 'content',
             ],
             'description' => 'Show/hide Heading additional items  like image or icon or number.',
+                ]
+        );
+        $this->add_control(
+                'oxi-accordions-content-height', $this->style, [
+            'label' => __('Fixed Content Height', OXI_ACCORDIONS_TEXTDOMAIN),
+            'type' => Controls::SWITCHER,
+            'loader' => TRUE,
+            'label_on' => __('True', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label_off' => __('False', OXI_ACCORDIONS_TEXTDOMAIN),
+            'return_value' => 'oxi-accordions-content-height',
+            'selector' => [
+                '{{WRAPPER}} .oxi-accordions-ultimate-style .oxi-accordions-content-body' => '',
+            ],
+            'description' => 'Check to display collapsible accordion content in a limited amount of space. Extra Settings available under Description Settings',
                 ]
         );
 
@@ -424,8 +663,7 @@ class Helper extends Admin {
             'label' => __('Background', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::GRADIENT,
             'selector' => [
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card:not(.oxi-accordions-head-expand-collapse-position-outside)' => 'background: {{VALUE}};',
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-head-expand-collapse-position-outside .oxi-accordions-head-outside-body' => 'background: {{VALUE}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body' => 'background: {{VALUE}};',
             ],
             'description' => 'Set the background of the all bodies on normal mode.',
                 ]
@@ -436,8 +674,7 @@ class Helper extends Admin {
                 [
                     'type' => Controls::BORDER,
                     'selector' => [
-                        '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card:not(.oxi-accordions-head-expand-collapse-position-outside)' => '',
-                        '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-head-expand-collapse-position-outside .oxi-accordions-head-outside-body' => ''
+                        '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body' => ''
                     ],
                     'description' => 'Customize border of each accordions. Set type, width, and color.',
                 ]
@@ -446,8 +683,7 @@ class Helper extends Admin {
                 'oxi-accordions-gen-boxshadow', $this->style, [
             'type' => Controls::BOXSHADOW,
             'selector' => [
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card:not(.oxi-accordions-head-expand-collapse-position-outside)' => '',
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-head-expand-collapse-position-outside .oxi-accordions-head-outside-body' => ''
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body' => ''
             ],
             'description' => 'Add one or more shadows into each section and customize other box-shadow options.',
                 ]
@@ -459,8 +695,7 @@ class Helper extends Admin {
             'label' => __('Background', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::GRADIENT,
             'selector' => [
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand:not(.oxi-accordions-head-expand-collapse-position-outside)' => 'background: {{VALUE}};',
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand.oxi-accordions-head-expand-collapse-position-outside .oxi-accordions-head-outside-body' => 'background: {{VALUE}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand > .oxi-accordions-head-outside-body' => 'background: {{VALUE}};',
             ],
             'description' => 'Set the background of the accordions on active mode.',
                 ]
@@ -471,8 +706,7 @@ class Helper extends Admin {
                 [
                     'type' => Controls::BORDER,
                     'selector' => [
-                        '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand:not(.oxi-accordions-head-expand-collapse-position-outside)' => '',
-                        '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand.oxi-accordions-head-expand-collapse-position-outside .oxi-accordions-head-outside-body' => ''
+                        '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand > .oxi-accordions-head-outside-body' => ''
                     ],
                     'description' => 'Customize border of the accotdions. Set type, width, and color.',
                 ]
@@ -481,14 +715,45 @@ class Helper extends Admin {
                 'oxi-accordions-gen-hover-boxshadow', $this->style, [
             'type' => Controls::BOXSHADOW,
             'selector' => [
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand:not(.oxi-accordions-head-expand-collapse-position-outside)' => '',
-                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand.oxi-accordions-head-expand-collapse-position-outside .oxi-accordions-head-outside-body' => '',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand > .oxi-accordions-head-outside-body' => '',
             ],
             'description' => 'Add one or more shadows into accordions section and customize other box-shadow options.',
                 ]
         );
         $this->end_controls_tab();
         $this->end_controls_tabs();
+
+        $this->add_responsive_control(
+                'oxi-accordions-general-border-radius', $this->style, [
+            'label' => __('Border Radius', OXI_ACCORDIONS_TEXTDOMAIN),
+            'type' => Controls::DIMENSIONS,
+            'default' => [
+                'unit' => 'px',
+                'size' => '',
+            ],
+            'range' => [
+                'px' => [
+                    'min' => 0,
+                    'max' => 500,
+                    'step' => 1,
+                ],
+                '%' => [
+                    'min' => 0,
+                    'max' => 100,
+                    'step' => 1,
+                ],
+                'em' => [
+                    'min' => 0,
+                    'max' => 100,
+                    'step' => .1,
+                ],
+            ],
+            'selector' => [
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}; overflow: hidden;',
+            ],
+            'description' => 'Add rounded corners to the header’s section.',
+                ]
+        );
 
         $this->add_responsive_control(
                 'oxi-accordions-general-margin', $this->style, [
@@ -822,7 +1087,7 @@ class Helper extends Admin {
                     'label' => __('Customization Interface', OXI_ACCORDIONS_TEXTDOMAIN),
                     'type' => Controls::CHOOSE,
                     'operator' => Controls::OPERATOR_TEXT,
-                    'toggle' => true,
+                    'loader' => TRUE,
                     'default' => '',
                     'options' => [
                         '' => [
@@ -1225,7 +1490,7 @@ class Helper extends Admin {
         $this->start_controls_section(
                 'oxi-accordions-head-sub-title', [
             'label' => esc_html__('Sub Title Settings', OXI_ACCORDIONS_TEXTDOMAIN),
-            'showing' => false,
+            'showing' => true,
             'condition' => [
                 'oxi-accordions-content-type' => 'content'
             ],
@@ -1337,7 +1602,7 @@ class Helper extends Admin {
         $this->start_controls_section(
                 'oxi-accordions-head-additional', [
             'label' => esc_html__('Additional Settings', OXI_ACCORDIONS_TEXTDOMAIN),
-            'showing' => false,
+            'showing' => true,
             'condition' => [
                 'oxi-accordions-content-type' => 'content',
                 'oxi-accordions-headding-additional' => 'oxi-accordions-headding-additional-active'
@@ -1366,7 +1631,7 @@ class Helper extends Admin {
                     'label' => __('Customization Interface', OXI_ACCORDIONS_TEXTDOMAIN),
                     'type' => Controls::CHOOSE,
                     'operator' => Controls::OPERATOR_TEXT,
-                    'toggle' => true,
+                    'loader' => TRUE,
                     'default' => '',
                     'options' => [
                         '' => [
@@ -2028,7 +2293,7 @@ class Helper extends Admin {
                     'label' => __('Interface', OXI_ACCORDIONS_TEXTDOMAIN),
                     'type' => Controls::CHOOSE,
                     'operator' => Controls::OPERATOR_TEXT,
-                    'toggle' => true,
+                    'loader' => TRUE,
                     'default' => '',
                     'options' => [
                         '' => [
@@ -2057,11 +2322,6 @@ class Helper extends Admin {
                 'px' => [
                     'min' => 0,
                     'max' => 2000,
-                    'step' => 1,
-                ],
-                '%' => [
-                    'min' => 0,
-                    'max' => 100,
                     'step' => 1,
                 ],
                 'em' => [

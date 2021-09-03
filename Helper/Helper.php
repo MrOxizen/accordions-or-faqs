@@ -53,7 +53,7 @@ trait Helper {
     }
 
     /**
-     * Plugin check Current Tabs
+     * Plugin check Current Accordions
      *
      * @since 2.0.1
      */

@@ -40,9 +40,9 @@ trait Sanitization {
     }
 
     /*
-     * Oxi Tabs Style Admin Panel header
+     * Oxi Accordions Style Admin Panel header
      * 
-     * @since 3.3.0
+     * @since 2.0.1
      */
 
     public function start_section_header($id, array $arg = []) {
@@ -54,9 +54,9 @@ trait Sanitization {
     }
 
     /*
-     * Oxi Tabs Style Admin Panel Body
+     * Oxi Accordions Style Admin Panel Body
      * 
-     * @since 3.3.0
+     * @since 2.0.1
      */
 
     public function start_section_tabs($id, array $arg = []) {
@@ -70,9 +70,9 @@ trait Sanitization {
     }
 
     /*
-     * Oxi Tabs Style Admin Panel end Body
+     * Oxi Accordions Style Admin Panel end Body
      * 
-     * @since 3.3.0
+     * @since 2.0.1
      */
 
     public function end_section_tabs() {
@@ -80,9 +80,9 @@ trait Sanitization {
     }
 
     /*
-     * Oxi Tabs Style Admin Panel Col 6 or Entry devider
+     * Oxi Accordions Style Admin Panel Col 6 or Entry devider
      * 
-     * @since 3.3.0
+     * @since 2.0.1
      */
 
     public function start_section_devider() {
@@ -90,9 +90,9 @@ trait Sanitization {
     }
 
     /*
-     * Oxi Tabs Style Admin Panel end Entry Divider
+     * Oxi Accordions Style Admin Panel end Entry Divider
      * 
-     * @since 3.3.0
+     * @since 2.0.1
      */
 
     public function end_section_devider() {
@@ -100,9 +100,9 @@ trait Sanitization {
     }
 
     /*
-     * Oxi Tabs Style Admin Panel Form Dependency 
+     * Oxi Accordions Style Admin Panel Form Dependency 
      * 
-     * @since 3.3.0
+     * @since 2.0.1
      */
 
     public function forms_condition(array $arg = []) {
@@ -151,9 +151,9 @@ trait Sanitization {
     }
 
     /*
-     * Oxi Tabs Style Admin Panel Each Tabs
+     * Oxi Accordions Style Admin Panel Each Accordions
      * 
-     * @since 3.3.0
+     * @since 2.0.1
      */
 
     public function start_controls_section($id, array $arg = []) {
@@ -169,9 +169,9 @@ trait Sanitization {
     }
 
     /*
-     * Oxi Tabs Style Admin Panel end Each Tabs
+     * Oxi Accordions Style Admin Panel end Each Accordions
      * 
-     * @since 3.3.0
+     * @since 2.0.1
      */
 
     public function end_controls_section() {
@@ -179,10 +179,10 @@ trait Sanitization {
     }
 
     /*
-     * Oxi Tabs Style Admin Panel Section Inner Tabs
-     * This Tabs like inner tabs as Normal view and Hover View
+     * Oxi Accordions Style Admin Panel Section Inner Accordions
+     * This Accordions like inner tabs as Normal view and Hover View
      * 
-     * @since 3.3.0
+     * @since 2.0.1
      */
 
     public function start_controls_tabs($id, array $arg = []) {
@@ -205,9 +205,9 @@ trait Sanitization {
     }
 
     /*
-     * Oxi Tabs Style Admin Panel end Section Inner Tabs
+     * Oxi Accordions Style Admin Panel end Section Inner Accordions
      * 
-     * @since 3.3.0
+     * @since 2.0.1
      */
 
     public function end_controls_tabs() {
@@ -215,9 +215,9 @@ trait Sanitization {
     }
 
     /*
-     * Oxi Tabs Style Admin Panel Section Inner Tabs Child
+     * Oxi Accordions Style Admin Panel Section Inner Accordions Child
      * 
-     * @since 3.3.0
+     * @since 2.0.1
      */
 
     public function start_controls_tab() {
@@ -225,9 +225,9 @@ trait Sanitization {
     }
 
     /*
-     * Oxi Tabs Style Admin Panel End Section Inner Tabs Child
+     * Oxi Accordions Style Admin Panel End Section Inner Accordions Child
      * 
-     * @since 3.3.0
+     * @since 2.0.1
      */
 
     public function end_controls_tab() {
@@ -235,9 +235,9 @@ trait Sanitization {
     }
 
     /*
-     * Oxi Tabs Style Admin Panel  Section Popover
+     * Oxi Accordions Style Admin Panel  Section Popover
      * 
-     * @since 3.3.0
+     * @since 2.0.1
      */
 
     public function start_popover_control($id, array $arg = [], $data = []) {
@@ -266,9 +266,9 @@ trait Sanitization {
     }
 
     /*
-     * Oxi Tabs Style Admin Panel end Popover
+     * Oxi Accordions Style Admin Panel end Popover
      * 
-     * @since 3.3.0
+     * @since 2.0.1
      */
 
     public function end_popover_control() {
@@ -277,16 +277,16 @@ trait Sanitization {
     }
 
     /*
-     * Oxi Tabs Style Admin Panel Form Add Control.
+     * Oxi Accordions Style Admin Panel Form Add Control.
      * Call All Input Control from here Based on Control Name. 
      * 
-     * @since 3.3.0
+     * @since 2.0.1
      */
 
     public function add_control($id, array $data = [], array $arg = []) {
         /*
          * Responsive Control Start
-         * @since 3.3.0
+         * @since 2.0.1
          */
         $responsive = $responsiveclass = '';
         if (array_key_exists('responsive', $arg)) :
@@ -373,10 +373,10 @@ trait Sanitization {
     }
 
     /*
-     * Oxi Tabs Style Admin Panel Responsive Control.
+     * Oxi Accordions Style Admin Panel Responsive Control.
      * Can Possible to modify any Add control to Responsive Control
      * 
-     * @since 3.3.0
+     * @since 2.0.1
      */
 
     public function add_responsive_control($id, array $data = [], array $arg = []) {
@@ -425,15 +425,14 @@ trait Sanitization {
     }
 
     /*
-     * Oxi Tabs Style Admin Panel Group Control.
+     * Oxi Accordions Style Admin Panel Group Control.
      * 
-     * @since 3.3.0
+     * @since 2.0.1
      */
 
     public function add_group_control($id, array $data = [], array $arg = []) {
         $defualt = [
             'type' => 'text',
-            'label' => 'Input Text',
             'description' => '',
             'simpledescription' => ''
         ];
@@ -473,9 +472,9 @@ trait Sanitization {
     }
 
     /*
-     * Oxi Tabs Style Admin Panel Heading Input.
+     * Oxi Accordions Style Admin Panel Heading Input.
      * 
-     * @since 3.3.0
+     * @since 2.0.1
      */
 
     public function heading_admin_control($id, array $data = [], array $arg = []) {
@@ -483,9 +482,9 @@ trait Sanitization {
     }
 
     /*
-     * Oxi Tabs Style Admin Panel Switcher Input.
+     * Oxi Accordions Style Admin Panel Switcher Input.
      * 
-     * @since 3.3.0
+     * @since 2.0.1
      */
 
     public function separator_admin_control($id, array $data = [], array $arg = []) {
@@ -514,9 +513,9 @@ trait Sanitization {
     }
 
     /*
-     * Oxi Tabs Style Admin Panel Switcher Input.
+     * Oxi Accordions Style Admin Panel Switcher Input.
      * 
-     * @since 3.3.0
+     * @since 2.0.1
      */
 
     public function switcher_admin_control($id, array $data = [], array $arg = []) {
@@ -552,9 +551,9 @@ trait Sanitization {
     }
 
     /*
-     * Oxi Tabs Style Admin Panel Text Input.
+     * Oxi Accordions Style Admin Panel Text Input.
      * 
-     * @since 3.3.0
+     * @since 2.0.1
      */
 
     public function text_admin_control($id, array $data = [], array $arg = []) {
@@ -572,9 +571,9 @@ trait Sanitization {
     }
 
     /*
-     * Oxi Tabs Style Admin Panel Hidden Input.
+     * Oxi Accordions Style Admin Panel Hidden Input.
      * 
-     * @since 3.3.0
+     * @since 2.0.1
      */
 
     public function hidden_admin_control($id, array $data = [], array $arg = []) {
@@ -603,9 +602,9 @@ trait Sanitization {
     }
 
     /*
-     * Oxi Tabs Style Admin Panel Textarea Input.
+     * Oxi Accordions Style Admin Panel Textarea Input.
      * 
-     * @since 3.3.0
+     * @since 2.0.1
      */
 
     public function textarea_admin_control($id, array $data = [], array $arg = []) {
@@ -617,9 +616,9 @@ trait Sanitization {
     }
 
     /*
-     * Oxi Tabs Style Admin Panel WYSIWYG Input.
+     * Oxi Accordions Style Admin Panel WYSIWYG Input.
      * 
-     * @since 3.3.0
+     * @since 2.0.1
      */
 
     public function wysiwyg_admin_control($id, array $data = [], array $arg = []) {
@@ -639,9 +638,9 @@ trait Sanitization {
     }
 
     /*
-     * Oxi Tabs Style Admin Panel Image Input.
+     * Oxi Accordions Style Admin Panel Image Input.
      * 
-     * @since 3.3.0
+     * @since 2.0.1
      */
 
     public function image_admin_control($id, array $data = [], array $arg = []) {
@@ -665,9 +664,9 @@ trait Sanitization {
     }
 
     /*
-     * Oxi Tabs Style Admin Panel Number Input.
+     * Oxi Accordions Style Admin Panel Number Input.
      * 
-     * @since 3.3.0
+     * @since 2.0.1
      */
 
     public function number_admin_control($id, array $data = [], array $arg = []) {
@@ -698,9 +697,9 @@ trait Sanitization {
     }
 
     /*
-     * Oxi Tabs Style Admin Panel Slider Input.
+     * Oxi Accordions Style Admin Panel Slider Input.
      * 
-     * @since 3.3.0
+     * @since 2.0.1
      * Done With Number Information
      */
 
@@ -747,9 +746,9 @@ trait Sanitization {
     }
 
     /*
-     * Oxi Tabs Style Admin Panel Select Input.
+     * Oxi Accordions Style Admin Panel Select Input.
      * 
-     * @since 3.3.0
+     * @since 2.0.1
      */
 
     public function select_admin_control($id, array $data = [], array $arg = []) {
@@ -804,9 +803,9 @@ trait Sanitization {
     }
 
     /*
-     * Oxi Tabs Style Admin Panel Choose Input.
+     * Oxi Accordions Style Admin Panel Choose Input.
      * 
-     * @since 3.3.0
+     * @since 2.0.1
      */
 
     public function choose_admin_control($id, array $data = [], array $arg = []) {
@@ -838,7 +837,7 @@ trait Sanitization {
                 <div class="shortcode-form-choices" responsive="' . $arg['responsive'] . '" retundata=\'' . $retunvalue . '\'>';
         foreach ($arg['options'] as $key => $val) {
             echo '  <input id="' . $id . '-' . $key . '" type="radio" name="' . $id . '" value="' . $key . '" ' . ($value == $key ? 'checked  ckdflt="true"' : '') . '>
-                                    <label class="shortcode-form-choices-label" for="' . $id . '-' . $key . '" tooltip="' . $val['title'] . '">
+                                    <label class="shortcode-form-choices-label" for="' . $id . '-' . $key . '" tooltip="' . (isset($val['title'])? $val['title'] : '') . '">
                                         ' . (($operator == 'text') ? $val['title'] : '<i class="' . $val['icon'] . '" aria-hidden="true"></i>') . '
                                     </label>';
         }
@@ -847,9 +846,9 @@ trait Sanitization {
     }
 
     /*
-     * Oxi Tabs Style Admin Panel Color Input.
+     * Oxi Accordions Style Admin Panel Color Input.
      * 
-     * @since 3.3.0
+     * @since 2.0.1
      */
 
     public function render_condition_control($id, array $data = [], array $arg = []) {
@@ -918,9 +917,9 @@ trait Sanitization {
     }
 
     /*
-     * Oxi Tabs Style Admin Panel Icon Selector.
+     * Oxi Accordions Style Admin Panel Icon Selector.
      * 
-     * @since 3.3.0
+     * @since 2.0.1
      */
 
     public function icon_admin_control($id, array $data = [], array $arg = []) {
@@ -934,9 +933,9 @@ trait Sanitization {
     }
 
     /*
-     * Oxi Tabs Style Admin Panel Font Selector.
+     * Oxi Accordions Style Admin Panel Font Selector.
      * 
-     * @since 3.3.0
+     * @since 2.0.1
      */
 
     public function font_admin_control($id, array $data = [], array $arg = []) {
@@ -971,9 +970,9 @@ trait Sanitization {
     }
 
     /*
-     * Oxi Tabs Style Admin Panel Date and Time Selector.
+     * Oxi Accordions Style Admin Panel Date and Time Selector.
      * 
-     * @since 3.3.0
+     * @since 2.0.1
      */
 
     public function date_time_admin_control($id, array $data = [], array $arg = []) {
@@ -991,9 +990,9 @@ trait Sanitization {
     }
 
     /*
-     * Oxi Tabs Style Admin Panel Gradient Selector.
+     * Oxi Accordions Style Admin Panel Gradient Selector.
      * 
-     * @since 3.3.0
+     * @since 2.0.1
      */
 
     public function gradient_admin_control($id, array $data = [], array $arg = []) {
@@ -1024,9 +1023,9 @@ trait Sanitization {
     }
 
     /*
-     * Oxi Tabs Style Admin Panel Dimensions Selector.
+     * Oxi Accordions Style Admin Panel Dimensions Selector.
      * 
-     * @since 3.3.0
+     * @since 2.0.1
      */
 
     public function dimensions_admin_control($id, array $data = [], array $arg = []) {
@@ -1097,9 +1096,9 @@ trait Sanitization {
     }
 
     /*
-     * Oxi Tabs Style Admin Panel Typography.
+     * Oxi Accordions Style Admin Panel Typography.
      * 
-     * @since 3.3.0
+     * @since 2.0.1
      * Simple Interface Enable
      */
 
@@ -1363,9 +1362,9 @@ trait Sanitization {
     }
 
     /*
-     * Oxi Tabs Style Admin Panel Media Group Control.
+     * Oxi Accordions Style Admin Panel Media Group Control.
      * 
-     * @since 3.3.0
+     * @since 2.0.1
      * 
      * Works at any version
      */
@@ -1427,9 +1426,9 @@ trait Sanitization {
     }
 
     /*
-     * Oxi Tabs Style Admin Panel Box Shadow Control.
+     * Oxi Accordions Style Admin Panel Box Shadow Control.
      * 
-     * @since 3.3.0
+     * @since 2.0.1
      * Only Works At Customizable Version
      */
 
@@ -1618,9 +1617,9 @@ trait Sanitization {
     }
 
     /*
-     * Oxi Tabs Style Admin Panel Text Shadow .
+     * Oxi Accordions Style Admin Panel Text Shadow .
      * 
-     * @since 3.3.0
+     * @since 2.0.1
      * Only Works at Customizable Options
      */
 
@@ -1738,9 +1737,9 @@ trait Sanitization {
     }
 
     /*
-     * Oxi Tabs Style Admin Panel Text Shadow .
+     * Oxi Accordions Style Admin Panel Text Shadow .
      * 
-     * @since 3.3.0
+     * @since 2.0.1
      * 
      * Simple Interface Enable
      */
@@ -1914,9 +1913,9 @@ trait Sanitization {
     }
 
     /*
-     * Oxi Tabs Style Admin Panel Border .
+     * Oxi Accordions Style Admin Panel Border .
      * 
-     * @since 3.3.0
+     * @since 2.0.1
      * Complete Simple Version
      */
 
@@ -2028,9 +2027,9 @@ trait Sanitization {
     }
 
     /*
-     * Oxi Tabs Style Admin Panel Border .
+     * Oxi Accordions Style Admin Panel Border .
      * 
-     * @since 3.3.0
+     * @since 2.0.1
      * Complete Simple Version
      */
 
@@ -2130,9 +2129,9 @@ trait Sanitization {
     }
 
     /*
-     * Oxi Tabs Style Admin Panel Background .
+     * Oxi Accordions Style Admin Panel Background .
      * 
-     * @since 3.3.0
+     * @since 2.0.1
      * Simple Interface Enable
      */
 
@@ -2344,9 +2343,9 @@ trait Sanitization {
     }
 
     /*
-     * Oxi Tabs Style Admin Panel Background .
+     * Oxi Accordions Style Admin Panel Background .
      * 
-     * @since 3.3.0
+     * @since 2.0.1
      * Simple Interfaece Enable
      */
 
@@ -2386,9 +2385,9 @@ trait Sanitization {
     }
 
     /*
-     * Oxi Tabs Style Admin Panel Column Size.
+     * Oxi Accordions Style Admin Panel Column Size.
      * 
-     * @since 3.3.0
+     * @since 2.0.1
      * Complete Simple Interface
      */
 
@@ -2481,9 +2480,9 @@ trait Sanitization {
      * 
      */
     /*
-     * Oxi Tabs Style Admin Panel Template Substitute Control.
+     * Oxi Accordions Style Admin Panel Template Substitute Control.
      * 
-     * @since 3.3.0
+     * @since 2.0.1
      */
 
     public function add_substitute_control($id, array $data = [], array $arg = []) {
@@ -2492,9 +2491,9 @@ trait Sanitization {
     }
 
     /*
-     * Oxi Tabs Style Admin Panel Template Substitute Modal Opener.
+     * Oxi Accordions Style Admin Panel Template Substitute Modal Opener.
      * 
-     * @since 3.3.0
+     * @since 2.0.1
      */
 
     public function modalopener_substitute_control($id, array $data = [], array $arg = []) {
@@ -2559,9 +2558,9 @@ trait Sanitization {
     }
 
     /*
-     * Oxi Tabs Style Admin Panel Template Shortcode Info.
+     * Oxi Accordions Style Admin Panel Template Shortcode Info.
      * 
-     * @since 3.3.0
+     * @since 2.0.1
      */
 
     public function shortcodeinfo_substitute_control($id, array $data = [], array $arg = []) {
@@ -2585,12 +2584,12 @@ trait Sanitization {
                     <em>Shortcode for posts/pages/plugins</em>
                     <p>Copy &amp;
                     paste the shortcode directly into any WordPress post, page or Page Builder.</p>
-                    <input type="text" class="form-control" onclick="this.setSelectionRange(0, this.value.length)" value="[ctu_ultimate_oxi id=&quot;' . $id . '&quot;]">
+                    <input type="text" class="form-control" onclick="this.setSelectionRange(0, this.value.length)" value="[oxi_accordions id=&quot;' . $id . '&quot;]">
                     <span></span>
                     <em>Shortcode for templates/themes</em>
                     <p>Copy &amp;
                     paste this code into a template file to include the slideshow within your theme.</p>
-                    <input type="text" class="form-control" onclick="this.setSelectionRange(0, this.value.length)" value="<?php echo do_shortcode(\'[ctu_ultimate_oxi  id=&quot;' . $id . '&quot;]\'); ?>">
+                    <input type="text" class="form-control" onclick="this.setSelectionRange(0, this.value.length)" value="<?php echo do_shortcode(\'[oxi_accordions  id=&quot;' . $id . '&quot;]\'); ?>">
                     <span></span>
                 </div>
             </div>';
@@ -2600,7 +2599,7 @@ trait Sanitization {
         $default = [
             'showing' => FALSE,
             'title' => 'Accordions Rearrange',
-            'sub-title' => 'Tabs Rearrange'
+            'sub-title' => 'Accordions Rearrange'
         ];
         $arg = array_merge($default, $arg);
         /*

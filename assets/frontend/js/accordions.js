@@ -53,9 +53,29 @@ jQuery.noConflict();
         }
 
 
+        var maxHeight = Math.max.apply(null, $(".oxi-accordions-single-card-" + _parent + " .oxi-accordions-expand-collapse-icon .oxi-icons").map(function ()
+        {
+            return $(this).height();
+        }).get());
+        var maxWeight = Math.max.apply(null, $(".oxi-accordions-single-card-" + _parent + " .oxi-accordions-expand-collapse-icon .oxi-icons").map(function ()
+        {
+            return $(this).width();
+        }).get());
+        if (maxHeight > maxWeight) {
+            maxHeightWeight = maxHeight;
+        } else {
+            maxHeightWeight = maxWeight;
+        }
+
+
+        $(".oxi-accordions-single-card-" + _parent + " .oxi-accordions-expand-collapse-icon .oxi-icons").each(function () {
+            var This = $(this).parent();
+            This.css('height', maxHeightWeight).css('width', maxHeightWeight);
+        });
+
+
         if ($("#" + id + " .oxi-accordions-content-expand-button")[0]) {
             $.fn.getBg = function () {
-
                 return $(this).parents().filter(function () {
                     // only checking for IE and Firefox/Chrome. add values as cross-browser compatibility is required
                     var color = $(this).css('background-color');
@@ -63,22 +83,36 @@ jQuery.noConflict();
                 }).eq(0).css('background-color');
             };
             var value = $('.oxi-accordions-content-expand-button').getBg();
-            console.log(id);
             var _Style = '#' + id + " .oxi-accordions-content-card-" + _parent + '> .oxi-accordions-content-body.oxi-accordions-content-height.oxi-accordions-content-mx-height-interface-button:not(.oxi-button-expand) > .oxi-accordions-content-expand-button{background: linear-gradient(to top, ' + value + ' 20%, rgba(255,255,255, 0) 100%);}';
-
             $('<style>' + _Style + '</style>').appendTo("#" + id);
         }
 
 
+        $("#" + id + " .oxi-accordions-ultimate-type-search").on('change keyup paste click', function () {
+            Text = $(this).val();
+            if (Text.length >= 3) {
+                $("#" + id + " .oxi-accordions-single-card").each(function () {
+                    _This = $(this);
+                    _ThisClass = _This.attr('id');
+                    $("#" + _ThisClass + ':not(:CaseInsensitive(' + Text + '))').hide();
+                    $("#" + _ThisClass + ':CaseInsensitive(' + Text + ')').show();
+                });
+            } else {
+                $("#" + id + " .oxi-accordions-single-card").show();
+            }
+        });
+
+
+
     });
+    $.expr[':'].CaseInsensitive = function (n, i, m) {
+        return $(n).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
+    };
+
+
 
     $(function () {
         (function () {
-
-
-
-
-
             $('.oxi-accordions-content-expand-body').bind('click', function () {
                 var $story = $(this).parent('.oxi-accordions-content-expand-button').parent('.oxi-accordions-content-body');
                 var collapsedHeight = $story.attr('collapsed-height');
@@ -96,7 +130,6 @@ jQuery.noConflict();
                 } else {
                     var expandHeight = $story.prop('scrollHeight');
                     $story.attr('expandHeight', expandHeight);
-
                 }
 
                 transitionDuration = $story.parent().css('transition-duration');
