@@ -67,9 +67,28 @@ jQuery.noConflict();
             maxHeightWeight = maxWeight;
         }
 
-
         $(".oxi-accordions-single-card-" + _parent + " .oxi-accordions-expand-collapse-icon .oxi-icons").each(function () {
-            var This = $(this).parent();
+            var This = $(this);
+            This.css('height', maxHeightWeight).css('width', maxHeightWeight);
+        });
+
+
+        var maxHeight = Math.max.apply(null, $(".oxi-accordions-additional-icon-" + _parent + " .oxi-icons").map(function ()
+        {
+            return $(this).height();
+        }).get());
+        var maxWeight = Math.max.apply(null, $(".oxi-accordions-additional-icon-" + _parent + " .oxi-icons").map(function ()
+        {
+            return $(this).width();
+        }).get());
+        if (maxHeight > maxWeight) {
+            maxHeightWeight = maxHeight;
+        } else {
+            maxHeightWeight = maxWeight;
+        }
+
+        $(".oxi-accordions-additional-icon-" + _parent + " .oxi-icons").each(function () {
+            var This = $(this);
             This.css('height', maxHeightWeight).css('width', maxHeightWeight);
         });
 
@@ -155,7 +174,6 @@ jQuery.noConflict();
     $(".oxi-accordions-head-expand-collapse-position-outside").each(function () {
         var Icon = $(this).children('.oxi-accordions-expand-collapse'),
                 Header = $(this).children('.oxi-accordions-head-outside-body').children('.oxi-accordions-header-card').children('.oxi-accordions-header-body');
-
         IconouterHeight = Icon.outerHeight();
         HeaderouterHeight = Header.outerHeight();
         if (HeaderouterHeight > IconouterHeight) {
@@ -170,7 +188,6 @@ jQuery.noConflict();
             Header.height(Height);
         }
     });
-
 
     $("div[oxi-animation]").each(function () {
         var animation = $(this).attr('oxi-animation');

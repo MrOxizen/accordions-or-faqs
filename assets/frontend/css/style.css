@@ -438,6 +438,7 @@
 }
 .oxi-accordions-ultimate-style .oxi-accordions-header-card .oxi-accordions-header-content .oxi-icons{
     font-size: 16px;
+    text-align: center;
 }
 .oxi-accordions-ultimate-style .oxi-accordions-header-card .oxi-accordions-header-li-number{
     font-size: 16px;
@@ -527,6 +528,7 @@
     outline-offset: 0;
     outline: 0;
     background: none;
+    box-shadow: none;
 }
 .oxi-accordions-ultimate-style .oxi-accordions-ultimate-search-options > .oxi-accordions-ultimate-search > input.oxi-accordions-ultimate-type-search::-webkit-input-placeholder { 
     opacity: 0.5;

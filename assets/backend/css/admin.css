@@ -871,7 +871,7 @@ Import Page Design
 }
 
 .oxi-addons-style-preview-top {
-    background-color: #f1f5f8;
+    background-color: #ffffff;
     padding: 20px;
     width: 100%;
     float: left;
@@ -882,7 +882,7 @@ Import Page Design
 .oxi-addons-style-preview-bottom {
     width: 100%;
     padding: 10px;
-    background-color: #fff;
+    background-color: #e0e0e0;
     -mos-border-radius: 0 0 5px 5px;
     border-radius: 0 0 5px 5px;
     display: flex;

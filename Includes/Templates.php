@@ -14,7 +14,8 @@ class Templates {
     use \OXI_ACCORDIONS_PLUGINS\Helper\Helper;
     use \OXI_ACCORDIONS_PLUGINS\Helper\Additional;
 
-    public $imported = [];
+    public $imported = '';
+    public $totalpage = 1;
     public $TEMPLATE;
 
     /**
@@ -30,11 +31,23 @@ class Templates {
     public function css_js_load() {
         $this->admin_template_additional();
         apply_filters('oxi-accordions-plugin/admin_menu', TRUE);
+
+        $this->imported = isset($_GET['layouts']) ? $_GET['layouts'] : 0;
         $this->get_local_tempalte();
     }
 
     public function get_local_tempalte() {
-        $this->local_template = array_map('basename', glob(OXI_ACCORDIONS_PATH . 'demo-template/' . '*.json', GLOB_BRACE));
+        $basename = array_map('basename', glob(OXI_ACCORDIONS_PATH . 'demo-template/' . '*.json', GLOB_BRACE));
+        $this->totalpage = ceil(count($basename) / 10);
+        $c = $this->imported * 10;
+        foreach ($basename as $key => $value) {
+            $onlyname = explode('faqs-template-', str_replace('.json', '', $value))[1];
+            $count = ((int) $onlyname - $c);
+            if ((int) $onlyname && $count > 0 && $count < 11):
+                $this->local_template[$onlyname] = $value;
+            endif;
+        }
+        ksort($this->local_template);
     }
 
     /**
@@ -105,6 +118,26 @@ class Templates {
     }
 
     public function create_new_modal() {
+       
+        if ($this->imported > $this->totalpage):
+            echo '<div class="oxi-addons-row">
+                        <div class="oxi-addons-col-1 oxi-import">
+                            <div class="oxi-addons-style-preview">
+                                <div class="oxilab-admin-style-preview-top">
+                                     <a href="' . admin_url("admin.php?page=oxi-accordions-ultimate-new&layouts=" . ($this->imported + 1)) . '">
+                                        <div class="oxilab-admin-add-new-item">
+                                            <span>
+                                                <i class="fas fa-arrow-right oxi-icons"></i>  
+                                                More Templates
+                                            </span>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>';
+        endif;
+
         echo __('<div class="modal fade" id="oxi-addons-style-create-modal" >
                         <form method="post" id="oxi-addons-style-modal-form">
                             <div class="modal-dialog modal-sm modal-dialog-centered">

@@ -246,7 +246,7 @@ class Template {
         if (isset($this->style['oxi-accordions-content-type']) && $this->style['oxi-accordions-content-type'] === 'post'):
             $this->post_query();
         endif;
-        return $data;
+        return $this->public_attribute = $data;
     }
 
     /**
@@ -293,7 +293,7 @@ class Template {
 
 
 
-        echo '<div class="oxi-accordions-ultimate-style oxi-accordions-ultimate-template-1  oxi-accordions-clearfix oxi-accordions-preloader" ' . $this->public_attribute . ' ' . $this->accordions_preloader . '>';
+        echo '<div class="oxi-accordions-ultimate-style oxi-accordions-ultimate-template-' . $this->oxiid . '  oxi-accordions-clearfix oxi-accordions-preloader" ' . $this->public_attribute . ' ' . $this->accordions_preloader . '>';
 
         if ($style['oxi-accordions-search-option'] == 'active'):
             echo '<div class="oxi-accordions-ultimate-search-options">';
@@ -614,7 +614,7 @@ class Template {
     public function icon_special_rander($id = '') {
         $value = $this->font_awesome_render($id);
         if (!empty($value)):
-            return ' <div class="oxi-accordions-additional-icon ' . (isset($this->style['oxi-accordions-head-additional-interface']) ? $this->style['oxi-accordions-head-additional-interface'] : '') . '"> ' . $value . '</div>';
+            return ' <div class="oxi-accordions-additional-icon oxi-accordions-additional-icon-' . $this->oxiid . ' ' . (isset($this->style['oxi-accordions-head-additional-interface']) ? $this->style['oxi-accordions-head-additional-interface'] : '') . '"> ' . $value . '</div>';
         endif;
     }
 

@@ -435,9 +435,9 @@ class Helper extends Admin {
                 'oxi-accordions-search-option-typho', $this->style, [
             'type' => Controls::TYPOGRAPHY,
             'selector' => [
-                 '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-ultimate-search-options > .oxi-accordions-ultimate-search > .oxi-accordions-ultimate-type-search' => '',
-                 '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-ultimate-search-options > .oxi-accordions-ultimate-search > .oxi-accordions-ultimate-type-search::-webkit-input-placeholder' => '',
-                 '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-ultimate-search-options > .oxi-accordions-ultimate-search > .oxi-icons' => '',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-ultimate-search-options > .oxi-accordions-ultimate-search > .oxi-accordions-ultimate-type-search' => '',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-ultimate-search-options > .oxi-accordions-ultimate-search > .oxi-accordions-ultimate-type-search::-webkit-input-placeholder' => '',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-ultimate-search-options > .oxi-accordions-ultimate-search > .oxi-icons' => '',
             ],
             'description' => 'Customize the typography options for the Search Text.',
                 ]
@@ -448,12 +448,12 @@ class Helper extends Admin {
             'type' => Controls::COLOR,
             'default' => '#ffffff',
             'selector' => [
-                 '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-ultimate-search-options > .oxi-accordions-ultimate-search .oxi-accordions-ultimate-type-search' => 'color: {{VALUE}};',
-                 '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-ultimate-search-options > .oxi-accordions-ultimate-search .oxi-accordions-ultimate-type-search:focus' => 'color: {{VALUE}};',
-                 '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-ultimate-search-options > .oxi-accordions-ultimate-search .oxi-accordions-ultimate-type-search:active' => 'color: {{VALUE}};',
-                 '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-ultimate-search-options > .oxi-accordions-ultimate-search .oxi-accordions-ultimate-type-search:hover' => 'color: {{VALUE}};',
-                 '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-ultimate-search-options > .oxi-accordions-ultimate-search > .oxi-accordions-ultimate-type-search::-webkit-input-placeholder' => 'color: {{VALUE}};',
-                 '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-ultimate-search-options > .oxi-accordions-ultimate-search > .oxi-icons' => 'color: {{VALUE}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-ultimate-search-options > .oxi-accordions-ultimate-search .oxi-accordions-ultimate-type-search' => 'color: {{VALUE}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-ultimate-search-options > .oxi-accordions-ultimate-search .oxi-accordions-ultimate-type-search:focus' => 'color: {{VALUE}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-ultimate-search-options > .oxi-accordions-ultimate-search .oxi-accordions-ultimate-type-search:active' => 'color: {{VALUE}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-ultimate-search-options > .oxi-accordions-ultimate-search .oxi-accordions-ultimate-type-search:hover' => 'color: {{VALUE}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-ultimate-search-options > .oxi-accordions-ultimate-search > .oxi-accordions-ultimate-type-search::-webkit-input-placeholder' => 'color: {{VALUE}};',
+                '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-ultimate-search-options > .oxi-accordions-ultimate-search > .oxi-icons' => 'color: {{VALUE}};',
             ],
             'description' => 'Set the search button color.',
                 ]
@@ -1133,7 +1133,6 @@ class Helper extends Admin {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-accordions-ultimate-style > .oxi-accordions-single-card .oxi-accordions-expand-collapse-' . $this->oxiid . '.oxi-accordions-head-expand-collapse-icon-customizable-interface' => 'width:{{SIZE}}{{UNIT}};height:{{SIZE}}{{UNIT}};',
-                '{{WRAPPER}} .oxi-accordions-ultimate-style > .oxi-accordions-single-card .oxi-accordions-expand-collapse-' . $this->oxiid . '.oxi-accordions-head-expand-collapse-icon-customizable-interface:after' => 'width: {{SIZE}}{{UNIT}};height:{{SIZE}}{{UNIT}};',
             ],
             'description' => 'Set the Icon’s Width and Height.',
                 ]

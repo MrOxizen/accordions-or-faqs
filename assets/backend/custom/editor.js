@@ -489,9 +489,9 @@ jQuery.noConflict();
         });
         setInterval(function () {
             var frame = 'oxi-addons-preview-iframe';
-            var actual = document.getElementById(frame).contentWindow.document.body.scrollHeight + 100,
+            var actual = document.getElementById(frame).contentWindow.document.body.scrollHeight + 200,
                     current = $('#' + frame).outerHeight();
-            if ((current < actual)) {
+            if ((current - actual > 200 || actual - current > 200)) {
                 $('#' + frame).css('height', actual + 'px');
             }
         }, 2000);
@@ -1216,7 +1216,7 @@ jQuery.noConflict();
 
 
                 var cls = key.replace(NEWRegExp("{{WRAPPER}}"), WRAPPER);
-                IFRAME.contents().find(cls).attr('class','oxi-icons');
+                IFRAME.contents().find(cls).attr('class', 'oxi-icons');
                 IFRAME.contents().find(cls).addClass($value);
 
 
