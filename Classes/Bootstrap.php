@@ -50,7 +50,7 @@ class Bootstrap {
     }
 
     public function load_shortcode() {
-        add_shortcode('oxi_ultimate_accordions', [$this, 'accordions_shortcode']);
+        add_shortcode('oxi_accordions', [$this, 'accordions_shortcode']);
         $Widget = new \OXI_ACCORDIONS_PLUGINS\Includes\Widget();
         add_filter('widget_text', 'do_shortcode');
         add_action('widgets_init', array($Widget, 'register_accordions_widget'));

@@ -537,3 +537,7 @@
 .oxi-accordions-ultimate-style > .oxi-accordions-ultimate-search-options > .oxi-accordions-ultimate-search > .oxi-icons{
     font-family: "Font Awesome 5 Free" !important; 
 }
+
+.oxi-addons-center{
+    text-align: center;
+}
