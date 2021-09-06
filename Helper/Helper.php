@@ -223,12 +223,74 @@ trait Helper {
 
     public function oxilab_plugins() {
         if (current_user_can('activate_plugins')):
-            new \OXI_ACCORDIONS_PLUGINS\Includes\Plugins();
+            new \OXI_ACCORDIONS_PLUGINS\Oxilab\Plugins();
         endif;
     }
 
     public function welcome_page() {
-        new \OXI_ACCORDIONS_PLUGINS\Includes\Welcome();
+        new \OXI_ACCORDIONS_PLUGINS\Oxilab\Welcome();
+    }
+
+    public function User_Reviews() {
+        if (current_user_can('activate_plugins')):
+            $this->admin_recommended();
+        endif;
+
+        $this->admin_notice();
+    }
+
+    /**
+     * Admin Notice Check
+     *
+     * @since 2.0.0
+     */
+    public function admin_notice_status() {
+        $data = get_option('accordions_or_faqs_no_bug');
+        return $data;
+    }
+
+    /**
+     * Admin Install date Check
+     *
+     * @since 2.0.0
+     */
+    public function installation_date() {
+        $data = get_option('accordions_or_faqs_activation_date');
+        if (empty($data)):
+            $data = strtotime("now");
+            update_option('accordions_or_faqs_activation_date', $data);
+        endif;
+        return $data;
+    }
+
+    /**
+     * Admin Notice Check
+     *
+     * @since 2.0.0
+     */
+    public function admin_recommended_status() {
+        $data = get_option('accordions_or_faqs_recommended');
+        return $data;
+    }
+
+    public function admin_recommended() {
+        if (!empty($this->admin_recommended_status())):
+            return;
+        endif;
+        if (strtotime('-1 days') < $this->installation_date()):
+            return;
+        endif;
+        new \OXI_ACCORDIONS_PLUGINS\Oxilab\Recommend();
+    }
+
+    public function admin_notice() {
+        if (!empty($this->admin_notice_status())):
+            return;
+        endif;
+        if (strtotime('-7 days') < $this->installation_date()):
+            return;
+        endif;
+        new \OXI_ACCORDIONS_PLUGINS\Oxilab\Reviews();
     }
 
 }

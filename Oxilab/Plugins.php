@@ -1,6 +1,6 @@
 <?php
 
-namespace OXI_ACCORDIONS_PLUGINS\Includes;
+namespace OXI_ACCORDIONS_PLUGINS\Oxilab;
 
 /**
  * Description of Addons

@@ -30,9 +30,9 @@ class Bootstrap {
         new \OXI_ACCORDIONS_PLUGINS\Classes\API();
         $this->load_shortcode();
 
-        $this->public_filter();
         if (is_admin()) {
             $this->User_Admin();
+            $this->User_Reviews();
             if (isset($_GET['page']) && 'oxi-accordions-style-view' === $_GET['page']) {
                 new \OXI_ACCORDIONS_PLUGINS\Includes\Frontend();
             }
@@ -54,10 +54,6 @@ class Bootstrap {
         $Widget = new \OXI_ACCORDIONS_PLUGINS\Includes\Widget();
         add_filter('widget_text', 'do_shortcode');
         add_action('widgets_init', array($Widget, 'register_accordions_widget'));
-    }
-
-    public function public_filter() {
-        
     }
 
     public function User_Admin() {
