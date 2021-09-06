@@ -58,11 +58,11 @@ trait Helper {
      * @since 2.0.1
      */
     public function check_current_accordions($agr) {
-        $vs = get_option($this->fixed_data('726573706f6e736976655f746162735f776974685f6163636f7264696f6e735f6c6963656e73655f737461747573'));
+        $vs = get_option($this->fixed_data('6163636f7264696f6e735f6f725f666171735f6c6963656e73655f737461747573'));
         if ($vs == $this->fixed_data('76616c6964')) {
             return true;
         } else {
-            return true;
+            return false;
         }
     }
 
@@ -90,7 +90,7 @@ trait Helper {
                     <div class="oxi-addons-admin-notifications-holder">
                         <div class="oxi-addons-admin-notifications-alert">
                             <p>Thank you for using my Accordions - Multiple Accordions or FAQs Builders. I Just wanted to see if you have any questions or concerns about my plugins. If you do, Please do not hesitate to <a href="https://wordpress.org/support/plugin/accordions-or-faqs#new-post">file a bug report</a>. </p>
-                            ' . (apply_filters(OXI_ACCORDIONS_PREMIUM, false) ? '' : '<p>By the way, did you know we also have a <a href="https://oxilab.org/responsive-accordions/pricing">Premium Version</a>? It offers lots of options with automatic update. It also comes with 16/5 personal support.</p>') . '
+                            ' . (apply_filters(OXI_ACCORDIONS_PREMIUM, false) ? '' : '<p>By the way, did you know we also have a <a href="https://oxilab.org/accordions/pricing">Premium Version</a>? It offers lots of options with automatic update. It also comes with 16/5 personal support.</p>') . '
                             <p>Thanks Again!</p>
                             <p></p>
                         </div>                     
@@ -165,8 +165,8 @@ trait Helper {
         endif;
         $menu .= '              </ul>
                             <ul class="oxilab-sa-admin-menu2">
-                               ' . (apply_filters(OXI_ACCORDIONS_PREMIUM, false) == FALSE ? ' <li class="fazil-class" ><a target="_blank" href="https://oxilab.org/responsive-accordions/pricing">Upgrade</a></li>' : '') . '
-                               <li class="saadmin-doc"><a target="_black" href="https://oxilab.org/responsive-accordions/docs/">Docs</a></li>
+                               ' . (apply_filters(OXI_ACCORDIONS_PREMIUM, false) == FALSE ? ' <li class="fazil-class" ><a target="_blank" href="https://oxilab.org/accordions/pricing">Upgrade</a></li>' : '') . '
+                               <li class="saadmin-doc"><a target="_black" href="https://oxilab.org/accordions/docs">Docs</a></li>
                                <li class="saadmin-doc"><a target="_black" href="https://wordpress.org/support/plugin/accordions-or-faqs/">Support</a></li>
                                <li class="saadmin-set"><a href="' . admin_url('admin.php?page=oxi-accordions-ultimate-settings') . '"><span class="dashicons dashicons-admin-generic"></span></a></li>
                             </ul>
@@ -205,7 +205,7 @@ trait Helper {
             $database = new \OXI_ACCORDIONS_PLUGINS\Helper\Database();
             $style = $database->wpdb->get_row($database->wpdb->prepare('SELECT * FROM ' . $database->parent_table . ' WHERE id = %d ', $styleid), ARRAY_A);
             if (is_array($style)):
-                $cls = '\OXI_ACCORDIONS_PLUGINS\Layouts\Helper' ;
+                $cls = '\OXI_ACCORDIONS_PLUGINS\Layouts\Helper';
                 if (class_exists($cls)):
                     new $cls();
                 endif;
@@ -218,15 +218,17 @@ trait Helper {
     }
 
     public function user_settings() {
-          new \OXI_ACCORDIONS_PLUGINS\Includes\Settings();
+        new \OXI_ACCORDIONS_PLUGINS\Includes\Settings();
     }
 
     public function oxilab_plugins() {
-        //   new \OXI_TABS_PLUGINS\Page\Plugins();
+        if (current_user_can('activate_plugins')):
+            new \OXI_ACCORDIONS_PLUGINS\Includes\Plugins();
+        endif;
     }
 
     public function welcome_page() {
-        //new \OXI_TABS_PLUGINS\Page\Welcome();
+        new \OXI_ACCORDIONS_PLUGINS\Includes\Welcome();
     }
 
 }

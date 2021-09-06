@@ -357,17 +357,17 @@ class API {
     public function post_oxi_license() {
         $rawdata = json_decode(stripslashes($this->rawdata), true);
         $new = $rawdata['license'];
-        $old = get_option('responsive_tabs_with_accordions_license_key');
-        $status = get_option('responsive_tabs_with_accordions_license_status');
+        $old = get_option('accordions_or_faqs_license_key');
+        $status = get_option('accordions_or_faqs_license_status');
         if ($new == ''):
             if ($old != '' && $status == 'valid'):
                 $this->deactivate_license($old);
             endif;
-            delete_option('responsive_tabs_with_accordions_license_key');
+            delete_option('accordions_or_faqs_license_key');
             $data = ['massage' => '<span class="oxi-confirmation-blank"></span>', 'text' => ''];
         else:
-            update_option('responsive_tabs_with_accordions_license_key', $new);
-            delete_option('responsive_tabs_with_accordions_license_status');
+            update_option('accordions_or_faqs_license_key', $new);
+            delete_option('accordions_or_faqs_license_status');
             $r = $this->activate_license($new);
             if ($r == 'success'):
                 $data = ['massage' => '<span class="oxi-confirmation-success"></span>', 'text' => 'Active'];
@@ -382,7 +382,7 @@ class API {
         $api_params = array(
             'edd_action' => 'activate_license',
             'license' => $key,
-            'item_name' => urlencode('Responsive Tabs'),
+            'item_name' => urlencode('Accordions - Multiple Accordions or FAQs Builders'),
             'url' => home_url()
         );
 
@@ -445,7 +445,7 @@ class API {
         if (!empty($message)) {
             return $message;
         }
-        update_option('responsive_tabs_with_accordions_license_status', $license_data->license);
+        update_option('accordions_or_faqs_license_status', $license_data->license);
         return 'success';
     }
 
@@ -453,7 +453,7 @@ class API {
         $api_params = array(
             'edd_action' => 'deactivate_license',
             'license' => $key,
-            'item_name' => urlencode('Responsive Tabs'),
+            'item_name' => urlencode('Accordions - Multiple Accordions or FAQs Builders'),
             'url' => home_url()
         );
         $response = wp_remote_post('https://www.oxilab.org', array('timeout' => 15, 'sslverify' => false, 'body' => $api_params));
@@ -468,8 +468,8 @@ class API {
         }
         $license_data = json_decode(wp_remote_retrieve_body($response));
         if ($license_data->license == 'deactivated') {
-            delete_option('responsive_tabs_with_accordions_license_status');
-            delete_option('responsive_tabs_with_accordions_license_key');
+            delete_option('accordions_or_faqs_license_status');
+            delete_option('accordions_or_faqs_license_key');
         }
         return 'success';
     }

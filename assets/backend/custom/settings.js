@@ -10,7 +10,7 @@ jQuery.noConflict();
         let result;
         try {
             result = await $.ajax({
-              url: oxiaccordionsultimate.root + 'oxiaccordionsultimate/v1/' + functionname,
+                url: oxiaccordionsultimate.root + 'oxiaccordionsultimate/v1/' + functionname,
                 method: 'POST',
                 dataType: "json",
                 beforeSend: function (xhr) {
@@ -27,6 +27,16 @@ jQuery.noConflict();
         } catch (error) {
             console.error(error);
         }
+    }
+    function delay(callback, ms) {
+        var timer = 0;
+        return function () {
+            var context = this, args = arguments;
+            clearTimeout(timer);
+            timer = setTimeout(function () {
+                callback.apply(context, args);
+            }, ms || 0);
+        };
     }
     $(document.body).on("click", "input", function (e) {
         var $This = $(this), name = $This.attr('name'), $value = $This.val();
@@ -52,8 +62,8 @@ jQuery.noConflict();
             }, 8000);
         });
     });
-  
-    $("input[name=responsive_tabs_with_accordions_license_key] ").on("keyup", delay(function (e) {
+
+    $("input[name=accordions_or_faqs_license_key] ").on("keyup", delay(function (e) {
         var $This = $(this), $value = $This.val();
         if ($value !== $.trim($value)) {
             $value = $.trim($value);
@@ -61,10 +71,10 @@ jQuery.noConflict();
         }
         var rawdata = JSON.stringify({license: $value});
         var functionname = "oxi_license";
-        $('.responsive_tabs_with_accordions_license_massage').html('<span class="spinner sa-spinner-open"></span>');
+        $('.accordions_or_faqs_license_massage').html('<span class="spinner sa-spinner-open"></span>');
         Oxi_Accordions_Settings(functionname, rawdata, styleid, childid, function (callback) {
-            $('.responsive_tabs_with_accordions_license_massage').html(callback.massage);
-            $('.responsive_tabs_with_accordions_license_text .oxi-addons-settings-massage').html(callback.text);
+            $('.accordions_or_faqs_license_massage').html(callback.massage);
+            $('.accordions_or_faqs_license_text .oxi-addons-settings-massage').html(callback.text);
         });
     }, 1000));
 }

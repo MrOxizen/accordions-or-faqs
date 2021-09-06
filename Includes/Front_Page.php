@@ -54,24 +54,21 @@ class Front_Page {
             if (!wp_verify_nonce($nonce, 'oxi-accordions-ultimate-import')) {
                 die('You do not have sufficient permissions to access this page.');
             } else {
-                if (apply_filters(OXI_ACCORDIONS_PREMIUM, false) == TRUE):
-                    if (isset($_FILES['importaccordionsfile'])) :
-                        $filename = $_FILES["importaccordionsfile"]["name"];
-                        $folder = $this->safe_path(OXI_ACCORDIONS_PATH . 'assets/export/');
+                if (isset($_FILES['importaccordionsfile'])) :
+                    $filename = $_FILES["importaccordionsfile"]["name"];
+                    $folder = $this->safe_path(OXI_ACCORDIONS_PATH . 'assets/export/');
 
-                        if (is_file($folder . $filename)):
-                            unlink($folder . $filename); // delete file
-                        endif;
+                    if (is_file($folder . $filename)):
+                        unlink($folder . $filename); // delete file
+                    endif;
 
-                        move_uploaded_file($_FILES['importaccordionsfile']['tmp_name'], $folder . $filename);
-                        
-                        
-                        $ImportApi = new \OXI_ACCORDIONS_PLUGINS\Classes\API();
-                        $ImportApi->post_json_import($folder, $filename);
+                    move_uploaded_file($_FILES['importaccordionsfile']['tmp_name'], $folder . $filename);
 
-                        if (is_file($folder . $filename)):
-                            unlink($folder . $filename); // delete file
-                        endif;
+                    $ImportApi = new \OXI_ACCORDIONS_PLUGINS\Classes\API();
+                    $ImportApi->post_json_import($folder, $filename);
+
+                    if (is_file($folder . $filename)):
+                        unlink($folder . $filename); // delete file
                     endif;
                 endif;
             }
@@ -165,7 +162,6 @@ class Front_Page {
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                     </div>
                                     <div class="modal-body">
-                                             ' . (apply_filters(OXI_ACCORDIONS_PREMIUM, false) == FALSE ? ' <a target="_blank" style"text-align:center" href="https://oxilab.org/responsive-accordions/pricing">**Works only with Pro Version</a><br> <br>' : '') . '
                                              <input class="form-control" type="file" name="importaccordionsfile" accept=".json,application/json,.zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed">
                                     </div>
                                     <div class="modal-footer">

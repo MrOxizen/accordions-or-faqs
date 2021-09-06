@@ -31,8 +31,8 @@ class Settings {
         global $wp_roles;
         $this->roles = $wp_roles->get_names();
         $this->saved_role = get_option('oxi_addons_user_permission');
-        $this->license = get_option('responsive_tabs_with_accordions_license_key');
-        $this->status = get_option('responsive_tabs_with_accordions_license_status');
+        $this->license = get_option('accordions_or_faqs_license_key');
+        $this->status = get_option('accordions_or_faqs_license_status');
     }
 
     /**
@@ -89,6 +89,7 @@ class Settings {
                                     </fieldset>
                                 </td>
                             </tr>
+                            
                         </tbody>
                     </table>	
                     <br>
@@ -99,11 +100,11 @@ class Settings {
                         <tbody>
                             <tr>
                                 <th scope="row">
-                                    <label for="responsive_tabs_with_accordions_license_key">License Key</label>
+                                    <label for="accordions_or_faqs_license_key">License Key</label>
                                 </th>
                                 <td class="valid">
-                                    <input type="text" class="regular-text" id="responsive_tabs_with_accordions_license_key" name="responsive_tabs_with_accordions_license_key" value="<?php echo $this->license; ?>">
-                                    <span class="oxi-addons-settings-connfirmation responsive_tabs_with_accordions_license_massage">
+                                    <input type="text" class="regular-text" id="accordions_or_faqs_license_key" name="accordions_or_faqs_license_key" value="<?php echo $this->license; ?>">
+                                    <span class="oxi-addons-settings-connfirmation accordions_or_faqs_license_massage">
                                         <?php
                                         if ($this->status == 'valid' && empty($this->license)):
                                             echo '<span class="oxi-confirmation-success"></span>';
@@ -116,7 +117,7 @@ class Settings {
                                         endif;
                                         ?>
                                     </span>
-                                    <span class="oxi-addons-settings-connfirmation responsive_tabs_with_accordions_license_text">
+                                    <span class="oxi-addons-settings-connfirmation accordions_or_faqs_license_text">
                                         <?php
                                         if ($this->status == 'valid' && empty($this->license)):
                                             echo '<span class="oxi-addons-settings-massage">Pre Active</span>';

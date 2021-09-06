@@ -66,6 +66,17 @@ class Bootstrap {
         add_filter('oxi-accordions-plugin/admin_menu', array($this, $this->fixed_data('6f78696c61625f61646d696e5f6d656e75')));
         add_action('admin_menu', [$this, 'admin_menu']);
         add_action('admin_head', [$this, 'admin_icon']);
+        add_action('admin_init', array($this, 'redirect_on_activation'));
+    }
+
+    public function redirect_on_activation() {
+        if (get_transient('accordions_or_faqs_activation_redirect')) :
+            delete_transient('accordions_or_faqs_activation_redirect');
+            if (is_network_admin() || isset($_GET['activate-multi'])) :
+                return;
+            endif;
+            wp_safe_redirect(admin_url("admin.php?page=oxi-accordions-ultimate-welcome"));
+        endif;
     }
 
 }

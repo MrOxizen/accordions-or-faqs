@@ -65,6 +65,8 @@ class Installation {
         $database = new \OXI_ACCORDIONS_PLUGINS\Helper\Database();
         $database->update_database();
         $this->active_menu();
+
+        set_transient('accordions_or_faqs_activation_redirect', true, 30);
     }
 
     /**

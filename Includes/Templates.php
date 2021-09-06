@@ -92,7 +92,7 @@ class Templates {
                 ?>
                 <div class="oxi-addons-col-1">
                     <div class="oxi-addons-style-preview">
-                        <div class="oxi-addons-style-preview-top oxi-addons-center">
+                        <div class="oxi-addons-style-preview-top">
                             <?php
                             if (class_exists($Cls) && isset($template_data['style']['rawdata'])):
                                 new $Cls($template_data['style'], $template_data['child']);
@@ -104,7 +104,14 @@ class Templates {
                                 <?php echo $template_data['style']['name']; ?>
                             </div>
                             <div class="oxi-addons-style-preview-bottom-right">
-                                <button type="button" class="btn btn-success oxi-addons-addons-template-create oxi-addons-addons-js-create" data-toggle="modal" template-id="<?php echo $value; ?>">Create Style</button>
+                                <?php
+                                if ($key > 10 && apply_filters(OXI_ACCORDIONS_PREMIUM, true) == false):
+                                    echo '<button class="btn btn-warning oxi-addons-addons-style-btn-warning" title="Pro Only"  type="submit" value="pro only" name="addonsstyleproonly">Pro Only</button>  ';
+                                else:
+                                    echo '<button type="button" class="btn btn-success oxi-addons-addons-template-create oxi-addons-addons-js-create" data-toggle="modal" template-id="' . $value . '">Create Style</button>';
+                                endif;
+                                ?>
+
                             </div>
                         </div>
                     </div>
@@ -118,7 +125,7 @@ class Templates {
     }
 
     public function create_new_modal() {
-      //  echo '';
+        //  echo '';
         if (($this->imported + 1) < $this->totalpage):
             echo '<div class="oxi-addons-row">
                         <div class="oxi-addons-col-1 oxi-import">
