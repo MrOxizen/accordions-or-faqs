@@ -33,7 +33,7 @@ class Welcome {
                 </div>
                 <div class="feature-section">
                     <div class="about-container">
-                        <div class="about-addons-videos"><iframe src="https://www.youtube.com/embed/elU_RjGqX4g" frameborder="0" allowfullscreen="" class="about-video"></iframe></div>
+                        <div class="about-addons-videos"><iframe src="https://www.youtube.com/embed/5KWrc74mGEY" frameborder="0" allowfullscreen="" class="about-video"></iframe></div>
                     </div>
                 </div>
             </div>
@@ -83,7 +83,7 @@ class Welcome {
                                 </div>
                                 <div class="oxi-docs-admin-block-content">
                                     <p>Unable to use Accordions - Multiple Accordions or FAQs Builders? Don't worry you can check your web tutorials to make easier to use :) </p>
-                                    <a href="https://www.youtube.com/playlist?list=PLUIlGSU2bl8ggcwHiPUVYe3-U9p21GQKU" class="oxi-docs-button" target="_blank">Video Tutorials</a>
+                                    <a href="https://www.youtube.com/watch?v=5KWrc74mGEY&list=PLUIlGSU2bl8ig0kR0MtlG_ntx5mO8PUiz" class="oxi-docs-button" target="_blank">Video Tutorials</a>
                                 </div>
                             </div>
                         </div>
