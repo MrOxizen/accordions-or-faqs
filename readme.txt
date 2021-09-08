@@ -311,9 +311,9 @@ Check our icon set from the arrow icon. We give three types of arrow icons and y
 
 == Screenshots ==
 
-1. Use most Advanced Control panels with live preview
-2. Select Templates and modify them as You like 
-3. Another template 
+1. Shortcode Page
+2. Templates or Layouts Page 
+3. Customization Page 
 
 == Changelog ==
 
