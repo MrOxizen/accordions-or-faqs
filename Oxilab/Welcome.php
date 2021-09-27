@@ -50,7 +50,7 @@ class Welcome {
                                     <h4 class="oxi-docs-admin-header-title">Documentation</h4>  
                                 </div>
                                 <div class="oxi-docs-admin-block-content">
-                                    <p>Get started by spending some time with the documentation to get familiar with Accordions - Multiple Accordions or FAQs Builders. Build awesome Tabs  for you or your clients with ease.</p>
+                                    <p>Get started by spending some time with the documentation to get familiar with Accordions - Multiple Accordions or FAQs Builders. Build awesome accordions or faqs  for you or your clients with ease.</p>
                                     <a href="https://oxilab.org/accordions/docs" class="oxi-docs-button" target="_blank">Documentation</a>
                                 </div>
                             </div>
