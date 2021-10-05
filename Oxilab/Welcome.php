@@ -51,7 +51,7 @@ class Welcome {
                                 </div>
                                 <div class="oxi-docs-admin-block-content">
                                     <p>Get started by spending some time with the documentation to get familiar with Accordions - Multiple Accordions or FAQs Builders. Build awesome accordions or faqs  for you or your clients with ease.</p>
-                                    <a href="https://oxilab.org/accordions/docs" class="oxi-docs-button" target="_blank">Documentation</a>
+                                    <a href="https://www.oxilabdemos.com/accordions/docs" class="oxi-docs-button" target="_blank">Documentation</a>
                                 </div>
                             </div>
                         </div>

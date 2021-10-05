@@ -90,7 +90,7 @@ trait Helper {
                     <div class="oxi-addons-admin-notifications-holder">
                         <div class="oxi-addons-admin-notifications-alert">
                             <p>Thank you for using my Accordions - Multiple Accordions or FAQs Builders. I Just wanted to see if you have any questions or concerns about my plugins. If you do, Please do not hesitate to <a href="https://wordpress.org/support/plugin/accordions-or-faqs#new-post">file a bug report</a>. </p>
-                            ' . (apply_filters(OXI_ACCORDIONS_PREMIUM, false) ? '' : '<p>By the way, did you know we also have a <a href="https://oxilab.org/accordions/pricing">Premium Version</a>? It offers lots of options with automatic update. It also comes with 16/5 personal support.</p>') . '
+                            ' . (apply_filters(OXI_ACCORDIONS_PREMIUM, false) ? '' : '<p>By the way, did you know we also have a <a href="https://www.oxilabdemos.com/accordions/pricing">Premium Version</a>? It offers lots of options with automatic update. It also comes with 16/5 personal support.</p>') . '
                             <p>Thanks Again!</p>
                             <p></p>
                         </div>                     
@@ -136,8 +136,8 @@ trait Helper {
         }
         $menu .= '          </ul>
                             <ul class="oxilab-sa-admin-menu2">
-                               ' . (apply_filters(OXI_ACCORDIONS_PREMIUM, false) == FALSE ? ' <li class="fazil-class" ><a target="_blank" href="https://oxilab.org/accordions/pricing">Upgrade</a></li>' : '') . '
-                               <li class="saadmin-doc"><a target="_black" href="https://oxilab.org/accordions/docs">Docs</a></li>
+                               ' . (apply_filters(OXI_ACCORDIONS_PREMIUM, false) == FALSE ? ' <li class="fazil-class" ><a target="_blank" href="https://www.oxilabdemos.com/accordions/pricing">Upgrade</a></li>' : '') . '
+                               <li class="saadmin-doc"><a target="_black" href="https://www.oxilabdemos.com/accordions/docs">Docs</a></li>
                                <li class="saadmin-doc"><a target="_black" href="https://wordpress.org/support/plugin/accordions-or-faqs/">Support</a></li>
                                <li class="saadmin-set"><a href="' . admin_url('admin.php?page=oxi-accordions-ultimate-settings') . '"><span class="dashicons dashicons-admin-generic"></span></a></li>
                             </ul>

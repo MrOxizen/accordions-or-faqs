@@ -53,44 +53,47 @@ jQuery.noConflict();
         }
 
 
-        var maxHeight = Math.max.apply(null, $(".oxi-accordions-single-card-" + _parent + " .oxi-accordions-expand-collapse-icon .oxi-icons").map(function ()
-        {
-            return $(this).height();
-        }).get());
-        var maxWeight = Math.max.apply(null, $(".oxi-accordions-single-card-" + _parent + " .oxi-accordions-expand-collapse-icon .oxi-icons").map(function ()
-        {
-            return $(this).width();
-        }).get());
-        if (maxHeight > maxWeight) {
-            maxHeightWeight = maxHeight;
-        } else {
-            maxHeightWeight = maxWeight;
-        }
-
-        $(".oxi-accordions-single-card-" + _parent + " .oxi-accordions-expand-collapse-icon .oxi-icons").each(function () {
-            var This = $(this);
-            This.css('height', maxHeightWeight).css('width', maxHeightWeight);
-        });
-
-
-        var maxHeight = Math.max.apply(null, $(".oxi-accordions-additional-icon-" + _parent + " .oxi-icons").map(function ()
-        {
-            return $(this).height();
-        }).get());
-        var maxWeight = Math.max.apply(null, $(".oxi-accordions-additional-icon-" + _parent + " .oxi-icons").map(function ()
-        {
-            return $(this).width();
-        }).get());
-        if (maxHeight > maxWeight) {
-            maxHeightWeight = maxHeight;
-        } else {
-            maxHeightWeight = maxWeight;
-        }
-
-        $(".oxi-accordions-additional-icon-" + _parent + " .oxi-icons").each(function () {
-            var This = $(this);
-            This.css('height', maxHeightWeight).css('width', maxHeightWeight);
-        });
+//        var maxHeight = Math.max.apply(null, $(".oxi-accordions-single-card-" + _parent + " .oxi-accordions-header-card .oxi-accordions-expand-collapse-icon .oxi-icons").map(function ()
+//        {
+//            return $(this).height();
+//        }).get());
+//        var maxWeight = Math.max.apply(null, $(".oxi-accordions-single-card-" + _parent + " .oxi-accordions-header-card .oxi-accordions-expand-collapse-icon .oxi-icons").map(function ()
+//        {
+//            return $(this).width();
+//        }).get());
+//        if (maxHeight > maxWeight) {
+//            maxHeightWeight = maxHeight;
+//        } else {
+//            maxHeightWeight = maxWeight;
+//        }
+//
+//
+//
+//
+//        $(".oxi-accordions-single-card-" + _parent + " .oxi-accordions-expand-collapse-icon .oxi-icons").each(function () {
+//            var This = $(this);
+//            This.css('height', maxHeightWeight).css('width', maxHeightWeight);
+//        });
+//
+//
+//        var maxHeight = Math.max.apply(null, $(".oxi-accordions-additional-icon-" + _parent + " .oxi-icons").map(function ()
+//        {
+//            return $(this).height();
+//        }).get());
+//        var maxWeight = Math.max.apply(null, $(".oxi-accordions-additional-icon-" + _parent + " .oxi-icons").map(function ()
+//        {
+//            return $(this).width();
+//        }).get());
+//        if (maxHeight > maxWeight) {
+//            maxHeightWeight = maxHeight;
+//        } else {
+//            maxHeightWeight = maxWeight;
+//        }
+//
+//        $(".oxi-accordions-additional-icon-" + _parent + " .oxi-icons").each(function () {
+//            var This = $(this);
+//            This.css('height', maxHeightWeight).css('width', maxHeightWeight);
+//        });
 
 
         if ($("#" + id + " .oxi-accordions-content-expand-button")[0]) {
