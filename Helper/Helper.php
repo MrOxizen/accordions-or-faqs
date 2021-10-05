@@ -105,23 +105,17 @@ trait Helper {
      * @since 2.0.1
      */
     public function oxilab_admin_menu($agr) {
-        $admin_menu = 'get_oxilab_addons_menu';
-        $response = !empty(get_transient($admin_menu)) ? get_transient($admin_menu) : [];
-        if (!array_key_exists('Accordions', $response)):
-            $response['Accordions']['Shortcode'] = [
+        $response = [
+            'Shortcode' => [
                 'name' => 'Shortcode',
                 'homepage' => 'oxi-accordions-ultimate'
-            ];
-            $response['Accordions']['Create New'] = [
+            ],
+            'Create New' => [
                 'name' => 'Create New',
                 'homepage' => 'oxi-accordions-ultimate-new'
-            ];
-            $response['Accordions']['Import Template'] = [
-                'name' => 'Import Template',
-                'homepage' => 'oxi-accordions-ultimate-new&import'
-            ];
-            set_transient($admin_menu, $response, 10 * DAY_IN_SECONDS);
-        endif;
+            ],
+        ];
+
         $bgimage = OXI_ACCORDIONS_URL . 'assets/image/sa-logo.png';
         $sub = '';
 
@@ -135,35 +129,12 @@ trait Helper {
                             <ul class="oxilab-sa-admin-menu">';
 
         $GETPage = sanitize_text_field($_GET['page']);
-        if (count($response) == 1):
-            foreach ($response['Accordions'] as $key => $value) {
-                $active = ($GETPage == $value['homepage'] ? ' class="active" ' : '');
-                $menu .= '<li ' . $active . '><a href="' . $this->admin_url_convert($value['homepage']) . '">' . $this->name_converter($value['name']) . '</a></li>';
-            }
-        else:
-            foreach ($response as $key => $value) {
-                $active = ($key == 'Accordions' ? 'active' : '');
-                $menu .= '<li class="' . $active . '"><a class="oxi-nev-drop-menu" href="#">' . $this->name_converter($key) . '</a>';
-                $menu .= '   <div class="oxi-nev-d-menu">
-                                    <div class="oxi-nev-drop-menu-li">';
-                foreach ($value as $key2 => $submenu) {
-                    $menu .= '<a href="' . $this->admin_url_convert($submenu['homepage']) . '">' . $this->name_converter($submenu['name']) . '</a>';
-                }
-                $menu .= '</div>';
-                $menu .= '</li>';
-            }
-            if (strpos($GETPage, 'oxi-accordions-ultimate') !== false):
-                $sub .= '<div class="shortcode-addons-main-tab-header">';
-                foreach ($response['Accordions'] as $key => $value) {
-                    $active = ($GETPage == $value['homepage'] ? 'oxi-active' : '');
-                    $sub .= '<a href="' . $this->admin_url_convert($value['homepage']) . '">
-                                <div class="shortcode-addons-header ' . $active . '">' . $this->name_converter($value['name']) . '</div>
-                              </a>';
-                }
-                $sub .= '</div>';
-            endif;
-        endif;
-        $menu .= '              </ul>
+
+        foreach ($response as $key => $value) {
+            $active = ($GETPage == $value['homepage'] ? ' class="active" ' : '');
+            $menu .= '<li ' . $active . '><a href="' . $this->admin_url_convert($value['homepage']) . '">' . $this->name_converter($value['name']) . '</a></li>';
+        }
+        $menu .= '          </ul>
                             <ul class="oxilab-sa-admin-menu2">
                                ' . (apply_filters(OXI_ACCORDIONS_PREMIUM, false) == FALSE ? ' <li class="fazil-class" ><a target="_blank" href="https://oxilab.org/accordions/pricing">Upgrade</a></li>' : '') . '
                                <li class="saadmin-doc"><a target="_black" href="https://oxilab.org/accordions/docs">Docs</a></li>

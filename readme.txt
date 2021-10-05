@@ -3,7 +3,7 @@ Contributors: biplob018
 Donate link: https://www.oxilab.org
 Tags: accordions, accordions plugin, FAQ, collapse, accordions plugin jquery, accordions plugin wordpress, accordions shortcode
 Requires at least: 3.8
-Stable tag: 2.0.1
+Stable tag: 2.0.2
 Tested up to: 5.8
 Requires PHP: 5.4
 License: GPLv2 or later
@@ -24,10 +24,10 @@ With our Accordions plugin, you can create FAQs content and posts, assign them i
 
 =Quick Links=
 
-+ [Accordions Features ](https://oxilab.org/accordions/ "Accordions Features")
-+ [Demo Templates ](https://oxilab.org/accordions/template/ "Demo Templates")
++ [Accordions Features ](https://www.oxilabdemos.com/accordions/ "Accordions Features")
++ [Demo Templates ](https://www.oxilabdemos.com/accordions/template/ "Demo Templates")
 + [How to Use (Video) ](https://youtu.be/5KWrc74mGEY "How to Use (Video)")
-+ [How to Use (Documentation) ](https://oxilab.org/accordions/docs/ "How to Use (Documentation)")
++ [How to Use (Documentation) ](https://www.oxilabdemos.com/accordions/docs/ "How to Use (Documentation)")
 + [Help and Support ](https://wordpress.org/support/plugin/accordions-or-faqs#new-post "Help and Support")
 
 
@@ -317,6 +317,10 @@ Check our icon set from the arrow icon. We give three types of arrow icons and y
 
 == Changelog ==
 
+= 2.0.2 =
+* Modify Admin Panel
+
+
 = 2.0.1 =
 * Redesign Admin Panel
 * Add 30+ Templates
@@ -332,6 +336,9 @@ Check our icon set from the arrow icon. We give three types of arrow icons and y
 * Initial Release
 
 == Upgrade Notice ==
+
+= 2.0.2 =
+Modify Admin Panel
 
 = 2.0.1 =
 Redesign Admin Panel

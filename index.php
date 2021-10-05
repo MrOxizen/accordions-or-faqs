@@ -6,7 +6,7 @@
   Description: Accordions, Most easiest accordions or faqs builder Plugin. Create multiple accordion or  collapse faqs with this.
   Author: Biplob Adhikari
   Author URI: http://www.oxilab.org/
-  Version: 2.0.1
+  Version: 2.0.2
  */
 if (!defined('ABSPATH'))
     exit;
@@ -15,7 +15,7 @@ define('OXI_ACCORDIONS_FILE', __FILE__);
 define('OXI_ACCORDIONS_BASENAME', plugin_basename(__FILE__));
 define('OXI_ACCORDIONS_PATH', plugin_dir_path(__FILE__));
 define('OXI_ACCORDIONS_URL', plugins_url('/', __FILE__));
-define('OXI_ACCORDIONS_PLUGIN_VERSION', '2.0.1');
+define('OXI_ACCORDIONS_PLUGIN_VERSION', '2.0.2');
 define('OXI_ACCORDIONS_TEXTDOMAIN', 'accordions-or-faqs');
 define('OXI_ACCORDIONS_PREMIUM', 'oxi-accordions-plugin/pro_version');
 
@@ -43,16 +43,6 @@ add_action('plugins_loaded', function () {
 register_activation_hook(__FILE__, function () {
     $Installation = new \OXI_ACCORDIONS_PLUGINS\Helper\Installation();
     $Installation->plugin_activation_hook();
-});
-
-/**
- * Deactivation hook
- *
- * @since 2.0.1
- */
-register_deactivation_hook(__FILE__, function () {
-    $Installation = new \OXI_ACCORDIONS_PLUGINS\Helper\Installation();
-    $Installation->plugin_deactivation_hook();
 });
 
 /**
