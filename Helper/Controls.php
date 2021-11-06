@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) {
 
 /**
  * Description of Admin Controller
- * @author $biplob018
+ * author @biplob018
  */
 class Controls {
 
@@ -132,11 +132,10 @@ class Controls {
      */
     const HEADING = 'heading';
 
-
     /*
-     * 
+     *
      * Group Control
-     * 
+     *
      */
 
     /**
@@ -153,19 +152,18 @@ class Controls {
      * Typography control.
      */
     const TYPOGRAPHY = 'typography';
-    
+
     /**
      * Typography control.
      */
     const TYPO_FONTSIZE = 'typo-font-size';
-    
-    
 
     /**
      * Border control.
      */
     const BORDER = 'border';
-     /**
+
+    /**
      * Border control.
      */
     const SINGLEBORDER = 'singleborder';
@@ -195,11 +193,10 @@ class Controls {
      */
     const REARRANGE = 'rearrange';
 
-
     /*
-     * 
+     *
      * Typhography Include Turms
-     * 
+     *
      */
 
     /**
@@ -212,12 +209,10 @@ class Controls {
      */
     const ALIGNFLEX = 'align_flex';
 
-
-
     /*
-     * 
-     * Templates Substitute Data 
-     * 
+     *
+     * Templates Substitute Data
+     *
      */
 
     /**
@@ -234,6 +229,7 @@ class Controls {
      * Shortcode Name.
      */
     const SHORTCODEINFO = 'shortcodeinfo';
+
     /**
      * Shortcode Style.
      */

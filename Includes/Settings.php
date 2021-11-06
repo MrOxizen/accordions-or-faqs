@@ -5,7 +5,7 @@ namespace OXI_ACCORDIONS_PLUGINS\Includes;
 /**
  * Description of Settings
  *
- * @author biplo
+ * author @biplob018
  */
 class Settings {
 
@@ -35,18 +35,9 @@ class Settings {
         $this->status = get_option('accordions_or_faqs_license_status');
     }
 
-    /**
-     * Admin Notice JS file loader
-     * @return void
-     */
-    public function admin_ajax() {
-        $this->admin_settings_additional();
-        wp_enqueue_script('oxi-accordions-settings-page', OXI_ACCORDIONS_URL . '/assets/backend/custom/settings.js', false, OXI_ACCORDIONS_TEXTDOMAIN);
-    }
-
     public function Render() {
         ?>
-        <div class="wrap">   
+        <div class="wrap">
             <?php
             echo apply_filters('oxi-accordions-plugin/admin_menu', TRUE);
             ?>
@@ -89,9 +80,9 @@ class Settings {
                                     </fieldset>
                                 </td>
                             </tr>
-                            
+
                         </tbody>
-                    </table>	
+                    </table>
                     <br>
                     <br>
 
@@ -137,8 +128,17 @@ class Settings {
                     </table>
                 </form>
             </div>
-        </div>  
+        </div>
         <?php
+    }
+
+    /**
+     * Admin Notice JS file loader
+     * @return void
+     */
+    public function admin_ajax() {
+        $this->admin_settings_additional();
+        wp_enqueue_script('oxi-accordions-settings-page', OXI_ACCORDIONS_URL . '/assets/backend/custom/settings.js', false, OXI_ACCORDIONS_TEXTDOMAIN);
     }
 
 }

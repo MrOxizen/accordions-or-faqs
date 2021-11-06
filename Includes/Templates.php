@@ -5,7 +5,7 @@ namespace OXI_ACCORDIONS_PLUGINS\Includes;
 /**
  * Description of Templates
  *
- * @author biplo
+ * author @biplob018
  */
 class Templates {
 
@@ -134,7 +134,7 @@ class Templates {
                                      <a href="' . admin_url("admin.php?page=oxi-accordions-ultimate-new&layouts=" . ($this->imported + 1)) . '">
                                         <div class="oxilab-admin-add-new-item">
                                             <span>
-                                                <i class="fas fa-arrow-right oxi-icons"></i>  
+                                                <i class="fas fa-arrow-right oxi-icons"></i>
                                                 More Templates
                                             </span>
                                         </div>
@@ -149,7 +149,7 @@ class Templates {
                         <form method="post" id="oxi-addons-style-modal-form">
                             <div class="modal-dialog modal-sm modal-dialog-centered">
                                 <div class="modal-content">
-                                    <div class="modal-header">                    
+                                    <div class="modal-header">
                                         <h4 class="modal-title">New Accordions</h4>
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                     </div>

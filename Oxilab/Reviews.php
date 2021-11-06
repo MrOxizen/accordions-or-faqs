@@ -5,7 +5,7 @@ namespace OXI_ACCORDIONS_PLUGINS\Oxilab;
 /**
  * Description of Reviews
  *
- * @author biplo
+ * author @biplob018
  */
 class Reviews {
 

@@ -5,11 +5,11 @@ namespace OXI_ACCORDIONS_PLUGINS\Oxilab;
 /**
  * Description of Welcome
  *
- * @author biplo
+ * author @biplob018
  */
 class Welcome {
 
-     use \OXI_ACCORDIONS_PLUGINS\Helper\Additional;
+    use \OXI_ACCORDIONS_PLUGINS\Helper\Additional;
 
     public function __construct() {
         $this->header();
@@ -18,7 +18,7 @@ class Welcome {
 
     public function header() {
         $this->admin_css();
-         echo apply_filters('oxi-accordions-plugin/admin_menu', TRUE);
+        echo apply_filters('oxi-accordions-plugin/admin_menu', TRUE);
     }
 
     public function Public_Render() {
@@ -46,8 +46,8 @@ class Welcome {
                                 <div class="oxi-docs-admin-header">
                                     <div class="oxi-docs-admin-header-icon">
                                         <span class="dashicons dashicons-format-aside"></span>
-                                    </div>    
-                                    <h4 class="oxi-docs-admin-header-title">Documentation</h4>  
+                                    </div>
+                                    <h4 class="oxi-docs-admin-header-title">Documentation</h4>
                                 </div>
                                 <div class="oxi-docs-admin-block-content">
                                     <p>Get started by spending some time with the documentation to get familiar with Accordions - Multiple Accordions or FAQs Builders. Build awesome accordions or faqs  for you or your clients with ease.</p>
@@ -55,15 +55,15 @@ class Welcome {
                                 </div>
                             </div>
                         </div>
-                    </div>   
+                    </div>
                     <div class="col-lg-6 col-md-12">
                         <div class="oxi-docs-admin-wrapper">
                             <div class="oxi-docs-admin-block">
                                 <div class="oxi-docs-admin-header">
                                     <div class="oxi-docs-admin-header-icon">
                                         <span class="dashicons dashicons-format-aside"></span>
-                                    </div>    
-                                    <h4 class="oxi-docs-admin-header-title">Contribute to Responsive Accordions</h4>  
+                                    </div>
+                                    <h4 class="oxi-docs-admin-header-title">Contribute to Responsive Accordions</h4>
                                 </div>
                                 <div class="oxi-docs-admin-block-content">
                                     <p>You can contribute to make Accordions - Multiple Accordions or FAQs Builders better reporting bugs &amp; creating issues. Our Development team always try to make more powerfull Plugins day by day with solved Issues</p>
@@ -71,15 +71,15 @@ class Welcome {
                                 </div>
                             </div>
                         </div>
-                    </div>   
+                    </div>
                     <div class="col-lg-6 col-md-12">
                         <div class="oxi-docs-admin-wrapper">
                             <div class="oxi-docs-admin-block">
                                 <div class="oxi-docs-admin-header">
                                     <div class="oxi-docs-admin-header-icon">
                                         <span class="dashicons dashicons-format-aside"></span>
-                                    </div>    
-                                    <h4 class="oxi-docs-admin-header-title">Video Tutorials </h4>  
+                                    </div>
+                                    <h4 class="oxi-docs-admin-header-title">Video Tutorials </h4>
                                 </div>
                                 <div class="oxi-docs-admin-block-content">
                                     <p>Unable to use Accordions - Multiple Accordions or FAQs Builders? Don't worry you can check your web tutorials to make easier to use :) </p>
@@ -87,8 +87,8 @@ class Welcome {
                                 </div>
                             </div>
                         </div>
-                    </div>   
-                </div>   
+                    </div>
+                </div>
             </div>
         </div>
 

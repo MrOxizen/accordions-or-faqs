@@ -5,7 +5,7 @@ namespace OXI_ACCORDIONS_PLUGINS\Includes;
 /**
  * Description of Index
  *
- * @author biplo
+ * author @biplob018
  */
 class Front_Page {
 
@@ -14,7 +14,7 @@ class Front_Page {
     /**
      * Database
      *
-     * @since 3.1.0
+     * @since 2.0.1
      */
     public $database;
 
@@ -117,7 +117,7 @@ class Front_Page {
                                     <a href="#" id="oxilab-tabs-import-json">
                                         <div class="oxilab-admin-add-new-item">
                                             <span>
-                                                <i class="fas fa-plus-circle oxi-icons"></i>  
+                                                <i class="fas fa-plus-circle oxi-icons"></i>
                                                 Import Accordions
                                             </span>
                                         </div>
@@ -131,7 +131,7 @@ class Front_Page {
                         <form method="post" id="oxi-addons-style-modal-form">
                             <div class="modal-dialog modal-sm modal-dialog-centered">
                                 <div class="modal-content">
-                                    <div class="modal-header">                    
+                                    <div class="modal-header">
                                         <h4 class="modal-title">Tabs Clone</h4>
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                     </div>
@@ -157,7 +157,7 @@ class Front_Page {
                         <form method="post" id="oxi-addons-import-modal-form" enctype = "multipart/form-data">
                             <div class="modal-dialog modal-sm modal-dialog-centered">
                                 <div class="modal-content">
-                                    <div class="modal-header">                    
+                                    <div class="modal-header">
                                         <h4 class="modal-title">Import Form</h4>
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                     </div>
@@ -194,11 +194,11 @@ class Front_Page {
             $return .= _('<td>' . ucwords($value['name']) . '</td>');
             $return .= _('<td><span>Shortcode &nbsp;&nbsp;<input type="text" onclick="this.setSelectionRange(0, this.value.length)" value="[oxi_accordions id=&quot;' . $id . '&quot;]"></span> <br>'
                     . '<span>Php Code &nbsp;&nbsp; <input type="text" onclick="this.setSelectionRange(0, this.value.length)" value="&lt;?php echo do_shortcode(&#039;[oxi_accordions id=&quot;' . $id . '&quot;]&#039;); ?&gt;"></span></td>');
-            $return .= _('<td> 
+            $return .= _('<td>
                        <a href="' . admin_url("admin.php?page=oxi-accordions-ultimate-new&styleid=$id") . '"  title="Edit"  class="btn btn-info" style="float:left; margin-right: 5px; margin-left: 5px;">Edit</a>
                        <form method="post" class="oxi-addons-style-delete">
                                <input type="hidden" name="oxideleteid" id="oxideleteid" value="' . $id . '">
-                               <button class="btn btn-danger" style="float:left"  title="Delete"  type="submit" value="delete" name="addonsdatadelete">Delete</button>  
+                               <button class="btn btn-danger" style="float:left"  title="Delete"  type="submit" value="delete" name="addonsdatadelete">Delete</button>
                        </form>
                        <a href="' . esc_url_raw(rest_url()) . 'oxiaccordionsultimate/v1/shortcode_export?styleid=' . $id . '"  title="Export"  class="btn btn-info" style="float:left; margin-right: 5px; margin-left: 5px;">Export</a>
                 </td>');

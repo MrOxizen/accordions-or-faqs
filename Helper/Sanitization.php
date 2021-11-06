@@ -4,14 +4,14 @@ namespace OXI_ACCORDIONS_PLUGINS\Helper;
 
 /**
  *
- * @author $biplob018
+ * author @biplob018
  */
 use OXI_ACCORDIONS_PLUGINS\Helper\Controls as Controls;
 
 trait Sanitization {
 
     /**
-     * font settings sanitize 
+     * font settings sanitize
      * works at layouts page to adding font Settings sanitize
      */
     public function AdminTextSenitize($data) {
@@ -41,7 +41,7 @@ trait Sanitization {
 
     /*
      * Oxi Accordions Style Admin Panel header
-     * 
+     *
      * @since 2.0.1
      */
 
@@ -55,7 +55,7 @@ trait Sanitization {
 
     /*
      * Oxi Accordions Style Admin Panel Body
-     * 
+     *
      * @since 2.0.1
      */
 
@@ -71,7 +71,7 @@ trait Sanitization {
 
     /*
      * Oxi Accordions Style Admin Panel end Body
-     * 
+     *
      * @since 2.0.1
      */
 
@@ -81,7 +81,7 @@ trait Sanitization {
 
     /*
      * Oxi Accordions Style Admin Panel Col 6 or Entry devider
-     * 
+     *
      * @since 2.0.1
      */
 
@@ -91,7 +91,7 @@ trait Sanitization {
 
     /*
      * Oxi Accordions Style Admin Panel end Entry Divider
-     * 
+     *
      * @since 2.0.1
      */
 
@@ -100,8 +100,8 @@ trait Sanitization {
     }
 
     /*
-     * Oxi Accordions Style Admin Panel Form Dependency 
-     * 
+     * Oxi Accordions Style Admin Panel Form Dependency
+     *
      * @since 2.0.1
      */
 
@@ -152,7 +152,7 @@ trait Sanitization {
 
     /*
      * Oxi Accordions Style Admin Panel Each Accordions
-     * 
+     *
      * @since 2.0.1
      */
 
@@ -170,7 +170,7 @@ trait Sanitization {
 
     /*
      * Oxi Accordions Style Admin Panel end Each Accordions
-     * 
+     *
      * @since 2.0.1
      */
 
@@ -181,7 +181,7 @@ trait Sanitization {
     /*
      * Oxi Accordions Style Admin Panel Section Inner Accordions
      * This Accordions like inner tabs as Normal view and Hover View
-     * 
+     *
      * @since 2.0.1
      */
 
@@ -206,7 +206,7 @@ trait Sanitization {
 
     /*
      * Oxi Accordions Style Admin Panel end Section Inner Accordions
-     * 
+     *
      * @since 2.0.1
      */
 
@@ -216,7 +216,7 @@ trait Sanitization {
 
     /*
      * Oxi Accordions Style Admin Panel Section Inner Accordions Child
-     * 
+     *
      * @since 2.0.1
      */
 
@@ -226,7 +226,7 @@ trait Sanitization {
 
     /*
      * Oxi Accordions Style Admin Panel End Section Inner Accordions Child
-     * 
+     *
      * @since 2.0.1
      */
 
@@ -236,7 +236,7 @@ trait Sanitization {
 
     /*
      * Oxi Accordions Style Admin Panel  Section Popover
-     * 
+     *
      * @since 2.0.1
      */
 
@@ -252,22 +252,22 @@ trait Sanitization {
         echo '  <div class="shortcode-form-control shortcode-control-type-popover ' . $separator . '" ' . $condition . '>
                     <div class="shortcode-form-control-content shortcode-form-control-content-popover">
                         <div class="shortcode-form-control-field">
-                            <label for="" class="shortcode-form-control-title">' . $arg['label'] . '</label>  
+                            <label for="" class="shortcode-form-control-title">' . $arg['label'] . '</label>
                             <div class="shortcode-form-control-input-wrapper">
                                 <span class="dashicons popover-set"></span>
                             </div>
                         </div>
                         ' . (array_key_exists('description', $arg) ? '<div class="shortcode-form-control-description">' . $arg['description'] . '</div>' : '') . '
-                        
+
                     </div>
                     <div class="shortcode-form-control-content shortcode-form-control-content-popover-body">
-                        
+
                ';
     }
 
     /*
      * Oxi Accordions Style Admin Panel end Popover
-     * 
+     *
      * @since 2.0.1
      */
 
@@ -278,8 +278,8 @@ trait Sanitization {
 
     /*
      * Oxi Accordions Style Admin Panel Form Add Control.
-     * Call All Input Control from here Based on Control Name. 
-     * 
+     * Call All Input Control from here Based on Control Name.
+     *
      * @since 2.0.1
      */
 
@@ -327,7 +327,7 @@ trait Sanitization {
         ];
 
         /*
-         * Data Currection while Its comes from group Control 
+         * Data Currection while Its comes from group Control
          */
         if (array_key_exists('selector-value', $arg)) :
             foreach ($arg['selector'] as $key => $value) {
@@ -375,7 +375,7 @@ trait Sanitization {
     /*
      * Oxi Accordions Style Admin Panel Responsive Control.
      * Can Possible to modify any Add control to Responsive Control
-     * 
+     *
      * @since 2.0.1
      */
 
@@ -426,7 +426,7 @@ trait Sanitization {
 
     /*
      * Oxi Accordions Style Admin Panel Group Control.
-     * 
+     *
      * @since 2.0.1
      */
 
@@ -465,7 +465,7 @@ trait Sanitization {
         }
         echo '          <div class="shortcode-form-control-input-wrapper">
                             <input type="hidden" value="' . $value . '" name="' . $id . '" id="' . $id . '">
-                        </div>      
+                        </div>
                     </div>
                 </div>
             </div>';
@@ -473,7 +473,7 @@ trait Sanitization {
 
     /*
      * Oxi Accordions Style Admin Panel Heading Input.
-     * 
+     *
      * @since 2.0.1
      */
 
@@ -483,7 +483,7 @@ trait Sanitization {
 
     /*
      * Oxi Accordions Style Admin Panel Switcher Input.
-     * 
+     *
      * @since 2.0.1
      */
 
@@ -514,7 +514,7 @@ trait Sanitization {
 
     /*
      * Oxi Accordions Style Admin Panel Switcher Input.
-     * 
+     *
      * @since 2.0.1
      */
 
@@ -543,7 +543,7 @@ trait Sanitization {
         $retunvalue = array_key_exists('selector', $arg) ? htmlspecialchars(json_encode($retun)) : '';
 
         echo '  <div class="shortcode-form-control-input-wrapper">
-                    <label class="shortcode-switcher">  
+                    <label class="shortcode-switcher">
                         <input type="checkbox" ' . ($value == $arg['return_value'] ? 'checked ckdflt="true"' : '') . ' value="' . $arg['return_value'] . '"  name="' . $id . '" id="' . $id . '"  retundata="' . $retunvalue . '"/>
                         <span data-on="' . $arg['label_on'] . '" data-off="' . $arg['label_off'] . '"></span>
                     </label>
@@ -552,7 +552,7 @@ trait Sanitization {
 
     /*
      * Oxi Accordions Style Admin Panel Text Input.
-     * 
+     *
      * @since 2.0.1
      */
 
@@ -572,7 +572,7 @@ trait Sanitization {
 
     /*
      * Oxi Accordions Style Admin Panel Hidden Input.
-     * 
+     *
      * @since 2.0.1
      */
 
@@ -603,7 +603,7 @@ trait Sanitization {
 
     /*
      * Oxi Accordions Style Admin Panel Textarea Input.
-     * 
+     *
      * @since 2.0.1
      */
 
@@ -617,7 +617,7 @@ trait Sanitization {
 
     /*
      * Oxi Accordions Style Admin Panel WYSIWYG Input.
-     * 
+     *
      * @since 2.0.1
      */
 
@@ -639,7 +639,7 @@ trait Sanitization {
 
     /*
      * Oxi Accordions Style Admin Panel Image Input.
-     * 
+     *
      * @since 2.0.1
      */
 
@@ -665,7 +665,7 @@ trait Sanitization {
 
     /*
      * Oxi Accordions Style Admin Panel Number Input.
-     * 
+     *
      * @since 2.0.1
      */
 
@@ -698,7 +698,7 @@ trait Sanitization {
 
     /*
      * Oxi Accordions Style Admin Panel Slider Input.
-     * 
+     *
      * @since 2.0.1
      * Done With Number Information
      */
@@ -747,7 +747,7 @@ trait Sanitization {
 
     /*
      * Oxi Accordions Style Admin Panel Select Input.
-     * 
+     *
      * @since 2.0.1
      */
 
@@ -804,7 +804,7 @@ trait Sanitization {
 
     /*
      * Oxi Accordions Style Admin Panel Choose Input.
-     * 
+     *
      * @since 2.0.1
      */
 
@@ -837,7 +837,7 @@ trait Sanitization {
                 <div class="shortcode-form-choices" responsive="' . $arg['responsive'] . '" retundata=\'' . $retunvalue . '\'>';
         foreach ($arg['options'] as $key => $val) {
             echo '  <input id="' . $id . '-' . $key . '" type="radio" name="' . $id . '" value="' . $key . '" ' . ($value == $key ? 'checked  ckdflt="true"' : '') . '>
-                                    <label class="shortcode-form-choices-label" for="' . $id . '-' . $key . '" tooltip="' . (isset($val['title'])? $val['title'] : '') . '">
+                                    <label class="shortcode-form-choices-label" for="' . $id . '-' . $key . '" tooltip="' . (isset($val['title']) ? $val['title'] : '') . '">
                                         ' . (($operator == 'text') ? $val['title'] : '<i class="' . $val['icon'] . '" aria-hidden="true"></i>') . '
                                     </label>';
         }
@@ -847,7 +847,7 @@ trait Sanitization {
 
     /*
      * Oxi Accordions Style Admin Panel Color Input.
-     * 
+     *
      * @since 2.0.1
      */
 
@@ -918,7 +918,7 @@ trait Sanitization {
 
     /*
      * Oxi Accordions Style Admin Panel Icon Selector.
-     * 
+     *
      * @since 2.0.1
      */
 
@@ -934,7 +934,7 @@ trait Sanitization {
 
     /*
      * Oxi Accordions Style Admin Panel Font Selector.
-     * 
+     *
      * @since 2.0.1
      */
 
@@ -971,7 +971,7 @@ trait Sanitization {
 
     /*
      * Oxi Accordions Style Admin Panel Date and Time Selector.
-     * 
+     *
      * @since 2.0.1
      */
 
@@ -991,7 +991,7 @@ trait Sanitization {
 
     /*
      * Oxi Accordions Style Admin Panel Gradient Selector.
-     * 
+     *
      * @since 2.0.1
      */
 
@@ -1024,7 +1024,7 @@ trait Sanitization {
 
     /*
      * Oxi Accordions Style Admin Panel Dimensions Selector.
-     * 
+     *
      * @since 2.0.1
      */
 
@@ -1097,7 +1097,7 @@ trait Sanitization {
 
     /*
      * Oxi Accordions Style Admin Panel Typography.
-     * 
+     *
      * @since 2.0.1
      * Simple Interface Enable
      */
@@ -1363,9 +1363,9 @@ trait Sanitization {
 
     /*
      * Oxi Accordions Style Admin Panel Media Group Control.
-     * 
+     *
      * @since 2.0.1
-     * 
+     *
      * Works at any version
      */
 
@@ -1427,7 +1427,7 @@ trait Sanitization {
 
     /*
      * Oxi Accordions Style Admin Panel Box Shadow Control.
-     * 
+     *
      * @since 2.0.1
      * Only Works At Customizable Version
      */
@@ -1618,7 +1618,7 @@ trait Sanitization {
 
     /*
      * Oxi Accordions Style Admin Panel Text Shadow .
-     * 
+     *
      * @since 2.0.1
      * Only Works at Customizable Options
      */
@@ -1738,9 +1738,9 @@ trait Sanitization {
 
     /*
      * Oxi Accordions Style Admin Panel Text Shadow .
-     * 
+     *
      * @since 2.0.1
-     * 
+     *
      * Simple Interface Enable
      */
 
@@ -1914,7 +1914,7 @@ trait Sanitization {
 
     /*
      * Oxi Accordions Style Admin Panel Border .
-     * 
+     *
      * @since 2.0.1
      * Complete Simple Version
      */
@@ -2028,7 +2028,7 @@ trait Sanitization {
 
     /*
      * Oxi Accordions Style Admin Panel Border .
-     * 
+     *
      * @since 2.0.1
      * Complete Simple Version
      */
@@ -2130,7 +2130,7 @@ trait Sanitization {
 
     /*
      * Oxi Accordions Style Admin Panel Background .
-     * 
+     *
      * @since 2.0.1
      * Simple Interface Enable
      */
@@ -2344,7 +2344,7 @@ trait Sanitization {
 
     /*
      * Oxi Accordions Style Admin Panel Background .
-     * 
+     *
      * @since 2.0.1
      * Simple Interfaece Enable
      */
@@ -2386,7 +2386,7 @@ trait Sanitization {
 
     /*
      * Oxi Accordions Style Admin Panel Column Size.
-     * 
+     *
      * @since 2.0.1
      * Complete Simple Interface
      */
@@ -2471,17 +2471,17 @@ trait Sanitization {
     }
 
     /*
-     * 
-     * 
+     *
+     *
      * Templates Substitute Data
-     * 
-     * 
-     * 
-     * 
+     *
+     *
+     *
+     *
      */
     /*
      * Oxi Accordions Style Admin Panel Template Substitute Control.
-     * 
+     *
      * @since 2.0.1
      */
 
@@ -2492,7 +2492,7 @@ trait Sanitization {
 
     /*
      * Oxi Accordions Style Admin Panel Template Substitute Modal Opener.
-     * 
+     *
      * @since 2.0.1
      */
 
@@ -2506,7 +2506,7 @@ trait Sanitization {
         /*
          * $arg['title'] = 'Add New Items';
          * $arg['sub-title'] = 'Add New Items 02';
-         * 
+         *
          */
 
         $condition = $this->forms_condition($arg);
@@ -2534,7 +2534,7 @@ trait Sanitization {
         /*
          * $arg['title'] = 'Add New Items';
          * $arg['sub-title'] = 'Add New Items 02';
-         * 
+         *
          */
 
         $condition = $this->forms_condition($arg);
@@ -2559,7 +2559,7 @@ trait Sanitization {
 
     /*
      * Oxi Accordions Style Admin Panel Template Shortcode Info.
-     * 
+     *
      * @since 2.0.1
      */
 
@@ -2572,7 +2572,7 @@ trait Sanitization {
         /*
          * $arg['title'] = 'Add New Items';
          * $arg['sub-title'] = 'Add New Items 02';
-         * 
+         *
          */
         $condition = $this->forms_condition($arg);
         echo ' <div class="oxi-addons-shortcode shortcode-addons-templates-right-panel ' . (($arg['showing']) ? '' : 'oxi-admin-head-d-none') . '" ' . $condition . '>
@@ -2605,7 +2605,7 @@ trait Sanitization {
         /*
          * $arg['title'] = 'Add New Items';
          * $arg['sub-title'] = 'Add New Items 02';
-         * 
+         *
          */
         $condition = $this->forms_condition($arg);
         echo '  <div class="oxi-addons-item-form shortcode-addons-templates-right-panel ' . (($arg['showing']) ? '' : 'oxi-admin-head-d-none') . '" ' . $condition . '>

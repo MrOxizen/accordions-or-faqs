@@ -5,7 +5,7 @@ namespace OXI_ACCORDIONS_PLUGINS\Classes;
 /**
  * Description of API
  *
- * @author biplo
+ * author @biplob018
  */
 class API {
 
@@ -238,7 +238,7 @@ class API {
     /**
      * Template Name Change
      *
-     * @since 9.3.0
+     * @since 2.0.1
      */
     public function post_elements_template_rearrange_save_data() {
         $params = explode(',', $this->rawdata);
@@ -261,7 +261,7 @@ class API {
     /**
      * Template Modal Data
      *
-     * @since 9.3.0
+     * @since 2.0.1
      */
     public function post_elements_template_modal_data() {
         if ((int) $this->styleid):
@@ -277,7 +277,7 @@ class API {
     /**
      * Template Template Render
      *
-     * @since 9.3.0
+     * @since 2.0.1
      */
     public function post_elements_template_render_data() {
         $transient = 'accordions-or-faqs-template-' . $this->styleid;
@@ -286,9 +286,9 @@ class API {
     }
 
     /**
-     * Template Modal Data Edit Form 
+     * Template Modal Data Edit Form
      *
-     * @since 9.3.0
+     * @since 2.0.1
      */
     public function post_elements_template_modal_data_edit() {
         if ((int) $this->childid):
@@ -304,7 +304,7 @@ class API {
     /**
      * Template Child Delete Data
      *
-     * @since 9.3.0
+     * @since 2.0.1
      */
     public function post_elements_template_modal_data_delete() {
         if ((int) $this->childid):
@@ -378,6 +378,31 @@ class API {
         return $data;
     }
 
+    public function deactivate_license($key) {
+        $api_params = array(
+            'edd_action' => 'deactivate_license',
+            'license' => $key,
+            'item_name' => urlencode('Accordions - Multiple Accordions or FAQs Builders'),
+            'url' => home_url()
+        );
+        $response = wp_remote_post('https://www.oxilab.org', array('timeout' => 15, 'sslverify' => false, 'body' => $api_params));
+        if (is_wp_error($response) || 200 !== wp_remote_retrieve_response_code($response)) {
+
+            if (is_wp_error($response)) {
+                $message = $response->get_error_message();
+            } else {
+                $message = __('An error occurred, please try again.');
+            }
+            return $message;
+        }
+        $license_data = json_decode(wp_remote_retrieve_body($response));
+        if ($license_data->license == 'deactivated') {
+            delete_option('accordions_or_faqs_license_status');
+            delete_option('accordions_or_faqs_license_key');
+        }
+        return 'success';
+    }
+
     public function activate_license($key) {
         $api_params = array(
             'edd_action' => 'activate_license',
@@ -446,31 +471,6 @@ class API {
             return $message;
         }
         update_option('accordions_or_faqs_license_status', $license_data->license);
-        return 'success';
-    }
-
-    public function deactivate_license($key) {
-        $api_params = array(
-            'edd_action' => 'deactivate_license',
-            'license' => $key,
-            'item_name' => urlencode('Accordions - Multiple Accordions or FAQs Builders'),
-            'url' => home_url()
-        );
-        $response = wp_remote_post('https://www.oxilab.org', array('timeout' => 15, 'sslverify' => false, 'body' => $api_params));
-        if (is_wp_error($response) || 200 !== wp_remote_retrieve_response_code($response)) {
-
-            if (is_wp_error($response)) {
-                $message = $response->get_error_message();
-            } else {
-                $message = __('An error occurred, please try again.');
-            }
-            return $message;
-        }
-        $license_data = json_decode(wp_remote_retrieve_body($response));
-        if ($license_data->license == 'deactivated') {
-            delete_option('accordions_or_faqs_license_status');
-            delete_option('accordions_or_faqs_license_key');
-        }
         return 'success';
     }
 

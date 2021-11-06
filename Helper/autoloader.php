@@ -3,7 +3,7 @@
 /**
  * Core Autoloder
  *
- * @since 3.1.0
+ * @since 2.0.1
  */
 spl_autoload_register(function ($class) {
     // project-specific namespace prefix

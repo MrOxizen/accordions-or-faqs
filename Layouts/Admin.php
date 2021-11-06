@@ -5,7 +5,7 @@ namespace OXI_ACCORDIONS_PLUGINS\Layouts;
 /**
  * Description of Admin
  *
- * @author biplo
+ * author @biplob018
  */
 use OXI_ACCORDIONS_PLUGINS\Helper\Controls as Controls;
 
@@ -90,7 +90,6 @@ class Admin {
      * @since 2.0.1
      */
     public $google_font = [];
-
 
     /**
      * Define Oxilab Tabs  Elements Type
@@ -340,7 +339,7 @@ class Admin {
      */
     public function render() {
         ?>
-        <div class="wrap">  
+        <div class="wrap">
             <div class="oxi-addons-wrapper">
                 <?php
                 apply_filters('oxi-accordions-plugin/admin_menu', TRUE);
@@ -366,7 +365,7 @@ class Admin {
                                             <input type="hidden"  id="style-id" name="style-id" value="<?php echo $this->dbdata['id']; ?>">
                                             <button type="button" class="btn btn-success" id="oxi-addons-templates-submit"> Save</button>
                                         </div>
-                                    </div> 
+                                    </div>
                                 </form>
                             </div>
                             <div class="oxi-addons-style-right">
@@ -396,15 +395,15 @@ class Admin {
                                                     <span class="dashicons dashicons-smartphone"></span>
                                                 </a>
                                             </div>
-                                        </div> 
+                                        </div>
                                         <div class="oxi-addons-style-left-preview-heading-right">
                                             <input type="text" data-format="rgb" data-opacity="TRUE" class="oxi-addons-minicolor" id="oxi-addons-2-0-color" name="oxi-addons-2-0-color" value="<?php echo(is_array($this->style) ? array_key_exists('oxilab-preview-color', $this->style) ? $this->style['oxilab-preview-color'] : '#FFF' : '#FFF'); ?>">
                                         </div>
                                     </div>
                                     <div class="oxi-addons-preview-wrapper">
                                         <div class="oxi-addons-preview-data" id="oxi-addons-preview-data" template-wrapper="<?php echo $this->WRAPPER; ?> > .oxi-addons-row" template-id="#oxi-<?php echo strtolower($this->dbdata['type']); ?>-wrapper-<?php echo $this->dbdata['id']; ?>">
-                                            <iframe  src="<?php echo admin_url('admin.php?page=oxi-accordions-style-view&styleid=' . $this->oxiid); ?>" 
-                                                     id="oxi-addons-preview-iframe" 
+                                            <iframe  src="<?php echo admin_url('admin.php?page=oxi-accordions-style-view&styleid=' . $this->oxiid); ?>"
+                                                     id="oxi-addons-preview-iframe"
                                                      class="oxi-addons-preview-iframe"
                                                      width="100%" scrolling="no"
                                                      frameborder="0"></iframe>
@@ -424,12 +423,12 @@ class Admin {
                                     </div>
                                 </div>
                                 <div class="modal-body text-center">
-                                    <h4></h4>	
+                                    <h4></h4>
                                     <p></p>
                                 </div>
                             </div>
                         </div>
-                    </div>  
+                    </div>
 
                 </div>
             </div>

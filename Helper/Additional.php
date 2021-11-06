@@ -4,15 +4,9 @@ namespace OXI_ACCORDIONS_PLUGINS\Helper;
 
 /**
  *
- * @author biplo
+ * author @biplob018
  */
 trait Additional {
-
-    public function loader_font_familly_validation($data = []) {
-        foreach ($data as $value) {
-            wp_enqueue_style('' . $value . '', 'https://fonts.googleapis.com/css?family=' . $value . '');
-        }
-    }
 
     public function admin_css() {
         $this->loader_font_familly_validation(['Bree+Serif', 'Source+Sans+Pro']);
@@ -32,6 +26,7 @@ trait Additional {
             'plugin' => OXI_ACCORDIONS_URL
         ));
     }
+
     public function admin_settings_additional() {
         $this->admin_css();
         $this->admin_jquery();
@@ -46,8 +41,6 @@ trait Additional {
         wp_enqueue_script('jquery.dataTables.min', OXI_ACCORDIONS_URL . 'assets/backend/js/jquery.dataTables.min.js', false, OXI_ACCORDIONS_PLUGIN_VERSION);
         wp_enqueue_script('dataTables.bootstrap.min', OXI_ACCORDIONS_URL . 'assets/backend/js/dataTables.bootstrap.min.js', false, OXI_ACCORDIONS_PLUGIN_VERSION);
     }
-    
-    
 
     public function admin_front_additional() {
         $this->admin_css();
@@ -109,11 +102,17 @@ trait Additional {
         $this->admin_media_scripts();
     }
 
+    public function loader_font_familly_validation($data = []) {
+        foreach ($data as $value) {
+            wp_enqueue_style('' . $value . '', 'https://fonts.googleapis.com/css?family=' . $value . '');
+        }
+    }
+
     /**
      * Admin Media Scripts.
      * Most of time using into Style Editing Page
-     * 
-     * @since 9.3.0
+     *
+     * @since 2.0.1
      */
     public function admin_media_scripts() {
         wp_enqueue_media();
@@ -455,7 +454,7 @@ trait Additional {
                         jQuery(\'.shortcode-addons-family\').fontselect();';
 
         if (apply_filters(OXI_ACCORDIONS_PREMIUM, false) == false):
-            $data .= 'setTimeout(function () {jQuery(".oxi-addons-minicolor").each(function (index, value) {                             
+            $data .= 'setTimeout(function () {jQuery(".oxi-addons-minicolor").each(function (index, value) {
                             jQuery(this).parent().parent().siblings(".shortcode-form-control-title").append(" <span class=\"oxi-pro-only\">Pro Only</span>");
                             var datavalue = jQuery(this).val();
                             jQuery(this).attr("oxilabvalue", datavalue);

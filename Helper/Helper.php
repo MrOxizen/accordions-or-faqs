@@ -4,9 +4,76 @@ namespace OXI_ACCORDIONS_PLUGINS\Helper;
 
 /**
  *
- * @author biplo
+ * author @biplob018
  */
 trait Helper {
+
+    /**
+     * Plugin Admin Top Menu
+     *
+     * @since 2.0.1
+     */
+    public function oxilab_admin_menu($agr) {
+        $response = [
+            'Shortcode' => [
+                'name' => 'Shortcode',
+                'homepage' => 'oxi-accordions-ultimate'
+            ],
+            'Create New' => [
+                'name' => 'Create New',
+                'homepage' => 'oxi-accordions-ultimate-new'
+            ],
+        ];
+
+        $bgimage = OXI_ACCORDIONS_URL . 'assets/image/sa-logo.png';
+        $sub = '';
+
+        $menu = '<div class="oxi-addons-wrapper">
+                    <div class="oxilab-new-admin-menu">
+                        <div class="oxi-site-logo">
+                            <a href="' . $this->admin_url_convert('oxi-accordions-ultimate') . '" class="header-logo" style=" background-image: url(' . $bgimage . ');">
+                            </a>
+                        </div>
+                        <nav class="oxilab-sa-admin-nav">
+                            <ul class="oxilab-sa-admin-menu">';
+
+        $GETPage = sanitize_text_field($_GET['page']);
+
+        foreach ($response as $key => $value) {
+            $active = ($GETPage == $value['homepage'] ? ' class="active" ' : '');
+            $menu .= '<li ' . $active . '><a href="' . $this->admin_url_convert($value['homepage']) . '">' . $this->name_converter($value['name']) . '</a></li>';
+        }
+        $menu .= '          </ul>
+                            <ul class="oxilab-sa-admin-menu2">
+                               ' . (apply_filters(OXI_ACCORDIONS_PREMIUM, false) == FALSE ? ' <li class="fazil-class" ><a target="_blank" href="https://www.oxilabdemos.com/accordions/pricing">Upgrade</a></li>' : '') . '
+                               <li class="saadmin-doc"><a target="_black" href="https://www.oxilabdemos.com/accordions/docs">Docs</a></li>
+                               <li class="saadmin-doc"><a target="_black" href="https://wordpress.org/support/plugin/accordions-or-faqs/">Support</a></li>
+                               <li class="saadmin-set"><a href="' . admin_url('admin.php?page=oxi-accordions-ultimate-settings') . '"><span class="dashicons dashicons-admin-generic"></span></a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                ' . $sub;
+        echo __($menu, OXI_ACCORDIONS_TEXTDOMAIN);
+    }
+
+    public function admin_menu() {
+        $user_role = get_option('oxi_addons_user_permission');
+        $role_object = get_role($user_role);
+        $first_key = '';
+        if (isset($role_object->capabilities) && is_array($role_object->capabilities)) {
+            reset($role_object->capabilities);
+            $first_key = key($role_object->capabilities);
+        } else {
+            $first_key = 'manage_options';
+        }
+        add_menu_page('Accordions', 'Accordions', $first_key, 'oxi-accordions-ultimate', [$this, 'home_page']);
+        add_submenu_page('oxi-accordions-ultimate', 'Accordions', 'Shortcode', $first_key, 'oxi-accordions-ultimate', [$this, 'home_page']);
+        add_submenu_page('oxi-accordions-ultimate', 'Create New', 'Create New', $first_key, 'oxi-accordions-ultimate-new', [$this, 'create_new']);
+        add_submenu_page('oxi-accordions-ultimate', 'Settings', 'Settings', $first_key, 'oxi-accordions-ultimate-settings', [$this, 'user_settings']);
+        add_submenu_page('oxi-accordions-ultimate', 'Oxilab Plugins', 'Oxilab Plugins', $first_key, 'oxi-accordions-ultimate-plugins', [$this, 'oxilab_plugins']);
+        add_submenu_page('oxi-accordions-ultimate', 'Welcome To Accordions - Multiple Accordions or FAQs Builders', 'Support', $first_key, 'oxi-accordions-ultimate-welcome', [$this, 'welcome_page']);
+    }
 
     /**
      * Plugin fixed
@@ -83,7 +150,7 @@ trait Helper {
     public function supportandcomments($agr) {
         echo '  <div class="oxi-addons-admin-notifications">
                     <h3>
-                        <span class="dashicons dashicons-flag"></span> 
+                        <span class="dashicons dashicons-flag"></span>
                         Notifications
                     </h3>
                     <p></p>
@@ -93,77 +160,10 @@ trait Helper {
                             ' . (apply_filters(OXI_ACCORDIONS_PREMIUM, false) ? '' : '<p>By the way, did you know we also have a <a href="https://www.oxilabdemos.com/accordions/pricing">Premium Version</a>? It offers lots of options with automatic update. It also comes with 16/5 personal support.</p>') . '
                             <p>Thanks Again!</p>
                             <p></p>
-                        </div>                     
+                        </div>
                     </div>
                     <p></p>
                 </div>';
-    }
-
-    /**
-     * Plugin Admin Top Menu
-     *
-     * @since 2.0.1
-     */
-    public function oxilab_admin_menu($agr) {
-        $response = [
-            'Shortcode' => [
-                'name' => 'Shortcode',
-                'homepage' => 'oxi-accordions-ultimate'
-            ],
-            'Create New' => [
-                'name' => 'Create New',
-                'homepage' => 'oxi-accordions-ultimate-new'
-            ],
-        ];
-
-        $bgimage = OXI_ACCORDIONS_URL . 'assets/image/sa-logo.png';
-        $sub = '';
-
-        $menu = '<div class="oxi-addons-wrapper">
-                    <div class="oxilab-new-admin-menu">
-                        <div class="oxi-site-logo">
-                            <a href="' . $this->admin_url_convert('oxi-accordions-ultimate') . '" class="header-logo" style=" background-image: url(' . $bgimage . ');">
-                            </a>
-                        </div>
-                        <nav class="oxilab-sa-admin-nav">
-                            <ul class="oxilab-sa-admin-menu">';
-
-        $GETPage = sanitize_text_field($_GET['page']);
-
-        foreach ($response as $key => $value) {
-            $active = ($GETPage == $value['homepage'] ? ' class="active" ' : '');
-            $menu .= '<li ' . $active . '><a href="' . $this->admin_url_convert($value['homepage']) . '">' . $this->name_converter($value['name']) . '</a></li>';
-        }
-        $menu .= '          </ul>
-                            <ul class="oxilab-sa-admin-menu2">
-                               ' . (apply_filters(OXI_ACCORDIONS_PREMIUM, false) == FALSE ? ' <li class="fazil-class" ><a target="_blank" href="https://www.oxilabdemos.com/accordions/pricing">Upgrade</a></li>' : '') . '
-                               <li class="saadmin-doc"><a target="_black" href="https://www.oxilabdemos.com/accordions/docs">Docs</a></li>
-                               <li class="saadmin-doc"><a target="_black" href="https://wordpress.org/support/plugin/accordions-or-faqs/">Support</a></li>
-                               <li class="saadmin-set"><a href="' . admin_url('admin.php?page=oxi-accordions-ultimate-settings') . '"><span class="dashicons dashicons-admin-generic"></span></a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-                ' . $sub;
-        echo __($menu, OXI_ACCORDIONS_TEXTDOMAIN);
-    }
-
-    public function admin_menu() {
-        $user_role = get_option('oxi_addons_user_permission');
-        $role_object = get_role($user_role);
-        $first_key = '';
-        if (isset($role_object->capabilities) && is_array($role_object->capabilities)) {
-            reset($role_object->capabilities);
-            $first_key = key($role_object->capabilities);
-        } else {
-            $first_key = 'manage_options';
-        }
-        add_menu_page('Accordions', 'Accordions', $first_key, 'oxi-accordions-ultimate', [$this, 'home_page']);
-        add_submenu_page('oxi-accordions-ultimate', 'Accordions', 'Shortcode', $first_key, 'oxi-accordions-ultimate', [$this, 'home_page']);
-        add_submenu_page('oxi-accordions-ultimate', 'Create New', 'Create New', $first_key, 'oxi-accordions-ultimate-new', [$this, 'create_new']);
-        add_submenu_page('oxi-accordions-ultimate', 'Settings', 'Settings', $first_key, 'oxi-accordions-ultimate-settings', [$this, 'user_settings']);
-        add_submenu_page('oxi-accordions-ultimate', 'Oxilab Plugins', 'Oxilab Plugins', $first_key, 'oxi-accordions-ultimate-plugins', [$this, 'oxilab_plugins']);
-        add_submenu_page('oxi-accordions-ultimate', 'Welcome To Accordions - Multiple Accordions or FAQs Builders', 'Support', $first_key, 'oxi-accordions-ultimate-welcome', [$this, 'welcome_page']);
     }
 
     public function home_page() {

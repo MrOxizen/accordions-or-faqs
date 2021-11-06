@@ -5,7 +5,7 @@ namespace OXI_ACCORDIONS_PLUGINS\Classes;
 /**
  * Description of Bootstrap
  *
- * @author biplo
+ * author @biplob018
  */
 class Bootstrap {
 

@@ -5,7 +5,7 @@ namespace OXI_ACCORDIONS_PLUGINS\Layouts;
 /**
  * Description of Template
  *
- * @author biplo
+ * author @biplob018
  */
 class Template {
 
@@ -100,7 +100,7 @@ class Template {
     public $accordions_preloader;
 
     /**
-     * Define Accordions Type as Toggle or Accordions 
+     * Define Accordions Type as Toggle or Accordions
      *
      * @since 2.0.1
      */

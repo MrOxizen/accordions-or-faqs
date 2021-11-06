@@ -5,21 +5,21 @@ namespace OXI_ACCORDIONS_PLUGINS\Includes;
 /**
  * Description of Render
  *
- * @author biplo
+ * author @biplob018
  */
 class Frontend {
 
     /**
      * Current Elements ID
      *
-     * @since 3.3.0
+     * @since 2.0.1
      */
     public $oxiid;
 
     /**
      * Define $wpdb
      *
-     * @since 3.1.0
+     * @since 2.0.1
      */
     public $database;
 
@@ -79,29 +79,29 @@ class Frontend {
             <meta name="viewport" content="width=device-width"/>
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
             <title><?php esc_html_e('Accordions - Multiple Accordions or FAQs Builders', OXI_ACCORDIONS_TEXTDOMAIN); ?></title>
-        <?php wp_head(); ?>
+            <?php wp_head(); ?>
         </head>
         <body class="shortcode-addons-template-body" id="shortcode-addons-template-body">
-        <?php
-    }
+            <?php
+        }
 
-    /**
-     * Outputs the content of the current step.
-     */
-    public function template_content() {
-        if ($this->oxiid > 0):
-            $CLASS = '\OXI_ACCORDIONS_PLUGINS\Includes\Shortcode';
-            if (class_exists($CLASS)):
-                new $CLASS($this->oxiid, 'admin');
+        /**
+         * Outputs the content of the current step.
+         */
+        public function template_content() {
+            if ($this->oxiid > 0):
+                $CLASS = '\OXI_ACCORDIONS_PLUGINS\Includes\Shortcode';
+                if (class_exists($CLASS)):
+                    new $CLASS($this->oxiid, 'admin');
+                endif;
             endif;
-        endif;
-    }
+        }
 
-    /**
-     * Outputs the simplified footer.
-     */
-    public function template_footer() {
-        ?>
+        /**
+         * Outputs the simplified footer.
+         */
+        public function template_footer() {
+            ?>
             <?php wp_footer(); ?>
         </body>
         </html>
