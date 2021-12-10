@@ -2,6 +2,9 @@
 
 namespace OXI_ACCORDIONS_PLUGINS\Includes;
 
+if (!defined('ABSPATH'))
+    exit;
+
 /**
  * Description of Settings
  *
@@ -17,7 +20,7 @@ class Settings {
     public $status;
 
     /**
-     * Constructor of Oxilab tabs Home Page
+     * Constructor of Oxilab Accordions Home Page
      *
      * @since 2.0.0
      */
@@ -30,7 +33,7 @@ class Settings {
     public function admin() {
         global $wp_roles;
         $this->roles = $wp_roles->get_names();
-        $this->saved_role = get_option('oxi_addons_user_permission');
+        $this->saved_role = get_option('oxi_accordions_user_permission');
         $this->license = get_option('accordions_or_faqs_license_key');
         $this->status = get_option('accordions_or_faqs_license_status');
     }
@@ -48,16 +51,16 @@ class Settings {
                         <tbody>
                             <tr>
                                 <th scope="row">
-                                    <label for="oxi_addons_user_permission">Who Can Edit?</label>
+                                    <label for="oxi_accordions_user_permission">Who Can Edit?</label>
                                 </th>
                                 <td>
                                     <fieldset>
-                                        <select name="oxi_addons_user_permission">
+                                        <select name="oxi_accordions_user_permission">
                                             <?php foreach ($this->roles as $key => $role) { ?>
                                                 <option value="<?php echo $key; ?>" <?php selected($this->saved_role, $key); ?>><?php echo $role; ?></option>
-                                            <?php } ?>
+        <?php } ?>
                                         </select>
-                                        <span class="oxi-addons-settings-connfirmation oxi_addons_user_permission"></span>
+                                        <span class="oxi-addons-settings-connfirmation oxi_accordions_user_permission"></span>
                                         <br>
                                         <p class="description"><?php _e('Select the Role who can manage This Plugins.'); ?> <a target="_blank" href="https://codex.wordpress.org/Roles_and_Capabilities#Capability_vs._Role_Table">Help</a></p>
                                     </fieldset>

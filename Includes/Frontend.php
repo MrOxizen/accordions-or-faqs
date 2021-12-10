@@ -2,6 +2,9 @@
 
 namespace OXI_ACCORDIONS_PLUGINS\Includes;
 
+if (!defined('ABSPATH'))
+    exit;
+
 /**
  * Description of Render
  *
@@ -102,7 +105,7 @@ class Frontend {
          */
         public function template_footer() {
             ?>
-            <?php wp_footer(); ?>
+        <?php wp_footer(); ?>
         </body>
         </html>
         <?php

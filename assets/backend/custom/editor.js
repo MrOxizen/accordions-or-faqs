@@ -33,10 +33,9 @@ jQuery.noConflict();
                 url: oxiaccordionsultimate.root + 'oxiaccordionsultimate/v1/' + functionname,
                 method: 'POST',
                 dataType: "json",
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader('X-WP-Nonce', oxiaccordionsultimate.nonce);
-                },
+               
                 data: {
+                    _wpnonce: oxiaccordionsultimate.nonce,
                     styleid: styleid,
                     childid: childid,
                     rawdata: rawdata

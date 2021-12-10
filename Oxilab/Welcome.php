@@ -2,6 +2,9 @@
 
 namespace OXI_ACCORDIONS_PLUGINS\Oxilab;
 
+if (!defined('ABSPATH'))
+    exit;
+
 /**
  * Description of Welcome
  *

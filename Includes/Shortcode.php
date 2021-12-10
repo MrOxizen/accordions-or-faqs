@@ -2,6 +2,9 @@
 
 namespace OXI_ACCORDIONS_PLUGINS\Includes;
 
+if (!defined('ABSPATH'))
+    exit;
+
 /**
  * Description of Shortcode
  *

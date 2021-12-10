@@ -2,6 +2,9 @@
 
 namespace OXI_ACCORDIONS_PLUGINS\Includes;
 
+if (!defined('ABSPATH'))
+    exit;
+
 /**
  * Description of Index
  *
@@ -50,7 +53,7 @@ class Front_Page {
             $nonce = $_REQUEST['_wpnonce'];
         }
 
-        if (!empty($_POST['importdatasubmit']) && $_POST['importdatasubmit'] == 'Save') {
+        if (!empty($_POST['importdatasubmit']) && sanitize_text_field($_POST['importdatasubmit']) == 'Save') {
             if (!wp_verify_nonce($nonce, 'oxi-accordions-ultimate-import')) {
                 die('You do not have sufficient permissions to access this page.');
             } else {
@@ -114,7 +117,7 @@ class Front_Page {
                         <div class="oxi-addons-col-1 oxi-import">
                             <div class="oxi-addons-style-preview">
                                 <div class="oxilab-admin-style-preview-top">
-                                    <a href="#" id="oxilab-tabs-import-json">
+                                    <a href="#" id="oxilab-accordions-import-json">
                                         <div class="oxilab-admin-add-new-item">
                                             <span>
                                                 <i class="fas fa-plus-circle oxi-icons"></i>
@@ -139,7 +142,7 @@ class Front_Page {
                                         <div class=" form-group row">
                                             <label for="addons-style-name" class="col-sm-6 col-form-label" oxi-addons-tooltip="Give your Shortcode Name Here">Name</label>
                                             <div class="col-sm-6 addons-dtm-laptop-lock">
-                                                <input class="form-control" type="text" value="" id="addons-style-name"  name="addons-style-name">
+                                                <input class="form-control" type="text" value="" id="addons-style-name"  name="addons-style-name" required>
                                             </div>
                                         </div>
                                     </div>
@@ -200,7 +203,7 @@ class Front_Page {
                                <input type="hidden" name="oxideleteid" id="oxideleteid" value="' . $id . '">
                                <button class="btn btn-danger" style="float:left"  title="Delete"  type="submit" value="delete" name="addonsdatadelete">Delete</button>
                        </form>
-                       <a href="' . esc_url_raw(rest_url()) . 'oxiaccordionsultimate/v1/shortcode_export?styleid=' . $id . '"  title="Export"  class="btn btn-info" style="float:left; margin-right: 5px; margin-left: 5px;">Export</a>
+                       <a href="' . esc_url_raw(rest_url()) . 'oxiaccordionsultimate/v1/shortcode_export?styleid=' . $id . '&_wpnonce=' . wp_create_nonce('wp_rest') . '"  title="Export"  class="btn btn-info" style="float:left; margin-right: 5px; margin-left: 5px;">Export</a>
                 </td>');
             $return .= _(' </tr>');
         }

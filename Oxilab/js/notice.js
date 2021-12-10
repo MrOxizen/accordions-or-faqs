@@ -1,9 +1,9 @@
- jQuery.noConflict();
+jQuery.noConflict();
 (function ($) {
     "use strict";
     $(document).on("click", ".oxi-accordions-support-reviews", function (e) {
         e.preventDefault();
-       var _This = $(this);
+        var _This = $(this);
         $.ajax({
             url: oxi_accordions_reviews_notice.ajaxurl,
             type: 'post',
@@ -13,8 +13,8 @@
                 notice: _This.attr('sup-data')
             },
             success: function (response) {
-                console.log(response);
-                _This.parents().find('.oxi-accordions-review-notice').hide();
+               
+                $('.oxi-accordions-review-notice').remove();
             },
             error: function (error) {
                 console.log('Something went wrong!');

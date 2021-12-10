@@ -2,6 +2,9 @@
 
 namespace OXI_ACCORDIONS_PLUGINS\Helper;
 
+if (!defined('ABSPATH'))
+    exit;
+
 /**
  *
  * author @biplob018

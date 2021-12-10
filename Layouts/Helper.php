@@ -2,6 +2,9 @@
 
 namespace OXI_ACCORDIONS_PLUGINS\Layouts;
 
+if (!defined('ABSPATH'))
+    exit;
+
 /**
  * Description of Helper
  *
@@ -2627,7 +2630,7 @@ class Helper extends Admin {
     }
 
     public function modal_form_data() {
-        echo '<div class="modal-header">                    
+        echo '<div class="modal-header">
                     <h4 class="modal-title">Accordions Modal Form</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>

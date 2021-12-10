@@ -2,6 +2,9 @@
 
 namespace OXI_ACCORDIONS_PLUGINS\Layouts;
 
+if (!defined('ABSPATH'))
+    exit;
+
 /**
  * Description of Template
  *

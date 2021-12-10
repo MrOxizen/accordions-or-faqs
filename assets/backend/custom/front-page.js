@@ -14,10 +14,9 @@ jQuery.noConflict();
                 url: oxiaccordionsultimate.root + 'oxiaccordionsultimate/v1/' + functionname,
                 method: 'POST',
                 dataType: "json",
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader('X-WP-Nonce', oxiaccordionsultimate.nonce);
-                },
+
                 data: {
+                    _wpnonce: oxiaccordionsultimate.nonce,
                     styleid: styleid,
                     childid: childid,
                     rawdata: rawdata
@@ -68,7 +67,7 @@ jQuery.noConflict();
         });
 
     });
-    jQuery("#oxilab-tabs-import-json").on("click", function (e) {
+    jQuery("#oxilab-accordions-import-json").on("click", function (e) {
         e.preventDefault();
         jQuery("#oxi-addons-style-import-modal").modal("show");
     });

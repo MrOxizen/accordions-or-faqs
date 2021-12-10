@@ -2,6 +2,9 @@
 
 namespace OXI_ACCORDIONS_PLUGINS\Oxilab;
 
+if (!defined('ABSPATH'))
+    exit;
+
 /**
  * Description of Addons
  *
@@ -70,7 +73,7 @@ class Plugins {
         ?>
         <div class="oxi-addons-wrapper">
             <div class="oxi-addons-import-layouts">
-                <h1>Oxilab Plugins
+                <h1>Oxilab Addons
                 </h1>
                 <p> We Develop Couple of plugins which will help you to Create Your Modern and Dynamic Websites. Just click and Install </p>
             </div>

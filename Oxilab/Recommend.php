@@ -2,6 +2,9 @@
 
 namespace OXI_ACCORDIONS_PLUGINS\Oxilab;
 
+if (!defined('ABSPATH'))
+    exit;
+
 /**
  * Description of Support
  *
@@ -88,7 +91,7 @@ class Recommend {
             $massage = '<p>Thank you for using my Accordions - Multiple Accordions or FAQs Builders. ' . $recommend['modules-massage'] . '</p>';
 
             $install_url = wp_nonce_url(add_query_arg(array('action' => 'install-plugin', 'plugin' => $plugin), admin_url('update.php')), 'install-plugin' . '_' . $plugin);
-            echo '<div class="wrap oxi-addons-admin-notifications" style=" width: auto;">
+            echo '<div class="oxi-addons-admin-notifications oxi-accordions-admin-notifications">
                         <h3>
                             <span class="dashicons dashicons-flag"></span>
                             Notifications
@@ -111,7 +114,7 @@ class Recommend {
      */
     public function admin_enqueue_scripts() {
         wp_enqueue_script("jquery");
-        wp_enqueue_style('oxilab_tabs-admin-notice-css', OXI_ACCORDIONS_URL . '/Oxilab/css/notice.css', false, OXI_ACCORDIONS_TEXTDOMAIN);
+        wp_enqueue_style('oxilab_accorions-admin-notice-css', OXI_ACCORDIONS_URL . '/Oxilab/css/notice.css', false, OXI_ACCORDIONS_TEXTDOMAIN);
         $this->dismiss_button_scripts();
     }
 

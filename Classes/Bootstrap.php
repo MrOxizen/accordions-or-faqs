@@ -2,6 +2,9 @@
 
 namespace OXI_ACCORDIONS_PLUGINS\Classes;
 
+if (!defined('ABSPATH'))
+    exit;
+
 /**
  * Description of Bootstrap
  *
@@ -63,16 +66,6 @@ class Bootstrap {
         add_action('admin_menu', [$this, 'admin_menu']);
         add_action('admin_head', [$this, 'admin_icon']);
         add_action('admin_init', array($this, 'redirect_on_activation'));
-    }
-
-    public function redirect_on_activation() {
-        if (get_transient('accordions_or_faqs_activation_redirect')) :
-            delete_transient('accordions_or_faqs_activation_redirect');
-            if (is_network_admin() || isset($_GET['activate-multi'])) :
-                return;
-            endif;
-            wp_safe_redirect(admin_url("admin.php?page=oxi-accordions-ultimate-welcome"));
-        endif;
     }
 
 }
