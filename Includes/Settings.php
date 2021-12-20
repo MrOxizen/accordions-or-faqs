@@ -55,10 +55,10 @@ class Settings {
                                 </th>
                                 <td>
                                     <fieldset>
-                                        <select name="oxi_accordions_user_permission">
+                                        <select name="oxi_accordions_user_permission" id="oxi_accordions_user_permission">
                                             <?php foreach ($this->roles as $key => $role) { ?>
                                                 <option value="<?php echo $key; ?>" <?php selected($this->saved_role, $key); ?>><?php echo $role; ?></option>
-        <?php } ?>
+                                            <?php } ?>
                                         </select>
                                         <span class="oxi-addons-settings-connfirmation oxi_accordions_user_permission"></span>
                                         <br>

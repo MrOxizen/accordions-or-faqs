@@ -36,7 +36,7 @@ class Bootstrap {
         if (is_admin()) {
             $this->User_Admin();
             $this->User_Reviews();
-            if (isset($_GET['page']) && 'oxi-accordions-style-view' === $_GET['page']) {
+            if (isset($_GET['page']) && 'oxi-accordions-style-view' === sanitize_text_field($_GET['page'])) {
                 new \OXI_ACCORDIONS_PLUGINS\Includes\Frontend();
             }
         }

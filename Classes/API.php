@@ -62,7 +62,7 @@ class API {
             return new \WP_REST_Request('Invalid URL', 422);
         endif;
 
-        $this->rawdata = addslashes($request['rawdata']);
+        $this->rawdata = sanitize_textarea_field(addslashes($request['rawdata']));
         $this->styleid = (int) $request['styleid'];
         $this->childid = (int) $request['childid'];
 
@@ -342,7 +342,7 @@ class API {
      * @return void
      */
     public function post_notice_dissmiss() {
-        $notice = $this->request['notice'];
+        $notice = sanitize_text_field($this->request['notice']);
         if ($notice == 'maybe'):
             $data = strtotime("now");
             update_option('accordions-or-faqs-activation-date', $data);
@@ -356,9 +356,21 @@ class API {
      * Admin Settings
      * @return void
      */
-    public function post_oxi_settings() {
+    public function post_user_permission() {
         $rawdata = json_decode(stripslashes($this->rawdata), true);
-        update_option($rawdata['name'], $rawdata['value']);
+        $value = sanitize_text_field($rawdata['value']);
+        update_option('oxi_accordions_user_permission', $value);
+        return '<span class="oxi-confirmation-success"></span>';
+    }
+
+    /**
+     * Admin Settings
+     * @return void
+     */
+    public function post_font_awesome() {
+        $rawdata = json_decode(stripslashes($this->rawdata), true);
+        $value = sanitize_text_field($rawdata['value']);
+        update_option('oxi_addons_font_awesome', $value);
         return '<span class="oxi-confirmation-success"></span>';
     }
 
@@ -368,7 +380,7 @@ class API {
      */
     public function post_oxi_license() {
         $rawdata = json_decode(stripslashes($this->rawdata), true);
-        $new = $rawdata['license'];
+        $new = sanitize_text_field($rawdata['license']);
         $old = get_option('accordions_or_faqs_license_key');
         $status = get_option('accordions_or_faqs_license_status');
         if ($new == ''):

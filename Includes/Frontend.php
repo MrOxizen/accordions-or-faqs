@@ -45,7 +45,7 @@ class Frontend {
 
     public function maybe_load_template() {
         $this->oxiid = (!empty($_GET['styleid']) ? (int) $_GET['styleid'] : '');
-        $page = (isset($_GET['page']) ? $_GET['page'] : '');
+        $page = (isset($_GET['page']) ? sanitize_text_field($_GET['page']) : '');
         if ('oxi-accordions-style-view' !== $page || $this->oxiid < 0) {
             return;
         }
@@ -105,7 +105,7 @@ class Frontend {
          */
         public function template_footer() {
             ?>
-        <?php wp_footer(); ?>
+            <?php wp_footer(); ?>
         </body>
         </html>
         <?php

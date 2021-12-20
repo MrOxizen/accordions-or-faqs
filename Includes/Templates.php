@@ -35,7 +35,7 @@ class Templates {
         $this->admin_template_additional();
         apply_filters('oxi-accordions-plugin/admin_menu', TRUE);
 
-        $this->imported = isset($_GET['layouts']) ? $_GET['layouts'] : 0;
+        $this->imported = isset($_GET['layouts']) ? sanitize_text_field($_GET['layouts']) : 0;
         $this->get_local_tempalte();
     }
 

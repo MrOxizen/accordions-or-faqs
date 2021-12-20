@@ -57,7 +57,7 @@ class Front_Page {
             if (!wp_verify_nonce($nonce, 'oxi-accordions-ultimate-import')) {
                 die('You do not have sufficient permissions to access this page.');
             } else {
-                if (isset($_FILES['importaccordionsfile'])) :
+                if (isset($_FILES['importaccordionsfile']) && current_user_can('upload_files')) :
                     $filename = $_FILES["importaccordionsfile"]["name"];
                     $folder = $this->safe_path(OXI_ACCORDIONS_PATH . 'assets/export/');
 
