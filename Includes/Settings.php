@@ -114,11 +114,11 @@ class Settings {
                                     <span class="oxi-addons-settings-connfirmation accordions_or_faqs_license_text">
                                         <?php
                                         if ($this->status == 'valid' && empty($this->license)):
-                                            echo '<span class="oxi-addons-settings-massage">' . esc_attr__('Pre Active', OXI_ACCORDIONS_TEXTDOMAIN) . '</span>';
+                                            echo '<span class="oxi-addons-settings-massage">' . esc_attr__('Pre Active', 'accordions-or-faqs') . '</span>';
                                         elseif ($this->status == 'valid' && !empty($this->license)):
-                                            echo '<span class="oxi-addons-settings-massage">' . esc_attr__('Active', OXI_ACCORDIONS_TEXTDOMAIN) . '</span>';
+                                            echo '<span class="oxi-addons-settings-massage">' . esc_attr__('Active', 'accordions-or-faqs') . '</span>';
                                         elseif (!empty($this->license)):
-                                            echo '<span class="oxi-addons-settings-massage">' . esc_attr__($this->status, OXI_ACCORDIONS_TEXTDOMAIN) . '</span>';
+                                            echo '<span class="oxi-addons-settings-massage">' . esc_attr__($this->status, 'accordions-or-faqs') . '</span>';
                                         else:
                                             echo '<span class="oxi-addons-settings-massage"></span>';
                                         endif;

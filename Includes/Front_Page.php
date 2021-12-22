@@ -28,7 +28,7 @@ class Front_Page {
     }
 
     public function database_data() {
-        return $this->database->wpdb->get_results($this->database->wpdb->prepare('SELECT * FROM ' . $this->database->parent_table . ' WHERE type = %s ', OXI_ACCORDIONS_TEXTDOMAIN), ARRAY_A);
+        return $this->database->wpdb->get_results($this->database->wpdb->prepare('SELECT * FROM ' . $this->database->parent_table . ' WHERE type = %s ', 'accordions-or-faqs'), ARRAY_A);
     }
 
     public function additional_load() {

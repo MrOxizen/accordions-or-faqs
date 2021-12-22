@@ -111,12 +111,12 @@ class Plugins {
                                                     echo '<a href="#" class="btn btn-light">Installed</a>';
                                                 else:
                                                     $activation_url = wp_nonce_url(admin_url('plugins.php?action=activate&plugin=' . esc_attr($file_path)), 'activate-plugin_' . esc_attr($file_path));
-                                                    echo sprintf('<a href="%s" class="btn btn-info">%s</a>', $activation_url, esc_html__('Activate', OXI_ACCORDIONS_TEXTDOMAIN));
+                                                    echo sprintf('<a href="%s" class="btn btn-info">%s</a>', $activation_url, esc_html__('Activate', 'accordions-or-faqs'));
                                                 endif;
                                             else:
                                                 if (current_user_can('install_plugins')):
                                                     $install_url = wp_nonce_url(add_query_arg(array('action' => 'install-plugin', 'plugin' => esc_attr($plugin)), admin_url('update.php')), 'install-plugin' . '_' . esc_attr($plugin));
-                                                    echo sprintf('<a href="%s" class="btn btn-success">%s</a>', $install_url, esc_html__('Install', OXI_ACCORDIONS_TEXTDOMAIN));
+                                                    echo sprintf('<a href="%s" class="btn btn-success">%s</a>', $install_url, esc_html__('Install', 'accordions-or-faqs'));
                                                 endif;
                                             endif;
                                             ?></span>

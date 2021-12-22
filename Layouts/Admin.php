@@ -122,8 +122,8 @@ class Admin {
     public function modal_opener() {
         $this->add_substitute_control('', [], [
             'type' => Controls::MODALOPENER,
-            'title' => esc_html__('Accordions Data Form', OXI_ACCORDIONS_TEXTDOMAIN),
-            'sub-title' => esc_html__('Open Form', OXI_ACCORDIONS_TEXTDOMAIN),
+            'title' => esc_html__('Accordions Data Form', 'accordions-or-faqs'),
+            'sub-title' => esc_html__('Open Form', 'accordions-or-faqs'),
             'condition' => [
                 'oxi-accordions-content-type' => 'content'
             ],
@@ -140,8 +140,8 @@ class Admin {
     public function shortcode_name() {
         $this->add_substitute_control('', $this->dbdata, [
             'type' => Controls::SHORTCODENAME,
-            'title' => esc_html__('Shortcode Name', OXI_ACCORDIONS_TEXTDOMAIN),
-            'placeholder' => esc_html__('Set Your Shortcode Name', OXI_ACCORDIONS_TEXTDOMAIN),
+            'title' => esc_html__('Shortcode Name', 'accordions-or-faqs'),
+            'placeholder' => esc_html__('Set Your Shortcode Name', 'accordions-or-faqs'),
             'showing' => TRUE,
         ]);
     }
@@ -155,7 +155,7 @@ class Admin {
     public function shortcode_info() {
         $this->add_substitute_control($this->oxiid, $this->dbdata, [
             'type' => Controls::SHORTCODEINFO,
-            'title' => esc_html__('Shortcode', OXI_ACCORDIONS_TEXTDOMAIN),
+            'title' => esc_html__('Shortcode', 'accordions-or-faqs'),
             'showing' => TRUE,
         ]);
     }
@@ -374,7 +374,7 @@ class Admin {
                                             </div>
                                         </div>
                                         <div class="oxi-addons-style-left-preview-heading-right">
-                                            <input type="text" data-format="rgb" data-opacity="TRUE" class="oxi-addons-minicolor" id="oxi-addons-2-0-color" name="oxi-addons-2-0-color" value="<?php echo(is_array($this->style) ? array_key_exists('oxilab-preview-color', $this->style) ? $this->style['oxilab-preview-color'] : '#FFF' : '#FFF'); ?>">
+                                            <input type="text" data-format="rgb" data-opacity="TRUE" class="oxi-addons-minicolor" id="oxi-addons-2-0-color" name="oxi-addons-2-0-color" value="<?php echo(is_array($this->style) ? array_key_exists('oxilab-preview-color', $this->style) ? esc_attr($this->style['oxilab-preview-color']) : '#FFF' : '#FFF'); ?>">
                                         </div>
                                     </div>
                                     <div class="oxi-addons-preview-wrapper">
@@ -417,15 +417,15 @@ class Admin {
         $this->start_section_header(
                 'shortcode-addons-start-tabs', [
             'options' => [
-                'button-settings' => esc_html__('General Settings', OXI_ACCORDIONS_TEXTDOMAIN),
-                'custom' => esc_html__('Custom CSS', OXI_ACCORDIONS_TEXTDOMAIN),
+                'button-settings' => esc_html__('General Settings', 'accordions-or-faqs'),
+                'custom' => esc_html__('Custom CSS', 'accordions-or-faqs'),
             ]
                 ]
         );
         $this->start_section_tabs(
                 'oxi-accordions-start-tabs', [
             'condition' => [
-                'oxi-tabs-start-tabs' => esc_html__('button-settings', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oxi-tabs-start-tabs' => esc_html__('button-settings', 'accordions-or-faqs'),
             ]
                 ]
         );
@@ -449,13 +449,13 @@ class Admin {
 
         $this->start_controls_section(
                 'oxi-tabs-start-tabs-css', [
-            'label' => esc_html__('Custom CSS', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Custom CSS', 'accordions-or-faqs'),
             'showing' => TRUE,
                 ]
         );
         $this->add_control(
                 'oxi-tabs-custom-css', $this->style, [
-            'label' => esc_html__('', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('', 'accordions-or-faqs'),
             'type' => Controls::TEXTAREA,
             'default' => '',
             'description' => esc_html__('Custom CSS Section. You can add custom css into textarea.')
@@ -489,7 +489,7 @@ class Admin {
         $this->admin_elements_editior_loader();
         $this->dbdata = $this->database->wpdb->get_row($this->database->wpdb->prepare('SELECT * FROM ' . $this->database->parent_table . ' WHERE id = %d ', $this->oxiid), ARRAY_A);
 
-        $Get_Nested_Accordions = $this->database->wpdb->get_results($this->database->wpdb->prepare("SELECT id, name FROM {$this->database->parent_table} WHERE type = %s ORDER by id ASC", OXI_ACCORDIONS_TEXTDOMAIN), ARRAY_A);
+        $Get_Nested_Accordions = $this->database->wpdb->get_results($this->database->wpdb->prepare("SELECT id, name FROM {$this->database->parent_table} WHERE type = %s ORDER by id ASC", 'accordions-or-faqs'), ARRAY_A);
         foreach ($Get_Nested_Accordions as $key => $value) {
             if ($value['id'] != $this->oxiid):
                 $this->Get_Nested_Accordions[$value['id']] = !empty($value['name']) ? $value['name'] : 'Accordions id ' . $value['id'];

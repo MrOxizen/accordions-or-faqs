@@ -81,7 +81,7 @@ class Frontend {
         <html <?php language_attributes(); ?>>
             <meta name="viewport" content="width=device-width"/>
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-            <title><?php esc_html_e('Accordions - Multiple Accordions or FAQs Builders', OXI_ACCORDIONS_TEXTDOMAIN); ?></title>
+            <title><?php esc_html_e('Accordions - Multiple Accordions or FAQs Builders', 'accordions-or-faqs'); ?></title>
             <?php wp_head(); ?>
         </head>
         <body class="shortcode-addons-template-body" id="shortcode-addons-template-body">

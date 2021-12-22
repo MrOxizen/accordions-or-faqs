@@ -14,7 +14,7 @@ class Widget extends \WP_Widget {
 
     function __construct() {
         parent::__construct(
-                'oxi_ultimate_accordions_widget', esc_html__('Accordions', OXI_ACCORDIONS_TEXTDOMAIN), array('description' => esc_html__('Accordions - Multiple Accordions or FAQs Builders', OXI_ACCORDIONS_TEXTDOMAIN),)
+                'oxi_ultimate_accordions_widget', esc_html__('Accordions', 'accordions-or-faqs'), array('description' => esc_html__('Accordions - Multiple Accordions or FAQs Builders', 'accordions-or-faqs'),)
         );
     }
 
@@ -36,7 +36,7 @@ class Widget extends \WP_Widget {
         if (isset($instance['title'])) {
             $title = $instance['title'];
         } else {
-            $title = esc_html__('1', OXI_ACCORDIONS_TEXTDOMAIN);
+            $title = esc_html__('1', 'accordions-or-faqs');
         }
         ?>
         <p>

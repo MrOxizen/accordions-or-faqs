@@ -70,7 +70,7 @@ class API {
         if (method_exists($this, $action_class)):
             return $this->{$action_class}();
         else:
-            return die(esc_html__('Security check', OXI_ACCORDIONS_TEXTDOMAIN));
+            return die(esc_html__('Security check', 'accordions-or-faqs'));
         endif;
     }
 
@@ -121,7 +121,7 @@ class API {
         if ($name != 'truee'):
             $style['name'] = $name;
         endif;
-        $this->database->wpdb->query($this->database->wpdb->prepare("INSERT INTO {$this->database->parent_table} (name, type, rawdata) VALUES ( %s, %s, %s)", array($style['name'], OXI_ACCORDIONS_TEXTDOMAIN, $style['rawdata'])));
+        $this->database->wpdb->query($this->database->wpdb->prepare("INSERT INTO {$this->database->parent_table} (name, type, rawdata) VALUES ( %s, %s, %s)", array($style['name'], 'accordions-or-faqs', $style['rawdata'])));
         $redirect_id = $this->database->wpdb->insert_id;
 
         if ($redirect_id > 0):
@@ -152,7 +152,7 @@ class API {
         $params = json_decode(stripslashes($this->rawdata), true);
         $id = (int) $params['oxideletestyle'];
         if ($id > 0):
-            $this->database->wpdb->query($this->database->wpdb->prepare("DELETE FROM {$this->database->import_table} WHERE name = %s and type = %s", $id, OXI_ACCORDIONS_TEXTDOMAIN));
+            $this->database->wpdb->query($this->database->wpdb->prepare("DELETE FROM {$this->database->import_table} WHERE name = %s and type = %s", $id, 'accordions-or-faqs'));
             return 'done';
         else:
             return 'Silence is Golden';
@@ -163,7 +163,7 @@ class API {
         $params = json_decode(stripslashes($this->rawdata), true);
         $id = (int) $params['oxiimportstyle'];
         if ($id > 0):
-            $this->database->wpdb->query($this->database->wpdb->prepare("INSERT INTO {$this->database->import_table} (type, name) VALUES (%s, %s)", array(OXI_ACCORDIONS_TEXTDOMAIN, $id)));
+            $this->database->wpdb->query($this->database->wpdb->prepare("INSERT INTO {$this->database->import_table} (type, name) VALUES (%s, %s)", array('accordions-or-faqs', $id)));
             return admin_url("admin.php?page=oxi-accordions-ultimate-new#Template_" . $id);
         else:
             return 'Silence is Golden';

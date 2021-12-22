@@ -326,9 +326,9 @@ trait Sanitization {
             'type' => 'text',
             'label' => 'Input Text',
             'default' => '',
-            'label_on' => esc_html__('Yes', OXI_ACCORDIONS_TEXTDOMAIN),
-            'label_off' => esc_html__('No', OXI_ACCORDIONS_TEXTDOMAIN),
-            'placeholder' => esc_html__('', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label_on' => esc_html__('Yes', 'accordions-or-faqs'),
+            'label_off' => esc_html__('No', 'accordions-or-faqs'),
+            'placeholder' => esc_html__('', 'accordions-or-faqs'),
             'selector-data' => TRUE,
             'render' => TRUE,
             'responsive' => 'laptop',
@@ -347,16 +347,16 @@ trait Sanitization {
         if ($arg['type'] == 'animation'):
             $arg['type'] = 'select';
             $arg['options'] = [
-                '' => esc_html__('None', OXI_ACCORDIONS_TEXTDOMAIN),
-                'bounce' => esc_html__('Bounce', OXI_ACCORDIONS_TEXTDOMAIN),
-                'flash' => esc_html__('Flash', OXI_ACCORDIONS_TEXTDOMAIN),
-                'pulse' => esc_html__('Pulse', OXI_ACCORDIONS_TEXTDOMAIN),
-                'rubberBand' => esc_html__('RubberBand', OXI_ACCORDIONS_TEXTDOMAIN),
-                'shake' => esc_html__('Shake', OXI_ACCORDIONS_TEXTDOMAIN),
-                'swing' => esc_html__('Swing', OXI_ACCORDIONS_TEXTDOMAIN),
-                'tada' => esc_html__('Tada', OXI_ACCORDIONS_TEXTDOMAIN),
-                'wobble' => esc_html__('Wobble', OXI_ACCORDIONS_TEXTDOMAIN),
-                'jello' => esc_html__('Jello', OXI_ACCORDIONS_TEXTDOMAIN),
+                '' => esc_html__('None', 'accordions-or-faqs'),
+                'bounce' => esc_html__('Bounce', 'accordions-or-faqs'),
+                'flash' => esc_html__('Flash', 'accordions-or-faqs'),
+                'pulse' => esc_html__('Pulse', 'accordions-or-faqs'),
+                'rubberBand' => esc_html__('RubberBand', 'accordions-or-faqs'),
+                'shake' => esc_html__('Shake', 'accordions-or-faqs'),
+                'swing' => esc_html__('Swing', 'accordions-or-faqs'),
+                'tada' => esc_html__('Tada', 'accordions-or-faqs'),
+                'wobble' => esc_html__('Wobble', 'accordions-or-faqs'),
+                'jello' => esc_html__('Jello', 'accordions-or-faqs'),
             ];
         endif;
 
@@ -1140,7 +1140,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-font', $data, [
-            'label' => esc_html__('Font Family', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Font Family', 'accordions-or-faqs'),
             'type' => Controls::FONT,
             $selectorvalue => 'font-family:\'{{VALUE}}\';',
             $selector_key => $selector,
@@ -1150,7 +1150,7 @@ trait Sanitization {
         if (!array_key_exists('typo-font-size', $arg) || $arg['typo-font-size'] == true):
             $this->add_responsive_control(
                     $id . '-size', $data, [
-                'label' => esc_html__('Size', OXI_ACCORDIONS_TEXTDOMAIN),
+                'label' => esc_html__('Size', 'accordions-or-faqs'),
                 'type' => Controls::SLIDER,
                 'default' => [
                     'unit' => 'px',
@@ -1187,38 +1187,38 @@ trait Sanitization {
 
         $this->add_control(
                 $id . '-weight', $data, [
-            'label' => esc_html__('Weight', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Weight', 'accordions-or-faqs'),
             'type' => Controls::SELECT,
             $selectorvalue => 'font-weight: {{VALUE}};',
             $loader => $loadervalue,
             $selector_key => $selector,
             'options' => [
-                '100' => esc_html__('100', OXI_ACCORDIONS_TEXTDOMAIN),
-                '200' => esc_html__('200', OXI_ACCORDIONS_TEXTDOMAIN),
-                '300' => esc_html__('300', OXI_ACCORDIONS_TEXTDOMAIN),
-                '400' => esc_html__('400', OXI_ACCORDIONS_TEXTDOMAIN),
-                '500' => esc_html__('500', OXI_ACCORDIONS_TEXTDOMAIN),
-                '600' => esc_html__('600', OXI_ACCORDIONS_TEXTDOMAIN),
-                '700' => esc_html__('700', OXI_ACCORDIONS_TEXTDOMAIN),
-                '800' => esc_html__('800', OXI_ACCORDIONS_TEXTDOMAIN),
-                '900' => esc_html__('900', OXI_ACCORDIONS_TEXTDOMAIN),
-                '' => esc_html__('Default', OXI_ACCORDIONS_TEXTDOMAIN),
-                'normal' => esc_html__('Normal', OXI_ACCORDIONS_TEXTDOMAIN),
-                'bold' => esc_html__('Bold', OXI_ACCORDIONS_TEXTDOMAIN)
+                '100' => esc_html__('100', 'accordions-or-faqs'),
+                '200' => esc_html__('200', 'accordions-or-faqs'),
+                '300' => esc_html__('300', 'accordions-or-faqs'),
+                '400' => esc_html__('400', 'accordions-or-faqs'),
+                '500' => esc_html__('500', 'accordions-or-faqs'),
+                '600' => esc_html__('600', 'accordions-or-faqs'),
+                '700' => esc_html__('700', 'accordions-or-faqs'),
+                '800' => esc_html__('800', 'accordions-or-faqs'),
+                '900' => esc_html__('900', 'accordions-or-faqs'),
+                '' => esc_html__('Default', 'accordions-or-faqs'),
+                'normal' => esc_html__('Normal', 'accordions-or-faqs'),
+                'bold' => esc_html__('Bold', 'accordions-or-faqs')
             ],
                 ]
         );
         $this->add_control(
                 $id . '-transform', $data, [
-            'label' => esc_html__('Transform', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Transform', 'accordions-or-faqs'),
             'type' => Controls::SELECT,
             'default' => '',
             'options' => [
-                '' => esc_html__('Default', OXI_ACCORDIONS_TEXTDOMAIN),
-                'uppercase' => esc_html__('Uppercase', OXI_ACCORDIONS_TEXTDOMAIN),
-                'lowercase' => esc_html__('Lowercase', OXI_ACCORDIONS_TEXTDOMAIN),
-                'capitalize' => esc_html__('Capitalize', OXI_ACCORDIONS_TEXTDOMAIN),
-                'none' => esc_html__('Normal', OXI_ACCORDIONS_TEXTDOMAIN),
+                '' => esc_html__('Default', 'accordions-or-faqs'),
+                'uppercase' => esc_html__('Uppercase', 'accordions-or-faqs'),
+                'lowercase' => esc_html__('Lowercase', 'accordions-or-faqs'),
+                'capitalize' => esc_html__('Capitalize', 'accordions-or-faqs'),
+                'none' => esc_html__('Normal', 'accordions-or-faqs'),
             ],
             $loader => $loadervalue,
             $selectorvalue => 'text-transform: {{VALUE}};',
@@ -1227,14 +1227,14 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-style', $data, [
-            'label' => esc_html__('Style', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Style', 'accordions-or-faqs'),
             'type' => Controls::SELECT,
             'default' => '',
             'options' => [
-                '' => esc_html__('Default', OXI_ACCORDIONS_TEXTDOMAIN),
-                'normal' => esc_html__('normal', OXI_ACCORDIONS_TEXTDOMAIN),
-                'italic' => esc_html__('Italic', OXI_ACCORDIONS_TEXTDOMAIN),
-                'oblique' => esc_html__('Oblique', OXI_ACCORDIONS_TEXTDOMAIN),
+                '' => esc_html__('Default', 'accordions-or-faqs'),
+                'normal' => esc_html__('normal', 'accordions-or-faqs'),
+                'italic' => esc_html__('Italic', 'accordions-or-faqs'),
+                'oblique' => esc_html__('Oblique', 'accordions-or-faqs'),
             ],
             $loader => $loadervalue,
             $selectorvalue => 'font-style: {{VALUE}};',
@@ -1243,15 +1243,15 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-decoration', $data, [
-            'label' => esc_html__('Decoration', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Decoration', 'accordions-or-faqs'),
             'type' => Controls::SELECT,
             'default' => '',
             'options' => [
-                '' => esc_html__('Default', OXI_ACCORDIONS_TEXTDOMAIN),
-                'underline' => esc_html__('Underline', OXI_ACCORDIONS_TEXTDOMAIN),
-                'overline' => esc_html__('Overline', OXI_ACCORDIONS_TEXTDOMAIN),
-                'line-through' => esc_html__('Line Through', OXI_ACCORDIONS_TEXTDOMAIN),
-                'none' => esc_html__('None', OXI_ACCORDIONS_TEXTDOMAIN),
+                '' => esc_html__('Default', 'accordions-or-faqs'),
+                'underline' => esc_html__('Underline', 'accordions-or-faqs'),
+                'overline' => esc_html__('Overline', 'accordions-or-faqs'),
+                'line-through' => esc_html__('Line Through', 'accordions-or-faqs'),
+                'none' => esc_html__('None', 'accordions-or-faqs'),
             ],
             $loader => $loadervalue,
             $selectorvalue => 'text-decoration: {{VALUE}};',
@@ -1262,14 +1262,14 @@ trait Sanitization {
             if ($arg['include'] == 'align_normal') :
                 $this->add_responsive_control(
                         $id . '-align', $data, [
-                    'label' => esc_html__('Text Align', OXI_ACCORDIONS_TEXTDOMAIN),
+                    'label' => esc_html__('Text Align', 'accordions-or-faqs'),
                     'type' => Controls::SELECT,
                     'default' => '',
                     'options' => [
-                        '' => esc_html__('Default', OXI_ACCORDIONS_TEXTDOMAIN),
-                        'left' => esc_html__('Left', OXI_ACCORDIONS_TEXTDOMAIN),
-                        'center' => esc_html__('Center', OXI_ACCORDIONS_TEXTDOMAIN),
-                        'right' => esc_html__('Right', OXI_ACCORDIONS_TEXTDOMAIN),
+                        '' => esc_html__('Default', 'accordions-or-faqs'),
+                        'left' => esc_html__('Left', 'accordions-or-faqs'),
+                        'center' => esc_html__('Center', 'accordions-or-faqs'),
+                        'right' => esc_html__('Right', 'accordions-or-faqs'),
                     ],
                     $loader => $loadervalue,
                     $selectorvalue => 'text-align: {{VALUE}};',
@@ -1279,16 +1279,16 @@ trait Sanitization {
             else :
                 $this->add_responsive_control(
                         $id . '-justify', $data, [
-                    'label' => esc_html__('Justify Content', OXI_ACCORDIONS_TEXTDOMAIN),
+                    'label' => esc_html__('Justify Content', 'accordions-or-faqs'),
                     'type' => Controls::SELECT,
                     'default' => '',
                     'options' => [
-                        '' => esc_html__('Default', OXI_ACCORDIONS_TEXTDOMAIN),
-                        'flex-start' => esc_html__('Flex Start', OXI_ACCORDIONS_TEXTDOMAIN),
-                        'flex-end' => esc_html__('Flex End', OXI_ACCORDIONS_TEXTDOMAIN),
-                        'center' => esc_html__('Center', OXI_ACCORDIONS_TEXTDOMAIN),
-                        'space-around' => esc_html__('Space Around', OXI_ACCORDIONS_TEXTDOMAIN),
-                        'space-between' => esc_html__('Space Between', OXI_ACCORDIONS_TEXTDOMAIN),
+                        '' => esc_html__('Default', 'accordions-or-faqs'),
+                        'flex-start' => esc_html__('Flex Start', 'accordions-or-faqs'),
+                        'flex-end' => esc_html__('Flex End', 'accordions-or-faqs'),
+                        'center' => esc_html__('Center', 'accordions-or-faqs'),
+                        'space-around' => esc_html__('Space Around', 'accordions-or-faqs'),
+                        'space-between' => esc_html__('Space Between', 'accordions-or-faqs'),
                     ],
                     $loader => $loadervalue,
                     $selectorvalue => 'justify-content: {{VALUE}};',
@@ -1297,16 +1297,16 @@ trait Sanitization {
                 );
                 $this->add_responsive_control(
                         $id . '-align', $data, [
-                    'label' => esc_html__('Align Items', OXI_ACCORDIONS_TEXTDOMAIN),
+                    'label' => esc_html__('Align Items', 'accordions-or-faqs'),
                     'type' => Controls::SELECT,
                     'default' => '',
                     'options' => [
-                        '' => esc_html__('Default', OXI_ACCORDIONS_TEXTDOMAIN),
-                        'stretch' => esc_html__('Stretch', OXI_ACCORDIONS_TEXTDOMAIN),
-                        'baseline' => esc_html__('Baseline', OXI_ACCORDIONS_TEXTDOMAIN),
-                        'center' => esc_html__('Center', OXI_ACCORDIONS_TEXTDOMAIN),
-                        'flex-start' => esc_html__('Flex Start', OXI_ACCORDIONS_TEXTDOMAIN),
-                        'flex-end' => esc_html__('Flex End', OXI_ACCORDIONS_TEXTDOMAIN),
+                        '' => esc_html__('Default', 'accordions-or-faqs'),
+                        'stretch' => esc_html__('Stretch', 'accordions-or-faqs'),
+                        'baseline' => esc_html__('Baseline', 'accordions-or-faqs'),
+                        'center' => esc_html__('Center', 'accordions-or-faqs'),
+                        'flex-start' => esc_html__('Flex Start', 'accordions-or-faqs'),
+                        'flex-end' => esc_html__('Flex End', 'accordions-or-faqs'),
                     ],
                     $loader => $loadervalue,
                     $selectorvalue => 'align-items: {{VALUE}};',
@@ -1318,7 +1318,7 @@ trait Sanitization {
 
         $this->add_responsive_control(
                 $id . '-l-height', $data, [
-            'label' => esc_html__('Line Height', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Line Height', 'accordions-or-faqs'),
             'type' => Controls::SLIDER,
             'default' => [
                 'unit' => 'px',
@@ -1343,7 +1343,7 @@ trait Sanitization {
         );
         $this->add_responsive_control(
                 $id . '-l-spacing', $data, [
-            'label' => esc_html__('Letter Spacing', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Letter Spacing', 'accordions-or-faqs'),
             'type' => Controls::SLIDER,
             'default' => [
                 'unit' => 'px',
@@ -1385,18 +1385,18 @@ trait Sanitization {
         echo '<div class="shortcode-form-control" style="padding: 0;" ' . esc_attr($this->forms_condition($arg)) . '>';
         $this->add_control(
                 $id . '-select', $data, [
-            'label' => esc_html__($level, OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__($level, 'accordions-or-faqs'),
             'type' => Controls::CHOOSE,
             'loader' => TRUE,
             'default' => $type,
             'separator' => $separator,
             'options' => [
                 'media-library' => [
-                    'title' => esc_html__('Media Library', OXI_ACCORDIONS_TEXTDOMAIN),
+                    'title' => esc_html__('Media Library', 'accordions-or-faqs'),
                     'icon' => 'fa fa-align-left',
                 ],
                 'custom-url' => [
-                    'title' => esc_html__('Custom URL', OXI_ACCORDIONS_TEXTDOMAIN),
+                    'title' => esc_html__('Custom URL', 'accordions-or-faqs'),
                     'icon' => 'fa fa-align-center',
                 ]
             ],
@@ -1404,7 +1404,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-image', $data, [
-            'label' => esc_html__('Image', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Image', 'accordions-or-faqs'),
             'type' => Controls::IMAGE,
             'loader' => TRUE,
             'default' => $value,
@@ -1417,7 +1417,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-url', $data, [
-            'label' => esc_html__('Image URL', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Image URL', 'accordions-or-faqs'),
             'type' => Controls::TEXT,
             'default' => $value,
             'loader' => TRUE,
@@ -1483,7 +1483,7 @@ trait Sanitization {
         endif;
         $this->start_popover_control(
                 $id, [
-            'label' => esc_html__('Box Shadow', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Box Shadow', 'accordions-or-faqs'),
             $cond => $condition,
             'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
             'separator' => $separator,
@@ -1492,26 +1492,26 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-shadow', $data, [
-            'label' => esc_html__('Shadow', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Shadow', 'accordions-or-faqs'),
             'type' => Controls::SWITCHER,
             'default' => '',
-            'label_on' => esc_html__('Yes', OXI_ACCORDIONS_TEXTDOMAIN),
-            'label_off' => esc_html__('None', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label_on' => esc_html__('Yes', 'accordions-or-faqs'),
+            'label_off' => esc_html__('None', 'accordions-or-faqs'),
             'return_value' => 'yes',
                 ]
         );
         $this->add_control(
                 $id . '-type', $data, [
-            'label' => esc_html__('Type', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Type', 'accordions-or-faqs'),
             'type' => Controls::CHOOSE,
             'default' => '',
             'options' => [
                 '' => [
-                    'title' => esc_html__('Outline', OXI_ACCORDIONS_TEXTDOMAIN),
+                    'title' => esc_html__('Outline', 'accordions-or-faqs'),
                     'icon' => 'fa fa-align-left',
                 ],
                 'inset' => [
-                    'title' => esc_html__('Inset', OXI_ACCORDIONS_TEXTDOMAIN),
+                    'title' => esc_html__('Inset', 'accordions-or-faqs'),
                     'icon' => 'fa fa-align-center',
                 ],
             ],
@@ -1521,7 +1521,7 @@ trait Sanitization {
 
         $this->add_control(
                 $id . '-horizontal', $data, [
-            'label' => esc_html__('Horizontal', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Horizontal', 'accordions-or-faqs'),
             'type' => Controls::SLIDER,
             'default' => [
                 'unit' => 'px',
@@ -1543,7 +1543,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-vertical', $data, [
-            'label' => esc_html__('Vertical', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Vertical', 'accordions-or-faqs'),
             'type' => Controls::SLIDER,
             'default' => [
                 'unit' => 'px',
@@ -1565,7 +1565,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-blur', $data, [
-            'label' => esc_html__('Blur', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Blur', 'accordions-or-faqs'),
             'type' => Controls::SLIDER,
             'default' => [
                 'unit' => 'px',
@@ -1587,7 +1587,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-spread', $data, [
-            'label' => esc_html__('Spread', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Spread', 'accordions-or-faqs'),
             'type' => Controls::SLIDER,
             'default' => [
                 'unit' => 'px',
@@ -1609,7 +1609,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-color', $data, [
-            'label' => esc_html__('Color', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Color', 'accordions-or-faqs'),
             'separator' => TRUE,
             'type' => Controls::COLOR,
             'oparetor' => 'RGB',
@@ -1657,7 +1657,7 @@ trait Sanitization {
         endif;
         $this->start_popover_control(
                 $id, [
-            'label' => esc_html__('Text Shadow', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Text Shadow', 'accordions-or-faqs'),
             $cond => $condition,
             'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
             'separator' => $separator,
@@ -1666,7 +1666,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-color', $data, [
-            'label' => esc_html__('Color', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Color', 'accordions-or-faqs'),
             'type' => Controls::COLOR,
             'oparetor' => 'RGB',
             'default' => '#FFF',
@@ -1678,7 +1678,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-blur', $data, [
-            'label' => esc_html__('Blur', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Blur', 'accordions-or-faqs'),
             'type' => Controls::SLIDER,
             'separator' => TRUE,
             'custom' => $id . '|||||text-shadow',
@@ -1700,7 +1700,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-horizontal', $data, [
-            'label' => esc_html__('Horizontal', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Horizontal', 'accordions-or-faqs'),
             'type' => Controls::SLIDER,
             'custom' => $id . '|||||text-shadow',
             'render' => FALSE,
@@ -1721,7 +1721,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-vertical', $data, [
-            'label' => esc_html__('Vertical', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Vertical', 'accordions-or-faqs'),
             'type' => Controls::SLIDER,
             'custom' => $id . '|||||text-shadow',
             'render' => FALSE,
@@ -1762,7 +1762,7 @@ trait Sanitization {
 
         $this->start_popover_control(
                 $id, [
-            'label' => esc_html__('Animation', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Animation', 'accordions-or-faqs'),
             $cond => $condition,
             'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
             'separator' => $separator,
@@ -1772,80 +1772,80 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-type', $data, [
-            'label' => esc_html__('Type', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Type', 'accordions-or-faqs'),
             'type' => Controls::SELECT,
             'default' => '',
             'options' => [
                 'optgroup0' => [true, 'Attention Seekers'],
-                '' => esc_html__('None', OXI_ACCORDIONS_TEXTDOMAIN),
+                '' => esc_html__('None', 'accordions-or-faqs'),
                 'optgroup1' => [false],
                 'optgroup2' => [true, 'Attention Seekers'],
-                'bounce' => esc_html__('Bounce', OXI_ACCORDIONS_TEXTDOMAIN),
-                'flash' => esc_html__('Flash', OXI_ACCORDIONS_TEXTDOMAIN),
-                'pulse' => esc_html__('Pulse', OXI_ACCORDIONS_TEXTDOMAIN),
-                'rubberBand' => esc_html__('RubberBand', OXI_ACCORDIONS_TEXTDOMAIN),
-                'shake' => esc_html__('Shake', OXI_ACCORDIONS_TEXTDOMAIN),
-                'swing' => esc_html__('Swing', OXI_ACCORDIONS_TEXTDOMAIN),
-                'tada' => esc_html__('Tada', OXI_ACCORDIONS_TEXTDOMAIN),
-                'wobble' => esc_html__('Wobble', OXI_ACCORDIONS_TEXTDOMAIN),
-                'jello' => esc_html__('Jello', OXI_ACCORDIONS_TEXTDOMAIN),
+                'bounce' => esc_html__('Bounce', 'accordions-or-faqs'),
+                'flash' => esc_html__('Flash', 'accordions-or-faqs'),
+                'pulse' => esc_html__('Pulse', 'accordions-or-faqs'),
+                'rubberBand' => esc_html__('RubberBand', 'accordions-or-faqs'),
+                'shake' => esc_html__('Shake', 'accordions-or-faqs'),
+                'swing' => esc_html__('Swing', 'accordions-or-faqs'),
+                'tada' => esc_html__('Tada', 'accordions-or-faqs'),
+                'wobble' => esc_html__('Wobble', 'accordions-or-faqs'),
+                'jello' => esc_html__('Jello', 'accordions-or-faqs'),
                 'optgroup3' => [false],
                 'optgroup4' => [true, 'Bouncing Entrances'],
-                'bounceIn' => esc_html__('BounceIn', OXI_ACCORDIONS_TEXTDOMAIN),
-                'bounceInDown' => esc_html__('BounceInDown', OXI_ACCORDIONS_TEXTDOMAIN),
-                'bounceInLeft' => esc_html__('BounceInLeft', OXI_ACCORDIONS_TEXTDOMAIN),
-                'bounceInRight' => esc_html__('BounceInRight', OXI_ACCORDIONS_TEXTDOMAIN),
-                'bounceInUp' => esc_html__('BounceInUp', OXI_ACCORDIONS_TEXTDOMAIN),
+                'bounceIn' => esc_html__('BounceIn', 'accordions-or-faqs'),
+                'bounceInDown' => esc_html__('BounceInDown', 'accordions-or-faqs'),
+                'bounceInLeft' => esc_html__('BounceInLeft', 'accordions-or-faqs'),
+                'bounceInRight' => esc_html__('BounceInRight', 'accordions-or-faqs'),
+                'bounceInUp' => esc_html__('BounceInUp', 'accordions-or-faqs'),
                 'optgroup5' => [false],
                 'optgroup6' => [true, 'Fading Entrances'],
-                'fadeIn' => esc_html__('FadeIn', OXI_ACCORDIONS_TEXTDOMAIN),
-                'fadeInDown' => esc_html__('FadeInDown', OXI_ACCORDIONS_TEXTDOMAIN),
-                'fadeInDownBig' => esc_html__('FadeInDownBig', OXI_ACCORDIONS_TEXTDOMAIN),
-                'fadeInLeft' => esc_html__('FadeInLeft', OXI_ACCORDIONS_TEXTDOMAIN),
-                'fadeInLeftBig' => esc_html__('FadeInLeftBig', OXI_ACCORDIONS_TEXTDOMAIN),
-                'fadeInRight' => esc_html__('FadeInRight', OXI_ACCORDIONS_TEXTDOMAIN),
-                'fadeInRightBig' => esc_html__('FadeInRightBig', OXI_ACCORDIONS_TEXTDOMAIN),
-                'fadeInUp' => esc_html__('FadeInUp', OXI_ACCORDIONS_TEXTDOMAIN),
-                'fadeInUpBig' => esc_html__('FadeInUpBig', OXI_ACCORDIONS_TEXTDOMAIN),
+                'fadeIn' => esc_html__('FadeIn', 'accordions-or-faqs'),
+                'fadeInDown' => esc_html__('FadeInDown', 'accordions-or-faqs'),
+                'fadeInDownBig' => esc_html__('FadeInDownBig', 'accordions-or-faqs'),
+                'fadeInLeft' => esc_html__('FadeInLeft', 'accordions-or-faqs'),
+                'fadeInLeftBig' => esc_html__('FadeInLeftBig', 'accordions-or-faqs'),
+                'fadeInRight' => esc_html__('FadeInRight', 'accordions-or-faqs'),
+                'fadeInRightBig' => esc_html__('FadeInRightBig', 'accordions-or-faqs'),
+                'fadeInUp' => esc_html__('FadeInUp', 'accordions-or-faqs'),
+                'fadeInUpBig' => esc_html__('FadeInUpBig', 'accordions-or-faqs'),
                 'optgroup7' => [false],
                 'optgroup8' => [true, 'Flippers'],
-                'flip' => esc_html__('Flip', OXI_ACCORDIONS_TEXTDOMAIN),
-                'flipInX' => esc_html__('FlipInX', OXI_ACCORDIONS_TEXTDOMAIN),
-                'flipInY' => esc_html__('FlipInY', OXI_ACCORDIONS_TEXTDOMAIN),
+                'flip' => esc_html__('Flip', 'accordions-or-faqs'),
+                'flipInX' => esc_html__('FlipInX', 'accordions-or-faqs'),
+                'flipInY' => esc_html__('FlipInY', 'accordions-or-faqs'),
                 'optgroup9' => [false],
                 'optgroup10' => [true, 'Lightspeed'],
-                'lightSpeedIn' => esc_html__('LightSpeedIn', OXI_ACCORDIONS_TEXTDOMAIN),
+                'lightSpeedIn' => esc_html__('LightSpeedIn', 'accordions-or-faqs'),
                 'optgroup11' => [false],
                 'optgroup12' => [true, 'Rotating Entrances'],
-                'rotateIn' => esc_html__('RotateIn', OXI_ACCORDIONS_TEXTDOMAIN),
-                'rotateInDownLeft' => esc_html__('RotateInDownLeft', OXI_ACCORDIONS_TEXTDOMAIN),
-                'rotateInDownRight' => esc_html__('RotateInDownRight', OXI_ACCORDIONS_TEXTDOMAIN),
-                'rotateInUpLeft' => esc_html__('RotateInUpLeft', OXI_ACCORDIONS_TEXTDOMAIN),
-                'rotateInUpRight' => esc_html__('RotateInUpRight', OXI_ACCORDIONS_TEXTDOMAIN),
+                'rotateIn' => esc_html__('RotateIn', 'accordions-or-faqs'),
+                'rotateInDownLeft' => esc_html__('RotateInDownLeft', 'accordions-or-faqs'),
+                'rotateInDownRight' => esc_html__('RotateInDownRight', 'accordions-or-faqs'),
+                'rotateInUpLeft' => esc_html__('RotateInUpLeft', 'accordions-or-faqs'),
+                'rotateInUpRight' => esc_html__('RotateInUpRight', 'accordions-or-faqs'),
                 'optgroup13' => [false],
                 'optgroup14' => [true, 'Sliding Entrances'],
-                'slideInUp' => esc_html__('SlideInUp', OXI_ACCORDIONS_TEXTDOMAIN),
-                'slideInDown' => esc_html__('SlideInDown', OXI_ACCORDIONS_TEXTDOMAIN),
-                'slideInLeft' => esc_html__('SlideInLeft', OXI_ACCORDIONS_TEXTDOMAIN),
-                'slideInRight' => esc_html__('SlideInRight', OXI_ACCORDIONS_TEXTDOMAIN),
+                'slideInUp' => esc_html__('SlideInUp', 'accordions-or-faqs'),
+                'slideInDown' => esc_html__('SlideInDown', 'accordions-or-faqs'),
+                'slideInLeft' => esc_html__('SlideInLeft', 'accordions-or-faqs'),
+                'slideInRight' => esc_html__('SlideInRight', 'accordions-or-faqs'),
                 'optgroup15' => [false],
                 'optgroup16' => [true, 'Zoom Entrances'],
-                'zoomIn' => esc_html__('ZoomIn', OXI_ACCORDIONS_TEXTDOMAIN),
-                'zoomInDown' => esc_html__('ZoomInDown', OXI_ACCORDIONS_TEXTDOMAIN),
-                'zoomInLeft' => esc_html__('ZoomInLeft', OXI_ACCORDIONS_TEXTDOMAIN),
-                'zoomInRight' => esc_html__('ZoomInRight', OXI_ACCORDIONS_TEXTDOMAIN),
-                'zoomInUp' => esc_html__('ZoomInUp', OXI_ACCORDIONS_TEXTDOMAIN),
+                'zoomIn' => esc_html__('ZoomIn', 'accordions-or-faqs'),
+                'zoomInDown' => esc_html__('ZoomInDown', 'accordions-or-faqs'),
+                'zoomInLeft' => esc_html__('ZoomInLeft', 'accordions-or-faqs'),
+                'zoomInRight' => esc_html__('ZoomInRight', 'accordions-or-faqs'),
+                'zoomInUp' => esc_html__('ZoomInUp', 'accordions-or-faqs'),
                 'optgroup17' => [false],
                 'optgroup18' => [true, 'Specials'],
-                'hinge' => esc_html__('Hinge', OXI_ACCORDIONS_TEXTDOMAIN),
-                'rollIn' => esc_html__('RollIn', OXI_ACCORDIONS_TEXTDOMAIN),
+                'hinge' => esc_html__('Hinge', 'accordions-or-faqs'),
+                'rollIn' => esc_html__('RollIn', 'accordions-or-faqs'),
                 'optgroup19' => [false],
             ],
                 ]
         );
         $this->add_control(
                 $id . '-duration', $data, [
-            'label' => esc_html__('Duration (ms)', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Duration (ms)', 'accordions-or-faqs'),
             'type' => Controls::SLIDER,
             'default' => [
                 'unit' => 'px',
@@ -1865,7 +1865,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-delay', $data, [
-            'label' => esc_html__('Delay (ms)', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Delay (ms)', 'accordions-or-faqs'),
             'type' => Controls::SLIDER,
             'default' => [
                 'unit' => 'px',
@@ -1885,7 +1885,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-offset', $data, [
-            'label' => esc_html__('Offset', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Offset', 'accordions-or-faqs'),
             'type' => Controls::SLIDER,
             'default' => [
                 'unit' => 'px',
@@ -1905,12 +1905,12 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-looping', $data, [
-            'label' => esc_html__('Looping', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Looping', 'accordions-or-faqs'),
             'type' => Controls::SWITCHER,
             'default' => '',
             'loader' => TRUE,
-            'label_on' => esc_html__('Yes', OXI_ACCORDIONS_TEXTDOMAIN),
-            'label_off' => esc_html__('No', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label_on' => esc_html__('Yes', 'accordions-or-faqs'),
+            'label_off' => esc_html__('No', 'accordions-or-faqs'),
             'return_value' => 'yes',
             'condition' => [
                 $id . '-type' => 'EMPTY',
@@ -1959,7 +1959,7 @@ trait Sanitization {
 
         $this->start_popover_control(
                 $id, [
-            'label' => esc_html__('Border', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Border', 'accordions-or-faqs'),
             $cond => $condition,
             'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
             'separator' => $separator,
@@ -1969,20 +1969,20 @@ trait Sanitization {
 
         $this->add_control(
                 $id . '-type', $data, [
-            'label' => esc_html__('Type', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Type', 'accordions-or-faqs'),
             'type' => Controls::SELECT,
             'default' => '',
             'options' => [
-                '' => esc_html__('None', OXI_ACCORDIONS_TEXTDOMAIN),
-                'solid' => esc_html__('Solid', OXI_ACCORDIONS_TEXTDOMAIN),
-                'dotted' => esc_html__('Dotted', OXI_ACCORDIONS_TEXTDOMAIN),
-                'dashed' => esc_html__('Dashed', OXI_ACCORDIONS_TEXTDOMAIN),
-                'double' => esc_html__('Double', OXI_ACCORDIONS_TEXTDOMAIN),
-                'groove' => esc_html__('Groove', OXI_ACCORDIONS_TEXTDOMAIN),
-                'ridge' => esc_html__('Ridge', OXI_ACCORDIONS_TEXTDOMAIN),
-                'inset' => esc_html__('Inset', OXI_ACCORDIONS_TEXTDOMAIN),
-                'outset' => esc_html__('Outset', OXI_ACCORDIONS_TEXTDOMAIN),
-                'hidden' => esc_html__('Hidden', OXI_ACCORDIONS_TEXTDOMAIN),
+                '' => esc_html__('None', 'accordions-or-faqs'),
+                'solid' => esc_html__('Solid', 'accordions-or-faqs'),
+                'dotted' => esc_html__('Dotted', 'accordions-or-faqs'),
+                'dashed' => esc_html__('Dashed', 'accordions-or-faqs'),
+                'double' => esc_html__('Double', 'accordions-or-faqs'),
+                'groove' => esc_html__('Groove', 'accordions-or-faqs'),
+                'ridge' => esc_html__('Ridge', 'accordions-or-faqs'),
+                'inset' => esc_html__('Inset', 'accordions-or-faqs'),
+                'outset' => esc_html__('Outset', 'accordions-or-faqs'),
+                'hidden' => esc_html__('Hidden', 'accordions-or-faqs'),
             ],
             $loader => $loadervalue,
             $selectorvalue => 'border-style: {{VALUE}};',
@@ -1991,7 +1991,7 @@ trait Sanitization {
         );
         $this->add_responsive_control(
                 $id . '-width', $data, [
-            'label' => esc_html__('Width', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Width', 'accordions-or-faqs'),
             'type' => Controls::DIMENSIONS,
             $render => FALSE,
             'default' => [
@@ -2019,7 +2019,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-color', $data, [
-            'label' => esc_html__('Color', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Color', 'accordions-or-faqs'),
             'type' => Controls::COLOR,
             $render => FALSE,
             'default' => '#fff',
@@ -2079,20 +2079,20 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-type', $data, [
-            'label' => esc_html__('Type', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Type', 'accordions-or-faqs'),
             'type' => Controls::SELECT,
             'default' => '',
             'options' => [
-                '' => esc_html__('None', OXI_ACCORDIONS_TEXTDOMAIN),
-                'solid' => esc_html__('Solid', OXI_ACCORDIONS_TEXTDOMAIN),
-                'dotted' => esc_html__('Dotted', OXI_ACCORDIONS_TEXTDOMAIN),
-                'dashed' => esc_html__('Dashed', OXI_ACCORDIONS_TEXTDOMAIN),
-                'double' => esc_html__('Double', OXI_ACCORDIONS_TEXTDOMAIN),
-                'groove' => esc_html__('Groove', OXI_ACCORDIONS_TEXTDOMAIN),
-                'ridge' => esc_html__('Ridge', OXI_ACCORDIONS_TEXTDOMAIN),
-                'inset' => esc_html__('Inset', OXI_ACCORDIONS_TEXTDOMAIN),
-                'outset' => esc_html__('Outset', OXI_ACCORDIONS_TEXTDOMAIN),
-                'hidden' => esc_html__('Hidden', OXI_ACCORDIONS_TEXTDOMAIN),
+                '' => esc_html__('None', 'accordions-or-faqs'),
+                'solid' => esc_html__('Solid', 'accordions-or-faqs'),
+                'dotted' => esc_html__('Dotted', 'accordions-or-faqs'),
+                'dashed' => esc_html__('Dashed', 'accordions-or-faqs'),
+                'double' => esc_html__('Double', 'accordions-or-faqs'),
+                'groove' => esc_html__('Groove', 'accordions-or-faqs'),
+                'ridge' => esc_html__('Ridge', 'accordions-or-faqs'),
+                'inset' => esc_html__('Inset', 'accordions-or-faqs'),
+                'outset' => esc_html__('Outset', 'accordions-or-faqs'),
+                'hidden' => esc_html__('Hidden', 'accordions-or-faqs'),
             ],
             $loader => $loadervalue,
             $selector_key => $selector,
@@ -2100,7 +2100,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-width', $data, [
-            'label' => esc_html__('Size', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Size', 'accordions-or-faqs'),
             'type' => Controls::SLIDER,
             'default' => [
                 'unit' => 'px',
@@ -2122,7 +2122,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-color', $data, [
-            'label' => esc_html__('Color', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Color', 'accordions-or-faqs'),
             'type' => Controls::COLOR,
             $render => FALSE,
             'default' => '',
@@ -2184,7 +2184,7 @@ trait Sanitization {
         $separator = array_key_exists('separator', $arg) ? $arg['separator'] : FALSE;
         $this->start_popover_control(
                 $id, [
-            'label' => esc_html__('Background', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Background', 'accordions-or-faqs'),
             'condition' => array_key_exists('condition', $arg) ? $arg['condition'] : '',
             'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
             'separator' => $separator,
@@ -2194,7 +2194,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-color', $data, [
-            'label' => esc_html__('Color', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Color', 'accordions-or-faqs'),
             'type' => Controls::GRADIENT,
             'gradient' => $id,
             'oparetor' => 'RGB',
@@ -2206,28 +2206,28 @@ trait Sanitization {
 
         $this->add_control(
                 $id . '-img', $data, [
-            'label' => esc_html__('Image', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Image', 'accordions-or-faqs'),
             'type' => Controls::SWITCHER,
             'loader' => TRUE,
-            'label_on' => esc_html__('Yes', OXI_ACCORDIONS_TEXTDOMAIN),
-            'label_off' => esc_html__('No', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label_on' => esc_html__('Yes', 'accordions-or-faqs'),
+            'label_off' => esc_html__('No', 'accordions-or-faqs'),
             'return_value' => 'yes',
                 ]
         );
         $this->add_control(
                 $id . '-select', $data, [
-            'label' => esc_html__('Photo Source', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Photo Source', 'accordions-or-faqs'),
             'separator' => TRUE,
             'loader' => TRUE,
             'type' => Controls::CHOOSE,
             'default' => 'media-library',
             'options' => [
                 'media-library' => [
-                    'title' => esc_html__('Media Library', OXI_ACCORDIONS_TEXTDOMAIN),
+                    'title' => esc_html__('Media Library', 'accordions-or-faqs'),
                     'icon' => 'fa fa-align-left',
                 ],
                 'custom-url' => [
-                    'title' => esc_html__('Custom URL', OXI_ACCORDIONS_TEXTDOMAIN),
+                    'title' => esc_html__('Custom URL', 'accordions-or-faqs'),
                     'icon' => 'fa fa-align-center',
                 ]
             ],
@@ -2238,7 +2238,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-image', $data, [
-            'label' => esc_html__('Image', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Image', 'accordions-or-faqs'),
             'type' => Controls::IMAGE,
             'default' => '',
             'loader' => TRUE,
@@ -2250,7 +2250,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-url', $data, [
-            'label' => esc_html__('Image URL', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Image URL', 'accordions-or-faqs'),
             'type' => Controls::TEXT,
             'default' => '',
             'loader' => TRUE,
@@ -2263,21 +2263,21 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-position', $data, [
-            'label' => esc_html__('Position', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Position', 'accordions-or-faqs'),
             'type' => Controls::SELECT,
             'default' => 'center center',
             'render' => $render,
             'options' => [
-                '' => esc_html__('Default', OXI_ACCORDIONS_TEXTDOMAIN),
-                'top left' => esc_html__('Top Left', OXI_ACCORDIONS_TEXTDOMAIN),
-                'top center' => esc_html__('Top Center', OXI_ACCORDIONS_TEXTDOMAIN),
-                'top right' => esc_html__('Top Right', OXI_ACCORDIONS_TEXTDOMAIN),
-                'center left' => esc_html__('Center Left', OXI_ACCORDIONS_TEXTDOMAIN),
-                'center center' => esc_html__('Center Center', OXI_ACCORDIONS_TEXTDOMAIN),
-                'center right' => esc_html__('Center Right', OXI_ACCORDIONS_TEXTDOMAIN),
-                'bottom left' => esc_html__('Bottom Left', OXI_ACCORDIONS_TEXTDOMAIN),
-                'bottom center' => esc_html__('Bottom Center', OXI_ACCORDIONS_TEXTDOMAIN),
-                'bottom right' => esc_html__('Bottom Right', OXI_ACCORDIONS_TEXTDOMAIN),
+                '' => esc_html__('Default', 'accordions-or-faqs'),
+                'top left' => esc_html__('Top Left', 'accordions-or-faqs'),
+                'top center' => esc_html__('Top Center', 'accordions-or-faqs'),
+                'top right' => esc_html__('Top Right', 'accordions-or-faqs'),
+                'center left' => esc_html__('Center Left', 'accordions-or-faqs'),
+                'center center' => esc_html__('Center Center', 'accordions-or-faqs'),
+                'center right' => esc_html__('Center Right', 'accordions-or-faqs'),
+                'bottom left' => esc_html__('Bottom Left', 'accordions-or-faqs'),
+                'bottom center' => esc_html__('Bottom Center', 'accordions-or-faqs'),
+                'bottom right' => esc_html__('Bottom Right', 'accordions-or-faqs'),
             ],
             'loader' => TRUE,
             'condition' => [
@@ -2288,14 +2288,14 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-attachment', $data, [
-            'label' => esc_html__('Attachment', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Attachment', 'accordions-or-faqs'),
             'type' => Controls::SELECT,
             'default' => '',
             'render' => $render,
             'options' => [
-                '' => esc_html__('Default', OXI_ACCORDIONS_TEXTDOMAIN),
-                'scroll' => esc_html__('Scroll', OXI_ACCORDIONS_TEXTDOMAIN),
-                'fixed' => esc_html__('Fixed', OXI_ACCORDIONS_TEXTDOMAIN),
+                '' => esc_html__('Default', 'accordions-or-faqs'),
+                'scroll' => esc_html__('Scroll', 'accordions-or-faqs'),
+                'fixed' => esc_html__('Fixed', 'accordions-or-faqs'),
             ],
             $loader => $loadervalue,
             $selectorvalue => 'background-attachment: {{VALUE}};',
@@ -2308,16 +2308,16 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-repeat', $data, [
-            'label' => esc_html__('Repeat', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Repeat', 'accordions-or-faqs'),
             'type' => Controls::SELECT,
             'default' => 'no-repeat',
             'render' => $render,
             'options' => [
-                '' => esc_html__('Default', OXI_ACCORDIONS_TEXTDOMAIN),
-                'no-repeat' => esc_html__('No-Repeat', OXI_ACCORDIONS_TEXTDOMAIN),
-                'repeat' => esc_html__('Repeat', OXI_ACCORDIONS_TEXTDOMAIN),
-                'repeat-x' => esc_html__('Repeat-x', OXI_ACCORDIONS_TEXTDOMAIN),
-                'repeat-y' => esc_html__('Repeat-y', OXI_ACCORDIONS_TEXTDOMAIN),
+                '' => esc_html__('Default', 'accordions-or-faqs'),
+                'no-repeat' => esc_html__('No-Repeat', 'accordions-or-faqs'),
+                'repeat' => esc_html__('Repeat', 'accordions-or-faqs'),
+                'repeat-x' => esc_html__('Repeat-x', 'accordions-or-faqs'),
+                'repeat-y' => esc_html__('Repeat-y', 'accordions-or-faqs'),
             ],
             'loader' => TRUE,
             'condition' => [
@@ -2328,15 +2328,15 @@ trait Sanitization {
         );
         $this->add_responsive_control(
                 $id . '-size', $data, [
-            'label' => esc_html__('Size', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Size', 'accordions-or-faqs'),
             'type' => Controls::SELECT,
             'default' => 'cover',
             'render' => $render,
             'options' => [
-                '' => esc_html__('Default', OXI_ACCORDIONS_TEXTDOMAIN),
-                'auto' => esc_html__('Auto', OXI_ACCORDIONS_TEXTDOMAIN),
-                'cover' => esc_html__('Cover', OXI_ACCORDIONS_TEXTDOMAIN),
-                'contain' => esc_html__('Contain', OXI_ACCORDIONS_TEXTDOMAIN),
+                '' => esc_html__('Default', 'accordions-or-faqs'),
+                'auto' => esc_html__('Auto', 'accordions-or-faqs'),
+                'cover' => esc_html__('Cover', 'accordions-or-faqs'),
+                'contain' => esc_html__('Contain', 'accordions-or-faqs'),
             ],
             $loader => $loadervalue,
             $selectorvalue => 'background-size: {{VALUE}};',
@@ -2368,7 +2368,7 @@ trait Sanitization {
         $separator = array_key_exists('separator', $arg) ? $arg['separator'] : FALSE;
         $this->add_control(
                 $id . '-url', $data, [
-            'label' => esc_html__('Link', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Link', 'accordions-or-faqs'),
             'type' => Controls::TEXT,
             'link' => TRUE,
             'separator' => $separator,
@@ -2381,11 +2381,11 @@ trait Sanitization {
 
         $this->add_control(
                 $id . '-target', $data, [
-            'label' => esc_html__('New Window?', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('New Window?', 'accordions-or-faqs'),
             'type' => Controls::SWITCHER,
             'default' => '',
-            'label_on' => esc_html__('Yes', OXI_ACCORDIONS_TEXTDOMAIN),
-            'label_off' => esc_html__('No', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label_on' => esc_html__('Yes', 'accordions-or-faqs'),
+            'label_off' => esc_html__('No', 'accordions-or-faqs'),
             'return_value' => 'yes',
                 ]
         );
@@ -2410,20 +2410,20 @@ trait Sanitization {
         endif;
         $this->add_control(
                 $lap = $id . '-lap', $data, [
-            'label' => esc_html__('Column Size', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Column Size', 'accordions-or-faqs'),
             'type' => Controls::SELECT,
             'responsive' => 'laptop',
             'description' => $arg['description'],
             'default' => 'oxi-bt-col-lg-12',
             'options' => [
-                'oxi-bt-col-lg-12' => esc_html__('Col 1', OXI_ACCORDIONS_TEXTDOMAIN),
-                'oxi-bt-col-lg-6' => esc_html__('Col 2', OXI_ACCORDIONS_TEXTDOMAIN),
-                'oxi-bt-col-lg-4' => esc_html__('Col 3', OXI_ACCORDIONS_TEXTDOMAIN),
-                'oxi-bt-col-lg-3' => esc_html__('Col 4', OXI_ACCORDIONS_TEXTDOMAIN),
-                'oxi-bt-col-lg-5' => esc_html__('Col 5', OXI_ACCORDIONS_TEXTDOMAIN),
-                'oxi-bt-col-lg-2' => esc_html__('Col 6', OXI_ACCORDIONS_TEXTDOMAIN),
-                'oxi-bt-col-lg-8' => esc_html__('Col 8', OXI_ACCORDIONS_TEXTDOMAIN),
-                'oxi-bt-col-lg-1' => esc_html__('Col 12', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oxi-bt-col-lg-12' => esc_html__('Col 1', 'accordions-or-faqs'),
+                'oxi-bt-col-lg-6' => esc_html__('Col 2', 'accordions-or-faqs'),
+                'oxi-bt-col-lg-4' => esc_html__('Col 3', 'accordions-or-faqs'),
+                'oxi-bt-col-lg-3' => esc_html__('Col 4', 'accordions-or-faqs'),
+                'oxi-bt-col-lg-5' => esc_html__('Col 5', 'accordions-or-faqs'),
+                'oxi-bt-col-lg-2' => esc_html__('Col 6', 'accordions-or-faqs'),
+                'oxi-bt-col-lg-8' => esc_html__('Col 8', 'accordions-or-faqs'),
+                'oxi-bt-col-lg-1' => esc_html__('Col 12', 'accordions-or-faqs'),
             ],
             'description' => 'Define how much column you want to show into single rows. Customize possible with desktop or tab or mobile Settings.',
             $select => $selector,
@@ -2433,19 +2433,19 @@ trait Sanitization {
         );
         $this->add_control(
                 $tab = $id . '-tab', $data, [
-            'label' => esc_html__('Column Size', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Column Size', 'accordions-or-faqs'),
             'type' => Controls::SELECT,
             'responsive' => 'tab',
             'default' => 'oxi-bt-col-md-12',
             'description' => $arg['description'],
             'options' => [
-                '' => esc_html__('Default', OXI_ACCORDIONS_TEXTDOMAIN),
-                'oxi-bt-col-md-12' => esc_html__('Col 1', OXI_ACCORDIONS_TEXTDOMAIN),
-                'oxi-bt-col-md-6' => esc_html__('Col 2', OXI_ACCORDIONS_TEXTDOMAIN),
-                'oxi-bt-col-md-4' => esc_html__('Col 3', OXI_ACCORDIONS_TEXTDOMAIN),
-                'oxi-bt-col-md-3' => esc_html__('Col 4', OXI_ACCORDIONS_TEXTDOMAIN),
-                'oxi-bt-col-md-2' => esc_html__('Col 6', OXI_ACCORDIONS_TEXTDOMAIN),
-                'oxi-bt-col-md-1' => esc_html__('Col 12', OXI_ACCORDIONS_TEXTDOMAIN),
+                '' => esc_html__('Default', 'accordions-or-faqs'),
+                'oxi-bt-col-md-12' => esc_html__('Col 1', 'accordions-or-faqs'),
+                'oxi-bt-col-md-6' => esc_html__('Col 2', 'accordions-or-faqs'),
+                'oxi-bt-col-md-4' => esc_html__('Col 3', 'accordions-or-faqs'),
+                'oxi-bt-col-md-3' => esc_html__('Col 4', 'accordions-or-faqs'),
+                'oxi-bt-col-md-2' => esc_html__('Col 6', 'accordions-or-faqs'),
+                'oxi-bt-col-md-1' => esc_html__('Col 12', 'accordions-or-faqs'),
             ],
             'description' => 'Define how much column you want to show into single rows. Customize possible with desktop or tab or mobile Settings.',
             $select => $selector,
@@ -2455,20 +2455,20 @@ trait Sanitization {
         );
         $this->add_control(
                 $mob = $id . '-mob', $data, [
-            'label' => esc_html__('Column Size', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Column Size', 'accordions-or-faqs'),
             'type' => Controls::SELECT,
             'default' => 'oxi-bt-col-lg-12',
             'responsive' => 'mobile',
             'description' => $arg['description'],
             'options' => [
-                '' => esc_html__('Default', OXI_ACCORDIONS_TEXTDOMAIN),
-                'oxi-bt-col-sm-12' => esc_html__('Col 1', OXI_ACCORDIONS_TEXTDOMAIN),
-                'oxi-bt-col-sm-6' => esc_html__('Col 2', OXI_ACCORDIONS_TEXTDOMAIN),
-                'oxi-bt-col-sm-4' => esc_html__('Col 3', OXI_ACCORDIONS_TEXTDOMAIN),
-                'oxi-bt-col-sm-3' => esc_html__('Col 4', OXI_ACCORDIONS_TEXTDOMAIN),
-                'oxi-bt-col-sm-5' => esc_html__('Col 5', OXI_ACCORDIONS_TEXTDOMAIN),
-                'oxi-bt-col-sm-2' => esc_html__('Col 6', OXI_ACCORDIONS_TEXTDOMAIN),
-                'oxi-bt-col-sm-1' => esc_html__('Col 12', OXI_ACCORDIONS_TEXTDOMAIN),
+                '' => esc_html__('Default', 'accordions-or-faqs'),
+                'oxi-bt-col-sm-12' => esc_html__('Col 1', 'accordions-or-faqs'),
+                'oxi-bt-col-sm-6' => esc_html__('Col 2', 'accordions-or-faqs'),
+                'oxi-bt-col-sm-4' => esc_html__('Col 3', 'accordions-or-faqs'),
+                'oxi-bt-col-sm-3' => esc_html__('Col 4', 'accordions-or-faqs'),
+                'oxi-bt-col-sm-5' => esc_html__('Col 5', 'accordions-or-faqs'),
+                'oxi-bt-col-sm-2' => esc_html__('Col 6', 'accordions-or-faqs'),
+                'oxi-bt-col-sm-1' => esc_html__('Col 12', 'accordions-or-faqs'),
             ],
             'description' => 'Define how much column you want to show into single rows. Customize possible with desktop or tab or mobile Settings.',
             $select => $selector,
