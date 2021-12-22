@@ -70,7 +70,7 @@ class API {
         if (method_exists($this, $action_class)):
             return $this->{$action_class}();
         else:
-            return die(__('Security check', OXI_ACCORDIONS_TEXTDOMAIN));
+            return die(esc_html__('Security check', OXI_ACCORDIONS_TEXTDOMAIN));
         endif;
     }
 
@@ -427,7 +427,7 @@ class API {
             if (is_wp_error($response)) {
                 $message = $response->get_error_message();
             } else {
-                $message = __('An error occurred, please try again.');
+                $message = esc_html__('An error occurred, please try again.');
             }
             return $message;
         }
@@ -453,7 +453,7 @@ class API {
             if (is_wp_error($response)) {
                 $message = $response->get_error_message();
             } else {
-                $message = __('An error occurred, please try again.');
+                $message = esc_html__('An error occurred, please try again.');
             }
         } else {
             $license_data = json_decode(wp_remote_retrieve_body($response));
@@ -471,18 +471,18 @@ class API {
 
                     case 'revoked' :
 
-                        $message = __('Your license key has been disabled.');
+                        $message = esc_html__('Your license key has been disabled.');
                         break;
 
                     case 'missing' :
 
-                        $message = __('Invalid license.');
+                        $message = esc_html__('Invalid license.');
                         break;
 
                     case 'invalid' :
                     case 'site_inactive' :
 
-                        $message = __('Your license is not active for this URL.');
+                        $message = esc_html__('Your license is not active for this URL.');
                         break;
 
                     case 'item_name_mismatch' :
@@ -492,12 +492,12 @@ class API {
 
                     case 'no_activations_left':
 
-                        $message = __('Your license key has reached its activation limit.');
+                        $message = esc_html__('Your license key has reached its activation limit.');
                         break;
 
                     default :
 
-                        $message = __('An error occurred, please try again.');
+                        $message = esc_html__('An error occurred, please try again.');
                         break;
                 }
             }

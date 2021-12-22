@@ -49,7 +49,7 @@ trait Helper {
                     </a>
                 </div>
                 <nav class="oxilab-sa-admin-nav">
-                    <ul class="oxilab-sa-admin-menu">';
+                    <ul class="oxilab-sa-admin-menu">
                         <?php
                         foreach ($response as $key => $value) {
                             $active = ($GETPage == $value['homepage'] ? ' class="active" ' : '');

@@ -49,11 +49,15 @@ trait Sanitization {
      */
 
     public function start_section_header($id, array $arg = []) {
-        echo _('<ul class="oxi-addons-tabs-ul">   ');
-        foreach ($arg['options'] as $key => $value) {
-            echo _('<li ref="#shortcode-addons-section-' . esc_attr($key) . '">' . esc_html($value) . '</li>');
-        }
-        echo _('</ul>');
+        ?>
+        <ul class="oxi-addons-tabs-ul">
+            <?php
+            foreach ($arg['options'] as $key => $value) {
+                echo '<li ref="#shortcode-addons-section-' . esc_attr($key) . '">' . esc_html($value) . '</li>';
+            }
+            ?>
+        </ul>
+        <?php
     }
 
     /*
@@ -63,13 +67,14 @@ trait Sanitization {
      */
 
     public function start_section_tabs($id, array $arg = []) {
-        echo _('<div class="oxi-addons-tabs-content-tabs" id="shortcode-addons-section-');
+        echo '<div class="oxi-addons-tabs-content-tabs" id="shortcode-addons-section-';
         if (array_key_exists('condition', $arg)) :
             foreach ($arg['condition'] as $value) {
-                echo esc_html($value);
+                echo esc_attr($value);
             }
         endif;
-        echo _('"  ' . (array_key_exists('padding', $arg) ? 'style="padding: ' . esc_html($arg['padding']) . '"' : '') . '>');
+
+        echo '"  ' . (array_key_exists('padding', $arg) ? 'style="padding: ' . esc_attr($arg['padding']) . '"' : '') . '>';
     }
 
     /*
@@ -79,7 +84,7 @@ trait Sanitization {
      */
 
     public function end_section_tabs() {
-        echo _('</div>');
+        echo '</div>';
     }
 
     /*
@@ -89,7 +94,7 @@ trait Sanitization {
      */
 
     public function start_section_devider() {
-        echo _('<div class="oxi-addons-col-6">');
+        echo '<div class="oxi-addons-col-6">';
     }
 
     /*
@@ -99,7 +104,7 @@ trait Sanitization {
      */
 
     public function end_section_devider() {
-        echo _('</div>');
+        echo '</div>';
     }
 
     /*
@@ -148,7 +153,7 @@ trait Sanitization {
                 endif;
             }
             if (!empty($data)) :
-                return 'data-condition="' . __($data) . '"';
+                return 'data-condition="' . $data . '"';
             endif;
         endif;
     }
@@ -163,12 +168,12 @@ trait Sanitization {
         $defualt = ['showing' => FALSE];
         $arg = array_merge($defualt, $arg);
         $condition = $this->forms_condition($arg);
-        echo __('<div class="oxi-addons-content-div ' . (($arg['showing']) ? '' : 'oxi-admin-head-d-none') . '" ' . $condition . '>
-                    <div class="oxi-head">
-                    ' . esc_html($arg['label']) . '
-                    <div class="oxi-head-toggle"></div>
+        echo '<div class="oxi-addons-content-div ' . (($arg['showing']) ? '' : 'oxi-admin-head-d-none') . '" ' . esc_attr($condition) . '>
+                        <div class="oxi-head">
+                        ' . esc_html($arg['label']) . '
+                        <div class="oxi-head-toggle"></div>
                     </div>
-                    <div class="oxi-addons-content-div-body">');
+                    <div class="oxi-addons-content-div-body">';
     }
 
     /*
@@ -178,7 +183,7 @@ trait Sanitization {
      */
 
     public function end_controls_section() {
-        echo _('</div></div>');
+        echo '</div></div>';
     }
 
     /*
@@ -192,19 +197,19 @@ trait Sanitization {
         $defualt = ['options' => ['normal' => 'Normal', 'hover' => 'Hover']];
         $arg = array_merge($defualt, $arg);
         $condition = $this->forms_condition($arg);
-        echo __('<div class="shortcode-form-control shortcode-control-type-control-tabs ' . (array_key_exists('separator', $arg) ? ($arg['separator'] === TRUE ? 'shortcode-form-control-separator-before' : '') : '') . '" ' . $condition . ' >
-                <div class="shortcode-form-control-content shortcode-form-control-content-tabs">
-                    <div class="shortcode-form-control-field">');
+        echo '<div class="shortcode-form-control shortcode-control-type-control-tabs ' . (array_key_exists('separator', $arg) ? ($arg['separator'] === TRUE ? 'shortcode-form-control-separator-before' : '') : '') . '" ' . esc_attr($condition) . ' >
+                        <div class="shortcode-form-control-content shortcode-form-control-content-tabs">
+                            <div class="shortcode-form-control-field">';
         foreach ($arg['options'] as $key => $value) {
-            echo __('  <div class="shortcode-control-type-control-tab-child">
-			<div class="shortcode-control-content">
+            echo '      <div class="shortcode-control-type-control-tab-child">
+                                    <div class="shortcode-control-content">
 				' . esc_html($value) . '
-                        </div>
-                    </div>');
+                                    </div>
+                                </div>';
         }
-        echo __('</div>
-              </div>
-              <div class="shortcode-form-control-content">');
+        echo '         </div>
+                        </div>
+                    <div class="shortcode-form-control-content">';
     }
 
     /*
@@ -214,7 +219,7 @@ trait Sanitization {
      */
 
     public function end_controls_tabs() {
-        echo _('</div> </div>');
+        echo '</div> </div>';
     }
 
     /*
@@ -224,7 +229,7 @@ trait Sanitization {
      */
 
     public function start_controls_tab() {
-        echo _('<div class="shortcode-form-control-content shortcode-form-control-tabs-content shortcode-control-tab-close">');
+        echo '<div class="shortcode-form-control-content shortcode-form-control-tabs-content shortcode-control-tab-close">';
     }
 
     /*
@@ -234,7 +239,7 @@ trait Sanitization {
      */
 
     public function end_controls_tab() {
-        echo _('</div>');
+        echo '</div>';
     }
 
     /*
@@ -252,7 +257,7 @@ trait Sanitization {
 
         $condition = $this->forms_condition($arg);
         $separator = (array_key_exists('separator', $arg) ? ($arg['separator'] === TRUE ? 'shortcode-form-control-separator-before' : '') : '');
-        echo __('  <div class="shortcode-form-control shortcode-control-type-popover ' . $separator . '" ' . $condition . '>
+        echo '  <div class="shortcode-form-control shortcode-control-type-popover ' . esc_attr($separator) . '" ' . esc_attr($condition) . '>
                     <div class="shortcode-form-control-content shortcode-form-control-content-popover">
                         <div class="shortcode-form-control-field">
                             <label for="" class="shortcode-form-control-title">' . esc_html($arg['label']) . '</label>
@@ -265,7 +270,7 @@ trait Sanitization {
                     </div>
                     <div class="shortcode-form-control-content shortcode-form-control-content-popover-body">
 
-               ');
+               ';
     }
 
     /*
@@ -276,7 +281,7 @@ trait Sanitization {
 
     public function end_popover_control() {
         $this->Popover_Condition = true;
-        echo __('</div></div>');
+        echo '</div></div>';
     }
 
     /*
@@ -321,9 +326,9 @@ trait Sanitization {
             'type' => 'text',
             'label' => 'Input Text',
             'default' => '',
-            'label_on' => __('Yes', OXI_ACCORDIONS_TEXTDOMAIN),
-            'label_off' => __('No', OXI_ACCORDIONS_TEXTDOMAIN),
-            'placeholder' => __('', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label_on' => esc_html__('Yes', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label_off' => esc_html__('No', OXI_ACCORDIONS_TEXTDOMAIN),
+            'placeholder' => esc_html__('', OXI_ACCORDIONS_TEXTDOMAIN),
             'selector-data' => TRUE,
             'render' => TRUE,
             'responsive' => 'laptop',
@@ -342,16 +347,16 @@ trait Sanitization {
         if ($arg['type'] == 'animation'):
             $arg['type'] = 'select';
             $arg['options'] = [
-                '' => __('None', OXI_ACCORDIONS_TEXTDOMAIN),
-                'bounce' => __('Bounce', OXI_ACCORDIONS_TEXTDOMAIN),
-                'flash' => __('Flash', OXI_ACCORDIONS_TEXTDOMAIN),
-                'pulse' => __('Pulse', OXI_ACCORDIONS_TEXTDOMAIN),
-                'rubberBand' => __('RubberBand', OXI_ACCORDIONS_TEXTDOMAIN),
-                'shake' => __('Shake', OXI_ACCORDIONS_TEXTDOMAIN),
-                'swing' => __('Swing', OXI_ACCORDIONS_TEXTDOMAIN),
-                'tada' => __('Tada', OXI_ACCORDIONS_TEXTDOMAIN),
-                'wobble' => __('Wobble', OXI_ACCORDIONS_TEXTDOMAIN),
-                'jello' => __('Jello', OXI_ACCORDIONS_TEXTDOMAIN),
+                '' => esc_html__('None', OXI_ACCORDIONS_TEXTDOMAIN),
+                'bounce' => esc_html__('Bounce', OXI_ACCORDIONS_TEXTDOMAIN),
+                'flash' => esc_html__('Flash', OXI_ACCORDIONS_TEXTDOMAIN),
+                'pulse' => esc_html__('Pulse', OXI_ACCORDIONS_TEXTDOMAIN),
+                'rubberBand' => esc_html__('RubberBand', OXI_ACCORDIONS_TEXTDOMAIN),
+                'shake' => esc_html__('Shake', OXI_ACCORDIONS_TEXTDOMAIN),
+                'swing' => esc_html__('Swing', OXI_ACCORDIONS_TEXTDOMAIN),
+                'tada' => esc_html__('Tada', OXI_ACCORDIONS_TEXTDOMAIN),
+                'wobble' => esc_html__('Wobble', OXI_ACCORDIONS_TEXTDOMAIN),
+                'jello' => esc_html__('Jello', OXI_ACCORDIONS_TEXTDOMAIN),
             ];
         endif;
 
@@ -360,19 +365,19 @@ trait Sanitization {
         $separator = (array_key_exists('separator', $arg) ? ($arg['separator'] === TRUE ? 'shortcode-form-control-separator-before' : '') : '');
 
         $loader = (array_key_exists('loader', $arg) ? $arg['loader'] == TRUE ? ' shortcode-addons-control-loader ' : '' : '');
-        echo __('<div class="shortcode-form-control shortcode-control-type-' . $arg['type'] . ' ' . $separator . ' ' . $toggle . ' ' . $responsiveclass . ' ' . $loader . '" ' . $condition . '>
+        echo '<div class="shortcode-form-control shortcode-control-type-' . esc_attr($arg['type']) . ' ' . esc_attr($separator) . ' ' . esc_attr($toggle) . ' ' . esc_attr($responsiveclass) . ' ' . esc_attr($loader) . '" ' . esc_attr($condition) . '>
                 <div class="shortcode-form-control-content">
-                    <div class="shortcode-form-control-field">');
-        echo __('<label for="" class="shortcode-form-control-title">' . esc_html($arg['label']) . '</label>');
-        echo __($responsive);
+                    <div class="shortcode-form-control-field">';
+        echo '          <label for="" class="shortcode-form-control-title">' . esc_html($arg['label']) . '</label>';
+        echo $responsive;
 
-        $fun = $arg['type'] . '_admin_control';
-        echo __($this->$fun($id, $data, $arg));
-        echo _('      </div>');
-        echo __((array_key_exists('description', $arg) ? '<div class="shortcode-form-control-description">' . esc_html($arg['description']) . '</div>' : ''));
+        $fun = esc_attr($arg['type']) . '_admin_control';
+        echo $this->$fun($id, $data, $arg);
+        echo '      </div>';
+        echo array_key_exists('description', $arg) ? '<div class="shortcode-form-control-description">' . esc_html($arg['description']) . '</div>' : '';
 
-        echo __(' </div>
-        </div>');
+        echo '  </div>
+            </div>';
     }
 
     /*
@@ -441,37 +446,37 @@ trait Sanitization {
         ];
         $arg = array_merge($defualt, $arg);
         $fun = $arg['type'] . '_admin_group_control';
-        echo __($this->$fun($id, $data, $arg));
+        echo $this->$fun($id, $data, $arg);
     }
 
     public function add_rearrange_control($id, array $data = [], array $arg = []) {
         $condition = $this->forms_condition($arg);
         $separator = (array_key_exists('separator', $arg) ? ($arg['separator'] === TRUE ? 'shortcode-form-control-separator-before' : '') : '');
-        $value = array_key_exists($id, $data) ? $data[esc_attr($id)] : $arg['default'];
-        echo __('<div class="shortcode-form-control shortcode-control-type-' . $arg['type'] . ' ' . $separator . '" ' . $condition . '>
+        $value = array_key_exists($id, $data) ? $data[$id] : $arg['default'];
+        echo '<div class="shortcode-form-control shortcode-control-type-' . esc_attr($arg['type']) . ' ' . esc_attr($separator) . '" ' . esc_attr($condition) . '>
                 <div class="shortcode-form-control-content">
                     <div class="shortcode-form-control-field">
                         <label for="" class="shortcode-form-control-title">' . esc_html($arg['label']) . '</label>
                     </div>
-                    <div class="shortcode-form-rearrange-fields-wrapper" vlid="#' . esc_attr($id) . '">');
+                    <div class="shortcode-form-rearrange-fields-wrapper" vlid="#' . esc_attr($id) . '">';
         $rearrange = explode(',', $value);
         foreach ($rearrange as $k => $vl) {
             if ($vl != ''):
-                echo __('  <div class="shortcode-form-repeater-fields" id="' . $vl . '">
+                echo '  <div class="shortcode-form-repeater-fields" id="' . $vl . '">
                             <div class="shortcode-form-repeater-controls">
                                 <div class="shortcode-form-repeater-controls-title">
                                     ' . esc_html($arg['fields'][$vl]['label']) . '
                                 </div>
                             </div>
-                        </div>');
+                        </div>';
             endif;
         }
-        echo __('          <div class="shortcode-form-control-input-wrapper">
+        echo '          <div class="shortcode-form-control-input-wrapper">
                             <input type="hidden" value="' . esc_attr($value) . '" name="' . esc_attr($id) . '" id="' . esc_attr($id) . '">
                         </div>
                     </div>
                 </div>
-            </div>');
+            </div>';
     }
 
     /*
@@ -527,7 +532,7 @@ trait Sanitization {
         if (array_key_exists('selector-data', $arg) && $arg['selector-data'] == TRUE) {
             if (array_key_exists('selector', $arg)) :
                 foreach ($arg['selector'] as $key => $val) {
-                    $key = (strpos($key, '{{KEY}}') ? str_replace('{{KEY}}', explode('saarsa', esc_attr($id))[1], $key) : $key);
+                    $key = (strpos($key, '{{KEY}}') ? str_replace('{{KEY}}', explode('saarsa', $id)[1], $key) : $key);
                     if (!empty($val) && $this->render_condition_control($id, $data, $arg)) {
                         $class = str_replace('{{WRAPPER}}', $this->CSSWRAPPER, $key);
                         $file = str_replace('{{VALUE}}', $value, $val);
@@ -545,12 +550,12 @@ trait Sanitization {
         }
         $retunvalue = array_key_exists('selector', $arg) ? htmlspecialchars(json_encode($retun)) : '';
 
-        echo __('  <div class="shortcode-form-control-input-wrapper">
+        echo '  <div class="shortcode-form-control-input-wrapper">
                     <label class="shortcode-switcher">
-                        <input type="checkbox" ' . ($value == $arg['return_value'] ? 'checked ckdflt="true"' : '') . ' value="' . esc_html($arg['return_value']) . '"  name="' . esc_attr($id) . '" id="' . esc_attr($id) . '"  retundata="' . $retunvalue . '"/>
+                        <input type="checkbox" ' . ($value == $arg['return_value'] ? 'checked ckdflt="true"' : '') . ' value="' . esc_html($arg['return_value']) . '"  name="' . esc_attr($id) . '" id="' . esc_attr($id) . '"  retundata="' . esc_attr($retunvalue) . '"/>
                         <span data-on="' . esc_attr($arg['label_on']) . '" data-off="' . esc_attr($arg['label_off']) . '"></span>
                     </label>
-                </div>');
+                </div>';
     }
 
     /*
@@ -563,13 +568,13 @@ trait Sanitization {
         $value = array_key_exists($id, $data) ? $data[esc_attr($id)] : $arg['default'];
         $retunvalue = array_key_exists('selector', $arg) ? htmlspecialchars(json_encode($arg['selector'])) : '';
         if (array_key_exists('link', $arg)) :
-            echo __('<div class="shortcode-form-control-input-wrapper shortcode-form-control-input-link">
-                     <input type="text"  name="' . esc_attr($id) . '" id="' . esc_attr($id) . '" value="' . esc_html(htmlspecialchars($value)) . '" placeholder="' . esc_html($arg['placeholder']) . '" retundata=\'' . $retunvalue . '\'>
-                     <span class="dashicons dashicons-admin-generic"></span>');
+            echo '<div class="shortcode-form-control-input-wrapper shortcode-form-control-input-link">
+                     <input type="text"  name="' . esc_attr($id) . '" id="' . esc_attr($id) . '" value="' . esc_html(htmlspecialchars($value)) . '" placeholder="' . esc_html($arg['placeholder']) . '" retundata=\'' . esc_attr($retunvalue) . '\'>
+                     <span class="dashicons dashicons-admin-generic"></span>';
         else :
-            echo __('<div class="shortcode-form-control-input-wrapper">
-                <input type="text"  name="' . esc_attr($id) . '" id="' . esc_attr($id) . '" value="' . esc_html(htmlspecialchars($value)) . '" placeholder="' . esc_html($arg['placeholder']) . '" retundata=\'' . $retunvalue . '\'>
-            </div>');
+            echo '<div class="shortcode-form-control-input-wrapper">
+                <input type="text"  name="' . esc_attr($id) . '" id="' . esc_attr($id) . '" value="' . esc_html(htmlspecialchars($value)) . '" placeholder="' . esc_html($arg['placeholder']) . '" retundata=\'' . esc_attr($retunvalue) . '\'>
+            </div>';
         endif;
     }
 
@@ -599,9 +604,9 @@ trait Sanitization {
                 }
             endif;
         endif;
-        echo __(' <div class="shortcode-form-control-input-wrapper">
+        echo ' <div class="shortcode-form-control-input-wrapper">
                    <input type="hidden" value="' . esc_html($value) . '" name="' . esc_attr($id) . '" id="' . esc_attr($id) . '">
-               </div>');
+               </div>';
     }
 
     /*
@@ -613,9 +618,9 @@ trait Sanitization {
     public function textarea_admin_control($id, array $data = [], array $arg = []) {
         $value = array_key_exists($id, $data) ? $data[esc_attr($id)] : $arg['default'];
         $retunvalue = array_key_exists('selector', $arg) ? htmlspecialchars(json_encode($arg['selector'])) : '';
-        echo __('<div class="shortcode-form-control-input-wrapper">
-                 <textarea  name="' . esc_attr($id) . '" id="' . esc_attr($id) . '" retundata=\'' . $retunvalue . '\' class="shortcode-form-control-tag-area" rows="' . (int) ((strlen($value) / 50) + 4) . '" placeholder="' . esc_html($arg['placeholder']) . '">' . esc_html($value) . '</textarea>
-              </div>');
+        echo '<div class="shortcode-form-control-input-wrapper">
+                 <textarea  name="' . esc_attr($id) . '" id="' . esc_attr($id) . '" retundata=\'' . esc_attr($retunvalue) . '\' class="shortcode-form-control-tag-area" rows="' . (int) ((strlen($value) / 50) + 4) . '" placeholder="' . esc_html($arg['placeholder']) . '">' . esc_html($value) . '</textarea>
+              </div>';
     }
 
     /*
@@ -627,7 +632,7 @@ trait Sanitization {
     public function wysiwyg_admin_control($id, array $data = [], array $arg = []) {
         $value = array_key_exists($id, $data) ? $data[esc_attr($id)] : $arg['default'];
         $retunvalue = array_key_exists('selector', $arg) ? htmlspecialchars(json_encode($arg['selector'])) : '';
-        echo __(' <div class="shortcode-form-control-input-wrapper"  retundata=\'' . $retunvalue . '\'>');
+        echo ' <div class="shortcode-form-control-input-wrapper"  retundata=\'' . esc_attr($retunvalue) . '\'>';
         echo wp_editor(
                 $value, $id, $settings = array(
             'textarea_name' => $id,
@@ -637,7 +642,7 @@ trait Sanitization {
             'force_p_newlines' => false
                 )
         );
-        echo _(' </div>');
+        echo ' </div>';
     }
 
     /*
@@ -649,7 +654,7 @@ trait Sanitization {
     public function image_admin_control($id, array $data = [], array $arg = []) {
         $value = array_key_exists($id, $data) ? $data[esc_attr($id)] : $arg['default'];
         $alt = array_key_exists($id . '-alt', $data) ? $data[esc_attr($id) . '-alt'] : '';
-        echo __('  <div class="shortcode-form-control-input-wrapper">
+        echo '  <div class="shortcode-form-control-input-wrapper">
                     <div class="shortcode-addons-media-control ' . (empty($value) ? 'shortcode-addons-media-control-hidden-button' : '') . '">
                         <div class="shortcode-addons-media-control-pre-load">
                         </div>
@@ -663,7 +668,7 @@ trait Sanitization {
                     </div>
                     <input type="hidden" class="shortcode-addons-media-control-link" id="' . esc_attr($id) . '" name="' . esc_attr($id) . '" value="' . esc_url($value) . '" >
                     <input type="hidden" class="shortcode-addons-media-control-link-alt" id="' . esc_attr($id) . '-alt" name="' . esc_attr($id) . '-alt" value="' . esc_html($alt) . '" >
-                </div>');
+                </div>';
     }
 
     /*
@@ -694,9 +699,9 @@ trait Sanitization {
 
         $defualt = ['min' => 0, 'max' => 1000, 'step' => 1,];
         $arg = array_merge($defualt, $arg);
-        echo __('  <div class="shortcode-form-control-input-wrapper">
-                    <input id="' . esc_attr($id) . '" name="' . esc_attr($id) . '" type="number" min="' . esc_html($arg['min']) . '" max="' . esc_html($arg['max']) . '" step="' . esc_html($arg['step']) . '" value="' . esc_attr($value) . '"  responsive="' . esc_attr($arg['responsive']) . '" retundata=\'' . $retunvalue . '\'>
-                </div>');
+        echo '  <div class="shortcode-form-control-input-wrapper">
+                    <input id="' . esc_attr($id) . '" name="' . esc_attr($id) . '" type="number" min="' . esc_html($arg['min']) . '" max="' . esc_html($arg['max']) . '" step="' . esc_html($arg['step']) . '" value="' . esc_attr($value) . '"  responsive="' . esc_attr($arg['responsive']) . '" retundata=\'' . esc_attr($retunvalue) . '\'>
+                </div>';
     }
 
     /*
@@ -730,22 +735,22 @@ trait Sanitization {
         endif;
         if (array_key_exists('range', $arg)) :
             if (count($arg['range']) > 1) :
-                echo __(' <div class="shortcode-form-units-choices">');
+                echo ' <div class="shortcode-form-units-choices">';
                 foreach ($arg['range'] as $key => $val) {
                     $rand = rand(10000, 233333333);
-                    echo __('<input id="' . esc_attr($id) . '-choices-' . $rand . '" type="radio" name="' . esc_attr($id) . '-choices"  value="' . esc_html($key) . '" ' . ($key == $unit ? 'checked' : '') . '  min="' . esc_attr($val['min']) . '" max="' . esc_attr($val['max']) . '" step="' . esc_attr($val['step']) . '">
-                      <label class="shortcode-form-units-choices-label" for="' . esc_attr($id) . '-choices-' . $rand . '">' . esc_html($key) . '</label>');
+                    echo '<input id="' . esc_attr($id) . '-choices-' . esc_attr($rand) . '" type="radio" name="' . esc_attr($id) . '-choices"  value="' . esc_html($key) . '" ' . ($key == $unit ? 'checked' : '') . '  min="' . esc_attr($val['min']) . '" max="' . esc_attr($val['max']) . '" step="' . esc_attr($val['step']) . '">
+                      <label class="shortcode-form-units-choices-label" for="' . esc_attr($id) . '-choices-' . esc_attr($rand) . '">' . esc_html($key) . '</label>';
                 }
-                echo __('</div>');
+                echo '</div>';
             endif;
         endif;
-        $unitvalue = array_key_exists($id . '-choices', $data) ? 'unit="' . $data[esc_attr($id) . '-choices'] . '"' : '';
-        echo __('  <div class="shortcode-form-control-input-wrapper">
+        $unitvalue = array_key_exists($id . '-choices', $data) ? 'unit="' . $data[$id . '-choices'] . '"' : '';
+        echo '  <div class="shortcode-form-control-input-wrapper">
                     <div class="shortcode-form-slider" id="' . esc_attr($id) . '-slider' . '"></div>
                     <div class="shortcode-form-slider-input">
-                        <input name="' . esc_attr($id) . '-size" custom="' . (array_key_exists('custom', $arg) ? '' . $arg['custom'] . '' : '') . '" id="' . esc_attr($id) . '-size' . '" type="number" min="' . esc_attr($arg['range'][$unit]['min']) . '" max="' . esc_attr($arg['range'][$unit]['max']) . '" step="' . esc_attr($arg['range'][$unit]['step']) . '" value="' . esc_html($size) . '" default-value="' . esc_attr($size) . '" ' . $unitvalue . ' responsive="' . esc_attr($arg['responsive']) . '" retundata=\'' . $retunvalue . '\'>
+                        <input name="' . esc_attr($id) . '-size" custom="' . (array_key_exists('custom', $arg) ? '' . esc_attr($arg['custom']) . '' : '') . '" id="' . esc_attr($id) . '-size' . '" type="number" min="' . esc_attr($arg['range'][$unit]['min']) . '" max="' . esc_attr($arg['range'][$unit]['max']) . '" step="' . esc_attr($arg['range'][$unit]['step']) . '" value="' . esc_html($size) . '" default-value="' . esc_attr($size) . '" ' . esc_attr($unitvalue) . ' responsive="' . esc_attr($arg['responsive']) . '" retundata=\'' . esc_attr($retunvalue) . '\'>
                     </div>
-                </div>');
+                </div>';
     }
 
     /*
@@ -781,9 +786,9 @@ trait Sanitization {
         $retunvalue = array_key_exists('selector', $arg) ? htmlspecialchars(json_encode($retun)) : '';
         $multiple = (array_key_exists('multiple', $arg) && $arg['multiple']) == true ? TRUE : FALSE;
 
-        echo __('<div class="shortcode-form-control-input-wrapper">
+        echo '<div class="shortcode-form-control-input-wrapper">
                 <div class="shortcode-form-control-input-select-wrapper">
-                <select id="' . esc_attr($id) . '" class="shortcode-addons-select-input ' . ($multiple ? 'js-example-basic-multiple' : '' ) . '" ' . ($multiple ? 'multiple' : '' ) . ' name="' . esc_attr($id) . '' . ($multiple ? '[]' : '' ) . '"  responsive="' . esc_attr($arg['responsive']) . '" retundata=\'' . $retunvalue . '\'>');
+                <select id="' . esc_attr($id) . '" class="shortcode-addons-select-input ' . ($multiple ? 'js-example-basic-multiple' : '' ) . '" ' . ($multiple ? 'multiple' : '' ) . ' name="' . esc_attr($id) . '' . ($multiple ? '[]' : '' ) . '"  responsive="' . esc_attr($arg['responsive']) . '" retundata=\'' . esc_attr($retunvalue) . '\'>';
         foreach ($arg['options'] as $key => $val) {
             if (is_array($val)):
                 if (isset($val[0]) && $val[0] == true):
@@ -800,9 +805,9 @@ trait Sanitization {
                 endif;
             endif;
         }
-        echo __('</select>
+        echo '</select>
                 </div>
-            </div>');
+            </div>';
     }
 
     /*
@@ -836,16 +841,16 @@ trait Sanitization {
             endif;
         }
         $retunvalue = array_key_exists('selector', $arg) ? htmlspecialchars(json_encode($retun)) : '';
-        echo __('<div class="shortcode-form-control-input-wrapper">
-                <div class="shortcode-form-choices" responsive="' . esc_attr($arg['responsive']) . '" retundata=\'' . $retunvalue . '\'>');
+        echo '<div class="shortcode-form-control-input-wrapper">
+                <div class="shortcode-form-choices" responsive="' . esc_attr($arg['responsive']) . '" retundata=\'' . esc_attr($retunvalue) . '\'>';
         foreach ($arg['options'] as $key => $val) {
-            echo __('  <input id="' . esc_attr($id) . '-' . $key . '" type="radio" name="' . esc_attr($id) . '" value="' . esc_attr($key) . '" ' . ($value == $key ? 'checked  ckdflt="true"' : '') . '>
+            echo '  <input id="' . esc_attr($id) . '-' . esc_attr($key) . '" type="radio" name="' . esc_attr($id) . '" value="' . esc_attr($key) . '" ' . ($value == $key ? 'checked  ckdflt="true"' : '') . '>
                                     <label class="shortcode-form-choices-label" for="' . esc_attr($id) . '-' . esc_attr($key) . '" tooltip="' . (isset($val['title']) ? esc_attr($val['title']) : '') . '">
-                                        ' . (($operator == 'text') ? $val['title'] : '<i class="' . esc_attr($val['icon']) . '" aria-hidden="true"></i>') . '
-                                    </label>');
+                                        ' . (($operator == 'text') ? esc_html($val['title']) : '<i class="' . esc_attr($val['icon']) . '" aria-hidden="true"></i>') . '
+                                    </label>';
         }
-        echo __('</div>
-        </div>');
+        echo '</div>
+        </div>';
     }
 
     /*
@@ -914,9 +919,9 @@ trait Sanitization {
             endif;
         }
         $type = array_key_exists('oparetor', $arg) ? 'data-format="rgb" data-opacity="TRUE"' : '';
-        echo __('<div class="shortcode-form-control-input-wrapper">
-                <input ' . $type . ' type="text"  class="oxi-addons-minicolor" id="' . esc_attr($id) . '" name="' . esc_attr($id) . '" value="' . esc_attr($value) . '" responsive="' . esc_attr($arg['responsive']) . '" retundata=\'' . $retunvalue . '\' custom="' . (array_key_exists('custom', $arg) ? '' . $arg['custom'] . '' : '') . '">
-             </div>');
+        echo '<div class="shortcode-form-control-input-wrapper">
+                <input ' . $type . ' type="text"  class="oxi-addons-minicolor" id="' . esc_attr($id) . '" name="' . esc_attr($id) . '" value="' . esc_attr($value) . '" responsive="' . esc_attr($arg['responsive']) . '" retundata=\'' . esc_attr($retunvalue) . '\' custom="' . (array_key_exists('custom', $arg) ? '' . esc_attr($arg['custom']) . '' : '') . '">
+             </div>';
     }
 
     /*
@@ -929,10 +934,10 @@ trait Sanitization {
         $id = (array_key_exists('repeater', $arg) ? esc_attr($id) . ']' : $id);
         $value = array_key_exists($id, $data) ? $data[esc_attr($id)] : $arg['default'];
         $retunvalue = array_key_exists('selector', $arg) ? htmlspecialchars(json_encode($arg['selector'])) : '';
-        echo __('  <div class="shortcode-form-control-input-wrapper">
-                    <input type="text"  class="oxi-admin-icon-selector" id="' . esc_attr($id) . '" name="' . esc_attr($id) . '" value="' . esc_attr($value) . '" retundata="' . $retunvalue . '">
+        echo '  <div class="shortcode-form-control-input-wrapper">
+                    <input type="text"  class="oxi-admin-icon-selector" id="' . esc_attr($id) . '" name="' . esc_attr($id) . '" value="' . esc_attr($value) . '" retundata="' . esc_attr($retunvalue) . '">
                     <span class="input-group-addon"></span>
-                </div>');
+                </div>';
     }
 
     /*
@@ -967,9 +972,9 @@ trait Sanitization {
         }
         $retunvalue = array_key_exists('selector', $arg) ? htmlspecialchars(json_encode($arg['selector'])) : '';
 
-        echo __('  <div class="shortcode-form-control-input-wrapper">
-                    <input type="text"  class="shortcode-addons-family" id="' . esc_attr($id) . '" name="' . esc_attr($id) . '" value="' . esc_attr($value) . '" responsive="' . esc_attr($arg['responsive']) . '" retundata="' . $retunvalue . '">
-                </div>');
+        echo '  <div class="shortcode-form-control-input-wrapper">
+                    <input type="text"  class="shortcode-addons-family" id="' . esc_attr($id) . '" name="' . esc_attr($id) . '" value="' . esc_attr($value) . '" responsive="' . esc_attr($arg['responsive']) . '" retundata="' . esc_attr($retunvalue) . '">
+                </div>';
     }
 
     /*
@@ -987,9 +992,9 @@ trait Sanitization {
                 $format = 'datetime-local';
             endif;
         endif;
-        echo __('  <div class="shortcode-form-control-input-wrapper">
+        echo '  <div class="shortcode-form-control-input-wrapper">
                     <input type="' . $format . '"  id="' . esc_attr($id) . '" name="' . esc_attr($id) . '" value="' . esc_attr($value) . '">
-                </div>');
+                </div>';
     }
 
     /*
@@ -1020,9 +1025,9 @@ trait Sanitization {
             endif;
         }
         $background = (array_key_exists('gradient', $arg) ? $arg['gradient'] : '');
-        echo __('  <div class="shortcode-form-control-input-wrapper">
-                    <input type="text" background="' . $background . '"  class="oxi-addons-gradient-color" id="' . esc_attr($id) . '" name="' . esc_attr($id) . '" value="' . esc_attr($value) . '" responsive="' . esc_attr($arg['responsive']) . '" retundata=\'' . $retunvalue . '\'>
-                </div>');
+        echo '  <div class="shortcode-form-control-input-wrapper">
+                    <input type="text" background="' . esc_attr($background) . '"  class="oxi-addons-gradient-color" id="' . esc_attr($id) . '" name="' . esc_attr($id) . '" value="' . esc_attr($value) . '" responsive="' . esc_attr($arg['responsive']) . '" retundata=\'' . esc_attr($retunvalue) . '\'>
+                </div>';
     }
 
     /*
@@ -1063,39 +1068,39 @@ trait Sanitization {
 
         if (array_key_exists('range', $arg)) :
             if (count($arg['range']) > 1) :
-                echo __(' <div class="shortcode-form-units-choices">');
+                echo ' <div class="shortcode-form-units-choices">';
                 foreach ($arg['range'] as $key => $val) {
                     $rand = rand(10000, 233333333);
-                    echo __('<input id="' . esc_attr($id) . '-choices-' . $rand . '" type="radio" name="' . esc_attr($id) . '-choices"  value="' . $key . '" ' . ($key == $unit ? 'checked' : '') . '  min="' . esc_attr($val['min']) . '" max="' . esc_attr($val['max']) . '" step="' . esc_attr($val['step']) . '">
-                      <label class="shortcode-form-units-choices-label" for="' . esc_attr($id) . '-choices-' . $rand . '">' . esc_html($key) . '</label>');
+                    echo '<input id="' . esc_attr($id) . '-choices-' . esc_attr($rand) . '" type="radio" name="' . esc_attr($id) . '-choices"  value="' . $key . '" ' . ($key == $unit ? 'checked' : '') . '  min="' . esc_attr($val['min']) . '" max="' . esc_attr($val['max']) . '" step="' . esc_attr($val['step']) . '">
+                      <label class="shortcode-form-units-choices-label" for="' . esc_attr($id) . '-choices-' . esc_attr($rand) . '">' . esc_html($key) . '</label>';
                 }
                 echo '</div>';
             endif;
         endif;
         $unitvalue = array_key_exists($id . '-choices', $data) ? 'unit="' . $data[$id . '-choices'] . '"' : '';
-        echo __('<div class="shortcode-form-control-input-wrapper">
+        echo '<div class="shortcode-form-control-input-wrapper">
                 <ul class="shortcode-form-control-dimensions">
                     <li class="shortcode-form-control-dimension">
-                        <input id="' . esc_attr($id) . '-top" input-id="' . esc_attr($id) . '" name="' . esc_attr($id) . '-top" type="number"  min="' . esc_attr($arg['range'][$unit]['min']) . '" max="' . esc_attr($arg['range'][$unit]['max']) . '" step="' . esc_attr($arg['range'][$unit]['step']) . '" value="' . esc_attr($top) . '" default-value="' . esc_attr($top) . '" ' . $unitvalue . ' responsive="' . esc_attr($arg['responsive']) . '" retundata=\'' . $retunvalue . '\'>
+                        <input id="' . esc_attr($id) . '-top" input-id="' . esc_attr($id) . '" name="' . esc_attr($id) . '-top" type="number"  min="' . esc_attr($arg['range'][$unit]['min']) . '" max="' . esc_attr($arg['range'][$unit]['max']) . '" step="' . esc_attr($arg['range'][$unit]['step']) . '" value="' . esc_attr($top) . '" default-value="' . esc_attr($top) . '" ' . esc_attr($unitvalue) . ' responsive="' . esc_attr($arg['responsive']) . '" retundata=\'' . esc_attr($retunvalue) . '\'>
                         <label for="' . esc_attr($id) . '-top" class="shortcode-form-control-dimension-label">Top</label>
                     </li>
                     <li class="shortcode-form-control-dimension">
-                       <input id="' . esc_attr($id) . '-right" input-id="' . esc_attr($id) . '" name="' . esc_attr($id) . '-right" type="number"  min="' . esc_attr($arg['range'][$unit]['min']) . '" max="' . esc_attr($arg['range'][$unit]['max']) . '" step="' . esc_attr($arg['range'][$unit]['step']) . '" value="' . esc_attr($right) . '" default-value="' . esc_attr($right) . '" ' . $unitvalue . ' responsive="' . esc_attr($arg['responsive']) . '" retundata=\'' . $retunvalue . '\'>
+                       <input id="' . esc_attr($id) . '-right" input-id="' . esc_attr($id) . '" name="' . esc_attr($id) . '-right" type="number"  min="' . esc_attr($arg['range'][$unit]['min']) . '" max="' . esc_attr($arg['range'][$unit]['max']) . '" step="' . esc_attr($arg['range'][$unit]['step']) . '" value="' . esc_attr($right) . '" default-value="' . esc_attr($right) . '" ' . esc_attr($unitvalue) . ' responsive="' . esc_attr($arg['responsive']) . '" retundata=\'' . esc_attr($retunvalue) . '\'>
                          <label for="' . esc_attr($id) . '-right" class="shortcode-form-control-dimension-label">Right</label>
                     </li>
                     <li class="shortcode-form-control-dimension">
-                       <input id="' . esc_attr($id) . '-bottom" input-id="' . esc_attr($id) . '" name="' . esc_attr($id) . '-bottom" type="number"  min="' . esc_attr($arg['range'][$unit]['min']) . '" max="' . esc_attr($arg['range'][$unit]['max']) . '" step="' . esc_attr($arg['range'][$unit]['step']) . '" value="' . esc_attr($bottom) . '" default-value="' . esc_attr($bottom) . '" ' . $unitvalue . ' responsive="' . esc_attr($arg['responsive']) . '" retundata=\'' . $retunvalue . '\'>
+                       <input id="' . esc_attr($id) . '-bottom" input-id="' . esc_attr($id) . '" name="' . esc_attr($id) . '-bottom" type="number"  min="' . esc_attr($arg['range'][$unit]['min']) . '" max="' . esc_attr($arg['range'][$unit]['max']) . '" step="' . esc_attr($arg['range'][$unit]['step']) . '" value="' . esc_attr($bottom) . '" default-value="' . esc_attr($bottom) . '" ' . esc_attr($unitvalue) . ' responsive="' . esc_attr($arg['responsive']) . '" retundata=\'' . esc_attr($retunvalue) . '\'>
                        <label for="' . esc_attr($id) . '-bottom" class="shortcode-form-control-dimension-label">Bottom</label>
                     </li>
                     <li class="shortcode-form-control-dimension">
-                        <input id="' . esc_attr($id) . '-left" input-id="' . esc_attr($id) . '" name="' . esc_attr($id) . '-left" type="number"  min="' . esc_attr($arg['range'][$unit]['min']) . '" max="' . esc_attr($arg['range'][$unit]['max']) . '" step="' . esc_attr($arg['range'][$unit]['step']) . '" value="' . esc_attr($left) . '" default-value="' . esc_attr($left) . '" ' . $unitvalue . ' responsive="' . esc_attr($arg['responsive']) . '" retundata=\'' . $retunvalue . '\'>
+                        <input id="' . esc_attr($id) . '-left" input-id="' . esc_attr($id) . '" name="' . esc_attr($id) . '-left" type="number"  min="' . esc_attr($arg['range'][$unit]['min']) . '" max="' . esc_attr($arg['range'][$unit]['max']) . '" step="' . esc_attr($arg['range'][$unit]['step']) . '" value="' . esc_attr($left) . '" default-value="' . esc_attr($left) . '" ' . esc_attr($unitvalue) . ' responsive="' . esc_attr($arg['responsive']) . '" retundata=\'' . esc_attr($retunvalue) . '\'>
                          <label for="' . esc_attr($id) . '-left" class="shortcode-form-control-dimension-label">Left</label>
                     </li>
                     <li class="shortcode-form-control-dimension">
-                        <button type="button" class="shortcode-form-link-dimensions ' . $unlink . '"  data-tooltip="Link values together"></button>
+                        <button type="button" class="shortcode-form-link-dimensions ' . esc_attr($unlink) . '"  data-tooltip="Link values together"></button>
                     </li>
                 </ul>
-            </div>');
+            </div>';
     }
 
     /*
@@ -1135,7 +1140,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-font', $data, [
-            'label' => __('Font Family', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Font Family', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::FONT,
             $selectorvalue => 'font-family:\'{{VALUE}}\';',
             $selector_key => $selector,
@@ -1145,7 +1150,7 @@ trait Sanitization {
         if (!array_key_exists('typo-font-size', $arg) || $arg['typo-font-size'] == true):
             $this->add_responsive_control(
                     $id . '-size', $data, [
-                'label' => __('Size', OXI_ACCORDIONS_TEXTDOMAIN),
+                'label' => esc_html__('Size', OXI_ACCORDIONS_TEXTDOMAIN),
                 'type' => Controls::SLIDER,
                 'default' => [
                     'unit' => 'px',
@@ -1182,38 +1187,38 @@ trait Sanitization {
 
         $this->add_control(
                 $id . '-weight', $data, [
-            'label' => __('Weight', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Weight', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SELECT,
             $selectorvalue => 'font-weight: {{VALUE}};',
             $loader => $loadervalue,
             $selector_key => $selector,
             'options' => [
-                '100' => __('100', OXI_ACCORDIONS_TEXTDOMAIN),
-                '200' => __('200', OXI_ACCORDIONS_TEXTDOMAIN),
-                '300' => __('300', OXI_ACCORDIONS_TEXTDOMAIN),
-                '400' => __('400', OXI_ACCORDIONS_TEXTDOMAIN),
-                '500' => __('500', OXI_ACCORDIONS_TEXTDOMAIN),
-                '600' => __('600', OXI_ACCORDIONS_TEXTDOMAIN),
-                '700' => __('700', OXI_ACCORDIONS_TEXTDOMAIN),
-                '800' => __('800', OXI_ACCORDIONS_TEXTDOMAIN),
-                '900' => __('900', OXI_ACCORDIONS_TEXTDOMAIN),
-                '' => __('Default', OXI_ACCORDIONS_TEXTDOMAIN),
-                'normal' => __('Normal', OXI_ACCORDIONS_TEXTDOMAIN),
-                'bold' => __('Bold', OXI_ACCORDIONS_TEXTDOMAIN)
+                '100' => esc_html__('100', OXI_ACCORDIONS_TEXTDOMAIN),
+                '200' => esc_html__('200', OXI_ACCORDIONS_TEXTDOMAIN),
+                '300' => esc_html__('300', OXI_ACCORDIONS_TEXTDOMAIN),
+                '400' => esc_html__('400', OXI_ACCORDIONS_TEXTDOMAIN),
+                '500' => esc_html__('500', OXI_ACCORDIONS_TEXTDOMAIN),
+                '600' => esc_html__('600', OXI_ACCORDIONS_TEXTDOMAIN),
+                '700' => esc_html__('700', OXI_ACCORDIONS_TEXTDOMAIN),
+                '800' => esc_html__('800', OXI_ACCORDIONS_TEXTDOMAIN),
+                '900' => esc_html__('900', OXI_ACCORDIONS_TEXTDOMAIN),
+                '' => esc_html__('Default', OXI_ACCORDIONS_TEXTDOMAIN),
+                'normal' => esc_html__('Normal', OXI_ACCORDIONS_TEXTDOMAIN),
+                'bold' => esc_html__('Bold', OXI_ACCORDIONS_TEXTDOMAIN)
             ],
                 ]
         );
         $this->add_control(
                 $id . '-transform', $data, [
-            'label' => __('Transform', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Transform', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SELECT,
             'default' => '',
             'options' => [
-                '' => __('Default', OXI_ACCORDIONS_TEXTDOMAIN),
-                'uppercase' => __('Uppercase', OXI_ACCORDIONS_TEXTDOMAIN),
-                'lowercase' => __('Lowercase', OXI_ACCORDIONS_TEXTDOMAIN),
-                'capitalize' => __('Capitalize', OXI_ACCORDIONS_TEXTDOMAIN),
-                'none' => __('Normal', OXI_ACCORDIONS_TEXTDOMAIN),
+                '' => esc_html__('Default', OXI_ACCORDIONS_TEXTDOMAIN),
+                'uppercase' => esc_html__('Uppercase', OXI_ACCORDIONS_TEXTDOMAIN),
+                'lowercase' => esc_html__('Lowercase', OXI_ACCORDIONS_TEXTDOMAIN),
+                'capitalize' => esc_html__('Capitalize', OXI_ACCORDIONS_TEXTDOMAIN),
+                'none' => esc_html__('Normal', OXI_ACCORDIONS_TEXTDOMAIN),
             ],
             $loader => $loadervalue,
             $selectorvalue => 'text-transform: {{VALUE}};',
@@ -1222,14 +1227,14 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-style', $data, [
-            'label' => __('Style', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Style', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SELECT,
             'default' => '',
             'options' => [
-                '' => __('Default', OXI_ACCORDIONS_TEXTDOMAIN),
-                'normal' => __('normal', OXI_ACCORDIONS_TEXTDOMAIN),
-                'italic' => __('Italic', OXI_ACCORDIONS_TEXTDOMAIN),
-                'oblique' => __('Oblique', OXI_ACCORDIONS_TEXTDOMAIN),
+                '' => esc_html__('Default', OXI_ACCORDIONS_TEXTDOMAIN),
+                'normal' => esc_html__('normal', OXI_ACCORDIONS_TEXTDOMAIN),
+                'italic' => esc_html__('Italic', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oblique' => esc_html__('Oblique', OXI_ACCORDIONS_TEXTDOMAIN),
             ],
             $loader => $loadervalue,
             $selectorvalue => 'font-style: {{VALUE}};',
@@ -1238,15 +1243,15 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-decoration', $data, [
-            'label' => __('Decoration', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Decoration', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SELECT,
             'default' => '',
             'options' => [
-                '' => __('Default', OXI_ACCORDIONS_TEXTDOMAIN),
-                'underline' => __('Underline', OXI_ACCORDIONS_TEXTDOMAIN),
-                'overline' => __('Overline', OXI_ACCORDIONS_TEXTDOMAIN),
-                'line-through' => __('Line Through', OXI_ACCORDIONS_TEXTDOMAIN),
-                'none' => __('None', OXI_ACCORDIONS_TEXTDOMAIN),
+                '' => esc_html__('Default', OXI_ACCORDIONS_TEXTDOMAIN),
+                'underline' => esc_html__('Underline', OXI_ACCORDIONS_TEXTDOMAIN),
+                'overline' => esc_html__('Overline', OXI_ACCORDIONS_TEXTDOMAIN),
+                'line-through' => esc_html__('Line Through', OXI_ACCORDIONS_TEXTDOMAIN),
+                'none' => esc_html__('None', OXI_ACCORDIONS_TEXTDOMAIN),
             ],
             $loader => $loadervalue,
             $selectorvalue => 'text-decoration: {{VALUE}};',
@@ -1257,14 +1262,14 @@ trait Sanitization {
             if ($arg['include'] == 'align_normal') :
                 $this->add_responsive_control(
                         $id . '-align', $data, [
-                    'label' => __('Text Align', OXI_ACCORDIONS_TEXTDOMAIN),
+                    'label' => esc_html__('Text Align', OXI_ACCORDIONS_TEXTDOMAIN),
                     'type' => Controls::SELECT,
                     'default' => '',
                     'options' => [
-                        '' => __('Default', OXI_ACCORDIONS_TEXTDOMAIN),
-                        'left' => __('Left', OXI_ACCORDIONS_TEXTDOMAIN),
-                        'center' => __('Center', OXI_ACCORDIONS_TEXTDOMAIN),
-                        'right' => __('Right', OXI_ACCORDIONS_TEXTDOMAIN),
+                        '' => esc_html__('Default', OXI_ACCORDIONS_TEXTDOMAIN),
+                        'left' => esc_html__('Left', OXI_ACCORDIONS_TEXTDOMAIN),
+                        'center' => esc_html__('Center', OXI_ACCORDIONS_TEXTDOMAIN),
+                        'right' => esc_html__('Right', OXI_ACCORDIONS_TEXTDOMAIN),
                     ],
                     $loader => $loadervalue,
                     $selectorvalue => 'text-align: {{VALUE}};',
@@ -1274,16 +1279,16 @@ trait Sanitization {
             else :
                 $this->add_responsive_control(
                         $id . '-justify', $data, [
-                    'label' => __('Justify Content', OXI_ACCORDIONS_TEXTDOMAIN),
+                    'label' => esc_html__('Justify Content', OXI_ACCORDIONS_TEXTDOMAIN),
                     'type' => Controls::SELECT,
                     'default' => '',
                     'options' => [
-                        '' => __('Default', OXI_ACCORDIONS_TEXTDOMAIN),
-                        'flex-start' => __('Flex Start', OXI_ACCORDIONS_TEXTDOMAIN),
-                        'flex-end' => __('Flex End', OXI_ACCORDIONS_TEXTDOMAIN),
-                        'center' => __('Center', OXI_ACCORDIONS_TEXTDOMAIN),
-                        'space-around' => __('Space Around', OXI_ACCORDIONS_TEXTDOMAIN),
-                        'space-between' => __('Space Between', OXI_ACCORDIONS_TEXTDOMAIN),
+                        '' => esc_html__('Default', OXI_ACCORDIONS_TEXTDOMAIN),
+                        'flex-start' => esc_html__('Flex Start', OXI_ACCORDIONS_TEXTDOMAIN),
+                        'flex-end' => esc_html__('Flex End', OXI_ACCORDIONS_TEXTDOMAIN),
+                        'center' => esc_html__('Center', OXI_ACCORDIONS_TEXTDOMAIN),
+                        'space-around' => esc_html__('Space Around', OXI_ACCORDIONS_TEXTDOMAIN),
+                        'space-between' => esc_html__('Space Between', OXI_ACCORDIONS_TEXTDOMAIN),
                     ],
                     $loader => $loadervalue,
                     $selectorvalue => 'justify-content: {{VALUE}};',
@@ -1292,16 +1297,16 @@ trait Sanitization {
                 );
                 $this->add_responsive_control(
                         $id . '-align', $data, [
-                    'label' => __('Align Items', OXI_ACCORDIONS_TEXTDOMAIN),
+                    'label' => esc_html__('Align Items', OXI_ACCORDIONS_TEXTDOMAIN),
                     'type' => Controls::SELECT,
                     'default' => '',
                     'options' => [
-                        '' => __('Default', OXI_ACCORDIONS_TEXTDOMAIN),
-                        'stretch' => __('Stretch', OXI_ACCORDIONS_TEXTDOMAIN),
-                        'baseline' => __('Baseline', OXI_ACCORDIONS_TEXTDOMAIN),
-                        'center' => __('Center', OXI_ACCORDIONS_TEXTDOMAIN),
-                        'flex-start' => __('Flex Start', OXI_ACCORDIONS_TEXTDOMAIN),
-                        'flex-end' => __('Flex End', OXI_ACCORDIONS_TEXTDOMAIN),
+                        '' => esc_html__('Default', OXI_ACCORDIONS_TEXTDOMAIN),
+                        'stretch' => esc_html__('Stretch', OXI_ACCORDIONS_TEXTDOMAIN),
+                        'baseline' => esc_html__('Baseline', OXI_ACCORDIONS_TEXTDOMAIN),
+                        'center' => esc_html__('Center', OXI_ACCORDIONS_TEXTDOMAIN),
+                        'flex-start' => esc_html__('Flex Start', OXI_ACCORDIONS_TEXTDOMAIN),
+                        'flex-end' => esc_html__('Flex End', OXI_ACCORDIONS_TEXTDOMAIN),
                     ],
                     $loader => $loadervalue,
                     $selectorvalue => 'align-items: {{VALUE}};',
@@ -1313,7 +1318,7 @@ trait Sanitization {
 
         $this->add_responsive_control(
                 $id . '-l-height', $data, [
-            'label' => __('Line Height', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Line Height', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SLIDER,
             'default' => [
                 'unit' => 'px',
@@ -1338,7 +1343,7 @@ trait Sanitization {
         );
         $this->add_responsive_control(
                 $id . '-l-spacing', $data, [
-            'label' => __('Letter Spacing', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Letter Spacing', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SLIDER,
             'default' => [
                 'unit' => 'px',
@@ -1377,21 +1382,21 @@ trait Sanitization {
         $value = array_key_exists('default', $arg) ? $arg['default']['link'] : '';
         $level = array_key_exists('label', $arg) ? $arg['label'] : 'Photo Source';
         $separator = array_key_exists('separator', $arg) ? $arg['separator'] : FALSE;
-        echo __('<div class="shortcode-form-control" style="padding: 0;" ' . $this->forms_condition($arg) . '>');
+        echo '<div class="shortcode-form-control" style="padding: 0;" ' . esc_attr($this->forms_condition($arg)) . '>';
         $this->add_control(
                 $id . '-select', $data, [
-            'label' => __($level, OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__($level, OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::CHOOSE,
             'loader' => TRUE,
             'default' => $type,
             'separator' => $separator,
             'options' => [
                 'media-library' => [
-                    'title' => __('Media Library', OXI_ACCORDIONS_TEXTDOMAIN),
+                    'title' => esc_html__('Media Library', OXI_ACCORDIONS_TEXTDOMAIN),
                     'icon' => 'fa fa-align-left',
                 ],
                 'custom-url' => [
-                    'title' => __('Custom URL', OXI_ACCORDIONS_TEXTDOMAIN),
+                    'title' => esc_html__('Custom URL', OXI_ACCORDIONS_TEXTDOMAIN),
                     'icon' => 'fa fa-align-center',
                 ]
             ],
@@ -1399,7 +1404,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-image', $data, [
-            'label' => __('Image', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Image', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::IMAGE,
             'loader' => TRUE,
             'default' => $value,
@@ -1412,7 +1417,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-url', $data, [
-            'label' => __('Image URL', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Image URL', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::TEXT,
             'default' => $value,
             'loader' => TRUE,
@@ -1478,7 +1483,7 @@ trait Sanitization {
         endif;
         $this->start_popover_control(
                 $id, [
-            'label' => __('Box Shadow', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Box Shadow', OXI_ACCORDIONS_TEXTDOMAIN),
             $cond => $condition,
             'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
             'separator' => $separator,
@@ -1487,26 +1492,26 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-shadow', $data, [
-            'label' => __('Shadow', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Shadow', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SWITCHER,
             'default' => '',
-            'label_on' => __('Yes', OXI_ACCORDIONS_TEXTDOMAIN),
-            'label_off' => __('None', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label_on' => esc_html__('Yes', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label_off' => esc_html__('None', OXI_ACCORDIONS_TEXTDOMAIN),
             'return_value' => 'yes',
                 ]
         );
         $this->add_control(
                 $id . '-type', $data, [
-            'label' => __('Type', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Type', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::CHOOSE,
             'default' => '',
             'options' => [
                 '' => [
-                    'title' => __('Outline', OXI_ACCORDIONS_TEXTDOMAIN),
+                    'title' => esc_html__('Outline', OXI_ACCORDIONS_TEXTDOMAIN),
                     'icon' => 'fa fa-align-left',
                 ],
                 'inset' => [
-                    'title' => __('Inset', OXI_ACCORDIONS_TEXTDOMAIN),
+                    'title' => esc_html__('Inset', OXI_ACCORDIONS_TEXTDOMAIN),
                     'icon' => 'fa fa-align-center',
                 ],
             ],
@@ -1516,7 +1521,7 @@ trait Sanitization {
 
         $this->add_control(
                 $id . '-horizontal', $data, [
-            'label' => __('Horizontal', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Horizontal', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SLIDER,
             'default' => [
                 'unit' => 'px',
@@ -1538,7 +1543,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-vertical', $data, [
-            'label' => __('Vertical', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Vertical', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SLIDER,
             'default' => [
                 'unit' => 'px',
@@ -1560,7 +1565,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-blur', $data, [
-            'label' => __('Blur', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Blur', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SLIDER,
             'default' => [
                 'unit' => 'px',
@@ -1582,7 +1587,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-spread', $data, [
-            'label' => __('Spread', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Spread', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SLIDER,
             'default' => [
                 'unit' => 'px',
@@ -1604,7 +1609,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-color', $data, [
-            'label' => __('Color', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Color', OXI_ACCORDIONS_TEXTDOMAIN),
             'separator' => TRUE,
             'type' => Controls::COLOR,
             'oparetor' => 'RGB',
@@ -1652,7 +1657,7 @@ trait Sanitization {
         endif;
         $this->start_popover_control(
                 $id, [
-            'label' => __('Text Shadow', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Text Shadow', OXI_ACCORDIONS_TEXTDOMAIN),
             $cond => $condition,
             'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
             'separator' => $separator,
@@ -1661,7 +1666,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-color', $data, [
-            'label' => __('Color', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Color', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::COLOR,
             'oparetor' => 'RGB',
             'default' => '#FFF',
@@ -1673,7 +1678,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-blur', $data, [
-            'label' => __('Blur', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Blur', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SLIDER,
             'separator' => TRUE,
             'custom' => $id . '|||||text-shadow',
@@ -1695,7 +1700,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-horizontal', $data, [
-            'label' => __('Horizontal', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Horizontal', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SLIDER,
             'custom' => $id . '|||||text-shadow',
             'render' => FALSE,
@@ -1716,7 +1721,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-vertical', $data, [
-            'label' => __('Vertical', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Vertical', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SLIDER,
             'custom' => $id . '|||||text-shadow',
             'render' => FALSE,
@@ -1757,7 +1762,7 @@ trait Sanitization {
 
         $this->start_popover_control(
                 $id, [
-            'label' => __('Animation', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Animation', OXI_ACCORDIONS_TEXTDOMAIN),
             $cond => $condition,
             'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
             'separator' => $separator,
@@ -1767,80 +1772,80 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-type', $data, [
-            'label' => __('Type', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Type', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SELECT,
             'default' => '',
             'options' => [
                 'optgroup0' => [true, 'Attention Seekers'],
-                '' => __('None', OXI_ACCORDIONS_TEXTDOMAIN),
+                '' => esc_html__('None', OXI_ACCORDIONS_TEXTDOMAIN),
                 'optgroup1' => [false],
                 'optgroup2' => [true, 'Attention Seekers'],
-                'bounce' => __('Bounce', OXI_ACCORDIONS_TEXTDOMAIN),
-                'flash' => __('Flash', OXI_ACCORDIONS_TEXTDOMAIN),
-                'pulse' => __('Pulse', OXI_ACCORDIONS_TEXTDOMAIN),
-                'rubberBand' => __('RubberBand', OXI_ACCORDIONS_TEXTDOMAIN),
-                'shake' => __('Shake', OXI_ACCORDIONS_TEXTDOMAIN),
-                'swing' => __('Swing', OXI_ACCORDIONS_TEXTDOMAIN),
-                'tada' => __('Tada', OXI_ACCORDIONS_TEXTDOMAIN),
-                'wobble' => __('Wobble', OXI_ACCORDIONS_TEXTDOMAIN),
-                'jello' => __('Jello', OXI_ACCORDIONS_TEXTDOMAIN),
+                'bounce' => esc_html__('Bounce', OXI_ACCORDIONS_TEXTDOMAIN),
+                'flash' => esc_html__('Flash', OXI_ACCORDIONS_TEXTDOMAIN),
+                'pulse' => esc_html__('Pulse', OXI_ACCORDIONS_TEXTDOMAIN),
+                'rubberBand' => esc_html__('RubberBand', OXI_ACCORDIONS_TEXTDOMAIN),
+                'shake' => esc_html__('Shake', OXI_ACCORDIONS_TEXTDOMAIN),
+                'swing' => esc_html__('Swing', OXI_ACCORDIONS_TEXTDOMAIN),
+                'tada' => esc_html__('Tada', OXI_ACCORDIONS_TEXTDOMAIN),
+                'wobble' => esc_html__('Wobble', OXI_ACCORDIONS_TEXTDOMAIN),
+                'jello' => esc_html__('Jello', OXI_ACCORDIONS_TEXTDOMAIN),
                 'optgroup3' => [false],
                 'optgroup4' => [true, 'Bouncing Entrances'],
-                'bounceIn' => __('BounceIn', OXI_ACCORDIONS_TEXTDOMAIN),
-                'bounceInDown' => __('BounceInDown', OXI_ACCORDIONS_TEXTDOMAIN),
-                'bounceInLeft' => __('BounceInLeft', OXI_ACCORDIONS_TEXTDOMAIN),
-                'bounceInRight' => __('BounceInRight', OXI_ACCORDIONS_TEXTDOMAIN),
-                'bounceInUp' => __('BounceInUp', OXI_ACCORDIONS_TEXTDOMAIN),
+                'bounceIn' => esc_html__('BounceIn', OXI_ACCORDIONS_TEXTDOMAIN),
+                'bounceInDown' => esc_html__('BounceInDown', OXI_ACCORDIONS_TEXTDOMAIN),
+                'bounceInLeft' => esc_html__('BounceInLeft', OXI_ACCORDIONS_TEXTDOMAIN),
+                'bounceInRight' => esc_html__('BounceInRight', OXI_ACCORDIONS_TEXTDOMAIN),
+                'bounceInUp' => esc_html__('BounceInUp', OXI_ACCORDIONS_TEXTDOMAIN),
                 'optgroup5' => [false],
                 'optgroup6' => [true, 'Fading Entrances'],
-                'fadeIn' => __('FadeIn', OXI_ACCORDIONS_TEXTDOMAIN),
-                'fadeInDown' => __('FadeInDown', OXI_ACCORDIONS_TEXTDOMAIN),
-                'fadeInDownBig' => __('FadeInDownBig', OXI_ACCORDIONS_TEXTDOMAIN),
-                'fadeInLeft' => __('FadeInLeft', OXI_ACCORDIONS_TEXTDOMAIN),
-                'fadeInLeftBig' => __('FadeInLeftBig', OXI_ACCORDIONS_TEXTDOMAIN),
-                'fadeInRight' => __('FadeInRight', OXI_ACCORDIONS_TEXTDOMAIN),
-                'fadeInRightBig' => __('FadeInRightBig', OXI_ACCORDIONS_TEXTDOMAIN),
-                'fadeInUp' => __('FadeInUp', OXI_ACCORDIONS_TEXTDOMAIN),
-                'fadeInUpBig' => __('FadeInUpBig', OXI_ACCORDIONS_TEXTDOMAIN),
+                'fadeIn' => esc_html__('FadeIn', OXI_ACCORDIONS_TEXTDOMAIN),
+                'fadeInDown' => esc_html__('FadeInDown', OXI_ACCORDIONS_TEXTDOMAIN),
+                'fadeInDownBig' => esc_html__('FadeInDownBig', OXI_ACCORDIONS_TEXTDOMAIN),
+                'fadeInLeft' => esc_html__('FadeInLeft', OXI_ACCORDIONS_TEXTDOMAIN),
+                'fadeInLeftBig' => esc_html__('FadeInLeftBig', OXI_ACCORDIONS_TEXTDOMAIN),
+                'fadeInRight' => esc_html__('FadeInRight', OXI_ACCORDIONS_TEXTDOMAIN),
+                'fadeInRightBig' => esc_html__('FadeInRightBig', OXI_ACCORDIONS_TEXTDOMAIN),
+                'fadeInUp' => esc_html__('FadeInUp', OXI_ACCORDIONS_TEXTDOMAIN),
+                'fadeInUpBig' => esc_html__('FadeInUpBig', OXI_ACCORDIONS_TEXTDOMAIN),
                 'optgroup7' => [false],
                 'optgroup8' => [true, 'Flippers'],
-                'flip' => __('Flip', OXI_ACCORDIONS_TEXTDOMAIN),
-                'flipInX' => __('FlipInX', OXI_ACCORDIONS_TEXTDOMAIN),
-                'flipInY' => __('FlipInY', OXI_ACCORDIONS_TEXTDOMAIN),
+                'flip' => esc_html__('Flip', OXI_ACCORDIONS_TEXTDOMAIN),
+                'flipInX' => esc_html__('FlipInX', OXI_ACCORDIONS_TEXTDOMAIN),
+                'flipInY' => esc_html__('FlipInY', OXI_ACCORDIONS_TEXTDOMAIN),
                 'optgroup9' => [false],
                 'optgroup10' => [true, 'Lightspeed'],
-                'lightSpeedIn' => __('LightSpeedIn', OXI_ACCORDIONS_TEXTDOMAIN),
+                'lightSpeedIn' => esc_html__('LightSpeedIn', OXI_ACCORDIONS_TEXTDOMAIN),
                 'optgroup11' => [false],
                 'optgroup12' => [true, 'Rotating Entrances'],
-                'rotateIn' => __('RotateIn', OXI_ACCORDIONS_TEXTDOMAIN),
-                'rotateInDownLeft' => __('RotateInDownLeft', OXI_ACCORDIONS_TEXTDOMAIN),
-                'rotateInDownRight' => __('RotateInDownRight', OXI_ACCORDIONS_TEXTDOMAIN),
-                'rotateInUpLeft' => __('RotateInUpLeft', OXI_ACCORDIONS_TEXTDOMAIN),
-                'rotateInUpRight' => __('RotateInUpRight', OXI_ACCORDIONS_TEXTDOMAIN),
+                'rotateIn' => esc_html__('RotateIn', OXI_ACCORDIONS_TEXTDOMAIN),
+                'rotateInDownLeft' => esc_html__('RotateInDownLeft', OXI_ACCORDIONS_TEXTDOMAIN),
+                'rotateInDownRight' => esc_html__('RotateInDownRight', OXI_ACCORDIONS_TEXTDOMAIN),
+                'rotateInUpLeft' => esc_html__('RotateInUpLeft', OXI_ACCORDIONS_TEXTDOMAIN),
+                'rotateInUpRight' => esc_html__('RotateInUpRight', OXI_ACCORDIONS_TEXTDOMAIN),
                 'optgroup13' => [false],
                 'optgroup14' => [true, 'Sliding Entrances'],
-                'slideInUp' => __('SlideInUp', OXI_ACCORDIONS_TEXTDOMAIN),
-                'slideInDown' => __('SlideInDown', OXI_ACCORDIONS_TEXTDOMAIN),
-                'slideInLeft' => __('SlideInLeft', OXI_ACCORDIONS_TEXTDOMAIN),
-                'slideInRight' => __('SlideInRight', OXI_ACCORDIONS_TEXTDOMAIN),
+                'slideInUp' => esc_html__('SlideInUp', OXI_ACCORDIONS_TEXTDOMAIN),
+                'slideInDown' => esc_html__('SlideInDown', OXI_ACCORDIONS_TEXTDOMAIN),
+                'slideInLeft' => esc_html__('SlideInLeft', OXI_ACCORDIONS_TEXTDOMAIN),
+                'slideInRight' => esc_html__('SlideInRight', OXI_ACCORDIONS_TEXTDOMAIN),
                 'optgroup15' => [false],
                 'optgroup16' => [true, 'Zoom Entrances'],
-                'zoomIn' => __('ZoomIn', OXI_ACCORDIONS_TEXTDOMAIN),
-                'zoomInDown' => __('ZoomInDown', OXI_ACCORDIONS_TEXTDOMAIN),
-                'zoomInLeft' => __('ZoomInLeft', OXI_ACCORDIONS_TEXTDOMAIN),
-                'zoomInRight' => __('ZoomInRight', OXI_ACCORDIONS_TEXTDOMAIN),
-                'zoomInUp' => __('ZoomInUp', OXI_ACCORDIONS_TEXTDOMAIN),
+                'zoomIn' => esc_html__('ZoomIn', OXI_ACCORDIONS_TEXTDOMAIN),
+                'zoomInDown' => esc_html__('ZoomInDown', OXI_ACCORDIONS_TEXTDOMAIN),
+                'zoomInLeft' => esc_html__('ZoomInLeft', OXI_ACCORDIONS_TEXTDOMAIN),
+                'zoomInRight' => esc_html__('ZoomInRight', OXI_ACCORDIONS_TEXTDOMAIN),
+                'zoomInUp' => esc_html__('ZoomInUp', OXI_ACCORDIONS_TEXTDOMAIN),
                 'optgroup17' => [false],
                 'optgroup18' => [true, 'Specials'],
-                'hinge' => __('Hinge', OXI_ACCORDIONS_TEXTDOMAIN),
-                'rollIn' => __('RollIn', OXI_ACCORDIONS_TEXTDOMAIN),
+                'hinge' => esc_html__('Hinge', OXI_ACCORDIONS_TEXTDOMAIN),
+                'rollIn' => esc_html__('RollIn', OXI_ACCORDIONS_TEXTDOMAIN),
                 'optgroup19' => [false],
             ],
                 ]
         );
         $this->add_control(
                 $id . '-duration', $data, [
-            'label' => __('Duration (ms)', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Duration (ms)', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SLIDER,
             'default' => [
                 'unit' => 'px',
@@ -1860,7 +1865,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-delay', $data, [
-            'label' => __('Delay (ms)', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Delay (ms)', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SLIDER,
             'default' => [
                 'unit' => 'px',
@@ -1880,7 +1885,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-offset', $data, [
-            'label' => __('Offset', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Offset', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SLIDER,
             'default' => [
                 'unit' => 'px',
@@ -1900,12 +1905,12 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-looping', $data, [
-            'label' => __('Looping', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Looping', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SWITCHER,
             'default' => '',
             'loader' => TRUE,
-            'label_on' => __('Yes', OXI_ACCORDIONS_TEXTDOMAIN),
-            'label_off' => __('No', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label_on' => esc_html__('Yes', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label_off' => esc_html__('No', OXI_ACCORDIONS_TEXTDOMAIN),
             'return_value' => 'yes',
             'condition' => [
                 $id . '-type' => 'EMPTY',
@@ -1954,7 +1959,7 @@ trait Sanitization {
 
         $this->start_popover_control(
                 $id, [
-            'label' => __('Border', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Border', OXI_ACCORDIONS_TEXTDOMAIN),
             $cond => $condition,
             'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
             'separator' => $separator,
@@ -1964,20 +1969,20 @@ trait Sanitization {
 
         $this->add_control(
                 $id . '-type', $data, [
-            'label' => __('Type', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Type', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SELECT,
             'default' => '',
             'options' => [
-                '' => __('None', OXI_ACCORDIONS_TEXTDOMAIN),
-                'solid' => __('Solid', OXI_ACCORDIONS_TEXTDOMAIN),
-                'dotted' => __('Dotted', OXI_ACCORDIONS_TEXTDOMAIN),
-                'dashed' => __('Dashed', OXI_ACCORDIONS_TEXTDOMAIN),
-                'double' => __('Double', OXI_ACCORDIONS_TEXTDOMAIN),
-                'groove' => __('Groove', OXI_ACCORDIONS_TEXTDOMAIN),
-                'ridge' => __('Ridge', OXI_ACCORDIONS_TEXTDOMAIN),
-                'inset' => __('Inset', OXI_ACCORDIONS_TEXTDOMAIN),
-                'outset' => __('Outset', OXI_ACCORDIONS_TEXTDOMAIN),
-                'hidden' => __('Hidden', OXI_ACCORDIONS_TEXTDOMAIN),
+                '' => esc_html__('None', OXI_ACCORDIONS_TEXTDOMAIN),
+                'solid' => esc_html__('Solid', OXI_ACCORDIONS_TEXTDOMAIN),
+                'dotted' => esc_html__('Dotted', OXI_ACCORDIONS_TEXTDOMAIN),
+                'dashed' => esc_html__('Dashed', OXI_ACCORDIONS_TEXTDOMAIN),
+                'double' => esc_html__('Double', OXI_ACCORDIONS_TEXTDOMAIN),
+                'groove' => esc_html__('Groove', OXI_ACCORDIONS_TEXTDOMAIN),
+                'ridge' => esc_html__('Ridge', OXI_ACCORDIONS_TEXTDOMAIN),
+                'inset' => esc_html__('Inset', OXI_ACCORDIONS_TEXTDOMAIN),
+                'outset' => esc_html__('Outset', OXI_ACCORDIONS_TEXTDOMAIN),
+                'hidden' => esc_html__('Hidden', OXI_ACCORDIONS_TEXTDOMAIN),
             ],
             $loader => $loadervalue,
             $selectorvalue => 'border-style: {{VALUE}};',
@@ -1986,7 +1991,7 @@ trait Sanitization {
         );
         $this->add_responsive_control(
                 $id . '-width', $data, [
-            'label' => __('Width', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Width', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
             $render => FALSE,
             'default' => [
@@ -2014,7 +2019,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-color', $data, [
-            'label' => __('Color', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Color', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::COLOR,
             $render => FALSE,
             'default' => '#fff',
@@ -2074,20 +2079,20 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-type', $data, [
-            'label' => __('Type', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Type', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SELECT,
             'default' => '',
             'options' => [
-                '' => __('None', OXI_ACCORDIONS_TEXTDOMAIN),
-                'solid' => __('Solid', OXI_ACCORDIONS_TEXTDOMAIN),
-                'dotted' => __('Dotted', OXI_ACCORDIONS_TEXTDOMAIN),
-                'dashed' => __('Dashed', OXI_ACCORDIONS_TEXTDOMAIN),
-                'double' => __('Double', OXI_ACCORDIONS_TEXTDOMAIN),
-                'groove' => __('Groove', OXI_ACCORDIONS_TEXTDOMAIN),
-                'ridge' => __('Ridge', OXI_ACCORDIONS_TEXTDOMAIN),
-                'inset' => __('Inset', OXI_ACCORDIONS_TEXTDOMAIN),
-                'outset' => __('Outset', OXI_ACCORDIONS_TEXTDOMAIN),
-                'hidden' => __('Hidden', OXI_ACCORDIONS_TEXTDOMAIN),
+                '' => esc_html__('None', OXI_ACCORDIONS_TEXTDOMAIN),
+                'solid' => esc_html__('Solid', OXI_ACCORDIONS_TEXTDOMAIN),
+                'dotted' => esc_html__('Dotted', OXI_ACCORDIONS_TEXTDOMAIN),
+                'dashed' => esc_html__('Dashed', OXI_ACCORDIONS_TEXTDOMAIN),
+                'double' => esc_html__('Double', OXI_ACCORDIONS_TEXTDOMAIN),
+                'groove' => esc_html__('Groove', OXI_ACCORDIONS_TEXTDOMAIN),
+                'ridge' => esc_html__('Ridge', OXI_ACCORDIONS_TEXTDOMAIN),
+                'inset' => esc_html__('Inset', OXI_ACCORDIONS_TEXTDOMAIN),
+                'outset' => esc_html__('Outset', OXI_ACCORDIONS_TEXTDOMAIN),
+                'hidden' => esc_html__('Hidden', OXI_ACCORDIONS_TEXTDOMAIN),
             ],
             $loader => $loadervalue,
             $selector_key => $selector,
@@ -2095,7 +2100,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-width', $data, [
-            'label' => __('Size', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Size', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SLIDER,
             'default' => [
                 'unit' => 'px',
@@ -2117,7 +2122,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-color', $data, [
-            'label' => __('Color', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Color', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::COLOR,
             $render => FALSE,
             'default' => '',
@@ -2179,7 +2184,7 @@ trait Sanitization {
         $separator = array_key_exists('separator', $arg) ? $arg['separator'] : FALSE;
         $this->start_popover_control(
                 $id, [
-            'label' => __('Background', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Background', OXI_ACCORDIONS_TEXTDOMAIN),
             'condition' => array_key_exists('condition', $arg) ? $arg['condition'] : '',
             'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
             'separator' => $separator,
@@ -2189,7 +2194,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-color', $data, [
-            'label' => __('Color', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Color', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::GRADIENT,
             'gradient' => $id,
             'oparetor' => 'RGB',
@@ -2201,28 +2206,28 @@ trait Sanitization {
 
         $this->add_control(
                 $id . '-img', $data, [
-            'label' => __('Image', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Image', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SWITCHER,
             'loader' => TRUE,
-            'label_on' => __('Yes', OXI_ACCORDIONS_TEXTDOMAIN),
-            'label_off' => __('No', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label_on' => esc_html__('Yes', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label_off' => esc_html__('No', OXI_ACCORDIONS_TEXTDOMAIN),
             'return_value' => 'yes',
                 ]
         );
         $this->add_control(
                 $id . '-select', $data, [
-            'label' => __('Photo Source', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Photo Source', OXI_ACCORDIONS_TEXTDOMAIN),
             'separator' => TRUE,
             'loader' => TRUE,
             'type' => Controls::CHOOSE,
             'default' => 'media-library',
             'options' => [
                 'media-library' => [
-                    'title' => __('Media Library', OXI_ACCORDIONS_TEXTDOMAIN),
+                    'title' => esc_html__('Media Library', OXI_ACCORDIONS_TEXTDOMAIN),
                     'icon' => 'fa fa-align-left',
                 ],
                 'custom-url' => [
-                    'title' => __('Custom URL', OXI_ACCORDIONS_TEXTDOMAIN),
+                    'title' => esc_html__('Custom URL', OXI_ACCORDIONS_TEXTDOMAIN),
                     'icon' => 'fa fa-align-center',
                 ]
             ],
@@ -2233,7 +2238,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-image', $data, [
-            'label' => __('Image', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Image', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::IMAGE,
             'default' => '',
             'loader' => TRUE,
@@ -2245,7 +2250,7 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-url', $data, [
-            'label' => __('Image URL', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Image URL', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::TEXT,
             'default' => '',
             'loader' => TRUE,
@@ -2258,21 +2263,21 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-position', $data, [
-            'label' => __('Position', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Position', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SELECT,
             'default' => 'center center',
             'render' => $render,
             'options' => [
-                '' => __('Default', OXI_ACCORDIONS_TEXTDOMAIN),
-                'top left' => __('Top Left', OXI_ACCORDIONS_TEXTDOMAIN),
-                'top center' => __('Top Center', OXI_ACCORDIONS_TEXTDOMAIN),
-                'top right' => __('Top Right', OXI_ACCORDIONS_TEXTDOMAIN),
-                'center left' => __('Center Left', OXI_ACCORDIONS_TEXTDOMAIN),
-                'center center' => __('Center Center', OXI_ACCORDIONS_TEXTDOMAIN),
-                'center right' => __('Center Right', OXI_ACCORDIONS_TEXTDOMAIN),
-                'bottom left' => __('Bottom Left', OXI_ACCORDIONS_TEXTDOMAIN),
-                'bottom center' => __('Bottom Center', OXI_ACCORDIONS_TEXTDOMAIN),
-                'bottom right' => __('Bottom Right', OXI_ACCORDIONS_TEXTDOMAIN),
+                '' => esc_html__('Default', OXI_ACCORDIONS_TEXTDOMAIN),
+                'top left' => esc_html__('Top Left', OXI_ACCORDIONS_TEXTDOMAIN),
+                'top center' => esc_html__('Top Center', OXI_ACCORDIONS_TEXTDOMAIN),
+                'top right' => esc_html__('Top Right', OXI_ACCORDIONS_TEXTDOMAIN),
+                'center left' => esc_html__('Center Left', OXI_ACCORDIONS_TEXTDOMAIN),
+                'center center' => esc_html__('Center Center', OXI_ACCORDIONS_TEXTDOMAIN),
+                'center right' => esc_html__('Center Right', OXI_ACCORDIONS_TEXTDOMAIN),
+                'bottom left' => esc_html__('Bottom Left', OXI_ACCORDIONS_TEXTDOMAIN),
+                'bottom center' => esc_html__('Bottom Center', OXI_ACCORDIONS_TEXTDOMAIN),
+                'bottom right' => esc_html__('Bottom Right', OXI_ACCORDIONS_TEXTDOMAIN),
             ],
             'loader' => TRUE,
             'condition' => [
@@ -2283,14 +2288,14 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-attachment', $data, [
-            'label' => __('Attachment', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Attachment', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SELECT,
             'default' => '',
             'render' => $render,
             'options' => [
-                '' => __('Default', OXI_ACCORDIONS_TEXTDOMAIN),
-                'scroll' => __('Scroll', OXI_ACCORDIONS_TEXTDOMAIN),
-                'fixed' => __('Fixed', OXI_ACCORDIONS_TEXTDOMAIN),
+                '' => esc_html__('Default', OXI_ACCORDIONS_TEXTDOMAIN),
+                'scroll' => esc_html__('Scroll', OXI_ACCORDIONS_TEXTDOMAIN),
+                'fixed' => esc_html__('Fixed', OXI_ACCORDIONS_TEXTDOMAIN),
             ],
             $loader => $loadervalue,
             $selectorvalue => 'background-attachment: {{VALUE}};',
@@ -2303,16 +2308,16 @@ trait Sanitization {
         );
         $this->add_control(
                 $id . '-repeat', $data, [
-            'label' => __('Repeat', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Repeat', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SELECT,
             'default' => 'no-repeat',
             'render' => $render,
             'options' => [
-                '' => __('Default', OXI_ACCORDIONS_TEXTDOMAIN),
-                'no-repeat' => __('No-Repeat', OXI_ACCORDIONS_TEXTDOMAIN),
-                'repeat' => __('Repeat', OXI_ACCORDIONS_TEXTDOMAIN),
-                'repeat-x' => __('Repeat-x', OXI_ACCORDIONS_TEXTDOMAIN),
-                'repeat-y' => __('Repeat-y', OXI_ACCORDIONS_TEXTDOMAIN),
+                '' => esc_html__('Default', OXI_ACCORDIONS_TEXTDOMAIN),
+                'no-repeat' => esc_html__('No-Repeat', OXI_ACCORDIONS_TEXTDOMAIN),
+                'repeat' => esc_html__('Repeat', OXI_ACCORDIONS_TEXTDOMAIN),
+                'repeat-x' => esc_html__('Repeat-x', OXI_ACCORDIONS_TEXTDOMAIN),
+                'repeat-y' => esc_html__('Repeat-y', OXI_ACCORDIONS_TEXTDOMAIN),
             ],
             'loader' => TRUE,
             'condition' => [
@@ -2323,15 +2328,15 @@ trait Sanitization {
         );
         $this->add_responsive_control(
                 $id . '-size', $data, [
-            'label' => __('Size', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Size', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SELECT,
             'default' => 'cover',
             'render' => $render,
             'options' => [
-                '' => __('Default', OXI_ACCORDIONS_TEXTDOMAIN),
-                'auto' => __('Auto', OXI_ACCORDIONS_TEXTDOMAIN),
-                'cover' => __('Cover', OXI_ACCORDIONS_TEXTDOMAIN),
-                'contain' => __('Contain', OXI_ACCORDIONS_TEXTDOMAIN),
+                '' => esc_html__('Default', OXI_ACCORDIONS_TEXTDOMAIN),
+                'auto' => esc_html__('Auto', OXI_ACCORDIONS_TEXTDOMAIN),
+                'cover' => esc_html__('Cover', OXI_ACCORDIONS_TEXTDOMAIN),
+                'contain' => esc_html__('Contain', OXI_ACCORDIONS_TEXTDOMAIN),
             ],
             $loader => $loadervalue,
             $selectorvalue => 'background-size: {{VALUE}};',
@@ -2363,7 +2368,7 @@ trait Sanitization {
         $separator = array_key_exists('separator', $arg) ? $arg['separator'] : FALSE;
         $this->add_control(
                 $id . '-url', $data, [
-            'label' => __('Link', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Link', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::TEXT,
             'link' => TRUE,
             'separator' => $separator,
@@ -2372,19 +2377,19 @@ trait Sanitization {
             $cond => $condition
                 ]
         );
-        echo __('<div class="shortcode-form-control-content shortcode-form-control-content-popover-body">');
+        echo esc_html__('<div class="shortcode-form-control-content shortcode-form-control-content-popover-body">');
 
         $this->add_control(
                 $id . '-target', $data, [
-            'label' => __('New Window?', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('New Window?', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SWITCHER,
             'default' => '',
-            'label_on' => __('Yes', OXI_ACCORDIONS_TEXTDOMAIN),
-            'label_off' => __('No', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label_on' => esc_html__('Yes', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label_off' => esc_html__('No', OXI_ACCORDIONS_TEXTDOMAIN),
             'return_value' => 'yes',
                 ]
         );
-        echo __('</div>' . (array_key_exists('description', $arg) ? '<div class="shortcode-form-control-description">' . esc_html($arg['description']) . '</div>' : '') . '</div>');
+        echo '</div>' . (array_key_exists('description', $arg) ? '<div class="shortcode-form-control-description">' . esc_html($arg['description']) . '</div>' : '') . '</div>';
     }
 
     /*
@@ -2405,20 +2410,20 @@ trait Sanitization {
         endif;
         $this->add_control(
                 $lap = $id . '-lap', $data, [
-            'label' => __('Column Size', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Column Size', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SELECT,
             'responsive' => 'laptop',
             'description' => $arg['description'],
             'default' => 'oxi-bt-col-lg-12',
             'options' => [
-                'oxi-bt-col-lg-12' => __('Col 1', OXI_ACCORDIONS_TEXTDOMAIN),
-                'oxi-bt-col-lg-6' => __('Col 2', OXI_ACCORDIONS_TEXTDOMAIN),
-                'oxi-bt-col-lg-4' => __('Col 3', OXI_ACCORDIONS_TEXTDOMAIN),
-                'oxi-bt-col-lg-3' => __('Col 4', OXI_ACCORDIONS_TEXTDOMAIN),
-                'oxi-bt-col-lg-5' => __('Col 5', OXI_ACCORDIONS_TEXTDOMAIN),
-                'oxi-bt-col-lg-2' => __('Col 6', OXI_ACCORDIONS_TEXTDOMAIN),
-                'oxi-bt-col-lg-8' => __('Col 8', OXI_ACCORDIONS_TEXTDOMAIN),
-                'oxi-bt-col-lg-1' => __('Col 12', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oxi-bt-col-lg-12' => esc_html__('Col 1', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oxi-bt-col-lg-6' => esc_html__('Col 2', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oxi-bt-col-lg-4' => esc_html__('Col 3', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oxi-bt-col-lg-3' => esc_html__('Col 4', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oxi-bt-col-lg-5' => esc_html__('Col 5', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oxi-bt-col-lg-2' => esc_html__('Col 6', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oxi-bt-col-lg-8' => esc_html__('Col 8', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oxi-bt-col-lg-1' => esc_html__('Col 12', OXI_ACCORDIONS_TEXTDOMAIN),
             ],
             'description' => 'Define how much column you want to show into single rows. Customize possible with desktop or tab or mobile Settings.',
             $select => $selector,
@@ -2428,19 +2433,19 @@ trait Sanitization {
         );
         $this->add_control(
                 $tab = $id . '-tab', $data, [
-            'label' => __('Column Size', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Column Size', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SELECT,
             'responsive' => 'tab',
             'default' => 'oxi-bt-col-md-12',
             'description' => $arg['description'],
             'options' => [
-                '' => __('Default', OXI_ACCORDIONS_TEXTDOMAIN),
-                'oxi-bt-col-md-12' => __('Col 1', OXI_ACCORDIONS_TEXTDOMAIN),
-                'oxi-bt-col-md-6' => __('Col 2', OXI_ACCORDIONS_TEXTDOMAIN),
-                'oxi-bt-col-md-4' => __('Col 3', OXI_ACCORDIONS_TEXTDOMAIN),
-                'oxi-bt-col-md-3' => __('Col 4', OXI_ACCORDIONS_TEXTDOMAIN),
-                'oxi-bt-col-md-2' => __('Col 6', OXI_ACCORDIONS_TEXTDOMAIN),
-                'oxi-bt-col-md-1' => __('Col 12', OXI_ACCORDIONS_TEXTDOMAIN),
+                '' => esc_html__('Default', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oxi-bt-col-md-12' => esc_html__('Col 1', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oxi-bt-col-md-6' => esc_html__('Col 2', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oxi-bt-col-md-4' => esc_html__('Col 3', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oxi-bt-col-md-3' => esc_html__('Col 4', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oxi-bt-col-md-2' => esc_html__('Col 6', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oxi-bt-col-md-1' => esc_html__('Col 12', OXI_ACCORDIONS_TEXTDOMAIN),
             ],
             'description' => 'Define how much column you want to show into single rows. Customize possible with desktop or tab or mobile Settings.',
             $select => $selector,
@@ -2450,20 +2455,20 @@ trait Sanitization {
         );
         $this->add_control(
                 $mob = $id . '-mob', $data, [
-            'label' => __('Column Size', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Column Size', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SELECT,
             'default' => 'oxi-bt-col-lg-12',
             'responsive' => 'mobile',
             'description' => $arg['description'],
             'options' => [
-                '' => __('Default', OXI_ACCORDIONS_TEXTDOMAIN),
-                'oxi-bt-col-sm-12' => __('Col 1', OXI_ACCORDIONS_TEXTDOMAIN),
-                'oxi-bt-col-sm-6' => __('Col 2', OXI_ACCORDIONS_TEXTDOMAIN),
-                'oxi-bt-col-sm-4' => __('Col 3', OXI_ACCORDIONS_TEXTDOMAIN),
-                'oxi-bt-col-sm-3' => __('Col 4', OXI_ACCORDIONS_TEXTDOMAIN),
-                'oxi-bt-col-sm-5' => __('Col 5', OXI_ACCORDIONS_TEXTDOMAIN),
-                'oxi-bt-col-sm-2' => __('Col 6', OXI_ACCORDIONS_TEXTDOMAIN),
-                'oxi-bt-col-sm-1' => __('Col 12', OXI_ACCORDIONS_TEXTDOMAIN),
+                '' => esc_html__('Default', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oxi-bt-col-sm-12' => esc_html__('Col 1', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oxi-bt-col-sm-6' => esc_html__('Col 2', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oxi-bt-col-sm-4' => esc_html__('Col 3', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oxi-bt-col-sm-3' => esc_html__('Col 4', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oxi-bt-col-sm-5' => esc_html__('Col 5', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oxi-bt-col-sm-2' => esc_html__('Col 6', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oxi-bt-col-sm-1' => esc_html__('Col 12', OXI_ACCORDIONS_TEXTDOMAIN),
             ],
             'description' => 'Define how much column you want to show into single rows. Customize possible with desktop or tab or mobile Settings.',
             $select => $selector,
@@ -2490,7 +2495,7 @@ trait Sanitization {
 
     public function add_substitute_control($id, array $data = [], array $arg = []) {
         $fun = $arg['type'] . '_substitute_control';
-        echo __($this->$fun($id, $data, $arg));
+        echo $this->$fun($id, $data, $arg);
     }
 
     /*
@@ -2513,9 +2518,9 @@ trait Sanitization {
          */
 
         $condition = $this->forms_condition($arg);
-        echo __(' <div class="oxi-addons-item-form shortcode-addons-templates-right-panel ' . (($arg['showing']) ? '' : 'oxi-admin-head-d-none') . '" ' . $condition . '>
+        echo ' <div class="oxi-addons-item-form shortcode-addons-templates-right-panel ' . (($arg['showing']) ? '' : 'oxi-admin-head-d-none') . '" ' . esc_attr($condition) . '>
                     <div class="oxi-addons-item-form-heading shortcode-addons-templates-right-panel-heading">
-                        ' . $arg['title'] . '
+                        ' . esc_attr($arg['title']) . '
                          <div class="oxi-head-toggle"></div>
                          </div>
                     <div class="oxi-addons-item-form-item shortcode-addons-templates-right-panel-body" id="oxi-addons-list-data-modal-open">
@@ -2524,7 +2529,7 @@ trait Sanitization {
                             ' . esc_html($arg['sub-title']) . '
                         </span>
                     </div>
-                </div>');
+                </div>';
     }
 
     public function shortcodename_substitute_control($id, array $data = [], array $arg = []) {
@@ -2541,9 +2546,9 @@ trait Sanitization {
          */
 
         $condition = $this->forms_condition($arg);
-        echo __(' <div class="oxi-addons-shortcode  shortcode-addons-templates-right-panel ' . (($arg['showing']) ? '' : 'oxi-admin-head-d-none') . '" ' . $condition . '>
+        echo ' <div class="oxi-addons-shortcode  shortcode-addons-templates-right-panel ' . (($arg['showing']) ? '' : 'oxi-admin-head-d-none') . '" ' . esc_attr($condition) . '>
                 <div class="oxi-addons-shortcode-heading  shortcode-addons-templates-right-panel-heading">
-                    ' . $arg['title'] . '
+                    ' . esc_attr($arg['title']) . '
                     <div class="oxi-head-toggle"></div>
                 </div>
                 <div class="oxi-addons-shortcode-body  shortcode-addons-templates-right-panel-body">
@@ -2557,7 +2562,7 @@ trait Sanitization {
                         </div>
                     </form>
                 </div>
-            </div>');
+            </div>';
     }
 
     /*
@@ -2578,9 +2583,9 @@ trait Sanitization {
          *
          */
         $condition = $this->forms_condition($arg);
-        echo __(' <div class="oxi-addons-shortcode shortcode-addons-templates-right-panel ' . (($arg['showing']) ? '' : 'oxi-admin-head-d-none') . '" ' . $condition . '>
+        echo ' <div class="oxi-addons-shortcode shortcode-addons-templates-right-panel ' . (($arg['showing']) ? '' : 'oxi-admin-head-d-none') . '" ' . esc_attr($condition) . '>
                 <div class="oxi-addons-shortcode-heading  shortcode-addons-templates-right-panel-heading">
-                    ' . $arg['title'] . '
+                    ' . esc_html($arg['title']) . '
                     <div class="oxi-head-toggle"></div>
                 </div>
                 <div class="oxi-addons-shortcode-body shortcode-addons-templates-right-panel-body">
@@ -2595,7 +2600,7 @@ trait Sanitization {
                     <input type="text" class="form-control" onclick="this.setSelectionRange(0, this.value.length)" value="<?php echo do_shortcode(\'[oxi_accordions  id=&quot;' . esc_attr($id) . '&quot;]\'); ?>">
                     <span></span>
                 </div>
-            </div>');
+            </div>';
     }
 
     public function rearrange_substitute_control($id, array $data = [], array $arg = []) {
@@ -2611,15 +2616,15 @@ trait Sanitization {
          *
          */
         $condition = $this->forms_condition($arg);
-        echo __('  <div class="oxi-addons-item-form shortcode-addons-templates-right-panel ' . (($arg['showing']) ? '' : 'oxi-admin-head-d-none') . '" ' . $condition . '>
+        echo '  <div class="oxi-addons-item-form shortcode-addons-templates-right-panel ' . (($arg['showing']) ? '' : 'oxi-admin-head-d-none') . '" ' . esc_attr($condition) . '>
                     <div class="oxi-addons-item-form-heading shortcode-addons-templates-right-panel-heading">
-                        ' . $arg['title'] . '
+                        ' . esc_attr($arg['title']) . '
                         <div class="oxi-head-toggle"></div>
                     </div>
                     <div class="oxi-addons-item-form-item shortcode-addons-templates-right-panel-body" id="oxi-addons-rearrange-data-modal-open">
                         <span>
                         <i class="dashicons dashicons-plus-alt oxi-icons"></i>
-                        ' . $arg['sub-title'] . '
+                        ' . esc_html($arg['sub-title']) . '
                         </span>
                     </div>
                 </div>
@@ -2647,10 +2652,10 @@ trait Sanitization {
                             </div>
                         </form>
                     <div id="modal-rearrange-store-file">
-                        ' . __($id) . '
+                        ' . esc_html($id) . '
                     </div>
                 </div>
-            </div>');
+            </div>';
     }
 
 }

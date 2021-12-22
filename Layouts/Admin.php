@@ -122,8 +122,8 @@ class Admin {
     public function modal_opener() {
         $this->add_substitute_control('', [], [
             'type' => Controls::MODALOPENER,
-            'title' => __('Accordions Data Form', OXI_ACCORDIONS_TEXTDOMAIN),
-            'sub-title' => __('Open Form', OXI_ACCORDIONS_TEXTDOMAIN),
+            'title' => esc_html__('Accordions Data Form', OXI_ACCORDIONS_TEXTDOMAIN),
+            'sub-title' => esc_html__('Open Form', OXI_ACCORDIONS_TEXTDOMAIN),
             'condition' => [
                 'oxi-accordions-content-type' => 'content'
             ],
@@ -140,8 +140,8 @@ class Admin {
     public function shortcode_name() {
         $this->add_substitute_control('', $this->dbdata, [
             'type' => Controls::SHORTCODENAME,
-            'title' => __('Shortcode Name', OXI_ACCORDIONS_TEXTDOMAIN),
-            'placeholder' => __('Set Your Shortcode Name', OXI_ACCORDIONS_TEXTDOMAIN),
+            'title' => esc_html__('Shortcode Name', OXI_ACCORDIONS_TEXTDOMAIN),
+            'placeholder' => esc_html__('Set Your Shortcode Name', OXI_ACCORDIONS_TEXTDOMAIN),
             'showing' => TRUE,
         ]);
     }
@@ -155,7 +155,7 @@ class Admin {
     public function shortcode_info() {
         $this->add_substitute_control($this->oxiid, $this->dbdata, [
             'type' => Controls::SHORTCODEINFO,
-            'title' => __('Shortcode', OXI_ACCORDIONS_TEXTDOMAIN),
+            'title' => esc_html__('Shortcode', OXI_ACCORDIONS_TEXTDOMAIN),
             'showing' => TRUE,
         ]);
     }
@@ -177,12 +177,12 @@ class Admin {
      */
     public function modal_form() {
 
-        echo __('<div class="modal fade" id="oxi-addons-list-data-modal" >
+        echo '<div class="modal fade" id="oxi-addons-list-data-modal" >
                 <div class="modal-dialog modal-lg">
                     <form method="post" id="oxi-template-modal-form">
-                         <div class="modal-content">');
+                         <div class="modal-content">';
         $this->modal_form_data();
-        echo __('              <div class="modal-footer">
+        echo '              <div class="modal-footer">
                                 <input type="hidden" id="shortcodeitemid" name="shortcodeitemid" value="">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                                 <button type="button" class="btn btn-success" id="oxi-template-modal-submit">Submit</button>
@@ -190,7 +190,7 @@ class Admin {
                         </div>
                     </form>
                 </div>
-              </div>');
+              </div>';
     }
 
     /**
@@ -199,7 +199,7 @@ class Admin {
      * @since 2.0.0
      */
     public function Rearrange() {
-        return __('<li class="list-group-item" id="{{id}}">{{oxi-accordions-modal-title}}</li>');
+        return '<li class="list-group-item" id="{{id}}">{{oxi-accordions-modal-title}}</li>';
     }
 
     /**
@@ -378,7 +378,7 @@ class Admin {
                                         </div>
                                     </div>
                                     <div class="oxi-addons-preview-wrapper">
-                                        <div class="oxi-addons-preview-data" id="oxi-addons-preview-data" template-wrapper="<?php echo esc_attr($this->WRAPPER); ?> > .oxi-addons-row" template-id="#oxi-<?php echo _(strtolower($this->dbdata['type'])); ?>-wrapper-<?php echo _($this->dbdata['id']); ?>">
+                                        <div class="oxi-addons-preview-data" id="oxi-addons-preview-data" template-wrapper="<?php echo esc_attr($this->WRAPPER); ?> > .oxi-addons-row" template-id="#oxi-<?php echo esc_attr(strtolower($this->dbdata['type'])); ?>-wrapper-<?php echo esc_attr($this->dbdata['id']); ?>">
                                             <iframe  src="<?php echo esc_url(admin_url('admin.php?page=oxi-accordions-style-view&styleid=' . $this->oxiid)); ?>"
                                                      id="oxi-addons-preview-iframe"
                                                      class="oxi-addons-preview-iframe"

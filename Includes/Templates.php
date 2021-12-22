@@ -109,9 +109,9 @@ class Templates {
                             <div class="oxi-addons-style-preview-bottom-right">
                                 <?php
                                 if ($key > 10 && apply_filters(OXI_ACCORDIONS_PREMIUM, true) == false):
-                                    echo __('<button class="btn btn-warning oxi-addons-addons-style-btn-warning" title="Pro Only"  type="submit" value="pro only" name="addonsstyleproonly">Pro Only</button>  ');
+                                    echo '<button class="btn btn-warning oxi-addons-addons-style-btn-warning" title="Pro Only"  type="submit" value="pro only" name="addonsstyleproonly">Pro Only</button>  ';
                                 else:
-                                    echo __('<button type="button" class="btn btn-success oxi-addons-addons-template-create oxi-addons-addons-js-create" data-toggle="modal" template-id="' . esc_attr($value) . '">Create Style</button>');
+                                    echo '<button type="button" class="btn btn-success oxi-addons-addons-template-create oxi-addons-addons-js-create" data-toggle="modal" template-id="' . esc_attr($value) . '">Create Style</button>';
                                 endif;
                                 ?>
 
@@ -130,7 +130,7 @@ class Templates {
     public function create_new_modal() {
         //  echo '';
         if (($this->imported + 1) < $this->totalpage):
-            echo __('<div class="oxi-addons-row">
+            echo '<div class="oxi-addons-row">
                         <div class="oxi-addons-col-1 oxi-import">
                             <div class="oxi-addons-style-preview">
                                 <div class="oxilab-admin-style-preview-top">
@@ -145,10 +145,10 @@ class Templates {
                                 </div>
                             </div>
                         </div>
-                    </div>');
+                    </div>';
         endif;
 
-        echo __('<div class="modal fade" id="oxi-addons-style-create-modal" >
+        echo'<div class="modal fade" id="oxi-addons-style-create-modal" >
                         <form method="post" id="oxi-addons-style-modal-form">
                             <div class="modal-dialog modal-sm modal-dialog-centered">
                                 <div class="modal-content">
@@ -172,7 +172,7 @@ class Templates {
                                 </div>
                             </div>
                         </form>
-                    </div>');
+                    </div>';
     }
 
 }

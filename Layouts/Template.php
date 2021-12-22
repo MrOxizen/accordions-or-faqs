@@ -175,7 +175,6 @@ class Template {
             echo $this->font_familly_validation(json_decode(($this->dbdata['font_family'] != '' ? esc_html($this->dbdata['font_family']) : "[]"), true));
             $inlinecss .= $this->CSSDATA;
         }
-
         if ($inlinecss != ''):
             $inlinecss = html_entity_decode($inlinecss);
             wp_add_inline_style('oxi-accordions-ultimate', $inlinecss);
@@ -202,14 +201,14 @@ class Template {
      */
     public function render() {
 
-        echo __('<div class="oxi-addons-container oxi-accordions-wrapper ' . esc_attr($this->WRAPPER) . '" id="' . esc_attr($this->WRAPPER) . '">
-                 <div class="oxi-addons-row">');
+        echo '<div class="oxi-addons-container oxi-accordions-wrapper ' . esc_attr($this->WRAPPER) . '" id="' . esc_attr($this->WRAPPER) . '">
+                 <div class="oxi-addons-row">';
         if ($this->admin == 'admin'):
-            echo __('<input type="hidden" id="oxi-addons-iframe-background-color" name="oxi-addons-iframe-background-color" value="' . (is_array($this->style) ? array_key_exists('oxilab-preview-color', $this->style) ? esc_attr($this->style['oxilab-preview-color']) : '#FFF' : '#FFF') . '">');
+            echo '<input type="hidden" id="oxi-addons-iframe-background-color" name="oxi-addons-iframe-background-color" value="' . (is_array($this->style) ? array_key_exists('oxilab-preview-color', $this->style) ? esc_attr($this->style['oxilab-preview-color']) : '#FFF' : '#FFF') . '">';
         endif;
         $this->default_render($this->style, $this->child, $this->admin);
-        echo __('   </div>
-              </div>');
+        echo '   </div>
+              </div>';
     }
 
     /**
@@ -238,7 +237,7 @@ class Template {
      * @since 2.0.1
      */
     public function public_jquery() {
-        echo _('');
+        echo '';
     }
 
     /**
@@ -247,7 +246,7 @@ class Template {
      * @since 2.0.1
      */
     public function public_css() {
-        echo _('');
+        echo '';
     }
 
     /**
@@ -256,12 +255,10 @@ class Template {
      * @since 2.0.1
      */
     public function inline_public_css() {
-        echo _('');
+        echo '';
     }
 
     public function default_render($style, $child, $admin) {
-
-
 
 
         $content = '<div class="oxi-accordions-ultimate-style oxi-accordions-ultimate-template-' . esc_attr($this->oxiid) . '  oxi-accordions-clearfix oxi-accordions-preloader" ' . esc_attr($this->public_attribute) . ' ' . esc_attr($this->accordions_preloader) . '>';
@@ -280,9 +277,9 @@ class Template {
         foreach ($child as $key => $val) {
             $value = json_decode(stripslashes($val['rawdata']), true);
 
-            $expand = '<div class="oxi-accordions-expand-collapse-' . esc_attr($this->oxiid) . ' oxi-accordions-expand-collapse ' . $style['oxi-accordions-head-expand-collapse-icon-interface'] . ' ' . $style['oxi-accordions-expand-collapse'] . ' ' . $style['oxi-accordions-head-expand-collapse-type'] . ' ' . $style['oxi-accordions-head-expand-collapse-shape'] . '">' . $this->expand_collapse_icon_number_render($style, $number) . '</div>';
+            $expand = '<div class="oxi-accordions-expand-collapse-' . esc_attr($this->oxiid) . ' oxi-accordions-expand-collapse ' . esc_attr($style['oxi-accordions-head-expand-collapse-icon-interface']) . ' ' . esc_attr($style['oxi-accordions-expand-collapse']) . ' ' . esc_attr($style['oxi-accordions-head-expand-collapse-type']) . ' ' . esc_attr($style['oxi-accordions-head-expand-collapse-shape']) . '">' . $this->expand_collapse_icon_number_render($style, $number) . '</div>';
 
-            $content .= '<div class="oxi-accordions-single-card oxi-accordions-single-card-' . esc_attr($this->oxiid) . ' ' . ( isset($this->style['oxi-accordions-head-expand-collapse-location']) ? $this->style['oxi-accordions-head-expand-collapse-location'] : '') . ' oxi-accordions-single-card-' . esc_attr($this->oxiid) . '-' . esc_attr($number) . ' ' . $style['oxi-accordions-head-expand-collapse-position'] . '" id="oxi-accordions-single-card-' . esc_attr($this->oxiid) . '-' . esc_attr($number) . '">';
+            $content .= '<div class="oxi-accordions-single-card oxi-accordions-single-card-' . esc_attr($this->oxiid) . ' ' . ( isset($this->style['oxi-accordions-head-expand-collapse-location']) ? esc_attr($this->style['oxi-accordions-head-expand-collapse-location']) : '') . ' oxi-accordions-single-card-' . esc_attr($this->oxiid) . '-' . esc_attr($number) . ' ' . esc_attr($style['oxi-accordions-head-expand-collapse-position']) . '" id="oxi-accordions-single-card-' . esc_attr($this->oxiid) . '-' . esc_attr($number) . '">';
             if ($style['oxi-accordions-head-expand-collapse-position'] == 'oxi-accordions-head-expand-collapse-position-outside'):
                 $content .= $expand;
             endif;
@@ -291,11 +288,11 @@ class Template {
              * Header Child Loop Start
              */
             $content .= '<div class="oxi-accordions-header-card">';
-            $content .= '  <div class="oxi-accordions-header-body  oxi-accordions-header oxi-accordions-clearfix"   data-oxitoggle="oxicollapse" data-oxitarget="#oxi-accordions-content-' . $this->oxiid . '-' . $number . '" aria-expanded="false" ' . $this->accordions_url_render($value) . '>';
+            $content .= '  <div class="oxi-accordions-header-body  oxi-accordions-header oxi-accordions-clearfix"   data-oxitoggle="oxicollapse" data-oxitarget="#oxi-accordions-content-' . esc_attr($this->oxiid) . '-' . esc_attr($number) . '" aria-expanded="false" ' . $this->accordions_url_render($value) . '>';
             if ($style['oxi-accordions-head-expand-collapse-position'] != 'oxi-accordions-head-expand-collapse-position-outside'):
                 $content .= $expand;
             endif;
-            $content .= '      <div class="oxi-accordions-header-content ' . $style['oxi-accordions-headding-additional'] . ' ' . $style['oxi-accordions-head-additional-location'] . '">';
+            $content .= '      <div class="oxi-accordions-header-content ' . esc_attr($style['oxi-accordions-headding-additional']) . ' ' . esc_attr($style['oxi-accordions-head-additional-location']) . '">';
             if ($style['oxi-accordions-content-type'] == 'content'):
                 if ($value['oxi-accordions-modal-title-additional'] == 'icon'):
                     $content .= $this->icon_special_rander($value['oxi-accordions-modal-icon']);
@@ -314,10 +311,10 @@ class Template {
             /*
              * Content Child Loop Start
              */
-            $content_height = (isset($style['oxi-accordions-content-height']) ? $style['oxi-accordions-content-height'] : '') . ' ' . (isset($style['oxi-accordions-content-mx-height-interface']) ? $style['oxi-accordions-content-mx-height-interface'] : '') . ' ';
+            $content_height = (isset($style['oxi-accordions-content-height']) ? esc_attr($style['oxi-accordions-content-height']) : '') . ' ' . (isset($style['oxi-accordions-content-mx-height-interface']) ? esc_attr($style['oxi-accordions-content-mx-height-interface']) : '') . ' ';
             $animation = isset($style['oxi-accordions-desc-animation']) ? $style['oxi-accordions-desc-animation'] : '';
 
-            $content .= '  <div class="oxicollapse ' . $this->default_open($value) . ' oxi-accordions-content-card oxi-accordions-content-card-' . $this->oxiid . '  ' . ($this->admin == 'admin' ? 'oxi-addons-admin-edit-list' : '') . '" id="oxi-accordions-content-' . $this->oxiid . '-' . $number . '" ' . $this->accordions_type . '>';
+            $content .= '  <div class="oxicollapse ' . $this->default_open($value) . ' oxi-accordions-content-card oxi-accordions-content-card-' . esc_attr($this->oxiid) . '  ' . ($this->admin == 'admin' ? 'oxi-addons-admin-edit-list' : '') . '" id="oxi-accordions-content-' . esc_attr($this->oxiid) . '-' . esc_attr($number) . '" ' . esc_attr($this->accordions_type) . '>';
             $content .= '     <div class="oxi-accordions-content-body ' . esc_attr($content_height) . '"  oxi-animation="' . esc_attr($animation) . '">';
             $content .= $this->accordions_content_render($style, $value);
             if ($style['oxi-accordions-content-height'] == 'oxi-accordions-content-height' && $style['oxi-accordions-content-mx-height-interface'] == 'oxi-accordions-content-mx-height-interface-button'):
@@ -508,8 +505,8 @@ class Template {
         if (isset($style['oxi-accordions-modal-components-type']) && $style['oxi-accordions-modal-components-type'] == 'link'):
             $data = $this->url_render('oxi-accordions-modal-link', $style);
             if (count($data) >= 1):
-                echo _($data);
-                return ' data-link=\'' . json_encode($data) . '\'';
+                echo $data;
+                return ' data-link=\'' . esc_attr(json_encode($data)) . '\'';
             endif;
         endif;
     }
@@ -525,7 +522,6 @@ class Template {
         if ($child['oxi-accordions-modal-components-type'] == 'nested-accordions'):
             return $this->accordions_content_render_nested_accordions($style, $child);
         elseif ($child['oxi-accordions-modal-components-type'] == 'post'):
-
             $post_id = $child['oxi-accordions-modal-components-post'];
             $post_content = get_post($post_id);
             $content = $post_content->post_content;
@@ -558,11 +554,11 @@ class Template {
         $t = false;
         if (!empty($array[$title]) && $array[$title] != ''):
             $t = true;
-            $r .= '<div class=\'oxi-accordions-main-title\'>' . $this->special_charecter($array[$title]) . '</div>';
+            $r .= '<div class=\'oxi-accordions-main-title\'>' . esc_html($this->special_charecter($array[$title])) . '</div>';
         endif;
         if (!empty($array[$subtitle]) && $array[$subtitle] != ''):
             $t = true;
-            $r .= '<div class=\'oxi-accordions-sub-title\'>' . $this->special_charecter($array[$subtitle]) . '</div>';
+            $r .= '<div class=\'oxi-accordions-sub-title\'>' . esc_html($this->special_charecter($array[$subtitle])) . '</div>';
         endif;
         $r .= '</div>';
         if ($t):
@@ -572,22 +568,30 @@ class Template {
 
     public function number_special_charecter($data) {
         if (!empty($data) && $data != ''):
-            return '<div class="oxi-accordions-header-li-number ' . (isset($this->style['oxi-accordions-head-additional-interface']) ? $this->style['oxi-accordions-head-additional-interface'] : '') . '">' . $this->special_charecter($data) . '</div>';
+            return '<div class="oxi-accordions-header-li-number ' . (isset($this->style['oxi-accordions-head-additional-interface']) ? esc_attr($this->style['oxi-accordions-head-additional-interface']) : '') . '">' . $this->special_charecter($data) . '</div>';
         endif;
     }
 
     public function image_special_render($id = '', $array = []) {
         $value = $this->media_render($id, $array);
         if (!empty($value)):
-            return ' <img  class="oxi-accordions-header-li-image ' . (isset($this->style['oxi-accordions-head-additional-interface']) ? $this->style['oxi-accordions-head-additional-interface'] : '') . '" ' . $value . '>';
+            return ' <img  class="oxi-accordions-header-li-image ' . (isset($this->style['oxi-accordions-head-additional-interface']) ? esc_attr($this->style['oxi-accordions-head-additional-interface']) : '') . '" ' . esc_attr($value) . '>';
         endif;
     }
 
     public function icon_special_rander($id = '') {
         $value = $this->font_awesome_render($id);
         if (!empty($value)):
-            return ' <div class="oxi-accordions-additional-icon oxi-accordions-additional-icon-' . $this->oxiid . ' ' . (isset($this->style['oxi-accordions-head-additional-interface']) ? $this->style['oxi-accordions-head-additional-interface'] : '') . '"> ' . $value . '</div>';
+            return ' <div class="oxi-accordions-additional-icon oxi-accordions-additional-icon-' . esc_attr($this->oxiid) . ' ' . (isset($this->style['oxi-accordions-head-additional-interface']) ? esc_attr($this->style['oxi-accordions-head-additional-interface']) : '') . '"> ' . wp_kses($value, $this->font_awesome_kses()) . '</div>';
         endif;
+    }
+
+    public function font_awesome_kses() {
+        return array(
+            'i' => array(
+                'class' => array(),
+            ),
+        );
     }
 
     public function font_awesome_render($data) {

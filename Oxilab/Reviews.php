@@ -53,7 +53,7 @@ class Reviews {
             return;
         }
         $image = OXI_ACCORDIONS_URL . 'assets/image/logo.png';
-        echo __(' <div class="notice notice-info put-dismiss-noticenotice-has-thumbnail shortcode-addons-review-notice oxi-accordions-review-notice">
+        echo' <div class="notice notice-info put-dismiss-noticenotice-has-thumbnail shortcode-addons-review-notice oxi-accordions-review-notice">
                     <div class="shortcode-addons-notice-thumbnail">
                         <img src="' . esc_url($image) . '" alt=""></div>
                     <div class="shortcode-addons--notice-message">
@@ -86,7 +86,7 @@ class Reviews {
                             </li>
                         </ul>
                     </div>
-                </div>');
+                </div>';
     }
 
     /**

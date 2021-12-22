@@ -77,17 +77,17 @@ class Helper extends Admin {
         );
         $this->add_control(
                 'oxi-accordions-content-type', $this->style, [
-            'label' => __('Content Type', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Content Type', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::CHOOSE,
             'operator' => Controls::OPERATOR_TEXT,
             'default' => 'content',
             'loader' => TRUE,
             'options' => [
                 'content' => [
-                    'title' => __('Content', OXI_ACCORDIONS_TEXTDOMAIN),
+                    'title' => esc_html__('Content', OXI_ACCORDIONS_TEXTDOMAIN),
                 ],
                 'post' => [
-                    'title' => __('Post', OXI_ACCORDIONS_TEXTDOMAIN),
+                    'title' => esc_html__('Post', OXI_ACCORDIONS_TEXTDOMAIN),
                 ],
             ],
             'description' => 'Select accordion type as Content or Post.',
@@ -95,17 +95,17 @@ class Helper extends Admin {
         );
         $this->add_control(
                 'oxi-accordions-type', $this->style, [
-            'label' => __('Accordions', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Accordions', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::CHOOSE,
             'operator' => Controls::OPERATOR_TEXT,
             'loader' => TRUE,
             'default' => 'toggle',
             'options' => [
                 'toggle' => [
-                    'title' => __('Toggle', OXI_ACCORDIONS_TEXTDOMAIN),
+                    'title' => esc_html__('Toggle', OXI_ACCORDIONS_TEXTDOMAIN),
                 ],
                 'accordions' => [
-                    'title' => __('Accordions', OXI_ACCORDIONS_TEXTDOMAIN),
+                    'title' => esc_html__('Accordions', OXI_ACCORDIONS_TEXTDOMAIN),
                 ],
             ],
             'description' => 'Choose accordions type to open content with Toggle or Accordions method.',
@@ -113,7 +113,7 @@ class Helper extends Admin {
         );
         $this->add_control(
                 'oxi-accordions-animation-duration', $this->style, [
-            'label' => __('Animation Duration', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Animation Duration', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SLIDER,
             'default' => [
                 'unit' => 'ms',
@@ -135,20 +135,20 @@ class Helper extends Admin {
 
         $this->add_control(
                 'oxi-accordions-trigger', $this->style, [
-            'label' => __('Activator Event', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Activator Event', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::CHOOSE,
             'operator' => Controls::OPERATOR_TEXT,
             'default' => 'click',
             'loader' => TRUE,
             'options' => [
                 'click' => [
-                    'title' => __('Click', OXI_ACCORDIONS_TEXTDOMAIN),
+                    'title' => esc_html__('Click', OXI_ACCORDIONS_TEXTDOMAIN),
                 ],
                 'hover' => [
-                    'title' => __('Hover', OXI_ACCORDIONS_TEXTDOMAIN),
+                    'title' => esc_html__('Hover', OXI_ACCORDIONS_TEXTDOMAIN),
                 ],
                 'auto' => [
-                    'title' => __('Auto', OXI_ACCORDIONS_TEXTDOMAIN),
+                    'title' => esc_html__('Auto', OXI_ACCORDIONS_TEXTDOMAIN),
                 ],
             ],
             'selector' => [
@@ -159,7 +159,7 @@ class Helper extends Admin {
         );
         $this->add_control(
                 'oxi-accordions-auto-play-duration', $this->style, [
-            'label' => __('Auto Play Duration', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Auto Play Duration', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SLIDER,
             'condition' => [
                 'oxi-accordions-trigger' => 'auto',
@@ -202,7 +202,7 @@ class Helper extends Admin {
                 'display_post_post_type',
                 $this->style,
                 [
-                    'label' => __('Post Type', OXI_ACCORDIONS_TEXTDOMAIN),
+                    'label' => esc_html__('Post Type', OXI_ACCORDIONS_TEXTDOMAIN),
                     'loader' => TRUE,
                     'type' => Controls::SELECT,
                     'default' => 'post',
@@ -214,7 +214,7 @@ class Helper extends Admin {
                 'display_post_author',
                 $this->style,
                 [
-                    'label' => __('Author', OXI_ACCORDIONS_TEXTDOMAIN),
+                    'label' => esc_html__('Author', OXI_ACCORDIONS_TEXTDOMAIN),
                     'loader' => TRUE,
                     'type' => Controls::SELECT,
                     'multiple' => true,
@@ -228,7 +228,7 @@ class Helper extends Admin {
                         $key . '_category',
                         $this->style,
                         [
-                            'label' => __(' Category', OXI_ACCORDIONS_TEXTDOMAIN),
+                            'label' => esc_html__(' Category', OXI_ACCORDIONS_TEXTDOMAIN),
                             'type' => Controls::SELECT,
                             'multiple' => true,
                             'loader' => TRUE,
@@ -243,7 +243,7 @@ class Helper extends Admin {
                         $key . '_tag',
                         $this->style,
                         [
-                            'label' => __(' Tags', OXI_ACCORDIONS_TEXTDOMAIN),
+                            'label' => esc_html__(' Tags', OXI_ACCORDIONS_TEXTDOMAIN),
                             'type' => Controls::SELECT,
                             'multiple' => true,
                             'loader' => TRUE,
@@ -260,7 +260,7 @@ class Helper extends Admin {
                     $key . '_include',
                     $this->style,
                     [
-                        'label' => __(' Include Post', OXI_ACCORDIONS_TEXTDOMAIN),
+                        'label' => esc_html__(' Include Post', OXI_ACCORDIONS_TEXTDOMAIN),
                         'type' => Controls::SELECT,
                         'multiple' => true,
                         'loader' => TRUE,
@@ -275,7 +275,7 @@ class Helper extends Admin {
                     $key . '_exclude',
                     $this->style,
                     [
-                        'label' => __(' Exclude Post', OXI_ACCORDIONS_TEXTDOMAIN),
+                        'label' => esc_html__(' Exclude Post', OXI_ACCORDIONS_TEXTDOMAIN),
                         'type' => Controls::SELECT,
                         'multiple' => true,
                         'loader' => TRUE,
@@ -293,7 +293,7 @@ class Helper extends Admin {
                 'display_post_per_page',
                 $this->style,
                 [
-                    'label' => __('Maximum Post', OXI_ACCORDIONS_TEXTDOMAIN),
+                    'label' => esc_html__('Maximum Post', OXI_ACCORDIONS_TEXTDOMAIN),
                     'type' => Controls::NUMBER,
                     'loader' => TRUE,
                     'min' => 1,
@@ -304,7 +304,7 @@ class Helper extends Admin {
                 'display_post_offset',
                 $this->style,
                 [
-                    'label' => __('Offset', OXI_ACCORDIONS_TEXTDOMAIN),
+                    'label' => esc_html__('Offset', OXI_ACCORDIONS_TEXTDOMAIN),
                     'type' => Controls::NUMBER,
                     'loader' => TRUE,
                     'description' => 'Confirm offset of your Query.',
@@ -314,7 +314,7 @@ class Helper extends Admin {
                 'display_post_orderby',
                 $this->style,
                 [
-                    'label' => __(' Order By', OXI_ACCORDIONS_TEXTDOMAIN),
+                    'label' => esc_html__(' Order By', OXI_ACCORDIONS_TEXTDOMAIN),
                     'type' => Controls::SELECT,
                     'default' => 'ID',
                     'loader' => TRUE,
@@ -337,7 +337,7 @@ class Helper extends Admin {
                 'display_post_ordertype',
                 $this->style,
                 [
-                    'label' => __('Order Type', OXI_ACCORDIONS_TEXTDOMAIN),
+                    'label' => esc_html__('Order Type', OXI_ACCORDIONS_TEXTDOMAIN),
                     'type' => Controls::SELECT,
                     'loader' => TRUE,
                     'options' => [
@@ -376,19 +376,19 @@ class Helper extends Admin {
         );
         $this->add_control(
                 'oxi-accordions-search-option-alignment', $this->style, [
-            'label' => __('Alignment', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Alignment', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::CHOOSE,
             'operator' => Controls::OPERATOR_ICON,
             'default' => 'left',
             'options' => [
                 'left' => [
-                    'icon' => __('fas fa-align-left', OXI_ACCORDIONS_TEXTDOMAIN),
+                    'icon' => esc_html__('fas fa-align-left', OXI_ACCORDIONS_TEXTDOMAIN),
                 ],
                 'center' => [
-                    'icon' => __('fas fa-align-center', OXI_ACCORDIONS_TEXTDOMAIN),
+                    'icon' => esc_html__('fas fa-align-center', OXI_ACCORDIONS_TEXTDOMAIN),
                 ],
                 'right' => [
-                    'icon' => __('fas fa-align-right', OXI_ACCORDIONS_TEXTDOMAIN),
+                    'icon' => esc_html__('fas fa-align-right', OXI_ACCORDIONS_TEXTDOMAIN),
                 ],
             ],
             'selector' => [
@@ -399,7 +399,7 @@ class Helper extends Admin {
         );
         $this->add_responsive_control(
                 'oxi-accordions-search-option-width', $this->style, [
-            'label' => __('Width', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Width', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SLIDER,
             'default' => [
                 'unit' => 'px',
@@ -447,7 +447,7 @@ class Helper extends Admin {
         );
         $this->add_control(
                 'oxi-accordions-search-option-color', $this->style, [
-            'label' => __('Color', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Color', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::COLOR,
             'default' => '#ffffff',
             'selector' => [
@@ -464,7 +464,7 @@ class Helper extends Admin {
         $this->add_control(
                 'oxi-accordions-search-option-background', $this->style, [
             'type' => Controls::GRADIENT,
-            'label' => __('Background', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Background', OXI_ACCORDIONS_TEXTDOMAIN),
             'selector' => [
                 '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-ultimate-search-options > .oxi-accordions-ultimate-search' => 'background: {{VALUE}};',
             ],
@@ -483,7 +483,7 @@ class Helper extends Admin {
         );
         $this->add_responsive_control(
                 'oxi-accordions-search-option-radius', $this->style, [
-            'label' => __('Border Radius', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Border Radius', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
             'default' => [
                 'unit' => 'px',
@@ -514,7 +514,7 @@ class Helper extends Admin {
         );
         $this->add_responsive_control(
                 'oxi-accordions-search-option-padding', $this->style, [
-            'label' => __('Padding', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Padding', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
             'default' => [
                 'unit' => 'px',
@@ -545,7 +545,7 @@ class Helper extends Admin {
         );
         $this->add_responsive_control(
                 'oxi-accordions-search-option-margin', $this->style, [
-            'label' => __('Margin', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Margin', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
             'default' => [
                 'unit' => 'px',
@@ -586,20 +586,20 @@ class Helper extends Admin {
         );
         $this->add_control(
                 'oxi-accordions-preloader', $this->style, [
-            'label' => __('Preloader', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Preloader', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SWITCHER,
-            'label_on' => __('True', OXI_ACCORDIONS_TEXTDOMAIN),
-            'label_off' => __('False', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label_on' => esc_html__('True', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label_off' => esc_html__('False', OXI_ACCORDIONS_TEXTDOMAIN),
             'return_value' => 'yes',
             'description' => 'Accordion will be hidden until page load completed.',
                 ]
         );
         $this->add_control(
                 'oxi-accordions-expand-collapse', $this->style, [
-            'label' => __('Expand & Collapse Icon', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Expand & Collapse Icon', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SWITCHER,
-            'label_on' => __('True', OXI_ACCORDIONS_TEXTDOMAIN),
-            'label_off' => __('False', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label_on' => esc_html__('True', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label_off' => esc_html__('False', OXI_ACCORDIONS_TEXTDOMAIN),
             'return_value' => 'oxi-accordions-expand-collapse-active',
             'selector' => [
                 '{{WRAPPER}} .oxi-accordions-header-card > .oxi-accordions-header-body .oxi-accordions-expand-collapse' => '',
@@ -609,10 +609,10 @@ class Helper extends Admin {
         );
         $this->add_control(
                 'oxi-accordions-search-option', $this->style, [
-            'label' => __('Search Option', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Search Option', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SWITCHER,
-            'label_on' => __('True', OXI_ACCORDIONS_TEXTDOMAIN),
-            'label_off' => __('False', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label_on' => esc_html__('True', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label_off' => esc_html__('False', OXI_ACCORDIONS_TEXTDOMAIN),
             'return_value' => 'active',
             'loader' => TRUE,
             'description' => 'Show/hide search FAQs option or frequently asked questions.',
@@ -621,10 +621,10 @@ class Helper extends Admin {
 
         $this->add_control(
                 'oxi-accordions-headding-additional', $this->style, [
-            'label' => __('Heading Additional', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Heading Additional', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SWITCHER,
-            'label_on' => __('True', OXI_ACCORDIONS_TEXTDOMAIN),
-            'label_off' => __('False', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label_on' => esc_html__('True', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label_off' => esc_html__('False', OXI_ACCORDIONS_TEXTDOMAIN),
             'return_value' => 'oxi-accordions-headding-additional-active',
             'selector' => [
                 '{{WRAPPER}} .oxi-accordions-header-card > .oxi-accordions-header-body .oxi-accordions-header-content' => '',
@@ -637,11 +637,11 @@ class Helper extends Admin {
         );
         $this->add_control(
                 'oxi-accordions-content-height', $this->style, [
-            'label' => __('Fixed Content Height', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Fixed Content Height', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SWITCHER,
             'loader' => TRUE,
-            'label_on' => __('True', OXI_ACCORDIONS_TEXTDOMAIN),
-            'label_off' => __('False', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label_on' => esc_html__('True', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label_off' => esc_html__('False', OXI_ACCORDIONS_TEXTDOMAIN),
             'return_value' => 'oxi-accordions-content-height',
             'selector' => [
                 '{{WRAPPER}} .oxi-accordions-ultimate-style .oxi-accordions-content-body' => '',
@@ -663,7 +663,7 @@ class Helper extends Admin {
         $this->start_controls_tab();
         $this->add_control(
                 'oxi-accordions-gen-bg', $this->style, [
-            'label' => __('Background', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Background', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::GRADIENT,
             'selector' => [
                 '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body' => 'background: {{VALUE}};',
@@ -695,7 +695,7 @@ class Helper extends Admin {
         $this->start_controls_tab();
         $this->add_control(
                 'oxi-accordions-gen-ac-bg', $this->style, [
-            'label' => __('Background', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Background', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::GRADIENT,
             'selector' => [
                 '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand > .oxi-accordions-head-outside-body' => 'background: {{VALUE}};',
@@ -728,7 +728,7 @@ class Helper extends Admin {
 
         $this->add_responsive_control(
                 'oxi-accordions-general-border-radius', $this->style, [
-            'label' => __('Border Radius', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Border Radius', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
             'default' => [
                 'unit' => 'px',
@@ -760,7 +760,7 @@ class Helper extends Admin {
 
         $this->add_responsive_control(
                 'oxi-accordions-general-margin', $this->style, [
-            'label' => __('Margin', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Margin', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
             'default' => [
                 'unit' => 'px',
@@ -839,7 +839,7 @@ class Helper extends Admin {
         $this->start_controls_tab();
         $this->add_control(
                 'oxi-accordions-head-bg', $this->style, [
-            'label' => __('Background', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Background', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::GRADIENT,
             'selector' => [
                 '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-header-body' => 'background: {{VALUE}};',
@@ -862,7 +862,7 @@ class Helper extends Admin {
         $this->start_controls_tab();
         $this->add_control(
                 'oxi-accordions-head-ac-bg', $this->style, [
-            'label' => __('Background', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Background', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::GRADIENT,
             'selector' => [
                 '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-header-body' => 'background: {{VALUE}};',
@@ -895,7 +895,7 @@ class Helper extends Admin {
         );
         $this->add_responsive_control(
                 'oxi-accordions-head-radius', $this->style, [
-            'label' => __('Border Radius', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Border Radius', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
             'default' => [
                 'unit' => 'px',
@@ -926,7 +926,7 @@ class Helper extends Admin {
         );
         $this->add_responsive_control(
                 'oxi-accordions-head-padding', $this->style, [
-            'label' => __('Padding', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Padding', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
             'default' => [
                 'unit' => 'px',
@@ -970,11 +970,11 @@ class Helper extends Admin {
         );
         $this->add_control(
                 'oxi-accordions-head-expand-collapse-position', $this->style, [
-            'label' => __('Location', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Location', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SWITCHER,
             'loader' => TRUE,
-            'label_on' => __('Outside', OXI_ACCORDIONS_TEXTDOMAIN),
-            'label_off' => __('Inside', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label_on' => esc_html__('Outside', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label_off' => esc_html__('Inside', OXI_ACCORDIONS_TEXTDOMAIN),
             'return_value' => 'oxi-accordions-head-expand-collapse-position-outside',
             'description' => 'Set the location of expand & collapse as beside title or Outside Title',
                 ]
@@ -982,10 +982,10 @@ class Helper extends Admin {
 
         $this->add_control(
                 'oxi-accordions-head-expand-collapse-location', $this->style, [
-            'label' => __('Right or Left', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Right or Left', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SWITCHER,
-            'label_on' => __('Right', OXI_ACCORDIONS_TEXTDOMAIN),
-            'label_off' => __('Left', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label_on' => esc_html__('Right', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label_off' => esc_html__('Left', OXI_ACCORDIONS_TEXTDOMAIN),
             'return_value' => 'oxi-accordions-head-expand-collapse-right-position',
             'selector' => [
                 '{{WRAPPER}} .oxi-accordions-single-card' => '',
@@ -995,16 +995,16 @@ class Helper extends Admin {
         );
         $this->add_control(
                 'oxi-accordions-head-expand-collapse-type', $this->style, [
-            'label' => __('Expand & Collapse Type', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Expand & Collapse Type', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::CHOOSE,
             'operator' => Controls::OPERATOR_TEXT,
             'default' => 'oxi-accordions-head-expand-collapse-type-icon',
             'options' => [
                 'oxi-accordions-head-expand-collapse-type-icon' => [
-                    'title' => __('Icon', OXI_ACCORDIONS_TEXTDOMAIN),
+                    'title' => esc_html__('Icon', OXI_ACCORDIONS_TEXTDOMAIN),
                 ],
                 'oxi-accordions-head-expand-collapse-type-number' => [
-                    'title' => __('Number', OXI_ACCORDIONS_TEXTDOMAIN),
+                    'title' => esc_html__('Number', OXI_ACCORDIONS_TEXTDOMAIN),
                 ],
             ],
             'selector' => [
@@ -1015,28 +1015,28 @@ class Helper extends Admin {
         );
         $this->add_control(
                 'oxi-accordions-icon-style', $this->style, [
-            'label' => __('Icon Style', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Icon Style', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SELECT,
             'default' => '',
             'condition' => [
                 'oxi-accordions-head-expand-collapse-type' => 'oxi-accordions-head-expand-collapse-type-icon',
             ],
             'options' => [
-                'angle' => __('angle', OXI_ACCORDIONS_TEXTDOMAIN),
-                'angle-2' => __('Agnle 2', OXI_ACCORDIONS_TEXTDOMAIN),
-                'angle-3' => __('angle-3', OXI_ACCORDIONS_TEXTDOMAIN),
-                'angle-double' => __('angle-double', OXI_ACCORDIONS_TEXTDOMAIN),
-                'angle-double-down' => __('angle-double-down', OXI_ACCORDIONS_TEXTDOMAIN),
-                'angle-double-up' => __('angle-double-up', OXI_ACCORDIONS_TEXTDOMAIN),
-                'arrow' => __('arrow', OXI_ACCORDIONS_TEXTDOMAIN),
-                'arrow-up' => __('arrow-up', OXI_ACCORDIONS_TEXTDOMAIN),
-                'carret' => __('carret', OXI_ACCORDIONS_TEXTDOMAIN),
-                'carret-up' => __('carret-up', OXI_ACCORDIONS_TEXTDOMAIN),
-                'chevron' => __('chevron', OXI_ACCORDIONS_TEXTDOMAIN),
-                'hand' => __('hand', OXI_ACCORDIONS_TEXTDOMAIN),
-                'plus' => __('plus', OXI_ACCORDIONS_TEXTDOMAIN),
-                'tick' => __('tick', OXI_ACCORDIONS_TEXTDOMAIN),
-                'custom' => __('custom', OXI_ACCORDIONS_TEXTDOMAIN),
+                'angle' => esc_html__('angle', OXI_ACCORDIONS_TEXTDOMAIN),
+                'angle-2' => esc_html__('Agnle 2', OXI_ACCORDIONS_TEXTDOMAIN),
+                'angle-3' => esc_html__('angle-3', OXI_ACCORDIONS_TEXTDOMAIN),
+                'angle-double' => esc_html__('angle-double', OXI_ACCORDIONS_TEXTDOMAIN),
+                'angle-double-down' => esc_html__('angle-double-down', OXI_ACCORDIONS_TEXTDOMAIN),
+                'angle-double-up' => esc_html__('angle-double-up', OXI_ACCORDIONS_TEXTDOMAIN),
+                'arrow' => esc_html__('arrow', OXI_ACCORDIONS_TEXTDOMAIN),
+                'arrow-up' => esc_html__('arrow-up', OXI_ACCORDIONS_TEXTDOMAIN),
+                'carret' => esc_html__('carret', OXI_ACCORDIONS_TEXTDOMAIN),
+                'carret-up' => esc_html__('carret-up', OXI_ACCORDIONS_TEXTDOMAIN),
+                'chevron' => esc_html__('chevron', OXI_ACCORDIONS_TEXTDOMAIN),
+                'hand' => esc_html__('hand', OXI_ACCORDIONS_TEXTDOMAIN),
+                'plus' => esc_html__('plus', OXI_ACCORDIONS_TEXTDOMAIN),
+                'tick' => esc_html__('tick', OXI_ACCORDIONS_TEXTDOMAIN),
+                'custom' => esc_html__('custom', OXI_ACCORDIONS_TEXTDOMAIN),
             ],
             'description' => 'Choose a expand and collapse icon style.',
                 ]
@@ -1087,17 +1087,17 @@ class Helper extends Admin {
                 'oxi-accordions-head-expand-collapse-icon-interface',
                 $this->style,
                 [
-                    'label' => __('Customization Interface', OXI_ACCORDIONS_TEXTDOMAIN),
+                    'label' => esc_html__('Customization Interface', OXI_ACCORDIONS_TEXTDOMAIN),
                     'type' => Controls::CHOOSE,
                     'operator' => Controls::OPERATOR_TEXT,
                     'loader' => TRUE,
                     'default' => '',
                     'options' => [
                         '' => [
-                            'title' => __('Simple', OXI_ACCORDIONS_TEXTDOMAIN),
+                            'title' => esc_html__('Simple', OXI_ACCORDIONS_TEXTDOMAIN),
                         ],
                         'oxi-accordions-head-expand-collapse-icon-customizable-interface' => [
-                            'title' => __('Customizable', OXI_ACCORDIONS_TEXTDOMAIN),
+                            'title' => esc_html__('Customizable', OXI_ACCORDIONS_TEXTDOMAIN),
                         ],
                     ],
                     'selector' => [
@@ -1108,7 +1108,7 @@ class Helper extends Admin {
         );
         $this->add_responsive_control(
                 'oxi-accordions-head-expand-collapse-icon-width', $this->style, [
-            'label' => __('Width & Height', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Width & Height', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SLIDER,
             'condition' => [
                 'oxi-accordions-head-expand-collapse-icon-interface' => 'oxi-accordions-head-expand-collapse-icon-customizable-interface',
@@ -1143,7 +1143,7 @@ class Helper extends Admin {
 
         $this->add_responsive_control(
                 'oxi-accordions-head-expand-collapse-icon-size', $this->style, [
-            'label' => __('Icon Size', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Icon Size', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SLIDER,
             'default' => [
                 'unit' => 'px',
@@ -1191,18 +1191,18 @@ class Helper extends Admin {
 
         $this->add_control(
                 'oxi-accordions-head-expand-collapse-shape', $this->style, [
-            'label' => __('Backgroud Shape', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Backgroud Shape', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SELECT,
             'default' => '',
             'condition' => [
                 'oxi-accordions-head-expand-collapse-icon-interface' => 'oxi-accordions-head-expand-collapse-icon-customizable-interface',
             ],
             'options' => [
-                'oxi-accordion-expand-0' => __('Basic', OXI_ACCORDIONS_TEXTDOMAIN),
-                'oxi-accordion-expand-1' => __('Shape 01', OXI_ACCORDIONS_TEXTDOMAIN),
-                'oxi-accordion-expand-2' => __('Shape 02', OXI_ACCORDIONS_TEXTDOMAIN),
-                'oxi-accordion-expand-3' => __('Shape 03', OXI_ACCORDIONS_TEXTDOMAIN),
-                'oxi-accordion-expand-4' => __('Shape 04', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oxi-accordion-expand-0' => esc_html__('Basic', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oxi-accordion-expand-1' => esc_html__('Shape 01', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oxi-accordion-expand-2' => esc_html__('Shape 02', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oxi-accordion-expand-3' => esc_html__('Shape 03', OXI_ACCORDIONS_TEXTDOMAIN),
+                'oxi-accordion-expand-4' => esc_html__('Shape 04', OXI_ACCORDIONS_TEXTDOMAIN),
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-accordions-ultimate-style > .oxi-accordions-single-card .oxi-accordions-head-expand-collapse-icon-customizable-interface' => '',
@@ -1223,7 +1223,7 @@ class Helper extends Admin {
 
         $this->add_control(
                 'oxi-accordions-head-expand-collapse-icon-color', $this->style, [
-            'label' => __('Color', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Color', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::COLOR,
             'default' => '#ffffff',
             'selector' => [
@@ -1236,7 +1236,7 @@ class Helper extends Admin {
         $this->add_control(
                 'oxi-accordions-head-expand-collapse-icon-background', $this->style, [
             'type' => Controls::GRADIENT,
-            'label' => __('Background', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Background', OXI_ACCORDIONS_TEXTDOMAIN),
             'condition' => [
                 'oxi-accordions-head-expand-collapse-icon-interface' => 'oxi-accordions-head-expand-collapse-icon-customizable-interface',
             ],
@@ -1266,7 +1266,7 @@ class Helper extends Admin {
         $this->start_controls_tab();
         $this->add_control(
                 'oxi-accordions-head-expand-collapse-icon-ac-color', $this->style, [
-            'label' => __('Color', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Color', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::COLOR,
             'selector' => [
                 '{{WRAPPER}} .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand .oxi-accordions-expand-collapse-' . $this->oxiid . '.oxi-accordions-expand-collapse .oxi-icons' => 'color: {{VALUE}};',
@@ -1278,7 +1278,7 @@ class Helper extends Admin {
         $this->add_control(
                 'oxi-accordions-head-expand-collapse-icon-ac-background', $this->style, [
             'type' => Controls::GRADIENT,
-            'label' => __('Background', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Background', OXI_ACCORDIONS_TEXTDOMAIN),
             'condition' => [
                 'oxi-accordions-head-expand-collapse-icon-interface' => 'oxi-accordions-head-expand-collapse-icon-customizable-interface',
             ],
@@ -1309,7 +1309,7 @@ class Helper extends Admin {
 
         $this->add_responsive_control(
                 'oxi-accordions-head-expand-collapse-icon-border-radius', $this->style, [
-            'label' => __('Border Radius', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Border Radius', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
             'condition' => [
                 'oxi-accordions-head-expand-collapse-icon-interface' => 'oxi-accordions-head-expand-collapse-icon-customizable-interface',
@@ -1345,7 +1345,7 @@ class Helper extends Admin {
         );
         $this->add_responsive_control(
                 'oxi-accordions-head-expand-collapse-icon-margin', $this->style, [
-            'label' => __('Margin', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Margin', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
             'separator' => true,
             'default' => [
@@ -1410,7 +1410,7 @@ class Helper extends Admin {
 
         $this->add_control(
                 'oxi-accordions-head-title-color', $this->style, [
-            'label' => __('Color', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Color', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::COLOR,
             'default' => '#ffffff',
             'selector' => [
@@ -1433,7 +1433,7 @@ class Helper extends Admin {
         $this->start_controls_tab();
         $this->add_control(
                 'oxi-accordions-head-title-ac-color', $this->style, [
-            'label' => __('Color', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Color', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::COLOR,
             'selector' => [
                 '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-header-body .oxi-accordions-main-title' => 'color: {{VALUE}};',
@@ -1455,7 +1455,7 @@ class Helper extends Admin {
         $this->end_controls_tabs();
         $this->add_responsive_control(
                 'oxi-accordions-head-title-margin', $this->style, [
-            'label' => __('Margin', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Margin', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
             'separator' => true,
             'default' => [
@@ -1522,7 +1522,7 @@ class Helper extends Admin {
 
         $this->add_control(
                 'oxi-accordions-head-sub-title-color', $this->style, [
-            'label' => __('Color', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Color', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::COLOR,
             'default' => '#ffffff',
             'selector' => [
@@ -1545,7 +1545,7 @@ class Helper extends Admin {
         $this->start_controls_tab();
         $this->add_control(
                 'oxi-accordions-head-sub-title-ac-color', $this->style, [
-            'label' => __('Color', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Color', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::COLOR,
             'selector' => [
                 '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-sub-title' => 'color: {{VALUE}};',
@@ -1567,7 +1567,7 @@ class Helper extends Admin {
         $this->end_controls_tabs();
         $this->add_responsive_control(
                 'oxi-accordions-head-sub-title-margin', $this->style, [
-            'label' => __('Margin', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Margin', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
             'separator' => true,
             'default' => [
@@ -1614,10 +1614,10 @@ class Helper extends Admin {
 
         $this->add_control(
                 'oxi-accordions-head-additional-location', $this->style, [
-            'label' => __('Title Additional Location', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Title Additional Location', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SWITCHER,
-            'label_on' => __('Right', OXI_ACCORDIONS_TEXTDOMAIN),
-            'label_off' => __('Left', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label_on' => esc_html__('Right', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label_off' => esc_html__('Left', OXI_ACCORDIONS_TEXTDOMAIN),
             'return_value' => 'oxi-accordions-header-additional-right-position',
             'selector' => [
                 '{{WRAPPER}} .oxi-accordions-header-card > .oxi-accordions-header-body .oxi-accordions-header-content' => '',
@@ -1630,17 +1630,17 @@ class Helper extends Admin {
                 'oxi-accordions-head-additional-interface',
                 $this->style,
                 [
-                    'label' => __('Customization Interface', OXI_ACCORDIONS_TEXTDOMAIN),
+                    'label' => esc_html__('Customization Interface', OXI_ACCORDIONS_TEXTDOMAIN),
                     'type' => Controls::CHOOSE,
                     'operator' => Controls::OPERATOR_TEXT,
                     'loader' => TRUE,
                     'default' => '',
                     'options' => [
                         '' => [
-                            'title' => __('Simple', OXI_ACCORDIONS_TEXTDOMAIN),
+                            'title' => esc_html__('Simple', OXI_ACCORDIONS_TEXTDOMAIN),
                         ],
                         'oxi-accordions-head-additional-customizable-interface' => [
-                            'title' => __('Customizable', OXI_ACCORDIONS_TEXTDOMAIN),
+                            'title' => esc_html__('Customizable', OXI_ACCORDIONS_TEXTDOMAIN),
                         ],
                     ],
                     'selector' => [
@@ -1653,7 +1653,7 @@ class Helper extends Admin {
         );
         $this->add_responsive_control(
                 'oxi-accordions-head-additional-width', $this->style, [
-            'label' => __('Width', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Width', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SLIDER,
             'condition' => [
                 'oxi-accordions-head-additional-interface' => 'oxi-accordions-head-additional-customizable-interface',
@@ -1689,7 +1689,7 @@ class Helper extends Admin {
         );
         $this->add_responsive_control(
                 'oxi-accordions-head-additional-height', $this->style, [
-            'label' => __('Height', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Height', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SLIDER,
             'condition' => [
                 'oxi-accordions-head-additional-interface' => 'oxi-accordions-head-additional-customizable-interface',
@@ -1725,7 +1725,7 @@ class Helper extends Admin {
 
         $this->add_responsive_control(
                 'oxi-accordions-head-additional-size', $this->style, [
-            'label' => __('Icon Size', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Icon Size', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SLIDER,
             'default' => [
                 'unit' => 'px',
@@ -1779,7 +1779,7 @@ class Helper extends Admin {
 
         $this->add_control(
                 'oxi-accordions-head-additional-color', $this->style, [
-            'label' => __('Color', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Color', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::COLOR,
             'default' => '#ffffff',
             'selector' => [
@@ -1792,7 +1792,7 @@ class Helper extends Admin {
         $this->add_control(
                 'oxi-accordions-head-additional-background', $this->style, [
             'type' => Controls::GRADIENT,
-            'label' => __('Background', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Background', OXI_ACCORDIONS_TEXTDOMAIN),
             'condition' => [
                 'oxi-accordions-head-additional-interface' => 'oxi-accordions-head-additional-customizable-interface',
             ],
@@ -1823,7 +1823,7 @@ class Helper extends Admin {
         $this->start_controls_tab();
         $this->add_control(
                 'oxi-accordions-head-additional-ac-color', $this->style, [
-            'label' => __('Color', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Color', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::COLOR,
             'selector' => [
                 '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card.oxi-accordions-expand > .oxi-accordions-head-outside-body > .oxi-accordions-header-card .oxi-accordions-header-content .oxi-icons' => 'color: {{VALUE}};',
@@ -1835,7 +1835,7 @@ class Helper extends Admin {
         $this->add_control(
                 'oxi-accordions-head-additional-ac-background', $this->style, [
             'type' => Controls::GRADIENT,
-            'label' => __('Background', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Background', OXI_ACCORDIONS_TEXTDOMAIN),
             'condition' => [
                 'oxi-accordions-head-additional-interface' => 'oxi-accordions-head-additional-customizable-interface',
             ],
@@ -1867,7 +1867,7 @@ class Helper extends Admin {
 
         $this->add_responsive_control(
                 'oxi-accordions-head-additional-border-radius', $this->style, [
-            'label' => __('Border Radius', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Border Radius', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
             'condition' => [
                 'oxi-accordions-head-additional-interface' => 'oxi-accordions-head-additional-customizable-interface',
@@ -1903,7 +1903,7 @@ class Helper extends Admin {
         );
         $this->add_responsive_control(
                 'oxi-accordions-head-additional-margin', $this->style, [
-            'label' => __('Margin', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Margin', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
             'separator' => true,
             'default' => [
@@ -1970,7 +1970,7 @@ class Helper extends Admin {
         );
         $this->add_control(
                 'oxi-accordions-desc-general-bg', $this->style, [
-            'label' => __('Background', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Background', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::GRADIENT,
             'selector' => [
                 '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-content-card' => 'background: {{VALUE}};',
@@ -1991,7 +1991,7 @@ class Helper extends Admin {
         );
         $this->add_responsive_control(
                 'oxi-accordions-desc-general-radius', $this->style, [
-            'label' => __('Border Radius', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Border Radius', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
             'default' => [
                 'unit' => 'px',
@@ -2022,88 +2022,88 @@ class Helper extends Admin {
         );
         $this->add_control(
                 'oxi-accordions-desc-animation', $this->style, [
-            'label' => __('Animation', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Animation', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SELECT,
             'default' => '',
             'options' => [
                 'optgroup0' => [true, 'Attention Seekers'],
-                '' => __('None', OXI_ACCORDIONS_TEXTDOMAIN),
+                '' => esc_html__('None', OXI_ACCORDIONS_TEXTDOMAIN),
                 'optgroup1' => [false],
                 'optgroup2' => [true, 'Attention Seekers'],
-                'animate__bounce' => __('Bounce', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__flash' => __('Flash', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__pulse' => __('Pulse', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__rubberBand' => __('RubberBand', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__shakeX' => __('ShakeX', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__shakeY' => __('ShakeY', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__headShake' => __('HeadShake', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__swing' => __('Swing', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__tada' => __('Tada', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__wobble' => __('Wobble', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__jello' => __('Jello', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__heartBeat' => __('HeartBeat', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__bounce' => esc_html__('Bounce', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__flash' => esc_html__('Flash', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__pulse' => esc_html__('Pulse', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__rubberBand' => esc_html__('RubberBand', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__shakeX' => esc_html__('ShakeX', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__shakeY' => esc_html__('ShakeY', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__headShake' => esc_html__('HeadShake', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__swing' => esc_html__('Swing', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__tada' => esc_html__('Tada', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__wobble' => esc_html__('Wobble', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__jello' => esc_html__('Jello', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__heartBeat' => esc_html__('HeartBeat', OXI_ACCORDIONS_TEXTDOMAIN),
                 'optgroup3' => [false],
                 'optgroup4' => [true, 'Back Entrances'],
-                'animate__backInDown' => __('BackInDown', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__backInLeft' => __('BackInLeft', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__backInRight' => __('BackInRight', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__backInUp' => __('BackInUp', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__backInDown' => esc_html__('BackInDown', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__backInLeft' => esc_html__('BackInLeft', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__backInRight' => esc_html__('BackInRight', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__backInUp' => esc_html__('BackInUp', OXI_ACCORDIONS_TEXTDOMAIN),
                 'optgroup5' => [false],
                 'optgroup6' => [true, 'Bouncing Entrances'],
-                'animate__bounceIn' => __('BounceIn', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__bounceInDown' => __('BounceInDown', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__bounceInLeft' => __('BounceInLeft', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__bounceInRight' => __('BounceInRight', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__bounceInUp' => __('BounceInUp', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__bounceIn' => esc_html__('BounceIn', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__bounceInDown' => esc_html__('BounceInDown', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__bounceInLeft' => esc_html__('BounceInLeft', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__bounceInRight' => esc_html__('BounceInRight', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__bounceInUp' => esc_html__('BounceInUp', OXI_ACCORDIONS_TEXTDOMAIN),
                 'optgroup7' => [false],
                 'optgroup8' => [true, 'Fading Entrances'],
-                'animate__fadeIn' => __('FadeIn', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__fadeInDown' => __('FadeInDown', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__fadeInDownBig' => __('FadeInDownBig', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__fadeInLeft' => __('FadeInLeft', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__fadeInLeftBig' => __('FadeInLeftBig', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__fadeInRight' => __('FadeInRight', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__fadeInRightBig' => __('FadeInRightBig', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__fadeInUp' => __('FadeInUp', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__fadeInUpBig' => __('FadeInUpBig', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__fadeInTopLeft' => __('FadeInTopLeft', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__fadeInTopRight' => __('FadeInTopRight', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__fadeInBottomLeft' => __('FadeInBottomLeft', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__fadeInBottomRight' => __('FadeInBottomRight', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__fadeIn' => esc_html__('FadeIn', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__fadeInDown' => esc_html__('FadeInDown', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__fadeInDownBig' => esc_html__('FadeInDownBig', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__fadeInLeft' => esc_html__('FadeInLeft', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__fadeInLeftBig' => esc_html__('FadeInLeftBig', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__fadeInRight' => esc_html__('FadeInRight', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__fadeInRightBig' => esc_html__('FadeInRightBig', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__fadeInUp' => esc_html__('FadeInUp', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__fadeInUpBig' => esc_html__('FadeInUpBig', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__fadeInTopLeft' => esc_html__('FadeInTopLeft', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__fadeInTopRight' => esc_html__('FadeInTopRight', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__fadeInBottomLeft' => esc_html__('FadeInBottomLeft', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__fadeInBottomRight' => esc_html__('FadeInBottomRight', OXI_ACCORDIONS_TEXTDOMAIN),
                 'optgroup9' => [false],
                 'optgroup10' => [true, 'Flippers'],
-                'animate__flip' => __('Flip', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__flipInX' => __('FlipInX', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__flipInY' => __('FlipInY', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__flip' => esc_html__('Flip', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__flipInX' => esc_html__('FlipInX', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__flipInY' => esc_html__('FlipInY', OXI_ACCORDIONS_TEXTDOMAIN),
                 'optgroup11' => [false],
                 'optgroup12' => [true, 'Lightspeed'],
-                'animate__lightSpeedInRight' => __('LightSpeedInRight', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__lightSpeedInLeft' => __('LightSpeedInLeft', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__lightSpeedInRight' => esc_html__('LightSpeedInRight', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__lightSpeedInLeft' => esc_html__('LightSpeedInLeft', OXI_ACCORDIONS_TEXTDOMAIN),
                 'optgroup13' => [false],
                 'optgroup14' => [true, 'Rotating Entrances'],
-                'animate__rotateIn' => __('RotateIn', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__rotateInDownLeft' => __('RotateInDownLeft', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__rotateInDownRight' => __('RotateInDownRight', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__rotateInUpLeft' => __('RotateInUpLeft', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__rotateInUpRight' => __('RotateInUpRight', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__rotateIn' => esc_html__('RotateIn', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__rotateInDownLeft' => esc_html__('RotateInDownLeft', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__rotateInDownRight' => esc_html__('RotateInDownRight', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__rotateInUpLeft' => esc_html__('RotateInUpLeft', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__rotateInUpRight' => esc_html__('RotateInUpRight', OXI_ACCORDIONS_TEXTDOMAIN),
                 'optgroup14' => [false],
                 'optgroup16' => [true, 'Sliding Entrances'],
-                'animate__slideInUp' => __('SlideInUp', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__slideInDown' => __('SlideInDown', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__slideInLeft' => __('SlideInLeft', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__slideInRight' => __('SlideInRight', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__slideInUp' => esc_html__('SlideInUp', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__slideInDown' => esc_html__('SlideInDown', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__slideInLeft' => esc_html__('SlideInLeft', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__slideInRight' => esc_html__('SlideInRight', OXI_ACCORDIONS_TEXTDOMAIN),
                 'optgroup17' => [false],
                 'optgroup18' => [true, 'Zoom Entrances'],
-                'animate__zoomIn' => __('ZoomIn', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__zoomInDown' => __('ZoomInDown', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__zoomInLeft' => __('ZoomInLeft', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__zoomInRight' => __('ZoomInRight', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__zoomInUp' => __('ZoomInUp', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__zoomIn' => esc_html__('ZoomIn', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__zoomInDown' => esc_html__('ZoomInDown', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__zoomInLeft' => esc_html__('ZoomInLeft', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__zoomInRight' => esc_html__('ZoomInRight', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__zoomInUp' => esc_html__('ZoomInUp', OXI_ACCORDIONS_TEXTDOMAIN),
                 'optgroup19' => [false],
                 'optgroup20' => [true, 'Specials'],
-                'animate__hinge' => __('Hinge', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__jackInTheBox' => __('JackInTheBox', OXI_ACCORDIONS_TEXTDOMAIN),
-                'animate__rollIn' => __('RollIn', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__hinge' => esc_html__('Hinge', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__jackInTheBox' => esc_html__('JackInTheBox', OXI_ACCORDIONS_TEXTDOMAIN),
+                'animate__rollIn' => esc_html__('RollIn', OXI_ACCORDIONS_TEXTDOMAIN),
                 'optgroup21' => [false],
             ],
             'selector' => [
@@ -2114,7 +2114,7 @@ class Helper extends Admin {
 
         $this->add_control(
                 'oxi-accordions-content-animation-duration', $this->style, [
-            'label' => __('Animation Duration', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Animation Duration', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SLIDER,
             'condition' => [
                 'oxi-accordions-desc-animation' => 'EMPTY',
@@ -2139,7 +2139,7 @@ class Helper extends Admin {
 
         $this->add_responsive_control(
                 'oxi-accordions-desc-general-padding', $this->style, [
-            'label' => __('Padding', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Padding', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
             'default' => [
                 'unit' => 'px',
@@ -2170,7 +2170,7 @@ class Helper extends Admin {
         );
         $this->add_responsive_control(
                 'oxi-accordions-desc-general-margin', $this->style, [
-            'label' => __('Margin', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Margin', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
             'default' => [
                 'unit' => 'px',
@@ -2224,7 +2224,7 @@ class Helper extends Admin {
         );
         $this->add_control(
                 'oxi-accordions-desc-content-color', $this->style, [
-            'label' => __('Color', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Color', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::COLOR,
             'default' => '#ffffff',
             'selector' => [
@@ -2246,7 +2246,7 @@ class Helper extends Admin {
         );
         $this->add_responsive_control(
                 'oxi-accordions-desc-content-padding', $this->style, [
-            'label' => __('Content Padding', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Content Padding', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
             'default' => [
                 'unit' => 'px',
@@ -2292,17 +2292,17 @@ class Helper extends Admin {
                 'oxi-accordions-content-mx-height-interface',
                 $this->style,
                 [
-                    'label' => __('Interface', OXI_ACCORDIONS_TEXTDOMAIN),
+                    'label' => esc_html__('Interface', OXI_ACCORDIONS_TEXTDOMAIN),
                     'type' => Controls::CHOOSE,
                     'operator' => Controls::OPERATOR_TEXT,
                     'loader' => TRUE,
                     'default' => '',
                     'options' => [
                         '' => [
-                            'title' => __('Scroll', OXI_ACCORDIONS_TEXTDOMAIN),
+                            'title' => esc_html__('Scroll', OXI_ACCORDIONS_TEXTDOMAIN),
                         ],
                         'oxi-accordions-content-mx-height-interface-button' => [
-                            'title' => __('Button', OXI_ACCORDIONS_TEXTDOMAIN),
+                            'title' => esc_html__('Button', OXI_ACCORDIONS_TEXTDOMAIN),
                         ],
                     ],
                     'selector' => [
@@ -2314,7 +2314,7 @@ class Helper extends Admin {
 
         $this->add_responsive_control(
                 'oxi-accordions-content-mx-height', $this->style, [
-            'label' => __('Maximum Height', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Maximum Height', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SLIDER,
             'default' => [
                 'unit' => 'px',
@@ -2373,7 +2373,7 @@ class Helper extends Admin {
         );
         $this->add_control(
                 'oxi-accordions-content-mx-height-alignment', $this->style, [
-            'label' => __('Alignment', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Alignment', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::CHOOSE,
             'operator' => Controls::OPERATOR_ICON,
             'default' => 'left',
@@ -2382,13 +2382,13 @@ class Helper extends Admin {
             ],
             'options' => [
                 'left' => [
-                    'icon' => __('fas fa-align-left', OXI_ACCORDIONS_TEXTDOMAIN),
+                    'icon' => esc_html__('fas fa-align-left', OXI_ACCORDIONS_TEXTDOMAIN),
                 ],
                 'center' => [
-                    'icon' => __('fas fa-align-center', OXI_ACCORDIONS_TEXTDOMAIN),
+                    'icon' => esc_html__('fas fa-align-center', OXI_ACCORDIONS_TEXTDOMAIN),
                 ],
                 'right' => [
-                    'icon' => __('fas fa-align-right', OXI_ACCORDIONS_TEXTDOMAIN),
+                    'icon' => esc_html__('fas fa-align-right', OXI_ACCORDIONS_TEXTDOMAIN),
                 ],
             ],
             'selector' => [
@@ -2428,7 +2428,7 @@ class Helper extends Admin {
 
         $this->add_control(
                 'oxi-accordions-content-mx-height-expand-color', $this->style, [
-            'label' => __('Color', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Color', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::COLOR,
             'default' => '#ffffff',
             'selector' => [
@@ -2441,7 +2441,7 @@ class Helper extends Admin {
         $this->add_control(
                 'oxi-accordions-content-mx-height-expand-background', $this->style, [
             'type' => Controls::GRADIENT,
-            'label' => __('Background', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Background', OXI_ACCORDIONS_TEXTDOMAIN),
             'selector' => [
                 '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-content-card > .oxi-accordions-content-body > .oxi-accordions-content-expand-button .oxi-accordions-content-expand-body' => 'background: {{VALUE}};',
             ],
@@ -2463,7 +2463,7 @@ class Helper extends Admin {
         $this->start_controls_tab();
         $this->add_control(
                 'oxi-accordions-content-mx-height-collapse-color', $this->style, [
-            'label' => __('Color', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Color', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::COLOR,
             'selector' => [
                 '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-content-card > .oxi-accordions-content-body > .oxi-accordions-content-expand-button .oxi-accordions-content-expand-close' => 'color: {{VALUE}};',
@@ -2475,7 +2475,7 @@ class Helper extends Admin {
         $this->add_control(
                 'oxi-accordions-content-mx-height-collapse-background', $this->style, [
             'type' => Controls::GRADIENT,
-            'label' => __('Background', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Background', OXI_ACCORDIONS_TEXTDOMAIN),
             'selector' => [
                 '{{WRAPPER}} > .oxi-accordions-ultimate-style > .oxi-accordions-single-card > .oxi-accordions-head-outside-body > .oxi-accordions-content-card > .oxi-accordions-content-body.oxi-button-expand > .oxi-accordions-content-expand-button .oxi-accordions-content-expand-body' => 'background: {{VALUE}};',
             ],
@@ -2497,7 +2497,7 @@ class Helper extends Admin {
         $this->end_controls_tabs();
         $this->add_responsive_control(
                 'oxi-accordions-content-mx-height-radius', $this->style, [
-            'label' => __('Border Radius', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Border Radius', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
             'condition' => [
                 'oxi-accordions-content-mx-height-interface' => 'oxi-accordions-content-mx-height-interface-button',
@@ -2531,7 +2531,7 @@ class Helper extends Admin {
         );
         $this->add_responsive_control(
                 'oxi-accordions-content-mx-height-padding', $this->style, [
-            'label' => __('Padding', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Padding', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
             'condition' => [
                 'oxi-accordions-content-mx-height-interface' => 'oxi-accordions-content-mx-height-interface-button',
@@ -2565,7 +2565,7 @@ class Helper extends Admin {
         );
         $this->add_responsive_control(
                 'oxi-accordions-content-mx-height-margin', $this->style, [
-            'label' => __('Margin', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Margin', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
             'condition' => [
                 'oxi-accordions-content-mx-height-interface' => 'oxi-accordions-content-mx-height-interface-button',
@@ -2619,7 +2619,7 @@ class Helper extends Admin {
         );
         $this->add_control(
                 'oxi-accordions-custom-css', $this->style, [
-            'label' => __('', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::TEXTAREA,
             'default' => '',
             'description' => 'Custom CSS Section. You can add custom css into textarea.'
@@ -2630,17 +2630,17 @@ class Helper extends Admin {
     }
 
     public function modal_form_data() {
-        echo __('<div class="modal-header">
+        echo '<div class="modal-header">
                     <h4 class="modal-title">Accordions Modal Form</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <div class="modal-body">');
+                <div class="modal-body">';
         $this->add_control(
                 'oxi-accordions-modal-default', [], [
-            'label' => __('Default Open', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Default Open', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SWITCHER,
-            'label_on' => __('Yes', OXI_ACCORDIONS_TEXTDOMAIN),
-            'label_off' => __('No', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label_on' => esc_html__('Yes', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label_off' => esc_html__('No', OXI_ACCORDIONS_TEXTDOMAIN),
             'return_value' => 'yes',
             'description' => 'Expand this accordion on page load.',
                 ]
@@ -2662,17 +2662,17 @@ class Helper extends Admin {
         );
         $this->add_control(
                 'oxi-accordions-modal-title-additional', [], [
-            'label' => __('Title Additional', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Title Additional', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SELECT,
             'default' => '',
             'condition' => [
                 'oxi-accordions-headding-additional' => 'oxi-accordions-headding-additional-active',
             ],
             'options' => [
-                '' => __('None', OXI_ACCORDIONS_TEXTDOMAIN),
-                'icon' => __('Icon', OXI_ACCORDIONS_TEXTDOMAIN),
-                'number' => __('Number', OXI_ACCORDIONS_TEXTDOMAIN),
-                'image' => __('Image', OXI_ACCORDIONS_TEXTDOMAIN),
+                '' => esc_html__('None', OXI_ACCORDIONS_TEXTDOMAIN),
+                'icon' => esc_html__('Icon', OXI_ACCORDIONS_TEXTDOMAIN),
+                'number' => esc_html__('Number', OXI_ACCORDIONS_TEXTDOMAIN),
+                'image' => esc_html__('Image', OXI_ACCORDIONS_TEXTDOMAIN),
             ],
             'description' => 'Add the Additional elements beside the Accordions’s Title (Icon, Number or Image).',
                 ]
@@ -2703,7 +2703,7 @@ class Helper extends Admin {
         $this->add_group_control(
                 'oxi-accordions-modal-image', [],
                 [
-                    'label' => __('Image', OXI_ACCORDIONS_TEXTDOMAIN),
+                    'label' => esc_html__('Image', OXI_ACCORDIONS_TEXTDOMAIN),
                     'type' => Controls::MEDIA,
                     'condition' => [
                         'oxi-accordions-modal-title-additional' => 'image',
@@ -2713,13 +2713,13 @@ class Helper extends Admin {
         );
         $this->add_control(
                 'oxi-accordions-modal-components-type', [], [
-            'label' => __('Choose Components', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Choose Components', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SELECT,
             'default' => 'wysiwyg',
             'options' => [
-                'wysiwyg' => __('WYSIWYG Editor', OXI_ACCORDIONS_TEXTDOMAIN),
-                'nested-accordions' => __('Nested Accordions', OXI_ACCORDIONS_TEXTDOMAIN),
-                'link' => __('Custom Link', OXI_ACCORDIONS_TEXTDOMAIN),
+                'wysiwyg' => esc_html__('WYSIWYG Editor', OXI_ACCORDIONS_TEXTDOMAIN),
+                'nested-accordions' => esc_html__('Nested Accordions', OXI_ACCORDIONS_TEXTDOMAIN),
+                'link' => esc_html__('Custom Link', OXI_ACCORDIONS_TEXTDOMAIN),
             ],
             'description' => 'Se the accordions’s Content type as Content or Custom Link.',
                 ]
@@ -2736,7 +2736,7 @@ class Helper extends Admin {
         );
         $this->add_control(
                 'oxi-accordions-modal-desc', [], [
-            'label' => __('Description', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Description', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::WYSIWYG,
             'default' => '',
             'condition' => [
@@ -2748,7 +2748,7 @@ class Helper extends Admin {
 
         $this->add_control(
                 'oxi-accordions-modal-nested-accordions', [], [
-            'label' => __('Select Accordions', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('Select Accordions', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::SELECT,
             'default' => '',
             'options' => $this->Get_Nested_Accordions,
@@ -2759,7 +2759,7 @@ class Helper extends Admin {
                 ]
         );
 
-        echo __('</div>');
+        echo '</div>';
     }
 
 }
