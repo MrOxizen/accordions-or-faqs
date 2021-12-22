@@ -21,7 +21,7 @@ class Welcome {
 
     public function header() {
         $this->admin_css();
-        echo apply_filters('oxi-accordions-plugin/admin_menu', TRUE);
+        apply_filters('oxi-accordions-plugin/admin_menu', TRUE);
     }
 
     public function Public_Render() {

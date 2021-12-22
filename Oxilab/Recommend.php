@@ -23,6 +23,10 @@ class Recommend {
      *
      */
     public function __construct() {
+
+        if (!current_user_can('manage_options')) {
+            return;
+        }
         require_once(ABSPATH . 'wp-admin/includes/screen.php');
         $screen = get_current_screen();
         if (isset($screen->parent_file) && 'plugins.php' === $screen->parent_file && 'update' === $screen->id) {
@@ -88,10 +92,10 @@ class Recommend {
         if (count($recommend) > 2 && $recommend['modules-path'] != ''):
             $plugin = explode('/', $recommend['modules-path'])[0];
 
-            $massage = '<p>Thank you for using my Accordions - Multiple Accordions or FAQs Builders. ' . $recommend['modules-massage'] . '</p>';
+            $massage = sprintf('<p>Thank you for using my Accordions - Multiple Accordions or FAQs Builders. %s</p>', $recommend['modules-massage']);
 
             $install_url = wp_nonce_url(add_query_arg(array('action' => 'install-plugin', 'plugin' => $plugin), admin_url('update.php')), 'install-plugin' . '_' . $plugin);
-            echo '<div class="oxi-addons-admin-notifications oxi-accordions-admin-notifications">
+            echo __('<div class="oxi-addons-admin-notifications oxi-accordions-admin-notifications">
                         <h3>
                             <span class="dashicons dashicons-flag"></span>
                             Notifications
@@ -104,7 +108,7 @@ class Recommend {
                             </div>
                         </div>
                         <p></p>
-                    </div>';
+                    </div>');
         endif;
     }
 
@@ -135,7 +139,7 @@ class Recommend {
         if (isset($_POST['_wpnonce']) || wp_verify_nonce(sanitize_key(wp_unslash($_POST['_wpnonce'])), 'oxi_accordions_admin_recommended')):
             $data = 'done';
             update_option('accordions_or_faqs_recommended', $data);
-            echo 'done';
+            echo esc_html('done');
         else:
             return;
         endif;

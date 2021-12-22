@@ -67,10 +67,11 @@ class API {
         $this->childid = (int) $request['childid'];
 
         $action_class = strtolower($request->get_method()) . '_' . sanitize_key($request['action']);
-
-        if (method_exists($this, $action_class)) {
+        if (method_exists($this, $action_class)):
             return $this->{$action_class}();
-        }
+        else:
+            return die(__('Security check', OXI_ACCORDIONS_TEXTDOMAIN));
+        endif;
     }
 
     /**
@@ -93,36 +94,47 @@ class API {
     public function post_create_new_accordions() {
         $params = json_decode(stripslashes($this->rawdata), true);
         $folder = $this->safe_path(OXI_ACCORDIONS_PATH . 'demo-template/');
-        $filename = $params['template-id'];
-        return $this->post_json_import($folder, $filename, $params['addons-style-name']);
+        $filename = sanitize_text_field($params['template-id']);
+        $name = sanitize_text_field($params['addons-style-name']);
+        $data = json_decode(file_get_contents($folder . $filename), true);
+
+        if (empty($data)) {
+            return new \WP_Error('file_error', 'Invalid File');
+        }
+
+        $content = $data['style'];
+
+        if (!is_array($content) || $content['type'] != 'accordions-or-faqs') {
+            return new \WP_Error('file_error', 'Invalid Content In File');
+        }
+
+        return $this->post_json_import($data, $name);
     }
 
-    public function post_json_import($folder, $filename, $name = 'truee') {
+    public function post_json_import($params, $name = 'truee') {
 
-        if (is_file($folder . $filename)) {
-            $this->rawdata = file_get_contents($folder . $filename);
-
-            $params = json_decode($this->rawdata, true);
-            $style = $params['style'];
-            $child = $params['child'];
-            if ($name != 'truee'):
-                $style['name'] = $name;
-            endif;
-            $this->database->wpdb->query($this->database->wpdb->prepare("INSERT INTO {$this->database->parent_table} (name, type, rawdata) VALUES ( %s, %s, %s)", array($style['name'], OXI_ACCORDIONS_TEXTDOMAIN, $style['rawdata'])));
-            $redirect_id = $this->database->wpdb->insert_id;
-
-            if ($redirect_id > 0):
-                $raw = json_decode(stripslashes($style['rawdata']), true);
-                $raw['style-id'] = $redirect_id;
-                $CLASS = '\OXI_ACCORDIONS_PLUGINS\Layouts\Helper';
-                $CLASS = new $CLASS('admin');
-                $CLASS->template_css_render($raw);
-                foreach ($child as $value) {
-                    $this->database->wpdb->query($this->database->wpdb->prepare("INSERT INTO {$this->database->child_table} (styleid, rawdata) VALUES (%d,  %s)", array($redirect_id, $value['rawdata'])));
-                }
-                return admin_url("admin.php?page=oxi-accordions-ultimate-new&styleid=$redirect_id");
-            endif;
+        if (!is_array($params) || $params['style']['type'] != 'accordions-or-faqs') {
+            return new \WP_Error('file_error', 'Invalid Content In File');
         }
+        $style = $params['style'];
+        $child = $params['child'];
+        if ($name != 'truee'):
+            $style['name'] = $name;
+        endif;
+        $this->database->wpdb->query($this->database->wpdb->prepare("INSERT INTO {$this->database->parent_table} (name, type, rawdata) VALUES ( %s, %s, %s)", array($style['name'], OXI_ACCORDIONS_TEXTDOMAIN, $style['rawdata'])));
+        $redirect_id = $this->database->wpdb->insert_id;
+
+        if ($redirect_id > 0):
+            $raw = json_decode(stripslashes($style['rawdata']), true);
+            $raw['style-id'] = $redirect_id;
+            $CLASS = '\OXI_ACCORDIONS_PLUGINS\Layouts\Helper';
+            $CLASS = new $CLASS('admin');
+            $CLASS->template_css_render($raw);
+            foreach ($child as $value) {
+                $this->database->wpdb->query($this->database->wpdb->prepare("INSERT INTO {$this->database->child_table} (styleid, rawdata) VALUES (%d,  %s)", array($redirect_id, $value['rawdata'])));
+            }
+            return admin_url("admin.php?page=oxi-accordions-ultimate-new&styleid=$redirect_id");
+        endif;
     }
 
     public function post_shortcode_delete() {

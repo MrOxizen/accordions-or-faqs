@@ -2630,11 +2630,11 @@ class Helper extends Admin {
     }
 
     public function modal_form_data() {
-        echo '<div class="modal-header">
+        echo __('<div class="modal-header">
                     <h4 class="modal-title">Accordions Modal Form</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <div class="modal-body">';
+                <div class="modal-body">');
         $this->add_control(
                 'oxi-accordions-modal-default', [], [
             'label' => __('Default Open', OXI_ACCORDIONS_TEXTDOMAIN),
@@ -2759,7 +2759,7 @@ class Helper extends Admin {
                 ]
         );
 
-        echo '</div>';
+        echo __('</div>');
     }
 
 }

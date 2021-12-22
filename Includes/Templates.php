@@ -104,14 +104,14 @@ class Templates {
                         </div>
                         <div class="oxi-addons-style-preview-bottom">
                             <div class="oxi-addons-style-preview-bottom-left">
-                                <?php echo $template_data['style']['name']; ?>
+                                <?php echo esc_html($template_data['style']['name']); ?>
                             </div>
                             <div class="oxi-addons-style-preview-bottom-right">
                                 <?php
                                 if ($key > 10 && apply_filters(OXI_ACCORDIONS_PREMIUM, true) == false):
-                                    echo '<button class="btn btn-warning oxi-addons-addons-style-btn-warning" title="Pro Only"  type="submit" value="pro only" name="addonsstyleproonly">Pro Only</button>  ';
+                                    echo __('<button class="btn btn-warning oxi-addons-addons-style-btn-warning" title="Pro Only"  type="submit" value="pro only" name="addonsstyleproonly">Pro Only</button>  ');
                                 else:
-                                    echo '<button type="button" class="btn btn-success oxi-addons-addons-template-create oxi-addons-addons-js-create" data-toggle="modal" template-id="' . $value . '">Create Style</button>';
+                                    echo __('<button type="button" class="btn btn-success oxi-addons-addons-template-create oxi-addons-addons-js-create" data-toggle="modal" template-id="' . esc_attr($value) . '">Create Style</button>');
                                 endif;
                                 ?>
 
@@ -130,11 +130,11 @@ class Templates {
     public function create_new_modal() {
         //  echo '';
         if (($this->imported + 1) < $this->totalpage):
-            echo '<div class="oxi-addons-row">
+            echo __('<div class="oxi-addons-row">
                         <div class="oxi-addons-col-1 oxi-import">
                             <div class="oxi-addons-style-preview">
                                 <div class="oxilab-admin-style-preview-top">
-                                     <a href="' . admin_url("admin.php?page=oxi-accordions-ultimate-new&layouts=" . ($this->imported + 1)) . '">
+                                     <a href="' . esc_url(admin_url("admin.php?page=oxi-accordions-ultimate-new&layouts=" . ($this->imported + 1))) . '">
                                         <div class="oxilab-admin-add-new-item">
                                             <span>
                                                 <i class="fas fa-arrow-right oxi-icons"></i>
@@ -145,7 +145,7 @@ class Templates {
                                 </div>
                             </div>
                         </div>
-                    </div>';
+                    </div>');
         endif;
 
         echo __('<div class="modal fade" id="oxi-addons-style-create-modal" >

@@ -36,7 +36,7 @@ class Reviews {
             else:
                 update_option('accordions_or_faqs_no_bug', $notice);
             endif;
-            echo $notice;
+            echo esc_html($notice);
         else:
             return;
         endif;
@@ -53,9 +53,9 @@ class Reviews {
             return;
         }
         $image = OXI_ACCORDIONS_URL . 'assets/image/logo.png';
-        echo _(' <div class="notice notice-info put-dismiss-noticenotice-has-thumbnail shortcode-addons-review-notice oxi-accordions-review-notice">
+        echo __(' <div class="notice notice-info put-dismiss-noticenotice-has-thumbnail shortcode-addons-review-notice oxi-accordions-review-notice">
                     <div class="shortcode-addons-notice-thumbnail">
-                        <img src="' . $image . '" alt=""></div>
+                        <img src="' . esc_url($image) . '" alt=""></div>
                     <div class="shortcode-addons--notice-message">
                         <p>Hey, You’ve using <strong>Accordions - Multiple Accordions or FAQs Builders</strong> more than 1 week – that’s awesome! Could you please do me a BIG favor and give it a 5-star rating on WordPress? Just to help us spread the word and boost our motivation.!</p>
                         <ul class="shortcode-addons--notice-link">

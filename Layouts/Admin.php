@@ -177,12 +177,12 @@ class Admin {
      */
     public function modal_form() {
 
-        echo '<div class="modal fade" id="oxi-addons-list-data-modal" >
+        echo __('<div class="modal fade" id="oxi-addons-list-data-modal" >
                 <div class="modal-dialog modal-lg">
                     <form method="post" id="oxi-template-modal-form">
-                         <div class="modal-content">';
+                         <div class="modal-content">');
         $this->modal_form_data();
-        echo '              <div class="modal-footer">
+        echo __('              <div class="modal-footer">
                                 <input type="hidden" id="shortcodeitemid" name="shortcodeitemid" value="">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                                 <button type="button" class="btn btn-success" id="oxi-template-modal-submit">Submit</button>
@@ -190,7 +190,7 @@ class Admin {
                         </div>
                     </form>
                 </div>
-              </div>';
+              </div>');
     }
 
     /**
@@ -199,7 +199,7 @@ class Admin {
      * @since 2.0.0
      */
     public function Rearrange() {
-        return '<li class="list-group-item" id="{{id}}">{{oxi-accordions-modal-title}}</li>';
+        return __('<li class="list-group-item" id="{{id}}">{{oxi-accordions-modal-title}}</li>');
     }
 
     /**
@@ -338,8 +338,8 @@ class Admin {
                                         </div>
                                         <div class="oxi-addons-setting-save">
                                             <button type="button" class="btn btn-danger" id="oxi-addons-setting-reload">Reload</button>
-                                            <input type="hidden"  id="oxilab-preview-color" name="oxilab-preview-color" value="<?php echo(is_array($this->style) ? array_key_exists('oxilab-preview-color', $this->style) ? $this->style['oxilab-preview-color'] : '#FFF' : '#FFF'); ?>">
-                                            <input type="hidden"  id="style-id" name="style-id" value="<?php echo $this->dbdata['id']; ?>">
+                                            <input type="hidden"  id="oxilab-preview-color" name="oxilab-preview-color" value="<?php echo esc_attr(is_array($this->style) ? array_key_exists('oxilab-preview-color', $this->style) ? $this->style['oxilab-preview-color'] : '#FFF' : '#FFF'); ?>">
+                                            <input type="hidden"  id="style-id" name="style-id" value="<?php echo esc_attr($this->dbdata['id']); ?>">
                                             <button type="button" class="btn btn-success" id="oxi-addons-templates-submit"> Save</button>
                                         </div>
                                     </div>
@@ -378,8 +378,8 @@ class Admin {
                                         </div>
                                     </div>
                                     <div class="oxi-addons-preview-wrapper">
-                                        <div class="oxi-addons-preview-data" id="oxi-addons-preview-data" template-wrapper="<?php echo $this->WRAPPER; ?> > .oxi-addons-row" template-id="#oxi-<?php echo strtolower($this->dbdata['type']); ?>-wrapper-<?php echo $this->dbdata['id']; ?>">
-                                            <iframe  src="<?php echo admin_url('admin.php?page=oxi-accordions-style-view&styleid=' . $this->oxiid); ?>"
+                                        <div class="oxi-addons-preview-data" id="oxi-addons-preview-data" template-wrapper="<?php echo esc_attr($this->WRAPPER); ?> > .oxi-addons-row" template-id="#oxi-<?php echo _(strtolower($this->dbdata['type'])); ?>-wrapper-<?php echo _($this->dbdata['id']); ?>">
+                                            <iframe  src="<?php echo esc_url(admin_url('admin.php?page=oxi-accordions-style-view&styleid=' . $this->oxiid)); ?>"
                                                      id="oxi-addons-preview-iframe"
                                                      class="oxi-addons-preview-iframe"
                                                      width="100%" scrolling="no"
@@ -425,7 +425,7 @@ class Admin {
         $this->start_section_tabs(
                 'oxi-accordions-start-tabs', [
             'condition' => [
-                'oxi-tabs-start-tabs' => 'button-settings'
+                'oxi-tabs-start-tabs' => esc_html__('button-settings', OXI_ACCORDIONS_TEXTDOMAIN),
             ]
                 ]
         );
@@ -455,10 +455,10 @@ class Admin {
         );
         $this->add_control(
                 'oxi-tabs-custom-css', $this->style, [
-            'label' => __('', OXI_ACCORDIONS_TEXTDOMAIN),
+            'label' => esc_html__('', OXI_ACCORDIONS_TEXTDOMAIN),
             'type' => Controls::TEXTAREA,
             'default' => '',
-            'description' => 'Custom CSS Section. You can add custom css into textarea.'
+            'description' => esc_html__('Custom CSS Section. You can add custom css into textarea.')
                 ]
         );
         $this->end_controls_section();

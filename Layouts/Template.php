@@ -166,39 +166,19 @@ class Template {
         $this->public_attribute();
         $this->render();
         $inlinecss = $this->inline_public_css() . $this->inline_css . (array_key_exists('oxi-accordions-custom-css', $this->style) ? $this->style['oxi-accordions-custom-css'] : '');
-        $inlinejs = $this->inline_public_jquery();
+
         if ($this->CSSDATA == '' && $this->admin == 'admin') {
             $cls = '\OXI_ACCORDIONS_PLUGINS\Layouts\Helper';
             $CLASS = new $cls('admin');
             $inlinecss .= $CLASS->inline_template_css_render($this->style);
         } else {
-
-            echo $this->font_familly_validation(json_decode(($this->dbdata['font_family'] != '' ? $this->dbdata['font_family'] : "[]"), true));
+            echo $this->font_familly_validation(json_decode(($this->dbdata['font_family'] != '' ? esc_html($this->dbdata['font_family']) : "[]"), true));
             $inlinecss .= $this->CSSDATA;
         }
-        if ($inlinejs != ''):
-            if ($this->admin == 'admin'):
-                echo _('<script>
-                        (function ($) {
-                            setTimeout(function () {');
-                echo $inlinejs;
-                echo _('    }, 2000);
-                        })(jQuery)</script>');
-            else:
-                $jquery = '(function ($) {' . $inlinejs . '})(jQuery);';
-                wp_add_inline_script($this->JSHANDLE, $jquery);
-            endif;
-        endif;
+
         if ($inlinecss != ''):
             $inlinecss = html_entity_decode($inlinecss);
-            if ($this->admin == 'admin'):
-                //only load while ajax called
-                echo _('<style>');
-                echo $inlinecss;
-                echo _('</style>');
-            else:
-                wp_add_inline_style('oxi-accordions-ultimate', $inlinecss);
-            endif;
+            wp_add_inline_style('oxi-accordions-ultimate', $inlinecss);
         endif;
     }
 
@@ -222,14 +202,14 @@ class Template {
      */
     public function render() {
 
-        echo '<div class="oxi-addons-container oxi-accordions-wrapper ' . $this->WRAPPER . '" id="' . $this->WRAPPER . '">
-                 <div class="oxi-addons-row">';
+        echo __('<div class="oxi-addons-container oxi-accordions-wrapper ' . esc_attr($this->WRAPPER) . '" id="' . esc_attr($this->WRAPPER) . '">
+                 <div class="oxi-addons-row">');
         if ($this->admin == 'admin'):
-            echo '<input type="hidden" id="oxi-addons-iframe-background-color" name="oxi-addons-iframe-background-color" value="' . (is_array($this->style) ? array_key_exists('oxilab-preview-color', $this->style) ? $this->style['oxilab-preview-color'] : '#FFF' : '#FFF') . '">';
+            echo __('<input type="hidden" id="oxi-addons-iframe-background-color" name="oxi-addons-iframe-background-color" value="' . (is_array($this->style) ? array_key_exists('oxilab-preview-color', $this->style) ? esc_attr($this->style['oxilab-preview-color']) : '#FFF' : '#FFF') . '">');
         endif;
         $this->default_render($this->style, $this->child, $this->admin);
-        echo '   </div>
-              </div>';
+        echo __('   </div>
+              </div>');
     }
 
     /**
@@ -258,7 +238,7 @@ class Template {
      * @since 2.0.1
      */
     public function public_jquery() {
-        echo '';
+        echo _('');
     }
 
     /**
@@ -267,16 +247,7 @@ class Template {
      * @since 2.0.1
      */
     public function public_css() {
-        echo '';
-    }
-
-    /**
-     * load inline public jquery
-     *
-     * @since 2.0.1
-     */
-    public function inline_public_jquery() {
-        echo '';
+        echo _('');
     }
 
     /**
@@ -285,7 +256,7 @@ class Template {
      * @since 2.0.1
      */
     public function inline_public_css() {
-        echo '';
+        echo _('');
     }
 
     public function default_render($style, $child, $admin) {
@@ -293,18 +264,15 @@ class Template {
 
 
 
-
-
-
-        echo '<div class="oxi-accordions-ultimate-style oxi-accordions-ultimate-template-' . $this->oxiid . '  oxi-accordions-clearfix oxi-accordions-preloader" ' . $this->public_attribute . ' ' . $this->accordions_preloader . '>';
+        $content = '<div class="oxi-accordions-ultimate-style oxi-accordions-ultimate-template-' . esc_attr($this->oxiid) . '  oxi-accordions-clearfix oxi-accordions-preloader" ' . esc_attr($this->public_attribute) . ' ' . esc_attr($this->accordions_preloader) . '>';
 
         if ($style['oxi-accordions-search-option'] == 'active'):
-            echo '<div class="oxi-accordions-ultimate-search-options">';
-            echo '  <div class="oxi-accordions-ultimate-search">';
-            echo '      <input type="search" class="oxi-accordions-ultimate-type-search" placeholder="Search your FAQ" value="" onkeyup="this.setAttribute(\'value\', this.value);">';
-            echo '      <i class="oxi-icons fas fa-search"></i>';
-            echo '  </div>';
-            echo '</div>';
+            $content .= '<div class="oxi-accordions-ultimate-search-options">
+                            <div class="oxi-accordions-ultimate-search">
+                             <input type="search" class="oxi-accordions-ultimate-type-search" placeholder="Search your FAQ" value="" onkeyup="this.setAttribute(\'value\', this.value);">
+                               <i class="oxi-icons fas fa-search"></i>
+                            </div>
+                          </div>';
         endif;
 
         $number = 1;
@@ -312,36 +280,36 @@ class Template {
         foreach ($child as $key => $val) {
             $value = json_decode(stripslashes($val['rawdata']), true);
 
-            $expand = '<div class="oxi-accordions-expand-collapse-' . $this->oxiid . ' oxi-accordions-expand-collapse ' . $style['oxi-accordions-head-expand-collapse-icon-interface'] . ' ' . $style['oxi-accordions-expand-collapse'] . ' ' . $style['oxi-accordions-head-expand-collapse-type'] . ' ' . $style['oxi-accordions-head-expand-collapse-shape'] . '">' . $this->expand_collapse_icon_number_render($style, $number) . '</div>';
+            $expand = '<div class="oxi-accordions-expand-collapse-' . esc_attr($this->oxiid) . ' oxi-accordions-expand-collapse ' . $style['oxi-accordions-head-expand-collapse-icon-interface'] . ' ' . $style['oxi-accordions-expand-collapse'] . ' ' . $style['oxi-accordions-head-expand-collapse-type'] . ' ' . $style['oxi-accordions-head-expand-collapse-shape'] . '">' . $this->expand_collapse_icon_number_render($style, $number) . '</div>';
 
-            echo '<div class="oxi-accordions-single-card oxi-accordions-single-card-' . $this->oxiid . ' ' . ( isset($this->style['oxi-accordions-head-expand-collapse-location']) ? $this->style['oxi-accordions-head-expand-collapse-location'] : '') . ' oxi-accordions-single-card-' . $this->oxiid . '-' . $number . ' ' . $style['oxi-accordions-head-expand-collapse-position'] . '" id="oxi-accordions-single-card-' . $this->oxiid . '-' . $number . '">';
+            $content .= '<div class="oxi-accordions-single-card oxi-accordions-single-card-' . esc_attr($this->oxiid) . ' ' . ( isset($this->style['oxi-accordions-head-expand-collapse-location']) ? $this->style['oxi-accordions-head-expand-collapse-location'] : '') . ' oxi-accordions-single-card-' . esc_attr($this->oxiid) . '-' . esc_attr($number) . ' ' . $style['oxi-accordions-head-expand-collapse-position'] . '" id="oxi-accordions-single-card-' . esc_attr($this->oxiid) . '-' . esc_attr($number) . '">';
             if ($style['oxi-accordions-head-expand-collapse-position'] == 'oxi-accordions-head-expand-collapse-position-outside'):
-                echo $expand;
+                $content .= $expand;
             endif;
-            echo '<div class="oxi-accordions-head-outside-body">';
+            $content .= '<div class="oxi-accordions-head-outside-body">';
             /*
              * Header Child Loop Start
              */
-            echo '<div class="oxi-accordions-header-card">';
-            echo '  <div class="oxi-accordions-header-body  oxi-accordions-header oxi-accordions-clearfix"   data-oxitoggle="oxicollapse" data-oxitarget="#oxi-accordions-content-' . $this->oxiid . '-' . $number . '" aria-expanded="false" ' . $this->accordions_url_render($value) . '>';
+            $content .= '<div class="oxi-accordions-header-card">';
+            $content .= '  <div class="oxi-accordions-header-body  oxi-accordions-header oxi-accordions-clearfix"   data-oxitoggle="oxicollapse" data-oxitarget="#oxi-accordions-content-' . $this->oxiid . '-' . $number . '" aria-expanded="false" ' . $this->accordions_url_render($value) . '>';
             if ($style['oxi-accordions-head-expand-collapse-position'] != 'oxi-accordions-head-expand-collapse-position-outside'):
-                echo $expand;
+                $content .= $expand;
             endif;
-            echo '      <div class="oxi-accordions-header-content ' . $style['oxi-accordions-headding-additional'] . ' ' . $style['oxi-accordions-head-additional-location'] . '">';
+            $content .= '      <div class="oxi-accordions-header-content ' . $style['oxi-accordions-headding-additional'] . ' ' . $style['oxi-accordions-head-additional-location'] . '">';
             if ($style['oxi-accordions-content-type'] == 'content'):
                 if ($value['oxi-accordions-modal-title-additional'] == 'icon'):
-                    echo $this->icon_special_rander($value['oxi-accordions-modal-icon']);
+                    $content .= $this->icon_special_rander($value['oxi-accordions-modal-icon']);
                 elseif ($value['oxi-accordions-modal-title-additional'] == 'number'):
-                    echo $this->number_special_charecter($value['oxi-accordions-modal-number']);
+                    $content .= $this->number_special_charecter($value['oxi-accordions-modal-number']);
                 elseif ($value['oxi-accordions-modal-title-additional'] == 'image'):
-                    echo $this->image_special_render('oxi-accordions-modal-image', $value);
+                    $content .= $this->image_special_render('oxi-accordions-modal-image', $value);
                 endif;
             endif;
-            echo $this->title_special_charecter($value, 'oxi-accordions-modal-title', 'oxi-accordions-modal-sub-title');
+            $content .= $this->title_special_charecter($value, 'oxi-accordions-modal-title', 'oxi-accordions-modal-sub-title');
 
-            echo '      </div>';
-            echo '  </div>';
-            echo '</div>';
+            $content .= '      </div>
+                     </div>
+                    </div>';
 
             /*
              * Content Child Loop Start
@@ -349,30 +317,31 @@ class Template {
             $content_height = (isset($style['oxi-accordions-content-height']) ? $style['oxi-accordions-content-height'] : '') . ' ' . (isset($style['oxi-accordions-content-mx-height-interface']) ? $style['oxi-accordions-content-mx-height-interface'] : '') . ' ';
             $animation = isset($style['oxi-accordions-desc-animation']) ? $style['oxi-accordions-desc-animation'] : '';
 
-            echo '  <div class="oxicollapse ' . $this->default_open($value) . ' oxi-accordions-content-card oxi-accordions-content-card-' . $this->oxiid . '  ' . ($this->admin == 'admin' ? 'oxi-addons-admin-edit-list' : '') . '" id="oxi-accordions-content-' . $this->oxiid . '-' . $number . '" ' . $this->accordions_type . '>';
-            echo '     <div class="oxi-accordions-content-body ' . $content_height . '"  oxi-animation="' . $animation . '">';
-            echo $this->accordions_content_render($style, $value);
+            $content .= '  <div class="oxicollapse ' . $this->default_open($value) . ' oxi-accordions-content-card oxi-accordions-content-card-' . $this->oxiid . '  ' . ($this->admin == 'admin' ? 'oxi-addons-admin-edit-list' : '') . '" id="oxi-accordions-content-' . $this->oxiid . '-' . $number . '" ' . $this->accordions_type . '>';
+            $content .= '     <div class="oxi-accordions-content-body ' . esc_attr($content_height) . '"  oxi-animation="' . esc_attr($animation) . '">';
+            $content .= $this->accordions_content_render($style, $value);
             if ($style['oxi-accordions-content-height'] == 'oxi-accordions-content-height' && $style['oxi-accordions-content-mx-height-interface'] == 'oxi-accordions-content-mx-height-interface-button'):
-                echo '<div class="oxi-accordions-content-expand-button">'
-                . '        <div class="oxi-accordions-content-expand-body">'
-                . '             <div class="oxi-accordions-content-expand-open">' . $this->text_render($style['oxi-accordions-content-mx-height-expand-text']) . '</div> '
-                . '             <div class="oxi-accordions-content-expand-close">' . $this->text_render($style['oxi-accordions-content-mx-height-collapse-text']) . '</div>'
-                . '        </div>'
-                . ' </div>';
+                $content .= '<div class="oxi-accordions-content-expand-button">'
+                        . '        <div class="oxi-accordions-content-expand-body">'
+                        . '             <div class="oxi-accordions-content-expand-open">' . $this->text_render($style['oxi-accordions-content-mx-height-expand-text']) . '</div> '
+                        . '             <div class="oxi-accordions-content-expand-close">' . $this->text_render($style['oxi-accordions-content-mx-height-collapse-text']) . '</div>'
+                        . '        </div>'
+                        . ' </div>';
             endif;
 
             if ($this->admin == 'admin' && $style['oxi-accordions-content-type'] != 'post'):
-                echo $this->admin_edit_panel($val['id']);
+                $content .= $this->admin_edit_panel($val['id']);
             endif;
-            echo '      </div>';
-            echo '  </div>';
+            $content .= '      </div>
+                    </div>
 
-            echo '</div>';
-            echo '</div>';
+                    </div>
+                </div>';
             $number++;
         }
 
-        echo '</div>';
+        $content .= '</div>';
+        echo wp_kses($content, $this->database->allowed_tags());
     }
 
     public function post_query() {
@@ -458,7 +427,7 @@ class Template {
             return;
         endif;
         foreach ($data as $value) {
-            wp_enqueue_style('' . $value . '', 'https://fonts.googleapis.com/css?family=' . $value . '');
+            wp_enqueue_style('' . esc_html($value) . '', 'https://fonts.googleapis.com/css?family=' . esc_html($value) . '');
         }
     }
 
@@ -539,7 +508,7 @@ class Template {
         if (isset($style['oxi-accordions-modal-components-type']) && $style['oxi-accordions-modal-components-type'] == 'link'):
             $data = $this->url_render('oxi-accordions-modal-link', $style);
             if (count($data) >= 1):
-                echo $data;
+                echo _($data);
                 return ' data-link=\'' . json_encode($data) . '\'';
             endif;
         endif;
@@ -629,14 +598,14 @@ class Template {
         if ($fadata == 'yes'):
             wp_enqueue_style('font-awsome.min', OXI_ACCORDIONS_URL . 'assets/frontend/css/font-awsome.min.css', false, OXI_ACCORDIONS_PLUGIN_VERSION);
         endif;
-        $files = '<i class="' . $data . ' oxi-icons"></i>';
+        $files = '<i class="' . esc_attr($data) . ' oxi-icons"></i>';
         return $files;
     }
 
     public function expand_collapse_icon_number_render($style = [], $number) {
         $data = '';
         if (isset($style['oxi-accordions-head-start-number'])):
-            $data .= '<div class="oxi-accordions-expand-collapse-number">' . ($style['oxi-accordions-head-start-number'] + $number - 1) . '</div>';
+            $data .= '<div class="oxi-accordions-expand-collapse-number">' . esc_html(($style['oxi-accordions-head-start-number'] + $number - 1)) . '</div>';
         endif;
         if (isset($style['oxi-accordions-head-expand-icon']) && isset($style['oxi-accordions-head-collapse-icon'])):
             $data .= '<div class="oxi-accordions-expand-collapse-icon">
@@ -656,10 +625,10 @@ class Template {
         if ($this->admin == 'admin'):
             $data = '   <div class="oxi-addons-admin-absulote">
                             <div class="oxi-addons-admin-absulate-edit">
-                                <button class="btn btn-primary shortcode-addons-template-item-edit" type="button" value="' . $id . '">Edit</button>
+                                <button class="btn btn-primary shortcode-addons-template-item-edit" type="button" value="' . esc_attr($id) . '">Edit</button>
                             </div>
                             <div class="oxi-addons-admin-absulate-delete">
-                                <button class="btn btn-danger shortcode-addons-template-item-delete" type="submit" value="' . $id . '">Delete</button>
+                                <button class="btn btn-danger shortcode-addons-template-item-delete" type="submit" value="' . esc_attr($id) . '">Delete</button>
                             </div>
                         </div>';
         endif;

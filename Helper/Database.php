@@ -95,4 +95,120 @@ Class Database {
         return self::$lfe_instance;
     }
 
+    public function allowed_tags() {
+
+        $allowed_tags = array(
+            'a' => array(
+                'class' => array(),
+                'href' => array(),
+                'rel' => array(),
+                'title' => array(),
+            ),
+            'abbr' => array(
+                'title' => array(),
+            ),
+            'b' => array(),
+            'blockquote' => array(
+                'cite' => array(),
+            ),
+            'cite' => array(
+                'title' => array(),
+            ),
+            'code' => array(),
+            'del' => array(
+                'datetime' => array(),
+                'title' => array(),
+            ),
+            'dd' => array(),
+            'div' => array(
+                'class' => array(),
+                'title' => array(),
+                'style' => array(),
+                'id' => array(),
+                'data-link' => array(),
+                'oxi-animation' => array(),
+                'data-oxi-trigger' => array(),
+                'data-oxi-accordions-type' => array(),
+                'data-oxi-auto-play' => array(),
+                'data-parent' => array(),
+                'data-oxitoggle' => array(),
+                'data-oxitarget' => array(),
+                'aria-expanded' => array(),
+            ),
+            'table' => array(
+                'class' => array(),
+                'id' => array(),
+                'style' => array(),
+            ),
+            'button' => array(
+                'class' => array(),
+                'type' => array(),
+                'value' => array(),
+            ),
+            'input' => array(
+                'onkeyup' => array(),
+                'class' => array(),
+                'id' => array(),
+                'name' => array(),
+                'type' => array(),
+                'value' => array(),
+                'placeholder' => array(),
+                'onclick' => array(),
+            ),
+            'form' => array(
+                'class' => array(),
+                'id' => array(),
+                'method' => array(),
+                'action' => array(),
+            ),
+            'thead' => array(),
+            'tbody' => array(),
+            'tr' => array(),
+            'td' => array(),
+            'dt' => array(),
+            'em' => array(),
+            'h1' => array(),
+            'h2' => array(),
+            'h3' => array(),
+            'h4' => array(),
+            'h5' => array(),
+            'h6' => array(),
+            'i' => array(
+                'class' => array(),
+            ),
+            'img' => array(
+                'alt' => array(),
+                'class' => array(),
+                'height' => array(),
+                'src' => array(),
+                'width' => array(),
+            ),
+            'li' => array(
+                'class' => array(),
+            ),
+            'ol' => array(
+                'class' => array(),
+            ),
+            'p' => array(
+                'class' => array(),
+            ),
+            'q' => array(
+                'cite' => array(),
+                'title' => array(),
+            ),
+            'span' => array(
+                'class' => array(),
+                'title' => array(),
+                'style' => array(),
+            ),
+            'strike' => array(),
+            'strong' => array(),
+            'ul' => array(
+                'class' => array(),
+            ),
+        );
+
+        return $allowed_tags;
+    }
+
 }

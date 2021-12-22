@@ -24,12 +24,12 @@ class Widget extends \WP_Widget {
 
     public function widget($args, $instance) {
         $title = apply_filters('widget_title', $instance['title']);
-        echo $args['before_widget'];
+        echo __($args['before_widget']);
         $CLASS = '\OXI_ACCORDIONS_PLUGINS\Includes\Shortcode';
         if (class_exists($CLASS)):
             new $CLASS($title, 'user');
         endif;
-        echo $args['after_widget'];
+        echo __($args['after_widget']);
     }
 
     public function form($instance) {
@@ -40,8 +40,8 @@ class Widget extends \WP_Widget {
         }
         ?>
         <p>
-            <label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Style ID:'); ?></label>
-            <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr($title); ?>" />
+            <label for="<?php echo esc_html($this->get_field_id('title')); ?>"><?php _e('Style ID:'); ?></label>
+            <input class="widefat" id="<?php echo esc_attr($this->get_field_id('title')); ?>" name="<?php echo esc_attr($this->get_field_name('title')); ?>" type="text" value="<?php echo esc_attr($title); ?>" />
         </p>
         <?php
     }

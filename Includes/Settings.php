@@ -57,7 +57,7 @@ class Settings {
                                     <fieldset>
                                         <select name="oxi_accordions_user_permission" id="oxi_accordions_user_permission">
                                             <?php foreach ($this->roles as $key => $role) { ?>
-                                                <option value="<?php echo $key; ?>" <?php selected($this->saved_role, $key); ?>><?php echo $role; ?></option>
+                                                <option value="<?php echo esc_attr($key); ?>" <?php selected($this->saved_role, $key); ?>><?php echo esc_html($role); ?></option>
                                             <?php } ?>
                                         </select>
                                         <span class="oxi-addons-settings-connfirmation oxi_accordions_user_permission"></span>
@@ -97,30 +97,30 @@ class Settings {
                                     <label for="accordions_or_faqs_license_key">License Key</label>
                                 </th>
                                 <td class="valid">
-                                    <input type="text" class="regular-text" id="accordions_or_faqs_license_key" name="accordions_or_faqs_license_key" value="<?php echo $this->license; ?>">
+                                    <input type="text" class="regular-text" id="accordions_or_faqs_license_key" name="accordions_or_faqs_license_key" value="<?php echo esc_attr($this->license); ?>">
                                     <span class="oxi-addons-settings-connfirmation accordions_or_faqs_license_massage">
                                         <?php
                                         if ($this->status == 'valid' && empty($this->license)):
-                                            echo '<span class="oxi-confirmation-success"></span>';
+                                            echo _e('<span class="oxi-confirmation-success"></span>');
                                         elseif ($this->status == 'valid' && !empty($this->license)):
-                                            echo '<span class="oxi-confirmation-success"></span>';
+                                            echo _e('<span class="oxi-confirmation-success"></span>');
                                         elseif (!empty($this->license)):
-                                            echo '<span class="oxi-confirmation-failed"></span>';
+                                            echo _e('<span class="oxi-confirmation-failed"></span>');
                                         else:
-                                            echo '<span class="oxi-confirmation-blank"></span>';
+                                            echo _e('<span class="oxi-confirmation-blank"></span>');
                                         endif;
                                         ?>
                                     </span>
                                     <span class="oxi-addons-settings-connfirmation accordions_or_faqs_license_text">
                                         <?php
                                         if ($this->status == 'valid' && empty($this->license)):
-                                            echo '<span class="oxi-addons-settings-massage">Pre Active</span>';
+                                            echo _e('<span class="oxi-addons-settings-massage">Pre Active</span>');
                                         elseif ($this->status == 'valid' && !empty($this->license)):
-                                            echo '<span class="oxi-addons-settings-massage">Active</span>';
+                                            echo _e('<span class="oxi-addons-settings-massage">Active</span>');
                                         elseif (!empty($this->license)):
-                                            echo '<span class="oxi-addons-settings-massage">' . $this->status . '</span>';
+                                            echo _e('<span class="oxi-addons-settings-massage">' . $this->status . '</span>');
                                         else:
-                                            echo '<span class="oxi-addons-settings-massage"></span>';
+                                            echo _e('<span class="oxi-addons-settings-massage"></span>');
                                         endif;
                                         ?>
                                     </span>
