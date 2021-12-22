@@ -505,7 +505,6 @@ class Template {
         if (isset($style['oxi-accordions-modal-components-type']) && $style['oxi-accordions-modal-components-type'] == 'link'):
             $data = $this->url_render('oxi-accordions-modal-link', $style);
             if (count($data) >= 1):
-                echo $data;
                 return ' data-link=\'' . esc_attr(json_encode($data)) . '\'';
             endif;
         endif;

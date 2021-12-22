@@ -184,7 +184,7 @@ class API {
             $this->send_file_headers($filename, strlen($finalfiles));
             @ob_end_clean();
             flush();
-            echo $finalfiles;
+            echo sanitize_post($finalfiles);
             die;
         else:
             return 'Silence is Golden';

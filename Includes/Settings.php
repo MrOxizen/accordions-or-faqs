@@ -62,7 +62,7 @@ class Settings {
                                         </select>
                                         <span class="oxi-addons-settings-connfirmation oxi_accordions_user_permission"></span>
                                         <br>
-                                        <p class="description"><?php _e('Select the Role who can manage This Plugins.'); ?> <a target="_blank" href="https://codex.wordpress.org/Roles_and_Capabilities#Capability_vs._Role_Table">Help</a></p>
+                                        <p class="description">Select the Role who can manage This Plugins.<a target="_blank" href="https://codex.wordpress.org/Roles_and_Capabilities#Capability_vs._Role_Table">Help</a></p>
                                     </fieldset>
                                 </td>
                             </tr>
@@ -101,26 +101,26 @@ class Settings {
                                     <span class="oxi-addons-settings-connfirmation accordions_or_faqs_license_massage">
                                         <?php
                                         if ($this->status == 'valid' && empty($this->license)):
-                                            echo _e('<span class="oxi-confirmation-success"></span>');
+                                            echo '<span class="oxi-confirmation-success"></span>';
                                         elseif ($this->status == 'valid' && !empty($this->license)):
-                                            echo _e('<span class="oxi-confirmation-success"></span>');
+                                            echo '<span class="oxi-confirmation-success"></span>';
                                         elseif (!empty($this->license)):
-                                            echo _e('<span class="oxi-confirmation-failed"></span>');
+                                            echo '<span class="oxi-confirmation-failed"></span>';
                                         else:
-                                            echo _e('<span class="oxi-confirmation-blank"></span>');
+                                            echo '<span class="oxi-confirmation-blank"></span>';
                                         endif;
                                         ?>
                                     </span>
                                     <span class="oxi-addons-settings-connfirmation accordions_or_faqs_license_text">
                                         <?php
                                         if ($this->status == 'valid' && empty($this->license)):
-                                            echo _e('<span class="oxi-addons-settings-massage">Pre Active</span>');
+                                            echo '<span class="oxi-addons-settings-massage">' . esc_attr__('Pre Active', OXI_ACCORDIONS_TEXTDOMAIN) . '</span>';
                                         elseif ($this->status == 'valid' && !empty($this->license)):
-                                            echo _e('<span class="oxi-addons-settings-massage">Active</span>');
+                                            echo '<span class="oxi-addons-settings-massage">' . esc_attr__('Active', OXI_ACCORDIONS_TEXTDOMAIN) . '</span>';
                                         elseif (!empty($this->license)):
-                                            echo _e('<span class="oxi-addons-settings-massage">' . $this->status . '</span>');
+                                            echo '<span class="oxi-addons-settings-massage">' . esc_attr__($this->status, OXI_ACCORDIONS_TEXTDOMAIN) . '</span>';
                                         else:
-                                            echo _e('<span class="oxi-addons-settings-massage"></span>');
+                                            echo '<span class="oxi-addons-settings-massage"></span>';
                                         endif;
                                         ?>
                                     </span>
@@ -141,7 +141,7 @@ class Settings {
      */
     public function admin_ajax() {
         $this->admin_settings_additional();
-        wp_enqueue_script('oxi-accordions-settings-page', OXI_ACCORDIONS_URL . '/assets/backend/custom/settings.js', false, OXI_ACCORDIONS_TEXTDOMAIN);
+        wp_enqueue_script('oxi-accordions-settings-page', OXI_ACCORDIONS_URL . '/assets/backend/custom/settings.js', false, OXI_ACCORDIONS_PLUGIN_VERSION);
     }
 
 }

@@ -462,7 +462,7 @@ trait Sanitization {
         $rearrange = explode(',', $value);
         foreach ($rearrange as $k => $vl) {
             if ($vl != ''):
-                echo '  <div class="shortcode-form-repeater-fields" id="' . $vl . '">
+                echo '  <div class="shortcode-form-repeater-fields" id="' . esc_attr($vl) . '">
                             <div class="shortcode-form-repeater-controls">
                                 <div class="shortcode-form-repeater-controls-title">
                                     ' . esc_html($arg['fields'][$vl]['label']) . '
@@ -799,9 +799,9 @@ trait Sanitization {
             else:
                 if (is_array($value)):
                     $new = array_flip($value);
-                    echo ' <option value="' . $key . '" ' . (array_key_exists($key, $new) ? 'selected' : '') . '>' . esc_html($val) . '</option>';
+                    echo ' <option value="' . esc_attr($key) . '" ' . (array_key_exists($key, $new) ? 'selected' : '') . '>' . esc_html($val) . '</option>';
                 else:
-                    echo ' <option value="' . $key . '" ' . ($value == $key ? 'selected' : '') . '>' . esc_html($val) . '</option>';
+                    echo ' <option value="' . esc_attr($key) . '" ' . ($value == $key ? 'selected' : '') . '>' . esc_html($val) . '</option>';
                 endif;
             endif;
         }
@@ -920,7 +920,7 @@ trait Sanitization {
         }
         $type = array_key_exists('oparetor', $arg) ? 'data-format="rgb" data-opacity="TRUE"' : '';
         echo '<div class="shortcode-form-control-input-wrapper">
-                <input ' . $type . ' type="text"  class="oxi-addons-minicolor" id="' . esc_attr($id) . '" name="' . esc_attr($id) . '" value="' . esc_attr($value) . '" responsive="' . esc_attr($arg['responsive']) . '" retundata=\'' . esc_attr($retunvalue) . '\' custom="' . (array_key_exists('custom', $arg) ? '' . esc_attr($arg['custom']) . '' : '') . '">
+                <input ' . esc_attr($type) . ' type="text"  class="oxi-addons-minicolor" id="' . esc_attr($id) . '" name="' . esc_attr($id) . '" value="' . esc_attr($value) . '" responsive="' . esc_attr($arg['responsive']) . '" retundata=\'' . esc_attr($retunvalue) . '\' custom="' . (array_key_exists('custom', $arg) ? '' . esc_attr($arg['custom']) . '' : '') . '">
              </div>';
     }
 
@@ -993,7 +993,7 @@ trait Sanitization {
             endif;
         endif;
         echo '  <div class="shortcode-form-control-input-wrapper">
-                    <input type="' . $format . '"  id="' . esc_attr($id) . '" name="' . esc_attr($id) . '" value="' . esc_attr($value) . '">
+                    <input type="' . esc_attr($format) . '"  id="' . esc_attr($id) . '" name="' . esc_attr($id) . '" value="' . esc_attr($value) . '">
                 </div>';
     }
 
@@ -1071,7 +1071,7 @@ trait Sanitization {
                 echo ' <div class="shortcode-form-units-choices">';
                 foreach ($arg['range'] as $key => $val) {
                     $rand = rand(10000, 233333333);
-                    echo '<input id="' . esc_attr($id) . '-choices-' . esc_attr($rand) . '" type="radio" name="' . esc_attr($id) . '-choices"  value="' . $key . '" ' . ($key == $unit ? 'checked' : '') . '  min="' . esc_attr($val['min']) . '" max="' . esc_attr($val['max']) . '" step="' . esc_attr($val['step']) . '">
+                    echo '<input id="' . esc_attr($id) . '-choices-' . esc_attr($rand) . '" type="radio" name="' . esc_attr($id) . '-choices"  value="' . esc_attr($key) . '" ' . ($key == $unit ? 'checked' : '') . '  min="' . esc_attr($val['min']) . '" max="' . esc_attr($val['max']) . '" step="' . esc_attr($val['step']) . '">
                       <label class="shortcode-form-units-choices-label" for="' . esc_attr($id) . '-choices-' . esc_attr($rand) . '">' . esc_html($key) . '</label>';
                 }
                 echo '</div>';
