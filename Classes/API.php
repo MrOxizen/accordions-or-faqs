@@ -62,7 +62,13 @@ class API {
             return new \WP_REST_Request('Invalid URL', 422);
         endif;
 
-        $this->rawdata = sanitize_textarea_field(addslashes($request['rawdata']));
+        $rawdata = json_decode($request['rawdata'], true);
+        if (is_array($rawdata)):
+            $this->validate_post($rawdata);
+        else:
+            $this->rawdata = sanitize_text_field($request['rawdata']);
+        endif;
+
         $this->styleid = (int) $request['styleid'];
         $this->childid = (int) $request['childid'];
 
@@ -72,6 +78,107 @@ class API {
         else:
             return die(esc_html__('Security check', 'accordions-or-faqs'));
         endif;
+    }
+
+    public function allowed_html($rawdata) {
+        $allowed_tags = array(
+            'a' => array(
+                'class' => array(),
+                'href' => array(),
+                'rel' => array(),
+                'title' => array(),
+            ),
+            'abbr' => array(
+                'title' => array(),
+            ),
+            'b' => array(),
+            'blockquote' => array(
+                'cite' => array(),
+            ),
+            'cite' => array(
+                'title' => array(),
+            ),
+            'code' => array(),
+            'del' => array(
+                'datetime' => array(),
+                'title' => array(),
+            ),
+            'dd' => array(),
+            'div' => array(
+                'class' => array(),
+                'title' => array(),
+                'style' => array(),
+                'id' => array(),
+            ),
+            'table' => array(
+                'class' => array(),
+                'id' => array(),
+                'style' => array(),
+            ),
+            'button' => array(
+                'class' => array(),
+                'type' => array(),
+                'value' => array(),
+            ),
+            'thead' => array(),
+            'tbody' => array(),
+            'tr' => array(),
+            'td' => array(),
+            'dt' => array(),
+            'em' => array(),
+            'h1' => array(),
+            'h2' => array(),
+            'h3' => array(),
+            'h4' => array(),
+            'h5' => array(),
+            'h6' => array(),
+            'i' => array(
+                'class' => array(),
+            ),
+            'img' => array(
+                'alt' => array(),
+                'class' => array(),
+                'height' => array(),
+                'src' => array(),
+                'width' => array(),
+            ),
+            'li' => array(
+                'class' => array(),
+            ),
+            'ol' => array(
+                'class' => array(),
+            ),
+            'p' => array(
+                'class' => array(),
+            ),
+            'q' => array(
+                'cite' => array(),
+                'title' => array(),
+            ),
+            'span' => array(
+                'class' => array(),
+                'title' => array(),
+                'style' => array(),
+            ),
+            'strike' => array(),
+            'strong' => array(),
+            'ul' => array(
+                'class' => array(),
+            ),
+        );
+        if (is_array($rawdata)):
+            return $rawdata = array_map(array($this, 'allowed_html'), $rawdata);
+        else:
+            return wp_kses($rawdata, $allowed_tags);
+        endif;
+    }
+
+    public function validate_post($rawdata) {
+        if (is_array($rawdata)):
+            $rawdata = array_map(array($this, 'allowed_html'), $rawdata);
+            $this->rawdata = addslashes(json_encode($rawdata));
+        endif;
+        return;
     }
 
     /**

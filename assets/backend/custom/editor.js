@@ -41,7 +41,7 @@ jQuery.noConflict();
                     rawdata: rawdata
                 }
             });
-            console.log(result);
+          
             return callback(result);
 
         } catch (error) {
@@ -416,6 +416,8 @@ jQuery.noConflict();
                     alert("Data Error");
                 } else {
                     $("#shortcode-addons-template-modal-form input[type='checkbox']").attr('checked', false);
+                    
+                    
                     $.each($.parseJSON(callback), function (key, value) {
                         if ($("#" + key + "").hasClass('wp-editor-area')) {
                             if ($("#wp-" + key + "-wrap").hasClass('tmce-active')) {

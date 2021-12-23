@@ -2377,7 +2377,7 @@ trait Sanitization {
             $cond => $condition
                 ]
         );
-        echo esc_html__('<div class="shortcode-form-control-content shortcode-form-control-content-popover-body">');
+        echo '<div class="shortcode-form-control-content shortcode-form-control-content-popover-body">';
 
         $this->add_control(
                 $id . '-target', $data, [
@@ -2652,7 +2652,7 @@ trait Sanitization {
                             </div>
                         </form>
                     <div id="modal-rearrange-store-file">
-                        ' . esc_html($id) . '
+                        ' . ($id) . '
                     </div>
                 </div>
             </div>';
