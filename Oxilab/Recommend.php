@@ -102,7 +102,7 @@ class Recommend {
                         <div class="oxi-addons-admin-notifications-holder">
                             <div class="oxi-addons-admin-notifications-alert">
                                 <p>Thank you for using my Accordions - Multiple Accordions or FAQs Builders. ' . esc_html($recommend['modules-massage']) . '</p>
-                                <p>' . sprintf('<a href="%s" class="button button-large button-primary">%s</a>', esc_url($install_url), esc_html__('Install Now', 'accordions-or-faqs')) . ' &nbsp;&nbsp;<a href="#" class="button button-large button-secondary oxi-plugins-admin-recommended-dismiss" sup-data="done">No, Thanks</a></p>
+                                <p><a href="' . esc_url($install_url) . '" class="button button-large button-primary">' . esc_html__('Install Now', 'accordions-or-faqs') . '</a> &nbsp;&nbsp;<a href="#" class="button button-large button-secondary oxi-plugins-admin-recommended-dismiss" sup-data="done">No, Thanks</a></p>
                             </div>
                         </div>
                         <p></p>

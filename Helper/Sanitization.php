@@ -328,7 +328,7 @@ trait Sanitization {
             'default' => '',
             'label_on' => esc_html__('Yes', 'accordions-or-faqs'),
             'label_off' => esc_html__('No', 'accordions-or-faqs'),
-            'placeholder' => esc_html__('', 'accordions-or-faqs'),
+            'placeholder' => '',
             'selector-data' => TRUE,
             'render' => TRUE,
             'responsive' => 'laptop',
