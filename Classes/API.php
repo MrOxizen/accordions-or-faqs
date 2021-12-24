@@ -63,11 +63,8 @@ class API {
         endif;
 
         $rawdata = json_decode($request['rawdata'], true);
-        if (is_array($rawdata)):
-            $this->validate_post($rawdata);
-        else:
-            $this->rawdata = sanitize_text_field($request['rawdata']);
-        endif;
+
+        $this->rawdata = sanitize_text_field($request['rawdata']);
 
         $this->styleid = (int) $request['styleid'];
         $this->childid = (int) $request['childid'];
@@ -76,7 +73,7 @@ class API {
         if (method_exists($this, $action_class)):
             return $this->{$action_class}();
         else:
-            return die(esc_html__('Security check', 'accordions-or-faqs'));
+            return die(esc_html('Security check'));
         endif;
     }
 
@@ -272,27 +269,6 @@ class API {
         if ($id > 0):
             $this->database->wpdb->query($this->database->wpdb->prepare("INSERT INTO {$this->database->import_table} (type, name) VALUES (%s, %s)", array('accordions-or-faqs', $id)));
             return admin_url("admin.php?page=oxi-accordions-ultimate-new#Template_" . $id);
-        else:
-            return 'Silence is Golden';
-        endif;
-    }
-
-    public function get_shortcode_export() {
-        $styleid = (int) $this->styleid;
-        if ($styleid):
-            $style = $this->database->wpdb->get_row($this->database->wpdb->prepare("SELECT * FROM {$this->database->parent_table} WHERE id = %d", $styleid), ARRAY_A);
-            $child = $this->database->wpdb->get_results($this->database->wpdb->prepare("SELECT * FROM {$this->database->child_table} WHERE styleid = %d ORDER by id ASC", $styleid), ARRAY_A);
-            $filename = 'accordions-or-faqs-template-' . $styleid . '.json';
-            $files = [
-                'style' => $style,
-                'child' => $child,
-            ];
-            $finalfiles = json_encode($files);
-            $this->send_file_headers($filename, strlen($finalfiles));
-            @ob_end_clean();
-            flush();
-            echo sanitize_post($finalfiles);
-            die;
         else:
             return 'Silence is Golden';
         endif;
@@ -534,7 +510,7 @@ class API {
             if (is_wp_error($response)) {
                 $message = $response->get_error_message();
             } else {
-                $message = esc_html__('An error occurred, please try again.');
+                $message = esc_html('An error occurred, please try again.');
             }
             return $message;
         }
@@ -560,7 +536,7 @@ class API {
             if (is_wp_error($response)) {
                 $message = $response->get_error_message();
             } else {
-                $message = esc_html__('An error occurred, please try again.');
+                $message = esc_html('An error occurred, please try again.');
             }
         } else {
             $license_data = json_decode(wp_remote_retrieve_body($response));
@@ -571,40 +547,40 @@ class API {
 
                     case 'expired' :
 
-                        $message = sprintf(
-                                __('Your license key expired on %s.'), date_i18n(get_option('date_format'), strtotime($license_data->expires, current_time('timestamp')))
+                        $message = esc_html(
+                                'Your license key expired'
                         );
                         break;
 
                     case 'revoked' :
 
-                        $message = esc_html__('Your license key has been disabled.');
+                        $message = esc_html('Your license key has been disabled.');
                         break;
 
                     case 'missing' :
 
-                        $message = esc_html__('Invalid license.');
+                        $message = esc_html('Invalid license.');
                         break;
 
                     case 'invalid' :
                     case 'site_inactive' :
 
-                        $message = esc_html__('Your license is not active for this URL.');
+                        $message = esc_html('Your license is not active for this URL.');
                         break;
 
                     case 'item_name_mismatch' :
 
-                        $message = sprintf(__('This appears to be an invalid license key for %s.'), Responsive_Tabs_with_Accordions);
+                        $message = esc_html('This appears to be an invalid license key for accordions-or-faqs.');
                         break;
 
                     case 'no_activations_left':
 
-                        $message = esc_html__('Your license key has reached its activation limit.');
+                        $message = esc_html('Your license key has reached its activation limit.');
                         break;
 
                     default :
 
-                        $message = esc_html__('An error occurred, please try again.');
+                        $message = esc_html('An error occurred, please try again.');
                         break;
                 }
             }

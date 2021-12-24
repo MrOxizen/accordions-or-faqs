@@ -34,7 +34,6 @@ class Front_Page {
     public function additional_load() {
         $this->database_data();
         $this->admin_front_additional();
-        $this->manual_import_json();
         apply_filters('oxi-accordions-plugin/admin_menu', TRUE);
     }
 
@@ -46,49 +45,6 @@ class Front_Page {
 
         $path = str_replace(['//', '\\\\'], ['/', '\\'], $path);
         return str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $path);
-    }
-
-    public function manual_import_json() {
-        if (!empty($_REQUEST['_wpnonce'])) {
-            $nonce = $_REQUEST['_wpnonce'];
-        }
-
-        if (!empty($_POST['importdatasubmit']) && sanitize_text_field($_POST['importdatasubmit']) == 'Save') {
-            if (!wp_verify_nonce($nonce, 'oxi-accordions-ultimate-import')) {
-                die('You do not have sufficient permissions to access this page.');
-            } else {
-                if (isset($_FILES['importaccordionsfile'])) :
-
-                    if (!current_user_can('upload_files')):
-                        wp_die(__('You do not have permission to upload files.'));
-                    endif;
-
-                    $allowedMimes = array(
-                        'json' => 'text/plain'
-                    );
-
-                    $fileInfo = wp_check_filetype(basename($_FILES['importaccordionsfile']['name']), $allowedMimes);
-                    if (empty($fileInfo['ext'])) {
-                        wp_die(__('You do not have permission to upload files.'));
-                    }
-
-                    $content = json_decode(file_get_contents($_FILES['importaccordionsfile']['tmp_name']), true);
-
-                    if (empty($content)) {
-                        return new \WP_Error('file_error', 'Invalid File');
-                    }
-                    $style = $content['style'];
-
-                    if (!is_array($style) || $style['type'] != 'accordions-or-faqs') {
-                        return new \WP_Error('file_error', 'Invalid Content In File');
-                    }
-
-                    $ImportApi = new \OXI_ACCORDIONS_PLUGINS\Classes\API();
-                    $new_slug = $ImportApi->post_json_import($content);
-                    wp_safe_redirect($new_slug);
-                endif;
-            }
-        }
     }
 
     public function public_render() {
@@ -168,27 +124,6 @@ class Front_Page {
                         </div>
                     </div>
                 </div>
-            </form>
-        </div>
-
-        <div class="modal fade" id="oxi-addons-style-import-modal" >
-            <form method="post" id="oxi-addons-import-modal-form" enctype="multipart/form-data">
-                <div class="modal-dialog modal-sm modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title">Import Form</h4>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        </div>
-                        <div class="modal-body">
-                            <input class="form-control" type="file" name="importaccordionsfile" accept=".json,application/json,.zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed">
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                            <input type="submit" class="btn btn-success" name="importdatasubmit" id="importdatasubmit" value="Save">
-                        </div>
-                    </div>
-                </div>
-                <?php echo wp_nonce_field("oxi-accordions-ultimate-import") ?>
             </form>
         </div>
 

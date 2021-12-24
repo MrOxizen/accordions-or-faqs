@@ -54,7 +54,7 @@ trait Helper {
                         foreach ($response as $key => $value) {
                             $active = ($GETPage == $value['homepage'] ? ' class="active" ' : '');
 
-                            echo'<li ' . $active . '><a href="' . esc_url($this->admin_url_convert($value['homepage'])) . '">' . esc_html($this->name_converter($value['name'])) . '</a></li>';
+                            echo'<li ' . esc_attr($active) . '><a href="' . esc_url($this->admin_url_convert($value['homepage'])) . '">' . esc_html($this->name_converter($value['name'])) . '</a></li>';
                         }
                         ?>
                     </ul>
