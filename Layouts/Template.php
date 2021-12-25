@@ -172,7 +172,7 @@ class Template {
             $CLASS = new $cls('admin');
             $inlinecss .= $CLASS->inline_template_css_render($this->style);
         } else {
-            echo $this->font_familly_validation(json_decode(($this->dbdata['font_family'] != '' ? esc_html($this->dbdata['font_family']) : "[]"), true));
+            $this->font_familly_validation(json_decode(($this->dbdata['font_family'] != '' ? esc_html($this->dbdata['font_family']) : "[]"), true));
             $inlinecss .= $this->CSSDATA;
         }
         if ($inlinecss != ''):

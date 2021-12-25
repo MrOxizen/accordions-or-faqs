@@ -305,18 +305,6 @@ trait Sanitization {
             elseif ($arg['responsive'] == 'mobile') :
                 $responsiveclass = 'shortcode-addons-form-responsive-mobile';
             endif;
-            $responsive = '<div class="shortcode-form-control-responsive-switchers">
-                                <a class="shortcode-form-responsive-switcher shortcode-form-responsive-switcher-desktop" data-device="desktop">
-                                    <span class="dashicons dashicons-desktop"></span>
-                                </a>
-                                <a class="shortcode-form-responsive-switcher shortcode-form-responsive-switcher-tablet" data-device="tablet">
-                                    <span class="dashicons dashicons-tablet"></span>
-                                </a>
-                                <a class="shortcode-form-responsive-switcher shortcode-form-responsive-switcher-mobile" data-device="mobile">
-                                    <span class="dashicons dashicons-smartphone"></span>
-                                </a>
-                            </div>';
-
         endif;
 
         if (array_key_exists('customresponsive', $arg)):
@@ -369,10 +357,24 @@ trait Sanitization {
                 <div class="shortcode-form-control-content">
                     <div class="shortcode-form-control-field">';
         echo '          <label for="" class="shortcode-form-control-title">' . esc_html($arg['label']) . '</label>';
-        echo $responsive;
+        if (array_key_exists('responsive', $arg)) :
+
+            echo '<div class="shortcode-form-control-responsive-switchers">
+                                <a class="shortcode-form-responsive-switcher shortcode-form-responsive-switcher-desktop" data-device="desktop">
+                                    <span class="dashicons dashicons-desktop"></span>
+                                </a>
+                                <a class="shortcode-form-responsive-switcher shortcode-form-responsive-switcher-tablet" data-device="tablet">
+                                    <span class="dashicons dashicons-tablet"></span>
+                                </a>
+                                <a class="shortcode-form-responsive-switcher shortcode-form-responsive-switcher-mobile" data-device="mobile">
+                                    <span class="dashicons dashicons-smartphone"></span>
+                                </a>
+                            </div>';
+
+        endif;
 
         $fun = esc_attr($arg['type']) . '_admin_control';
-        echo $this->$fun($id, $data, $arg);
+        $this->$fun($id, $data, $arg);
         echo '      </div>';
         echo array_key_exists('description', $arg) ? '<div class="shortcode-form-control-description">' . esc_html($arg['description']) . '</div>' : '';
 
@@ -446,7 +448,7 @@ trait Sanitization {
         ];
         $arg = array_merge($defualt, $arg);
         $fun = $arg['type'] . '_admin_group_control';
-        echo $this->$fun($id, $data, $arg);
+        $this->$fun($id, $data, $arg);
     }
 
     public function add_rearrange_control($id, array $data = [], array $arg = []) {
@@ -2495,7 +2497,7 @@ trait Sanitization {
 
     public function add_substitute_control($id, array $data = [], array $arg = []) {
         $fun = $arg['type'] . '_substitute_control';
-        echo $this->$fun($id, $data, $arg);
+        $this->$fun($id, $data, $arg);
     }
 
     /*

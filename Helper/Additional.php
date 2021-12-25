@@ -24,7 +24,7 @@ trait Additional {
         wp_enqueue_script('oxi-accordions-bootstrap', OXI_ACCORDIONS_URL . 'assets/backend/js/bootstrap.min.js', false, OXI_ACCORDIONS_PLUGIN_VERSION);
         wp_enqueue_script('jquery.serializejson.min', OXI_ACCORDIONS_URL . 'assets/backend/js/jquery.serializejson.min.js', false, OXI_ACCORDIONS_PLUGIN_VERSION);
         wp_localize_script('oxi-accordions-bootstrap', 'oxiaccordionsultimate', array(
-            'root' => esc_url_raw(rest_url()),
+            'root' => esc_url(rest_url()),
             'nonce' => wp_create_nonce('wp_rest'),
             'plugin' => OXI_ACCORDIONS_URL
         ));

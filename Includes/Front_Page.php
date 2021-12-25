@@ -159,7 +159,7 @@ class Front_Page {
                                         <input type="hidden" name="oxideleteid" id="oxideleteid" value="<?php echo esc_attr($id) ?>">
                                         <button class="btn btn-danger" style="float:left"  title="Delete"  type="submit" value="delete" name="addonsdatadelete">Delete</button>
                                     </form>
-                                    <a href="<?php echo esc_url_raw(rest_url()) . 'oxiaccordionsultimate/v1/shortcode_export?styleid=' . $id . '&_wpnonce=' . wp_create_nonce('wp_rest') ?>"  title="Export"  class="btn btn-info" style="float:left; margin-right: 5px; margin-left: 5px;">Export</a>
+                                    <a href="<?php echo esc_url(rest_url()) . 'oxiaccordionsultimate/v1/shortcode_export?styleid=' . $id . '&_wpnonce=' . wp_create_nonce('wp_rest') ?>"  title="Export"  class="btn btn-info" style="float:left; margin-right: 5px; margin-left: 5px;">Export</a>
                                 </td>
                             </tr>
 

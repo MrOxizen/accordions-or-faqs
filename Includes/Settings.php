@@ -42,7 +42,7 @@ class Settings {
         ?>
         <div class="wrap">
             <?php
-            echo apply_filters('oxi-accordions-plugin/admin_menu', TRUE);
+            apply_filters('oxi-accordions-plugin/admin_menu', TRUE);
             ?>
             <div class="oxi-addons-row oxi-addons-admin-settings">
                 <form method="post">
