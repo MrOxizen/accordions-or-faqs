@@ -104,7 +104,7 @@ class Admin {
 
     public function __construct($type = '') {
         $this->database = new \OXI_ACCORDIONS_PLUGINS\Helper\Database();
-        $this->oxiid = (!empty($_GET['styleid']) ? sanitize_text_field($_GET['styleid']) : '');
+        $this->oxiid = (!empty($_GET['styleid']) ? (int) $_GET['styleid'] : '');
         $this->WRAPPER = '.oxi-accordions-wrapper-' . $this->oxiid;
         $this->CSSWRAPPER = '.oxi-accordions-wrapper-' . $this->oxiid . ' > .oxi-addons-row';
         if ($type != 'admin') {
@@ -338,7 +338,7 @@ class Admin {
                                         </div>
                                         <div class="oxi-addons-setting-save">
                                             <button type="button" class="btn btn-danger" id="oxi-addons-setting-reload">Reload</button>
-                                            <input type="hidden"  id="oxilab-preview-color" name="oxilab-preview-color" value="<?php echo esc_attr(is_array($this->style) ? array_key_exists('oxilab-preview-color', $this->style) ? $this->style['oxilab-preview-color'] : '#FFF' : '#FFF'); ?>">
+                                            <input type="hidden"  id="oxilab-preview-color" name="oxilab-preview-color" value="<?php echo is_array($this->style) ? array_key_exists('oxilab-preview-color', $this->style) ? esc_attr($this->style['oxilab-preview-color']) : '#FFF' : '#FFF'; ?>">
                                             <input type="hidden"  id="style-id" name="style-id" value="<?php echo esc_attr($this->dbdata['id']); ?>">
                                             <button type="button" class="btn btn-success" id="oxi-addons-templates-submit"> Save</button>
                                         </div>
@@ -374,7 +374,7 @@ class Admin {
                                             </div>
                                         </div>
                                         <div class="oxi-addons-style-left-preview-heading-right">
-                                            <input type="text" data-format="rgb" data-opacity="TRUE" class="oxi-addons-minicolor" id="oxi-addons-2-0-color" name="oxi-addons-2-0-color" value="<?php echo(is_array($this->style) ? array_key_exists('oxilab-preview-color', $this->style) ? esc_attr($this->style['oxilab-preview-color']) : '#FFF' : '#FFF'); ?>">
+                                            <input type="text" data-format="rgb" data-opacity="TRUE" class="oxi-addons-minicolor" id="oxi-addons-2-0-color" name="oxi-addons-2-0-color" value="<?php echo(is_array($this->style) ? array_key_exists('oxilab-preview-color', $this->style) ? $this->style['oxilab-preview-color'] : '#FFF' : '#FFF'); ?>">
                                         </div>
                                     </div>
                                     <div class="oxi-addons-preview-wrapper">

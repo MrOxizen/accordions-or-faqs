@@ -25,6 +25,9 @@ class Settings {
      * @since 2.0.0
      */
     public function __construct() {
+        if (!current_user_can('manage_options')) {
+            return;
+        }
         $this->admin();
         $this->admin_ajax();
         $this->Render();
@@ -42,7 +45,7 @@ class Settings {
         ?>
         <div class="wrap">
             <?php
-            apply_filters('oxi-accordions-plugin/admin_menu', TRUE);
+            echo apply_filters('oxi-accordions-plugin/admin_menu', TRUE);
             ?>
             <div class="oxi-addons-row oxi-addons-admin-settings">
                 <form method="post">
@@ -62,7 +65,7 @@ class Settings {
                                         </select>
                                         <span class="oxi-addons-settings-connfirmation oxi_accordions_user_permission"></span>
                                         <br>
-                                        <p class="description">Select the Role who can manage This Plugins.<a target="_blank" href="https://codex.wordpress.org/Roles_and_Capabilities#Capability_vs._Role_Table">Help</a></p>
+                                        <p class="description"><?php _e('Select the Role who can manage This Plugins.'); ?> <a target="_blank" href="https://codex.wordpress.org/Roles_and_Capabilities#Capability_vs._Role_Table">Help</a></p>
                                     </fieldset>
                                 </td>
                             </tr>
@@ -97,30 +100,30 @@ class Settings {
                                     <label for="accordions_or_faqs_license_key">License Key</label>
                                 </th>
                                 <td class="valid">
-                                    <input type="text" class="regular-text" id="accordions_or_faqs_license_key" name="accordions_or_faqs_license_key" value="<?php echo esc_attr($this->license); ?>">
+                                    <input type="text" class="regular-text" id="accordions_or_faqs_license_key" name="accordions_or_faqs_license_key" value="<?php echo $this->license; ?>">
                                     <span class="oxi-addons-settings-connfirmation accordions_or_faqs_license_massage">
                                         <?php
                                         if ($this->status == 'valid' && empty($this->license)):
-                                            echo '<span class="oxi-confirmation-success"></span>';
+                                            echo _e('<span class="oxi-confirmation-success"></span>');
                                         elseif ($this->status == 'valid' && !empty($this->license)):
-                                            echo '<span class="oxi-confirmation-success"></span>';
+                                            echo _e('<span class="oxi-confirmation-success"></span>');
                                         elseif (!empty($this->license)):
-                                            echo '<span class="oxi-confirmation-failed"></span>';
+                                            echo _e('<span class="oxi-confirmation-failed"></span>');
                                         else:
-                                            echo '<span class="oxi-confirmation-blank"></span>';
+                                            echo _e('<span class="oxi-confirmation-blank"></span>');
                                         endif;
                                         ?>
                                     </span>
                                     <span class="oxi-addons-settings-connfirmation accordions_or_faqs_license_text">
                                         <?php
                                         if ($this->status == 'valid' && empty($this->license)):
-                                            echo '<span class="oxi-addons-settings-massage">' . esc_attr__('Pre Active', 'accordions-or-faqs') . '</span>';
+                                            echo _e('<span class="oxi-addons-settings-massage">Pre Active</span>');
                                         elseif ($this->status == 'valid' && !empty($this->license)):
-                                            echo '<span class="oxi-addons-settings-massage">' . esc_attr__('Active', 'accordions-or-faqs') . '</span>';
+                                            echo _e('<span class="oxi-addons-settings-massage">Active</span>');
                                         elseif (!empty($this->license)):
-                                            echo '<span class="oxi-addons-settings-massage">' . esc_attr__($this->status, 'accordions-or-faqs') . '</span>';
+                                            echo _e('<span class="oxi-addons-settings-massage">' . esc_html($this->status) . '</span>');
                                         else:
-                                            echo '<span class="oxi-addons-settings-massage"></span>';
+                                            echo _e('<span class="oxi-addons-settings-massage"></span>');
                                         endif;
                                         ?>
                                     </span>
@@ -141,7 +144,7 @@ class Settings {
      */
     public function admin_ajax() {
         $this->admin_settings_additional();
-        wp_enqueue_script('oxi-accordions-settings-page', OXI_ACCORDIONS_URL . '/assets/backend/custom/settings.js', false, OXI_ACCORDIONS_PLUGIN_VERSION);
+        wp_enqueue_script('oxi-accordions-settings-page', OXI_ACCORDIONS_URL . '/assets/backend/custom/settings.js', false, 'accordions-or-faqs');
     }
 
 }

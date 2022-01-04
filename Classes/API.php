@@ -63,9 +63,11 @@ class API {
         endif;
 
         $rawdata = json_decode($request['rawdata'], true);
-
-        $this->rawdata = sanitize_text_field($request['rawdata']);
-
+        if (is_array($rawdata)):
+            $this->validate_post($rawdata);
+        else:
+            $this->rawdata = sanitize_text_field($request['rawdata']);
+        endif;
         $this->styleid = (int) $request['styleid'];
         $this->childid = (int) $request['childid'];
 
@@ -73,7 +75,7 @@ class API {
         if (method_exists($this, $action_class)):
             return $this->{$action_class}();
         else:
-            return die(esc_html('Security check'));
+            return die(esc_html__('Security check', 'accordions-or-faqs'));
         endif;
     }
 
@@ -274,6 +276,27 @@ class API {
         endif;
     }
 
+    public function get_shortcode_export() {
+        $styleid = (int) $this->styleid;
+        if ($styleid):
+            $style = $this->database->wpdb->get_row($this->database->wpdb->prepare("SELECT * FROM {$this->database->parent_table} WHERE id = %d", $styleid), ARRAY_A);
+            $child = $this->database->wpdb->get_results($this->database->wpdb->prepare("SELECT * FROM {$this->database->child_table} WHERE styleid = %d ORDER by id ASC", $styleid), ARRAY_A);
+            $filename = 'accordions-or-faqs-template-' . $styleid . '.json';
+            $files = [
+                'style' => $style,
+                'child' => $child,
+            ];
+            $finalfiles = json_encode($files);
+            $this->send_file_headers($filename, strlen($finalfiles));
+            @ob_end_clean();
+            flush();
+            echo $finalfiles;
+            die;
+        else:
+            return 'Silence is Golden';
+        endif;
+    }
+
     /**
      * Send file headers.
      *
@@ -452,6 +475,9 @@ class API {
      * @return void
      */
     public function post_user_permission() {
+        if (!current_user_can('manage_options')) {
+            return;
+        }
         $rawdata = json_decode(stripslashes($this->rawdata), true);
         $value = sanitize_text_field($rawdata['value']);
         update_option('oxi_accordions_user_permission', $value);
@@ -463,6 +489,9 @@ class API {
      * @return void
      */
     public function post_font_awesome() {
+        if (!current_user_can('manage_options')) {
+            return;
+        }
         $rawdata = json_decode(stripslashes($this->rawdata), true);
         $value = sanitize_text_field($rawdata['value']);
         update_option('oxi_addons_font_awesome', $value);
@@ -474,6 +503,9 @@ class API {
      * @return void
      */
     public function post_oxi_license() {
+        if (!current_user_can('manage_options')) {
+            return;
+        }
         $rawdata = json_decode(stripslashes($this->rawdata), true);
         $new = sanitize_text_field($rawdata['license']);
         $old = get_option('accordions_or_faqs_license_key');
@@ -547,8 +579,8 @@ class API {
 
                     case 'expired' :
 
-                        $message = esc_html(
-                                'Your license key expired'
+                        $message = sprintf(
+                                'Your license key expired on %s.', date_i18n(get_option('date_format'), strtotime($license_data->expires, current_time('timestamp')))
                         );
                         break;
 
@@ -570,7 +602,7 @@ class API {
 
                     case 'item_name_mismatch' :
 
-                        $message = esc_html('This appears to be an invalid license key for accordions-or-faqs.');
+                        $message = sprintf(esc_html('This appears to be an invalid license key for %s.'), 'accordions-or-faqs');
                         break;
 
                     case 'no_activations_left':

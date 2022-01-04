@@ -17,6 +17,9 @@ class Reviews {
      *
      */
     public function __construct() {
+        if (!current_user_can('manage_options')) {
+            return;
+        }
         add_action('admin_notices', array($this, 'first_install'));
         add_action('admin_enqueue_scripts', array($this, 'admin_enqueue_scripts'));
         add_action('wp_ajax_oxi_accordions_reviews_notice', array($this, 'notice_dissmiss'));
@@ -95,7 +98,7 @@ class Reviews {
      */
     public function admin_enqueue_scripts() {
         wp_enqueue_script("jquery");
-        wp_enqueue_style('oxi-accordions-admin-notice', OXI_ACCORDIONS_URL . '/Oxilab/css/notice.css', false, OXI_ACCORDIONS_PLUGIN_VERSION);
+        wp_enqueue_style('oxi-accordions-admin-notice', OXI_ACCORDIONS_URL . '/Oxilab/css/notice.css', false, 'accordions-or-faqs');
         $this->dismiss_button_scripts();
     }
 
@@ -104,7 +107,7 @@ class Reviews {
      * @return void
      */
     public function dismiss_button_scripts() {
-        wp_enqueue_script('oxi-accordions-admin-notice', OXI_ACCORDIONS_URL . '/Oxilab/js/notice.js', false, OXI_ACCORDIONS_PLUGIN_VERSION);
+        wp_enqueue_script('oxi-accordions-admin-notice', OXI_ACCORDIONS_URL . '/Oxilab/js/notice.js', false, 'accordions-or-faqs');
         wp_localize_script('oxi-accordions-admin-notice', 'oxi_accordions_reviews_notice', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxi_accordions_reviews_notice')));
     }
 

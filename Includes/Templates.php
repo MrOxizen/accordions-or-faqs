@@ -109,7 +109,7 @@ class Templates {
                             <div class="oxi-addons-style-preview-bottom-right">
                                 <?php
                                 if ($key > 10 && apply_filters(OXI_ACCORDIONS_PREMIUM, true) == false):
-                                    echo '<button class="btn btn-warning oxi-addons-addons-style-btn-warning" title="Pro Only"  type="submit" value="pro only" name="addonsstyleproonly">Pro Only</button>  ';
+                                    echo'<button class="btn btn-warning oxi-addons-addons-style-btn-warning" title="Pro Only"  type="submit" value="pro only" name="addonsstyleproonly">Pro Only</button>  ';
                                 else:
                                     echo '<button type="button" class="btn btn-success oxi-addons-addons-template-create oxi-addons-addons-js-create" data-toggle="modal" template-id="' . esc_attr($value) . '">Create Style</button>';
                                 endif;
@@ -148,7 +148,7 @@ class Templates {
                     </div>';
         endif;
 
-        echo'<div class="modal fade" id="oxi-addons-style-create-modal" >
+        echo '<div class="modal fade" id="oxi-addons-style-create-modal" >
                         <form method="post" id="oxi-addons-style-modal-form">
                             <div class="modal-dialog modal-sm modal-dialog-centered">
                                 <div class="modal-content">

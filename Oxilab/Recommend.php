@@ -92,6 +92,8 @@ class Recommend {
         if (count($recommend) > 2 && $recommend['modules-path'] != ''):
             $plugin = explode('/', $recommend['modules-path'])[0];
 
+            $massage = sprintf('<p>Thank you for using my Accordions - Multiple Accordions or FAQs Builders. %s</p>', $recommend['modules-massage']);
+
             $install_url = wp_nonce_url(add_query_arg(array('action' => 'install-plugin', 'plugin' => $plugin), admin_url('update.php')), 'install-plugin' . '_' . $plugin);
             echo'<div class="oxi-addons-admin-notifications oxi-accordions-admin-notifications">
                         <h3>
@@ -101,8 +103,8 @@ class Recommend {
                         <p></p>
                         <div class="oxi-addons-admin-notifications-holder">
                             <div class="oxi-addons-admin-notifications-alert">
-                                <p>Thank you for using my Accordions - Multiple Accordions or FAQs Builders. ' . esc_html($recommend['modules-massage']) . '</p>
-                                <p><a href="' . esc_url($install_url) . '" class="button button-large button-primary">' . esc_html__('Install Now', 'accordions-or-faqs') . '</a> &nbsp;&nbsp;<a href="#" class="button button-large button-secondary oxi-plugins-admin-recommended-dismiss" sup-data="done">No, Thanks</a></p>
+                                ' . $massage . '
+                                <p>' . sprintf('<a href="%s" class="button button-large button-primary">%s</a>', esc_url($install_url), esc_html__('Install Now', 'accordions-or-faqs')) . ' &nbsp;&nbsp;<a href="#" class="button button-large button-secondary oxi-plugins-admin-recommended-dismiss" sup-data="done">No, Thanks</a></p>
                             </div>
                         </div>
                         <p></p>
@@ -116,7 +118,7 @@ class Recommend {
      */
     public function admin_enqueue_scripts() {
         wp_enqueue_script("jquery");
-        wp_enqueue_style('oxilab_accorions-admin-notice-css', OXI_ACCORDIONS_URL . '/Oxilab/css/notice.css', false, OXI_ACCORDIONS_PLUGIN_VERSION);
+        wp_enqueue_style('oxilab_accorions-admin-notice-css', OXI_ACCORDIONS_URL . '/Oxilab/css/notice.css', false, 'accordions-or-faqs');
         $this->dismiss_button_scripts();
     }
 
@@ -125,7 +127,7 @@ class Recommend {
      * @return void
      */
     public function dismiss_button_scripts() {
-        wp_enqueue_script('oxi-accordions-admin-recommend', OXI_ACCORDIONS_URL . '/Oxilab/js/recommend.js', false, OXI_ACCORDIONS_PLUGIN_VERSION);
+        wp_enqueue_script('oxi-accordions-admin-recommend', OXI_ACCORDIONS_URL . '/Oxilab/js/recommend.js', false, 'accordions-or-faqs');
         wp_localize_script('oxi-accordions-admin-recommend', 'oxi_accordions_admin_recommended', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxi_accordions_admin_recommended')));
     }
 
@@ -137,7 +139,7 @@ class Recommend {
         if (isset($_POST['_wpnonce']) || wp_verify_nonce(sanitize_key(wp_unslash($_POST['_wpnonce'])), 'oxi_accordions_admin_recommended')):
             $data = 'done';
             update_option('accordions_or_faqs_recommended', $data);
-            echo 'done';
+            echo esc_html('done');
         else:
             return;
         endif;

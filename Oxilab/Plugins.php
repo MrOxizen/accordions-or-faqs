@@ -95,6 +95,20 @@ class Plugins {
                         if ($modulespath != $this->current_plugins):
                             $file_path = $modulespath;
                             $plugin = explode('/', $file_path)[0];
+                            $message = '';
+                            if (isset($installed_plugins[$file_path])):
+                                if (array_key_exists($file_path, $active_plugins)):
+                                    $message = '<a href="#" class="btn btn-light">Installed</a>';
+                                else:
+                                    $activation_url = wp_nonce_url(admin_url('plugins.php?action=activate&plugin=' . $file_path), 'activate-plugin_' . $file_path);
+                                    $message = sprintf('<a href="%s" class="btn btn-info">%s</a>', esc_url($activation_url), esc_html__('Activate', 'accordions-or-faqs'));
+                                endif;
+                            else:
+                                if (current_user_can('install_plugins')):
+                                    $install_url = wp_nonce_url(add_query_arg(array('action' => 'install-plugin', 'plugin' => $plugin), admin_url('update.php')), 'install-plugin' . '_' . $plugin);
+                                    $message = sprintf('<a href="%s" class="btn btn-success">%s</a>', esc_url($install_url), esc_html__('Install', 'accordions-or-faqs'));
+                                endif;
+                            endif;
                             ?>
                             <div class="col-lg-4 col-md-6 col-sm-12">
                                 <div class="oxi-addons-modules-elements">
@@ -105,6 +119,7 @@ class Plugins {
                                     </div>
                                     <div class="oxi-addons-modules-action-status">
                                         <span class="oxi-addons-modules-preview"><a href="<?php echo esc_url($value['plugin-url']); ?>" class="btn btn-dark">Preview</a></span>
+                                        <span class="oxi-addons-modules-installing"><?php echo $message; ?></span>
                                     </div>
                                 </div>
                             </div>
