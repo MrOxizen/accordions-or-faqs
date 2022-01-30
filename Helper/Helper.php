@@ -11,115 +11,6 @@ if (!defined('ABSPATH'))
  */
 trait Helper {
 
-    public function allowed_html($rawdata) {
-        $allowed_tags = array(
-            'a' => array(
-                'class' => array(),
-                'href' => array(),
-                'rel' => array(),
-                'title' => array(),
-            ),
-            'abbr' => array(
-                'title' => array(),
-            ),
-            'b' => array(),
-            'br' => array(),
-            'blockquote' => array(
-                'cite' => array(),
-            ),
-            'cite' => array(
-                'title' => array(),
-            ),
-            'code' => array(),
-            'del' => array(
-                'datetime' => array(),
-                'title' => array(),
-            ),
-            'dd' => array(),
-            'div' => array(
-                'class' => array(),
-                'title' => array(),
-                'style' => array(),
-                'id' => array(),
-            ),
-            'table' => array(
-                'class' => array(),
-                'id' => array(),
-                'style' => array(),
-            ),
-            'button' => array(
-                'class' => array(),
-                'type' => array(),
-                'value' => array(),
-            ),
-            'thead' => array(),
-            'tbody' => array(),
-            'tr' => array(),
-            'td' => array(),
-            'dt' => array(),
-            'em' => array(),
-            'h1' => array(),
-            'h2' => array(),
-            'h3' => array(),
-            'h4' => array(),
-            'h5' => array(),
-            'h6' => array(),
-            'i' => array(
-                'class' => array(),
-            ),
-            'img' => array(
-                'alt' => array(),
-                'class' => array(),
-                'height' => array(),
-                'src' => array(),
-                'width' => array(),
-            ),
-            'li' => array(
-                'class' => array(),
-            ),
-            'ol' => array(
-                'class' => array(),
-            ),
-            'p' => array(
-                'class' => array(),
-            ),
-            'q' => array(
-                'cite' => array(),
-                'title' => array(),
-            ),
-            'span' => array(
-                'class' => array(),
-                'title' => array(),
-                'style' => array(),
-            ),
-            'strike' => array(),
-            'strong' => array(),
-            'ul' => array(
-                'class' => array(),
-            ),
-        );
-        if (is_array($rawdata)):
-            return $rawdata = array_map(array($this, 'allowed_html'), $rawdata);
-        else:
-            return wp_kses($rawdata, $allowed_tags);
-        endif;
-    }
-
-    public function validate_post($files = '') {
-
-        $rawdata = [];
-        if (!empty($files)):
-            $data = json_decode(stripslashes($files), true);
-        endif;
-        if (is_array($data)):
-            $rawdata = array_map(array($this, 'allowed_html'), $data);
-        else:
-            $rawdata = $this->allowed_html($files);
-        endif;
-
-        return $rawdata;
-    }
-
     public function redirect_on_activation() {
         if (get_transient('accordions_or_faqs_activation_redirect')) :
             delete_transient('accordions_or_faqs_activation_redirect');
@@ -159,7 +50,7 @@ trait Helper {
                         <nav class="oxilab-sa-admin-nav">
                             <ul class="oxilab-sa-admin-menu">';
 
-        $GETPage = $this->validate_post($_GET['page']);
+        $GETPage = sanitize_text_field($_GET['page']);
 
         foreach ($response as $key => $value) {
             $active = ($GETPage == $value['homepage'] ? ' class="active" ' : '');

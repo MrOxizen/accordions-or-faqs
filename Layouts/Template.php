@@ -470,7 +470,8 @@ class Template {
 
     public function text_render($data) {
         $r = do_shortcode(str_replace('spTac', '&nbsp;', str_replace('spBac', '<br>', html_entity_decode($data))), $ignore_html = false);
-        return $r;
+
+        return wp_kses($r, $this->database->allowed_tags());
     }
 
     public function url_render($id, $style) {
@@ -599,7 +600,7 @@ class Template {
         endif;
         $r .= '</div>';
         if ($t):
-            return $r;
+            return wp_kses($r, $this->database->allowed_tags());
         endif;
     }
 
