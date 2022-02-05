@@ -62,12 +62,7 @@ class API {
             return new \WP_REST_Request('Invalid URL', 422);
         endif;
 
-        $rawdata = json_decode($request['rawdata'], true);
-        if (is_array($rawdata)):
-            $this->validate_post($rawdata);
-        else:
-            $this->rawdata = sanitize_text_field($request['rawdata']);
-        endif;
+        $this->rawdata = addslashes($request['rawdata']);
         $this->styleid = (int) $request['styleid'];
         $this->childid = (int) $request['childid'];
 
@@ -91,6 +86,7 @@ class API {
                 'title' => array(),
             ),
             'b' => array(),
+            'br' => array(),
             'blockquote' => array(
                 'cite' => array(),
             ),
@@ -172,12 +168,19 @@ class API {
         endif;
     }
 
-    public function validate_post($rawdata) {
-        if (is_array($rawdata)):
-            $rawdata = array_map(array($this, 'allowed_html'), $rawdata);
-            $this->rawdata = addslashes(json_encode($rawdata));
+    public function validate_post($data = '') {
+        $rawdata = [];
+        if (!empty($data)):
+            $arrfiles = json_decode(stripslashes($data), true);
+        else:
+            $arrfiles = json_decode(stripslashes($this->rawdata), true);
         endif;
-        return;
+        if (is_array($arrfiles)):
+            $rawdata = array_map(array($this, 'allowed_html'), $arrfiles);
+        else:
+            $rawdata = $this->allowed_html($data);
+        endif;
+        return $rawdata;
     }
 
     /**
@@ -198,7 +201,7 @@ class API {
     }
 
     public function post_create_new_accordions() {
-        $params = json_decode(stripslashes($this->rawdata), true);
+        $params = $this->validate_post();
         $folder = $this->safe_path(OXI_ACCORDIONS_PATH . 'demo-template/');
         $filename = sanitize_text_field($params['template-id']);
         $name = sanitize_text_field($params['addons-style-name']);
@@ -255,7 +258,7 @@ class API {
     }
 
     public function post_shortcode_deactive() {
-        $params = json_decode(stripslashes($this->rawdata), true);
+        $params = $this->validate_post();
         $id = (int) $params['oxideletestyle'];
         if ($id > 0):
             $this->database->wpdb->query($this->database->wpdb->prepare("DELETE FROM {$this->database->import_table} WHERE name = %s and type = %s", $id, 'accordions-or-faqs'));
@@ -266,7 +269,7 @@ class API {
     }
 
     public function post_shortcode_active() {
-        $params = json_decode(stripslashes($this->rawdata), true);
+        $params = $this->validate_post();
         $id = (int) $params['oxiimportstyle'];
         if ($id > 0):
             $this->database->wpdb->query($this->database->wpdb->prepare("INSERT INTO {$this->database->import_table} (type, name) VALUES (%s, %s)", array('accordions-or-faqs', $id)));
@@ -337,7 +340,7 @@ class API {
      * @since 2.0.1
      */
     public function post_template_name() {
-        $settings = json_decode(stripslashes($this->rawdata), true);
+        $settings = $this->validate_post();
         $name = sanitize_text_field($settings['addonsstylename']);
         $id = $settings['addonsstylenameid'];
         if ((int) $id):
@@ -371,7 +374,7 @@ class API {
      * @since 2.0.1
      */
     public function post_elements_template_rearrange_save_data() {
-        $params = explode(',', $this->rawdata);
+        $params = explode(',', $this->validate_post());
         foreach ($params as $value) {
             if ((int) $value):
                 $data = $this->database->wpdb->get_row($this->database->wpdb->prepare("SELECT * FROM {$this->database->child_table} WHERE id = %d ", $value), ARRAY_A);
@@ -478,7 +481,7 @@ class API {
         if (!current_user_can('manage_options')) {
             return;
         }
-        $rawdata = json_decode(stripslashes($this->rawdata), true);
+        $rawdata = $this->validate_post();
         $value = sanitize_text_field($rawdata['value']);
         update_option('oxi_accordions_user_permission', $value);
         return '<span class="oxi-confirmation-success"></span>';
@@ -492,7 +495,7 @@ class API {
         if (!current_user_can('manage_options')) {
             return;
         }
-        $rawdata = json_decode(stripslashes($this->rawdata), true);
+        $rawdata = $this->validate_post();
         $value = sanitize_text_field($rawdata['value']);
         update_option('oxi_addons_font_awesome', $value);
         return '<span class="oxi-confirmation-success"></span>';
@@ -506,7 +509,7 @@ class API {
         if (!current_user_can('manage_options')) {
             return;
         }
-        $rawdata = json_decode(stripslashes($this->rawdata), true);
+        $rawdata = $this->validate_post();
         $new = sanitize_text_field($rawdata['license']);
         $old = get_option('accordions_or_faqs_license_key');
         $status = get_option('accordions_or_faqs_license_status');
