@@ -173,6 +173,7 @@ class API {
         if (!empty($data)):
             $arrfiles = json_decode(stripslashes($data), true);
         else:
+            $data = $this->rawdata;
             $arrfiles = json_decode(stripslashes($this->rawdata), true);
         endif;
         if (is_array($arrfiles)):

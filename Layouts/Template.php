@@ -221,15 +221,30 @@ class Template {
      * @since 2.0.1
      */
     public function render() {
-
-        echo'<div class="oxi-addons-container oxi-accordions-wrapper ' . esc_attr($this->WRAPPER) . '" id="' . esc_attr($this->WRAPPER) . '">
-                 <div class="oxi-addons-row">';
-        if ($this->admin == 'admin'):
-            echo '<input type="hidden" id="oxi-addons-iframe-background-color" name="oxi-addons-iframe-background-color" value="' . (is_array($this->style) ? array_key_exists('oxilab-preview-color', $this->style) ? esc_attr($this->style['oxilab-preview-color']) : '#FFF' : '#FFF') . '">';
-        endif;
-        $this->default_render($this->style, $this->child, $this->admin);
-        echo'   </div>
-              </div>';
+        ?>
+        <div class="oxi-addons-container oxi-accordions-wrapper <?php echo esc_attr($this->WRAPPER) ?>" id="<?php echo esc_attr($this->WRAPPER) ?>">
+            <div class="oxi-addons-row">
+                <?php
+                if ($this->admin == 'admin'):
+                    ?>
+                    <input type="hidden" id="oxi-addons-iframe-background-color" name="oxi-addons-iframe-background-color" value=" <?php
+                           if (is_array($this->style)):
+                               if (array_key_exists('oxilab-preview-color', $this->style)):
+                                   echo esc_attr($this->style['oxilab-preview-color']);
+                               else:
+                                   echo '#FFF';
+                               endif;
+                           else:
+                               echo '#FFF';
+                           endif;
+                           ?>">
+                    <?php
+                endif;
+                $this->default_render($this->style, $this->child, $this->admin);
+                ?>
+            </div>
+        </div>
+        <?php
     }
 
     /**

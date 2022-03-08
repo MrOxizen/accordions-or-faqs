@@ -412,6 +412,31 @@ class Admin {
         </div>
         <?php
     }
+       /**
+     * Template hooks
+     *
+     * @since 2.0.1
+     */
+    public function hooks() {
+        $this->admin_elements_editior_loader();
+        $this->dbdata = $this->database->wpdb->get_row($this->database->wpdb->prepare('SELECT * FROM ' . $this->database->parent_table . ' WHERE id = %d ', $this->oxiid), ARRAY_A);
+
+        $Get_Nested_Accordions = $this->database->wpdb->get_results($this->database->wpdb->prepare("SELECT id, name FROM {$this->database->parent_table} WHERE type = %s ORDER by id ASC", 'accordions-or-faqs'), ARRAY_A);
+        foreach ($Get_Nested_Accordions as $key => $value) {
+            if ($value['id'] != $this->oxiid):
+                $this->Get_Nested_Accordions[$value['id']] = !empty($value['name']) ? $value['name'] : 'Accordions id ' . $value['id'];
+            endif;
+        }
+
+        $this->child = $this->database->wpdb->get_results($this->database->wpdb->prepare("SELECT * FROM {$this->database->child_table} WHERE styleid = %d ORDER by id ASC", $this->oxiid), ARRAY_A);
+        if (!empty($this->dbdata['rawdata'])):
+            $s = json_decode(stripslashes($this->dbdata['rawdata']), true);
+            if (is_array($s)):
+                $this->style = $s;
+            endif;
+        endif;
+        $this->import_font_family();
+    }
 
     public function register_controls() {
         $this->start_section_header(
@@ -480,30 +505,6 @@ class Admin {
         return $thumbnail_sizes;
     }
 
-    /**
-     * Template hooks
-     *
-     * @since 2.0.1
-     */
-    public function hooks() {
-        $this->admin_elements_editior_loader();
-        $this->dbdata = $this->database->wpdb->get_row($this->database->wpdb->prepare('SELECT * FROM ' . $this->database->parent_table . ' WHERE id = %d ', $this->oxiid), ARRAY_A);
-
-        $Get_Nested_Accordions = $this->database->wpdb->get_results($this->database->wpdb->prepare("SELECT id, name FROM {$this->database->parent_table} WHERE type = %s ORDER by id ASC", 'accordions-or-faqs'), ARRAY_A);
-        foreach ($Get_Nested_Accordions as $key => $value) {
-            if ($value['id'] != $this->oxiid):
-                $this->Get_Nested_Accordions[$value['id']] = !empty($value['name']) ? $value['name'] : 'Accordions id ' . $value['id'];
-            endif;
-        }
-
-        $this->child = $this->database->wpdb->get_results($this->database->wpdb->prepare("SELECT * FROM {$this->database->child_table} WHERE styleid = %d ORDER by id ASC", $this->oxiid), ARRAY_A);
-        if (!empty($this->dbdata['rawdata'])):
-            $s = json_decode(stripslashes($this->dbdata['rawdata']), true);
-            if (is_array($s)):
-                $this->style = $s;
-            endif;
-        endif;
-        $this->import_font_family();
-    }
+ 
 
 }

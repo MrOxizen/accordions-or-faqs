@@ -390,6 +390,7 @@ jQuery.noConflict();
             alert('Kindly Rearrange, Then  Click to saved');
             return false;
         }
+        
         var functionname = "elements_template_rearrange_save_data";
         OxiAccordionsRestApi(functionname, rawdata, styleid, childid, function (callback) {
             if (callback === "success") {

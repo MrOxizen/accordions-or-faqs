@@ -2599,37 +2599,7 @@ class Helper extends Admin {
         );
         $this->end_controls_section();
     }
-
-    public function register_custom_parent() {
-        ///Custom CSS
-        $this->start_section_tabs(
-                'oxi-accordions-start-tabs', [
-            'condition' => [
-                'oxi-accordions-start-tabs' => 'custom'
-            ],
-            'padding' => '10px'
-                ]
-        );
-
-        $this->start_controls_section(
-                'oxi-accordions-start-tabs-css', [
-            'label' => esc_html__('Custom CSS', 'accordions-or-faqs'),
-            'showing' => TRUE,
-                ]
-        );
-        $this->add_control(
-                'oxi-accordions-custom-css', $this->style, [
-            'label' => esc_html__('', 'accordions-or-faqs'),
-            'type' => Controls::TEXTAREA,
-            'default' => '',
-            'description' => 'Custom CSS Section. You can add custom css into textarea.'
-                ]
-        );
-        $this->end_controls_section();
-        $this->end_section_tabs();
-    }
-
-    public function modal_form_data() {
+     public function modal_form_data() {
         echo '<div class="modal-header">
                     <h4 class="modal-title">Accordions Modal Form</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -2761,5 +2731,36 @@ class Helper extends Admin {
 
         echo '</div>';
     }
+
+    public function register_custom_parent() {
+        ///Custom CSS
+        $this->start_section_tabs(
+                'oxi-accordions-start-tabs', [
+            'condition' => [
+                'oxi-accordions-start-tabs' => 'custom'
+            ],
+            'padding' => '10px'
+                ]
+        );
+
+        $this->start_controls_section(
+                'oxi-accordions-start-tabs-css', [
+            'label' => esc_html__('Custom CSS', 'accordions-or-faqs'),
+            'showing' => TRUE,
+                ]
+        );
+        $this->add_control(
+                'oxi-accordions-custom-css', $this->style, [
+            'label' => esc_html__('', 'accordions-or-faqs'),
+            'type' => Controls::TEXTAREA,
+            'default' => '',
+            'description' => 'Custom CSS Section. You can add custom css into textarea.'
+                ]
+        );
+        $this->end_controls_section();
+        $this->end_section_tabs();
+    }
+
+   
 
 }
