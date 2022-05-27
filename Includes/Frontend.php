@@ -31,6 +31,9 @@ class Frontend {
      */
     public function __construct() {
         $this->database = new \OXI_ACCORDIONS_PLUGINS\Helper\Database();
+         if (!function_exists('wp_print_media_templates')) {
+            require_once ABSPATH . WPINC . '/media-template.php';
+        }
         add_action('admin_init', array($this, 'maybe_load_template'));
         add_action('admin_menu', array($this, 'add_dashboard_page'));
         add_action('network_admin_menu', array($this, 'add_dashboard_page'));
