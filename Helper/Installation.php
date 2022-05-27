@@ -14,6 +14,10 @@ class Installation {
 
     protected static $lfe_instance = NULL;
 
+    public function __construct() {
+        
+    }
+
     /**
      * Plugin fixed
      *
@@ -62,10 +66,6 @@ class Installation {
         $database->update_database();
 
         set_transient('accordions_or_faqs_activation_redirect', true, 30);
-    }
-
-    public function __construct() {
-
     }
 
 }

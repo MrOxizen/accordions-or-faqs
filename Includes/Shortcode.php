@@ -63,6 +63,25 @@ class Shortcode {
     }
 
     /**
+     * Confirm Transient
+     *
+     * @since 2.0.1
+     */
+    public function get_transient() {
+        if ($this->define_user == 'admin'):
+            $response = get_transient('accordions-or-faqs-template-' . $this->styleid);
+            if ($response):
+                $new = [
+                    'rawdata' => $response,
+                    'stylesheet' => '',
+                    'font_family' => ''
+                ];
+                $this->style_table = array_merge($this->style_table, $new);
+            endif;
+        endif;
+    }
+
+    /**
      * Get Data From Database
      *
      * @since 2.0.1
@@ -80,25 +99,6 @@ class Shortcode {
         $this->child_table = $this->database->wpdb->get_results($this->database->wpdb->prepare("SELECT * FROM {$this->database->child_table} WHERE styleid = %d ORDER by id ASC", $this->styleid), ARRAY_A);
 
         $this->render_html();
-    }
-
-    /**
-     * Confirm Transient
-     *
-     * @since 2.0.1
-     */
-    public function get_transient() {
-        if ($this->define_user == 'admin'):
-            $response = get_transient('accordions-or-faqs-template-' . $this->styleid);
-            if ($response):
-                $new = [
-                    'rawdata' => $response,
-                    'stylesheet' => '',
-                    'font_family' => ''
-                ];
-                $this->style_table = array_merge($this->style_table, $new);
-            endif;
-        endif;
     }
 
     public function render_html() {

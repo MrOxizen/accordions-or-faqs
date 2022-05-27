@@ -40,14 +40,6 @@ Class Database {
     public $child_table;
     protected static $lfe_instance = NULL;
 
-    public function __construct() {
-        global $wpdb;
-        $this->wpdb = $wpdb;
-        $this->parent_table = $wpdb->prefix . 'oxi_div_style';
-        $this->child_table = $wpdb->prefix . 'oxi_div_list';
-        $this->import_table = $wpdb->prefix . 'oxi_div_import';
-    }
-
     public function update_database() {
         $charset_collate = $this->wpdb->get_charset_collate();
 
@@ -209,6 +201,14 @@ Class Database {
         );
 
         return $allowed_tags;
+    }
+
+    public function __construct() {
+        global $wpdb;
+        $this->wpdb = $wpdb;
+        $this->parent_table = $wpdb->prefix . 'oxi_div_style';
+        $this->child_table = $wpdb->prefix . 'oxi_div_list';
+        $this->import_table = $wpdb->prefix . 'oxi_div_import';
     }
 
 }

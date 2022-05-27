@@ -42,15 +42,7 @@ class Bootstrap {
         }
     }
 
-    /**
-     * Load Textdomain
-     *
-     * @since 2.0.1
-     * @access public
-     */
-    public function i18n() {
-        load_plugin_textdomain('oxi-accordions-plugin');
-    }
+   
 
     public function load_shortcode() {
         add_shortcode('oxi_accordions', [$this, 'accordions_shortcode']);
@@ -66,6 +58,15 @@ class Bootstrap {
         add_action('admin_menu', [$this, 'admin_menu']);
         add_action('admin_head', [$this, 'admin_icon']);
         add_action('admin_init', array($this, 'redirect_on_activation'));
+    } 
+    /**
+     * Load Textdomain
+     *
+     * @since 2.0.1
+     * @access public
+     */
+    public function i18n() {
+        load_plugin_textdomain('oxi-accordions-plugin');
     }
 
 }

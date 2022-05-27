@@ -11,6 +11,24 @@ if (!defined('ABSPATH'))
  */
 trait Additional {
 
+    public function loader_font_familly_validation($data = []) {
+        foreach ($data as $value) {
+            wp_enqueue_style('' . $value . '', 'https://fonts.googleapis.com/css?family=' . $value . '');
+        }
+    }
+
+    /**
+     * Admin Media Scripts.
+     * Most of time using into Style Editing Page
+     *
+     * @since 2.0.1
+     */
+    public function admin_media_scripts() {
+        wp_enqueue_media();
+        wp_register_script('oxi_accordions_media_scripts', OXI_ACCORDIONS_URL . '/assets/backend/custom/media-uploader.js', false, OXI_ACCORDIONS_PLUGIN_VERSION);
+        wp_enqueue_script('oxi_accordions_media_scripts');
+    }
+
     public function admin_css() {
         $this->loader_font_familly_validation(['Bree+Serif', 'Source+Sans+Pro']);
         wp_enqueue_style('oxi-accordions-bootstrap', OXI_ACCORDIONS_URL . 'assets/backend/css/bootstrap.min.css', false, OXI_ACCORDIONS_PLUGIN_VERSION);
@@ -103,24 +121,6 @@ trait Additional {
         wp_enqueue_style('jquery.fontselect', OXI_ACCORDIONS_URL . 'assets/backend/css/jquery.fontselect.css', false, OXI_ACCORDIONS_PLUGIN_VERSION);
         wp_enqueue_script('oxi-accordions--editor', OXI_ACCORDIONS_URL . 'assets/backend/custom/editor.js', false, OXI_ACCORDIONS_PLUGIN_VERSION);
         $this->admin_media_scripts();
-    }
-
-    public function loader_font_familly_validation($data = []) {
-        foreach ($data as $value) {
-            wp_enqueue_style('' . $value . '', 'https://fonts.googleapis.com/css?family=' . $value . '');
-        }
-    }
-
-    /**
-     * Admin Media Scripts.
-     * Most of time using into Style Editing Page
-     *
-     * @since 2.0.1
-     */
-    public function admin_media_scripts() {
-        wp_enqueue_media();
-        wp_register_script('oxi_accordions_media_scripts', OXI_ACCORDIONS_URL . '/assets/backend/custom/media-uploader.js', false, OXI_ACCORDIONS_PLUGIN_VERSION);
-        wp_enqueue_script('oxi_accordions_media_scripts');
     }
 
     public function import_font_family() {

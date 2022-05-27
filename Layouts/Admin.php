@@ -112,6 +112,10 @@ class Admin {
             $this->render();
         }
     }
+       public function str_replace_first($from, $to, $content) {
+        $from = '/' . preg_quote($from, '/') . '/';
+        return preg_replace($from, $to, $content, 1);
+    }
 
     /**
      * Template Modal opener
@@ -490,10 +494,7 @@ class Admin {
         $this->end_section_tabs();
     }
 
-    public function str_replace_first($from, $to, $content) {
-        $from = '/' . preg_quote($from, '/') . '/';
-        return preg_replace($from, $to, $content, 1);
-    }
+ 
 
     public function thumbnail_sizes() {
         $default_image_sizes = get_intermediate_image_sizes();

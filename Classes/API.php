@@ -22,185 +22,6 @@ class API {
     public $styleid;
     public $childid;
 
-    /**
-     * Constructor of plugin class
-     *
-     * @since 2.0.1
-     */
-    public function __construct() {
-        $this->database = new \OXI_ACCORDIONS_PLUGINS\Helper\Database();
-        $this->build_api();
-    }
-
-    public function build_api() {
-        add_action('rest_api_init', function () {
-            register_rest_route(untrailingslashit('oxiaccordionsultimate/v1/'), '/(?P<action>\w+)/', array(
-                'methods' => array('GET', 'POST'),
-                'callback' => [$this, 'api_action'],
-                'permission_callback' => array($this, 'get_permissions_check'),
-            ));
-        });
-    }
-
-    public function get_permissions_check($request) {
-        $user_role = get_option('oxi_accordions_user_permission');
-        $role_object = get_role($user_role);
-        $first_key = '';
-        if (isset($role_object->capabilities) && is_array($role_object->capabilities)) {
-            reset($role_object->capabilities);
-            $first_key = key($role_object->capabilities);
-        } else {
-            $first_key = 'manage_options';
-        }
-        return current_user_can($first_key);
-    }
-
-    public function api_action($request) {
-        $this->request = $request;
-        $wpnonce = $request['_wpnonce'];
-        if (!wp_verify_nonce($wpnonce, 'wp_rest')):
-            return new \WP_REST_Request('Invalid URL', 422);
-        endif;
-
-        $this->rawdata = addslashes($request['rawdata']);
-        $this->styleid = (int) $request['styleid'];
-        $this->childid = (int) $request['childid'];
-
-        $action_class = strtolower($request->get_method()) . '_' . sanitize_key($request['action']);
-        if (method_exists($this, $action_class)):
-            return $this->{$action_class}();
-        else:
-            return die(esc_html__('Security check', 'accordions-or-faqs'));
-        endif;
-    }
-
-    public function allowed_html($rawdata) {
-        $allowed_tags = array(
-            'a' => array(
-                'class' => array(),
-                'href' => array(),
-                'rel' => array(),
-                'title' => array(),
-            ),
-            'abbr' => array(
-                'title' => array(),
-            ),
-            'b' => array(),
-            'br' => array(),
-            'blockquote' => array(
-                'cite' => array(),
-            ),
-            'cite' => array(
-                'title' => array(),
-            ),
-            'code' => array(),
-            'del' => array(
-                'datetime' => array(),
-                'title' => array(),
-            ),
-            'dd' => array(),
-            'div' => array(
-                'class' => array(),
-                'title' => array(),
-                'style' => array(),
-                'id' => array(),
-            ),
-            'table' => array(
-                'class' => array(),
-                'id' => array(),
-                'style' => array(),
-            ),
-            'button' => array(
-                'class' => array(),
-                'type' => array(),
-                'value' => array(),
-            ),
-            'thead' => array(),
-            'tbody' => array(),
-            'tr' => array(),
-            'td' => array(),
-            'dt' => array(),
-            'em' => array(),
-            'h1' => array(),
-            'h2' => array(),
-            'h3' => array(),
-            'h4' => array(),
-            'h5' => array(),
-            'h6' => array(),
-            'i' => array(
-                'class' => array(),
-            ),
-            'img' => array(
-                'alt' => array(),
-                'class' => array(),
-                'height' => array(),
-                'src' => array(),
-                'width' => array(),
-            ),
-            'li' => array(
-                'class' => array(),
-            ),
-            'ol' => array(
-                'class' => array(),
-            ),
-            'p' => array(
-                'class' => array(),
-            ),
-            'q' => array(
-                'cite' => array(),
-                'title' => array(),
-            ),
-            'span' => array(
-                'class' => array(),
-                'title' => array(),
-                'style' => array(),
-            ),
-            'strike' => array(),
-            'strong' => array(),
-            'ul' => array(
-                'class' => array(),
-            ),
-        );
-        if (is_array($rawdata)):
-            return $rawdata = array_map(array($this, 'allowed_html'), $rawdata);
-        else:
-            return wp_kses($rawdata, $allowed_tags);
-        endif;
-    }
-
-    public function validate_post($data = '') {
-        $rawdata = [];
-        if (!empty($data)):
-            $arrfiles = json_decode(stripslashes($data), true);
-        else:
-            $data = $this->rawdata;
-            $arrfiles = json_decode(stripslashes($this->rawdata), true);
-        endif;
-        if (is_array($arrfiles)):
-            $rawdata = array_map(array($this, 'allowed_html'), $arrfiles);
-        else:
-            $rawdata = $this->allowed_html($data);
-        endif;
-        return $rawdata;
-    }
-
-    /**
-     * Generate safe path
-     * @since v1.0.0
-     */
-    public function safe_path($path) {
-
-        $path = str_replace(['//', '\\\\'], ['/', '\\'], $path);
-        return str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $path);
-    }
-
-    public function array_replace($arr = [], $search = '', $replace = '') {
-        array_walk($arr, function (&$v) use ($search, $replace) {
-            $v = str_replace($search, $replace, $v);
-        });
-        return $arr;
-    }
-
     public function post_create_new_accordions() {
         $params = $this->validate_post();
         $folder = $this->safe_path(OXI_ACCORDIONS_PATH . 'demo-template/');
@@ -627,6 +448,185 @@ class API {
         }
         update_option('accordions_or_faqs_license_status', $license_data->license);
         return 'success';
+    }
+
+    /**
+     * Constructor of plugin class
+     *
+     * @since 2.0.1
+     */
+    public function __construct() {
+        $this->database = new \OXI_ACCORDIONS_PLUGINS\Helper\Database();
+        $this->build_api();
+    }
+
+    public function build_api() {
+        add_action('rest_api_init', function () {
+            register_rest_route(untrailingslashit('oxiaccordionsultimate/v1/'), '/(?P<action>\w+)/', array(
+                'methods' => array('GET', 'POST'),
+                'callback' => [$this, 'api_action'],
+                'permission_callback' => array($this, 'get_permissions_check'),
+            ));
+        });
+    }
+
+    public function get_permissions_check($request) {
+        $user_role = get_option('oxi_accordions_user_permission');
+        $role_object = get_role($user_role);
+        $first_key = '';
+        if (isset($role_object->capabilities) && is_array($role_object->capabilities)) {
+            reset($role_object->capabilities);
+            $first_key = key($role_object->capabilities);
+        } else {
+            $first_key = 'manage_options';
+        }
+        return current_user_can($first_key);
+    }
+
+    public function api_action($request) {
+        $this->request = $request;
+        $wpnonce = $request['_wpnonce'];
+        if (!wp_verify_nonce($wpnonce, 'wp_rest')):
+            return new \WP_REST_Request('Invalid URL', 422);
+        endif;
+
+        $this->rawdata = addslashes($request['rawdata']);
+        $this->styleid = (int) $request['styleid'];
+        $this->childid = (int) $request['childid'];
+
+        $action_class = strtolower($request->get_method()) . '_' . sanitize_key($request['action']);
+        if (method_exists($this, $action_class)):
+            return $this->{$action_class}();
+        else:
+            return die(esc_html__('Security check', 'accordions-or-faqs'));
+        endif;
+    }
+
+    public function allowed_html($rawdata) {
+        $allowed_tags = array(
+            'a' => array(
+                'class' => array(),
+                'href' => array(),
+                'rel' => array(),
+                'title' => array(),
+            ),
+            'abbr' => array(
+                'title' => array(),
+            ),
+            'b' => array(),
+            'br' => array(),
+            'blockquote' => array(
+                'cite' => array(),
+            ),
+            'cite' => array(
+                'title' => array(),
+            ),
+            'code' => array(),
+            'del' => array(
+                'datetime' => array(),
+                'title' => array(),
+            ),
+            'dd' => array(),
+            'div' => array(
+                'class' => array(),
+                'title' => array(),
+                'style' => array(),
+                'id' => array(),
+            ),
+            'table' => array(
+                'class' => array(),
+                'id' => array(),
+                'style' => array(),
+            ),
+            'button' => array(
+                'class' => array(),
+                'type' => array(),
+                'value' => array(),
+            ),
+            'thead' => array(),
+            'tbody' => array(),
+            'tr' => array(),
+            'td' => array(),
+            'dt' => array(),
+            'em' => array(),
+            'h1' => array(),
+            'h2' => array(),
+            'h3' => array(),
+            'h4' => array(),
+            'h5' => array(),
+            'h6' => array(),
+            'i' => array(
+                'class' => array(),
+            ),
+            'img' => array(
+                'alt' => array(),
+                'class' => array(),
+                'height' => array(),
+                'src' => array(),
+                'width' => array(),
+            ),
+            'li' => array(
+                'class' => array(),
+            ),
+            'ol' => array(
+                'class' => array(),
+            ),
+            'p' => array(
+                'class' => array(),
+            ),
+            'q' => array(
+                'cite' => array(),
+                'title' => array(),
+            ),
+            'span' => array(
+                'class' => array(),
+                'title' => array(),
+                'style' => array(),
+            ),
+            'strike' => array(),
+            'strong' => array(),
+            'ul' => array(
+                'class' => array(),
+            ),
+        );
+        if (is_array($rawdata)):
+            return $rawdata = array_map(array($this, 'allowed_html'), $rawdata);
+        else:
+            return wp_kses($rawdata, $allowed_tags);
+        endif;
+    }
+
+    public function validate_post($data = '') {
+        $rawdata = [];
+        if (!empty($data)):
+            $arrfiles = json_decode(stripslashes($data), true);
+        else:
+            $data = $this->rawdata;
+            $arrfiles = json_decode(stripslashes($this->rawdata), true);
+        endif;
+        if (is_array($arrfiles)):
+            $rawdata = array_map(array($this, 'allowed_html'), $arrfiles);
+        else:
+            $rawdata = $this->allowed_html($data);
+        endif;
+        return $rawdata;
+    }
+
+    /**
+     * Generate safe path
+     * @since v1.0.0
+     */
+    public function safe_path($path) {
+
+        $path = str_replace(['//', '\\\\'], ['/', '\\'], $path);
+        return str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $path);
+    }
+
+    public function array_replace($arr = [], $search = '', $replace = '') {
+        array_walk($arr, function (&$v) use ($search, $replace) {
+            $v = str_replace($search, $replace, $v);
+        });
+        return $arr;
     }
 
 }

@@ -84,50 +84,7 @@ class Templates {
         </div>
         <?php
     }
-
-    public function template_body() {
-        ?>
-        <div class="oxi-addons-row">
-            <?php
-            foreach ($this->local_template as $key => $value) {
-                $template_data = json_decode(file_get_contents($this->safe_path(OXI_ACCORDIONS_PATH . 'demo-template/') . $value), true);
-                $Cls = 'OXI_ACCORDIONS_PLUGINS\Layouts\Template';
-                ?>
-                <div class="oxi-addons-col-1">
-                    <div class="oxi-addons-style-preview">
-                        <div class="oxi-addons-style-preview-top">
-                            <?php
-                            if (class_exists($Cls) && isset($template_data['style']['rawdata'])):
-                                new $Cls($template_data['style'], $template_data['child']);
-                            endif;
-                            ?>
-                        </div>
-                        <div class="oxi-addons-style-preview-bottom">
-                            <div class="oxi-addons-style-preview-bottom-left">
-                                <?php echo esc_html($template_data['style']['name']); ?>
-                            </div>
-                            <div class="oxi-addons-style-preview-bottom-right">
-                                <?php
-                                if ($key > 10 && apply_filters(OXI_ACCORDIONS_PREMIUM, true) == false):
-                                    echo'<button class="btn btn-warning oxi-addons-addons-style-btn-warning" title="Pro Only"  type="submit" value="pro only" name="addonsstyleproonly">Pro Only</button>  ';
-                                else:
-                                    echo '<button type="button" class="btn btn-success oxi-addons-addons-template-create oxi-addons-addons-js-create" data-toggle="modal" template-id="' . esc_attr($value) . '">Create Style</button>';
-                                endif;
-                                ?>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <?php
-            }
-            ?>
-        </div>
-        <?php
-        $this->create_new_modal();
-    }
-
-    public function create_new_modal() {
+   public function create_new_modal() {
         //  echo '';
         if (($this->imported + 1) < $this->totalpage):
             echo '<div class="oxi-addons-row">
@@ -174,5 +131,48 @@ class Templates {
                         </form>
                     </div>';
     }
+    public function template_body() {
+        ?>
+        <div class="oxi-addons-row">
+            <?php
+            foreach ($this->local_template as $key => $value) {
+                $template_data = json_decode(file_get_contents($this->safe_path(OXI_ACCORDIONS_PATH . 'demo-template/') . $value), true);
+                $Cls = 'OXI_ACCORDIONS_PLUGINS\Layouts\Template';
+                ?>
+                <div class="oxi-addons-col-1">
+                    <div class="oxi-addons-style-preview">
+                        <div class="oxi-addons-style-preview-top">
+                            <?php
+                            if (class_exists($Cls) && isset($template_data['style']['rawdata'])):
+                                new $Cls($template_data['style'], $template_data['child']);
+                            endif;
+                            ?>
+                        </div>
+                        <div class="oxi-addons-style-preview-bottom">
+                            <div class="oxi-addons-style-preview-bottom-left">
+                                <?php echo esc_html($template_data['style']['name']); ?>
+                            </div>
+                            <div class="oxi-addons-style-preview-bottom-right">
+                                <?php
+                                if ($key > 10 && apply_filters(OXI_ACCORDIONS_PREMIUM, true) == false):
+                                    echo'<button class="btn btn-warning oxi-addons-addons-style-btn-warning" title="Pro Only"  type="submit" value="pro only" name="addonsstyleproonly">Pro Only</button>  ';
+                                else:
+                                    echo '<button type="button" class="btn btn-success oxi-addons-addons-template-create oxi-addons-addons-js-create" data-toggle="modal" template-id="' . esc_attr($value) . '">Create Style</button>';
+                                endif;
+                                ?>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php
+            }
+            ?>
+        </div>
+        <?php
+        $this->create_new_modal();
+    }
+
+ 
 
 }
