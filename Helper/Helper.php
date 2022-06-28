@@ -297,7 +297,8 @@ trait Helper
                     <p></p>
                     <div class="oxi-addons-admin-notifications-holder">
                         <div class="oxi-addons-admin-notifications-alert">
-                            <p>Got any Trouble to use our Accordions or Customization? You can <a href="https://wordpress.org/support/plugin/accordions-or-faqs#new-post">Ask any question</a> and get reply from our expert members. We will be glad to answer any question you may have about our plugin.</p>
+                            <p>Unable to create your desire design or need any help? You can <a href="https://wordpress.org/support/plugin/accordions-or-faqs#new-post">Ask any question</a> and get reply from our expert members. We will be glad to answer any question you may have about our plugin.</p>
+                            ' . (apply_filters(OXI_ACCORDIONS_PREMIUM, false) ? '' : '<p>By the way, did you know we also have a <a href="https://www.oxilabdemos.com/accordions/pricing">Premium Version</a>? It offers lots of options with automatic update. It also comes with 16/5 personal support.</p>  <p>Thanks Again!</p>') . '
                            
                             <p></p>
                         </div>
