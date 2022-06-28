@@ -10,7 +10,8 @@ if (!defined('ABSPATH'))
  *
  * author @biplob018
  */
-class Templates {
+class Templates
+{
 
     public $local_template;
 
@@ -26,12 +27,14 @@ class Templates {
      *
      * @since 2.0.0
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->css_js_load();
         $this->render_html();
     }
 
-    public function css_js_load() {
+    public function css_js_load()
+    {
         $this->admin_template_additional();
         apply_filters('oxi-accordions-plugin/admin_menu', TRUE);
 
@@ -39,14 +42,15 @@ class Templates {
         $this->get_local_tempalte();
     }
 
-    public function get_local_tempalte() {
+    public function get_local_tempalte()
+    {
         $basename = array_map('basename', glob(OXI_ACCORDIONS_PATH . 'demo-template/' . '*.json', GLOB_BRACE));
         $this->totalpage = ceil(count($basename) / 10);
         $c = $this->imported * 10;
         foreach ($basename as $key => $value) {
             $onlyname = explode('faqs-template-', str_replace('.json', '', $value))[1];
             $count = ((int) $onlyname - $c);
-            if ((int) $onlyname && $count > 0 && $count < 11):
+            if ((int) $onlyname && $count > 0 && $count < 11) :
                 $this->local_template[$onlyname] = $value;
             endif;
         }
@@ -57,36 +61,41 @@ class Templates {
      * Generate safe path
      * @since v1.0.0
      */
-    public function safe_path($path) {
+    public function safe_path($path)
+    {
 
         $path = str_replace(['//', '\\\\'], ['/', '\\'], $path);
         return str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $path);
     }
 
-    public function render_html() {
-        ?>
+    public function render_html()
+    {
+?>
         <div class="oxi-addons-row">
             <?php
             $this->template_header();
             $this->template_body();
             ?>
         </div>
-        <?php
+    <?php
     }
 
-    public function template_header() {
-        ?>
+    public function template_header()
+    {
+        apply_filters('oxi-accordions-plugin/support-and-comments', TRUE);
+    ?>
         <div class="oxi-addons-wrapper">
             <div class="oxi-addons-import-layouts">
                 <h1>Oxilab Accordions › Create New</h1>
                 <p> Select Accordions layouts, give your Accordions name and create new Accordions. </p>
             </div>
         </div>
-        <?php
+    <?php
     }
-   public function create_new_modal() {
+    public function create_new_modal()
+    {
         //  echo '';
-        if (($this->imported + 1) < $this->totalpage):
+        if (($this->imported + 1) < $this->totalpage) :
             echo '<div class="oxi-addons-row">
                         <div class="oxi-addons-col-1 oxi-import">
                             <div class="oxi-addons-style-preview">
@@ -131,19 +140,20 @@ class Templates {
                         </form>
                     </div>';
     }
-    public function template_body() {
-        ?>
+    public function template_body()
+    {
+    ?>
         <div class="oxi-addons-row">
             <?php
             foreach ($this->local_template as $key => $value) {
                 $template_data = json_decode(file_get_contents($this->safe_path(OXI_ACCORDIONS_PATH . 'demo-template/') . $value), true);
                 $Cls = 'OXI_ACCORDIONS_PLUGINS\Layouts\Template';
-                ?>
+            ?>
                 <div class="oxi-addons-col-1">
                     <div class="oxi-addons-style-preview">
                         <div class="oxi-addons-style-preview-top">
                             <?php
-                            if (class_exists($Cls) && isset($template_data['style']['rawdata'])):
+                            if (class_exists($Cls) && isset($template_data['style']['rawdata'])) :
                                 new $Cls($template_data['style'], $template_data['child']);
                             endif;
                             ?>
@@ -154,9 +164,9 @@ class Templates {
                             </div>
                             <div class="oxi-addons-style-preview-bottom-right">
                                 <?php
-                                if ($key > 10 && apply_filters(OXI_ACCORDIONS_PREMIUM, true) == false):
-                                    echo'<button class="btn btn-warning oxi-addons-addons-style-btn-warning" title="Pro Only"  type="submit" value="pro only" name="addonsstyleproonly">Pro Only</button>  ';
-                                else:
+                                if ($key > 10 && apply_filters(OXI_ACCORDIONS_PREMIUM, true) == false) :
+                                    echo '<button class="btn btn-warning oxi-addons-addons-style-btn-warning" title="Pro Only"  type="submit" value="pro only" name="addonsstyleproonly">Pro Only</button>  ';
+                                else :
                                     echo '<button type="button" class="btn btn-success oxi-addons-addons-template-create oxi-addons-addons-js-create" data-toggle="modal" template-id="' . esc_attr($value) . '">Create Style</button>';
                                 endif;
                                 ?>
@@ -165,14 +175,11 @@ class Templates {
                         </div>
                     </div>
                 </div>
-                <?php
+            <?php
             }
             ?>
         </div>
-        <?php
+<?php
         $this->create_new_modal();
     }
-
- 
-
 }

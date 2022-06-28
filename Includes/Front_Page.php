@@ -10,7 +10,8 @@ if (!defined('ABSPATH'))
  *
  * author @biplob018
  */
-class Front_Page {
+class Front_Page
+{
 
     use \OXI_ACCORDIONS_PLUGINS\Helper\Additional;
 
@@ -21,17 +22,20 @@ class Front_Page {
      */
     public $database;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->database = new \OXI_ACCORDIONS_PLUGINS\Helper\Database;
         $this->additional_load();
         $this->public_render();
     }
 
-    public function database_data() {
+    public function database_data()
+    {
         return $this->database->wpdb->get_results($this->database->wpdb->prepare('SELECT * FROM ' . $this->database->parent_table . ' WHERE type = %s ', 'accordions-or-faqs'), ARRAY_A);
     }
 
-    public function additional_load() {
+    public function additional_load()
+    {
         $this->database_data();
         $this->admin_front_additional();
         $this->manual_import_json();
@@ -42,13 +46,15 @@ class Front_Page {
      * Generate safe path
      * @since v2.0.1
      */
-    public function safe_path($path) {
+    public function safe_path($path)
+    {
 
         $path = str_replace(['//', '\\\\'], ['/', '\\'], $path);
         return str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $path);
     }
 
-    public function manual_import_json() {
+    public function manual_import_json()
+    {
         if (!empty($_REQUEST['_wpnonce'])) {
             $nonce = $_REQUEST['_wpnonce'];
         }
@@ -59,7 +65,7 @@ class Front_Page {
             } else {
                 if (isset($_FILES['importaccordionsfile'])) :
 
-                    if (!current_user_can('upload_files')):
+                    if (!current_user_can('upload_files')) :
                         wp_die(esc_html('You do not have permission to upload files.'));
                     endif;
 
@@ -92,8 +98,9 @@ class Front_Page {
         }
     }
 
-    public function public_render() {
-        ?>
+    public function public_render()
+    {
+?>
         <div class="oxi-addons-row">
             <?php
             $this->admin_header();
@@ -101,11 +108,13 @@ class Front_Page {
             $this->create_new();
             ?>
         </div>
-        <?php
+    <?php
     }
 
-    public function admin_header() {
-        ?>
+    public function admin_header()
+    {
+        apply_filters('oxi-accordions-plugin/support-and-comments', TRUE);
+    ?>
         <div class="oxi-addons-wrapper">
             <div class="oxi-addons-import-layouts">
                 <h1>Oxilab Accordions › Home
@@ -113,7 +122,7 @@ class Front_Page {
                 <p> Collect Accordions Shortcode, Edit, Delect, Clone or Export it. </p>
             </div>
         </div>
-        <?php
+<?php
     }
 
     /**
@@ -121,12 +130,14 @@ class Front_Page {
      *
      * @since 2.0.1
      */
-    public function name_converter($data) {
+    public function name_converter($data)
+    {
         $data = str_replace('tyle', 'tyle ', $data);
         return ucwords($data);
     }
 
-    public function create_new() {
+    public function create_new()
+    {
         echo '<div class="oxi-addons-row">
                         <div class="oxi-addons-col-1 oxi-import">
                             <div class="oxi-addons-style-preview">
@@ -193,7 +204,8 @@ class Front_Page {
                     </div>';
     }
 
-    public function created_shortcode() {
+    public function created_shortcode()
+    {
         $return = ' <div class="oxi-addons-row"> <div class="oxi-addons-row table-responsive abop" style="margin-bottom: 20px; opacity: 0; height: 0px">
                         <table class="table table-hover widefat oxi_addons_table_data" style="background-color: #fff; border: 1px solid #ccc">
                             <thead>
@@ -211,7 +223,7 @@ class Front_Page {
             $return .= _('<td>' . esc_html($id) . '</td>');
             $return .= _('<td>' . esc_html(ucwords($value['name'])) . '</td>');
             $return .= _('<td><span>Shortcode &nbsp;&nbsp;<input type="text" onclick="this.setSelectionRange(0, this.value.length)" value="[oxi_accordions id=&quot;' . esc_attr($id) . '&quot;]"></span> <br>'
-                    . '<span>Php Code &nbsp;&nbsp; <input type="text" onclick="this.setSelectionRange(0, this.value.length)" value="&lt;?php echo do_shortcode(&#039;[oxi_accordions id=&quot;' . esc_attr($id) . '&quot;]&#039;); ?&gt;"></span></td>');
+                . '<span>Php Code &nbsp;&nbsp; <input type="text" onclick="this.setSelectionRange(0, this.value.length)" value="&lt;?php echo do_shortcode(&#039;[oxi_accordions id=&quot;' . esc_attr($id) . '&quot;]&#039;); ?&gt;"></span></td>');
             $return .= _('<td>
                        <a href="' . esc_url(admin_url("admin.php?page=oxi-accordions-ultimate-new&styleid=" . esc_attr($id) . "")) . '"  title="Edit"  class="btn btn-info" style="float:left; margin-right: 5px; margin-left: 5px;">Edit</a>
                        <form method="post" class="oxi-addons-style-delete">
@@ -229,5 +241,4 @@ class Front_Page {
             <br></div>');
         echo $return;
     }
-
 }
