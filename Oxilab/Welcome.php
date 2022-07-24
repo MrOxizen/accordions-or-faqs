@@ -10,26 +10,26 @@ if (!defined('ABSPATH'))
  *
  * author @biplob018
  */
-class Welcome {
+class Welcome
+{
 
     use \OXI_ACCORDIONS_PLUGINS\Helper\Additional;
 
-    public function __construct() {
-        $this->header();
-        $this->Public_Render();
-    }
 
-    public function header() {
+
+    public function header()
+    {
         $this->admin_css();
         apply_filters('oxi-accordions-plugin/admin_menu', TRUE);
     }
 
-    public function Public_Render() {
-        ?>
+    public function Public_Render()
+    {
+?>
         <div class="oxi-addons-wrapper">
             <div class="oxi-addons-import-layouts">
                 <div class="about-wrap text-center">
-                    <h1>Welcome to  Oxilab Accordions</h1>
+                    <h1>Welcome to Oxilab Accordions</h1>
                     <div class="about-text">
                         Thank you for Installing Accordions - Multiple Accordions or FAQs Builders, The most friendly Accordions extension or all in one Package for any Wordpress Sites. Here's how to get started.
                     </div>
@@ -53,7 +53,7 @@ class Welcome {
                                     <h4 class="oxi-docs-admin-header-title">Documentation</h4>
                                 </div>
                                 <div class="oxi-docs-admin-block-content">
-                                    <p>Get started by spending some time with the documentation to get familiar with Accordions - Multiple Accordions or FAQs Builders. Build awesome accordions or faqs  for you or your clients with ease.</p>
+                                    <p>Get started by spending some time with the documentation to get familiar with Accordions - Multiple Accordions or FAQs Builders. Build awesome accordions or faqs for you or your clients with ease.</p>
                                     <a href="https://www.oxilabdemos.com/accordions/docs" class="oxi-docs-button" target="_blank">Documentation</a>
                                 </div>
                             </div>
@@ -96,7 +96,11 @@ class Welcome {
         </div>
 
 
-        <?php
+<?php
     }
-
+    public function __construct()
+    {
+        $this->header();
+        $this->Public_Render();
+    }
 }

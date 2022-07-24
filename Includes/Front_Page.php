@@ -29,10 +29,7 @@ class Front_Page
         $this->public_render();
     }
 
-    public function database_data()
-    {
-        return $this->database->wpdb->get_results($this->database->wpdb->prepare('SELECT * FROM ' . $this->database->parent_table . ' WHERE type = %s ', 'accordions-or-faqs'), ARRAY_A);
-    }
+
 
     public function additional_load()
     {
@@ -51,6 +48,10 @@ class Front_Page
 
         $path = str_replace(['//', '\\\\'], ['/', '\\'], $path);
         return str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $path);
+    }
+    public function database_data()
+    {
+        return $this->database->wpdb->get_results($this->database->wpdb->prepare('SELECT * FROM ' . $this->database->parent_table . ' WHERE type = %s ', 'accordions-or-faqs'), ARRAY_A);
     }
 
     public function manual_import_json()

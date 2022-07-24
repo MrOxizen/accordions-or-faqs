@@ -129,22 +129,7 @@ class API
         endif;
     }
 
-    /**
-     * Send file headers.
-     *
-     *
-     * @param string $file_name File name.
-     * @param int    $file_size File size.
-     */
-    private function send_file_headers($file_name, $file_size)
-    {
-        header('Content-Type: application/octet-stream');
-        header('Content-Disposition: attachment; filename=' . $file_name);
-        header('Expires: 0');
-        header('Cache-Control: must-revalidate');
-        header('Pragma: public');
-        header('Content-Length: ' . $file_size);
-    }
+
 
     /**
      * Template Style Data
@@ -673,5 +658,21 @@ class API
             $v = str_replace($search, $replace, $v);
         });
         return $arr;
+    }
+    /**
+     * Send file headers.
+     *
+     *
+     * @param string $file_name File name.
+     * @param int    $file_size File size.
+     */
+    private function send_file_headers($file_name, $file_size)
+    {
+        header('Content-Type: application/octet-stream');
+        header('Content-Disposition: attachment; filename=' . $file_name);
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate');
+        header('Pragma: public');
+        header('Content-Length: ' . $file_size);
     }
 }

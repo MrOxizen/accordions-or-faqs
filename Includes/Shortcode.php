@@ -10,7 +10,8 @@ if (!defined('ABSPATH'))
  *
  * author @biplob018
  */
-class Shortcode {
+class Shortcode
+{
 
     /**
      * Define $wpdb
@@ -53,8 +54,9 @@ class Shortcode {
      *
      * @since 2.0.0
      */
-    public function __construct($styleid = '', $user = 'user') {
-        if (!empty((int) $styleid)):
+    public function __construct($styleid = '', $user = 'user')
+    {
+        if (!empty((int) $styleid)) :
             $this->styleid = $styleid;
             $this->define_user = $user;
             $this->database = new \OXI_ACCORDIONS_PLUGINS\Helper\Database();
@@ -62,35 +64,19 @@ class Shortcode {
         endif;
     }
 
-    /**
-     * Confirm Transient
-     *
-     * @since 2.0.1
-     */
-    public function get_transient() {
-        if ($this->define_user == 'admin'):
-            $response = get_transient('accordions-or-faqs-template-' . $this->styleid);
-            if ($response):
-                $new = [
-                    'rawdata' => $response,
-                    'stylesheet' => '',
-                    'font_family' => ''
-                ];
-                $this->style_table = array_merge($this->style_table, $new);
-            endif;
-        endif;
-    }
+
 
     /**
      * Get Data From Database
      *
      * @since 2.0.1
      */
-    public function get_data() {
+    public function get_data()
+    {
         //style Data
         $this->style_table = $this->database->wpdb->get_row($this->database->wpdb->prepare('SELECT * FROM ' . $this->database->parent_table . ' WHERE id = %d ', $this->styleid), ARRAY_A);
 
-        if (!is_array($this->style_table)):
+        if (!is_array($this->style_table)) :
             return;
         endif;
         //Trasient
@@ -101,11 +87,30 @@ class Shortcode {
         $this->render_html();
     }
 
-    public function render_html() {
+    public function render_html()
+    {
         $CLASS = '\OXI_ACCORDIONS_PLUGINS\Layouts\Template';
-        if (class_exists($CLASS)):
+        if (class_exists($CLASS)) :
             new $CLASS($this->style_table, $this->child_table, $this->define_user);
         endif;
     }
-
+    /**
+     * Confirm Transient
+     *
+     * @since 2.0.1
+     */
+    public function get_transient()
+    {
+        if ($this->define_user == 'admin') :
+            $response = get_transient('accordions-or-faqs-template-' . $this->styleid);
+            if ($response) :
+                $new = [
+                    'rawdata' => $response,
+                    'stylesheet' => '',
+                    'font_family' => ''
+                ];
+                $this->style_table = array_merge($this->style_table, $new);
+            endif;
+        endif;
+    }
 }
