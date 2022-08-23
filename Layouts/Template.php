@@ -217,7 +217,7 @@ class Template
             endif;
         endif;
         if ($inlinecss != '') :
-            $inlinecss = html_entity_decode($inlinecss);
+            $inlinecss = html_entity_decode(str_replace('<br>', ' ', str_replace('&nbsp;', ' ', $inlinecss)));
             if ($this->admin == 'admin') :
                 //only load while ajax called
                 echo _('<style>');
