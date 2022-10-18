@@ -10,22 +10,12 @@ if (!defined('ABSPATH'))
  *
  * author @biplob018
  */
-class Welcome
-{
+class Welcome {
 
     use \OXI_ACCORDIONS_PLUGINS\Helper\Additional;
 
-
-
-    public function header()
-    {
-        $this->admin_css();
-        apply_filters('oxi-accordions-plugin/admin_menu', TRUE);
-    }
-
-    public function Public_Render()
-    {
-?>
+    public function Public_Render() {
+        ?>
         <div class="oxi-addons-wrapper">
             <div class="oxi-addons-import-layouts">
                 <div class="about-wrap text-center">
@@ -96,11 +86,17 @@ class Welcome
         </div>
 
 
-<?php
+        <?php
     }
-    public function __construct()
-    {
+
+    public function __construct() {
         $this->header();
         $this->Public_Render();
     }
+
+    public function header() {
+        $this->admin_css();
+        apply_filters('oxi-accordions-plugin/admin_menu', TRUE);
+    }
+
 }

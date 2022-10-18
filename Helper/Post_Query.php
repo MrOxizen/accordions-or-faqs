@@ -8,15 +8,7 @@ if (!defined('ABSPATH')) {
 
 trait Post_Query {
 
-    public function thumbnail_sizes() {
-        $default_image_sizes = get_intermediate_image_sizes();
-        $thumbnail_sizes = array();
-        foreach ($default_image_sizes as $size) {
-            $image_sizes[$size] = $size . ' - ' . intval(get_option("{$size}_size_w")) . ' x ' . intval(get_option("{$size}_size_h"));
-            $thumbnail_sizes[$size] = str_replace('_', ' ', ucfirst($image_sizes[$size]));
-        }
-        return $thumbnail_sizes;
-    }
+   
 
     public function post_type() {
         return get_post_types(array('public' => true, 'show_in_nav_menus' => true), 'names');
@@ -98,6 +90,15 @@ trait Post_Query {
             $posts[$post->ID] = ucfirst($post->post_title);
         }
         return $posts;
+    }
+     public function thumbnail_sizes() {
+        $default_image_sizes = get_intermediate_image_sizes();
+        $thumbnail_sizes = array();
+        foreach ($default_image_sizes as $size) {
+            $image_sizes[$size] = $size . ' - ' . intval(get_option("{$size}_size_w")) . ' x ' . intval(get_option("{$size}_size_h"));
+            $thumbnail_sizes[$size] = str_replace('_', ' ', ucfirst($image_sizes[$size]));
+        }
+        return $thumbnail_sizes;
     }
 
 }

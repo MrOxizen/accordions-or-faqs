@@ -42,20 +42,7 @@ class Templates
         $this->get_local_tempalte();
     }
 
-    public function get_local_tempalte()
-    {
-        $basename = array_map('basename', glob(OXI_ACCORDIONS_PATH . 'demo-template/' . '*.json', GLOB_BRACE));
-        $this->totalpage = ceil(count($basename) / 10);
-        $c = $this->imported * 10;
-        foreach ($basename as $key => $value) {
-            $onlyname = explode('faqs-template-', str_replace('.json', '', $value))[1];
-            $count = ((int) $onlyname - $c);
-            if ((int) $onlyname && $count > 0 && $count < 11) :
-                $this->local_template[$onlyname] = $value;
-            endif;
-        }
-        ksort($this->local_template);
-    }
+   
 
     /**
      * Generate safe path
@@ -181,5 +168,19 @@ class Templates
         </div>
 <?php
         $this->create_new_modal();
+    }
+     public function get_local_tempalte()
+    {
+        $basename = array_map('basename', glob(OXI_ACCORDIONS_PATH . 'demo-template/' . '*.json', GLOB_BRACE));
+        $this->totalpage = ceil(count($basename) / 10);
+        $c = $this->imported * 10;
+        foreach ($basename as $key => $value) {
+            $onlyname = explode('faqs-template-', str_replace('.json', '', $value))[1];
+            $count = ((int) $onlyname - $c);
+            if ((int) $onlyname && $count > 0 && $count < 11) :
+                $this->local_template[$onlyname] = $value;
+            endif;
+        }
+        ksort($this->local_template);
     }
 }

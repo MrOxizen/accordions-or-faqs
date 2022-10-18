@@ -30,7 +30,49 @@ class Reviews
 
 
 
+ 
     /**
+     * Admin Notice CSS file loader
+     * @return void
+     */
+    public function admin_enqueue_scripts()
+    {
+        wp_enqueue_script("jquery");
+        wp_enqueue_style('oxi-accordions-admin-notice', OXI_ACCORDIONS_URL . '/Oxilab/css/notice.css', false, 'accordions-or-faqs');
+        $this->dismiss_button_scripts();
+    }
+
+    /**
+     * Admin Notice JS file loader
+     * @return void
+     */
+    public function dismiss_button_scripts()
+    {
+        wp_enqueue_script('oxi-accordions-admin-notice', OXI_ACCORDIONS_URL . '/Oxilab/js/notice.js', false, 'accordions-or-faqs');
+        wp_localize_script('oxi-accordions-admin-notice', 'oxi_accordions_reviews_notice', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxi_accordions_reviews_notice')));
+    }
+    /**
+     * Admin Notice Ajax  loader
+     * @return void
+     */
+    public function notice_dissmiss()
+    {
+        if (isset($_POST['_wpnonce']) || wp_verify_nonce(sanitize_key(wp_unslash($_POST['_wpnonce'])), 'oxi_accordions_reviews_notice')) :
+            $notice = isset($_POST['notice']) ? sanitize_text_field($_POST['notice']) : '';
+            if ($notice == 'maybe') :
+                $data = strtotime("now");
+                update_option('accordions_or_faqs_activation_date', $data);
+            else :
+                update_option('accordions_or_faqs_no_bug', $notice);
+            endif;
+            echo esc_html($notice);
+        else :
+            return;
+        endif;
+
+        die();
+    }
+       /**
      * First Installation Track
      * @return void
      */
@@ -76,45 +118,4 @@ class Reviews
                 </div>';
     }
 
-    /**
-     * Admin Notice CSS file loader
-     * @return void
-     */
-    public function admin_enqueue_scripts()
-    {
-        wp_enqueue_script("jquery");
-        wp_enqueue_style('oxi-accordions-admin-notice', OXI_ACCORDIONS_URL . '/Oxilab/css/notice.css', false, 'accordions-or-faqs');
-        $this->dismiss_button_scripts();
-    }
-
-    /**
-     * Admin Notice JS file loader
-     * @return void
-     */
-    public function dismiss_button_scripts()
-    {
-        wp_enqueue_script('oxi-accordions-admin-notice', OXI_ACCORDIONS_URL . '/Oxilab/js/notice.js', false, 'accordions-or-faqs');
-        wp_localize_script('oxi-accordions-admin-notice', 'oxi_accordions_reviews_notice', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxi_accordions_reviews_notice')));
-    }
-    /**
-     * Admin Notice Ajax  loader
-     * @return void
-     */
-    public function notice_dissmiss()
-    {
-        if (isset($_POST['_wpnonce']) || wp_verify_nonce(sanitize_key(wp_unslash($_POST['_wpnonce'])), 'oxi_accordions_reviews_notice')) :
-            $notice = isset($_POST['notice']) ? sanitize_text_field($_POST['notice']) : '';
-            if ($notice == 'maybe') :
-                $data = strtotime("now");
-                update_option('accordions_or_faqs_activation_date', $data);
-            else :
-                update_option('accordions_or_faqs_no_bug', $notice);
-            endif;
-            echo esc_html($notice);
-        else :
-            return;
-        endif;
-
-        die();
-    }
 }

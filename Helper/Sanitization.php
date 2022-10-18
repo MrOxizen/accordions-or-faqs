@@ -13,34 +13,7 @@ use OXI_ACCORDIONS_PLUGINS\Helper\Controls as Controls;
 
 trait Sanitization {
 
-    /**
-     * font settings sanitize
-     * works at layouts page to adding font Settings sanitize
-     */
-    public function AdminTextSenitize($data) {
-        $data = str_replace('\\\\"', '&quot;', $data);
-        $data = str_replace('\\\"', '&quot;', $data);
-        $data = str_replace('\\"', '&quot;', $data);
-        $data = str_replace('\"', '&quot;', $data);
-        $data = str_replace('"', '&quot;', $data);
-        $data = str_replace('\\\\&quot;', '&quot;', $data);
-        $data = str_replace('\\\&quot;', '&quot;', $data);
-        $data = str_replace('\\&quot;', '&quot;', $data);
-        $data = str_replace('\&quot;', '&quot;', $data);
-        $data = str_replace("\\\\'", '&apos;', $data);
-        $data = str_replace("\\\'", '&apos;', $data);
-        $data = str_replace("\\'", '&apos;', $data);
-        $data = str_replace("\'", '&apos;', $data);
-        $data = str_replace("\\\\&apos;", '&apos;', $data);
-        $data = str_replace("\\\&apos;", '&apos;', $data);
-        $data = str_replace("\\&apos;", '&apos;', $data);
-        $data = str_replace("\&apos;", '&apos;', $data);
-        $data = str_replace("'", '&apos;', $data);
-        $data = str_replace('<', '&lt;', $data);
-        $data = str_replace('>', '&gt;', $data);
-        $data = sanitize_text_field($data);
-        return $data;
-    }
+    
 
     /*
      * Oxi Accordions Style Admin Panel header
@@ -2651,6 +2624,34 @@ trait Sanitization {
                     </div>
                 </div>
             </div>';
+    }
+    /**
+     * font settings sanitize
+     * works at layouts page to adding font Settings sanitize
+     */
+    public function AdminTextSenitize($data) {
+        $data = str_replace('\\\\"', '&quot;', $data);
+        $data = str_replace('\\\"', '&quot;', $data);
+        $data = str_replace('\\"', '&quot;', $data);
+        $data = str_replace('\"', '&quot;', $data);
+        $data = str_replace('"', '&quot;', $data);
+        $data = str_replace('\\\\&quot;', '&quot;', $data);
+        $data = str_replace('\\\&quot;', '&quot;', $data);
+        $data = str_replace('\\&quot;', '&quot;', $data);
+        $data = str_replace('\&quot;', '&quot;', $data);
+        $data = str_replace("\\\\'", '&apos;', $data);
+        $data = str_replace("\\\'", '&apos;', $data);
+        $data = str_replace("\\'", '&apos;', $data);
+        $data = str_replace("\'", '&apos;', $data);
+        $data = str_replace("\\\\&apos;", '&apos;', $data);
+        $data = str_replace("\\\&apos;", '&apos;', $data);
+        $data = str_replace("\\&apos;", '&apos;', $data);
+        $data = str_replace("\&apos;", '&apos;', $data);
+        $data = str_replace("'", '&apos;', $data);
+        $data = str_replace('<', '&lt;', $data);
+        $data = str_replace('>', '&gt;', $data);
+        $data = sanitize_text_field($data);
+        return $data;
     }
 
 }

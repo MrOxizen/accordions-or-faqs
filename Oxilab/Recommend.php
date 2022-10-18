@@ -43,6 +43,59 @@ class Recommend
 
 
 
+
+    /**
+     * Admin Notice CSS file loader
+     * @return void
+     */
+    public function admin_enqueue_scripts()
+    {
+        wp_enqueue_script("jquery");
+        wp_enqueue_style('oxilab_accorions-admin-notice-css', OXI_ACCORDIONS_URL . '/Oxilab/css/notice.css', false, 'accordions-or-faqs');
+        $this->dismiss_button_scripts();
+    }
+
+    /**
+     * Admin Notice JS file loader
+     * @return void
+     */
+    public function dismiss_button_scripts()
+    {
+        wp_enqueue_script('oxi-accordions-admin-recommend', OXI_ACCORDIONS_URL . '/Oxilab/js/recommend.js', false, 'accordions-or-faqs');
+        wp_localize_script('oxi-accordions-admin-recommend', 'oxi_accordions_admin_recommended', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxi_accordions_admin_recommended')));
+    }
+
+    /**
+     * Admin Notice Ajax  loader
+     * @return void
+     */
+    public function notice_dissmiss()
+    {
+        if (isset($_POST['_wpnonce']) || wp_verify_nonce(sanitize_key(wp_unslash($_POST['_wpnonce'])), 'oxi_accordions_admin_recommended')) :
+            $data = 'done';
+            update_option('accordions_or_faqs_recommended', $data);
+            echo esc_html('done');
+        else :
+            return;
+        endif;
+        die();
+    }
+    public function extension()
+    {
+        $response = get_transient(self::GET_LOCAL_PLUGINS);
+        if (!$response || !is_array($response)) {
+            $URL = self::PLUGINS;
+            $request = wp_remote_request($URL);
+            if (!is_wp_error($request)) {
+                $response = json_decode(wp_remote_retrieve_body($request), true);
+                set_transient(self::GET_LOCAL_PLUGINS, $response, 10 * DAY_IN_SECONDS);
+            } else {
+                $response = $request->get_error_message();
+            }
+        }
+        $this->get_plugins = $response;
+    }
+    
     /**
      * First Installation Track
      * @return void
@@ -100,57 +153,5 @@ class Recommend
                         <p></p>
                     </div>';
         endif;
-    }
-
-    /**
-     * Admin Notice CSS file loader
-     * @return void
-     */
-    public function admin_enqueue_scripts()
-    {
-        wp_enqueue_script("jquery");
-        wp_enqueue_style('oxilab_accorions-admin-notice-css', OXI_ACCORDIONS_URL . '/Oxilab/css/notice.css', false, 'accordions-or-faqs');
-        $this->dismiss_button_scripts();
-    }
-
-    /**
-     * Admin Notice JS file loader
-     * @return void
-     */
-    public function dismiss_button_scripts()
-    {
-        wp_enqueue_script('oxi-accordions-admin-recommend', OXI_ACCORDIONS_URL . '/Oxilab/js/recommend.js', false, 'accordions-or-faqs');
-        wp_localize_script('oxi-accordions-admin-recommend', 'oxi_accordions_admin_recommended', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxi_accordions_admin_recommended')));
-    }
-
-    /**
-     * Admin Notice Ajax  loader
-     * @return void
-     */
-    public function notice_dissmiss()
-    {
-        if (isset($_POST['_wpnonce']) || wp_verify_nonce(sanitize_key(wp_unslash($_POST['_wpnonce'])), 'oxi_accordions_admin_recommended')) :
-            $data = 'done';
-            update_option('accordions_or_faqs_recommended', $data);
-            echo esc_html('done');
-        else :
-            return;
-        endif;
-        die();
-    }
-    public function extension()
-    {
-        $response = get_transient(self::GET_LOCAL_PLUGINS);
-        if (!$response || !is_array($response)) {
-            $URL = self::PLUGINS;
-            $request = wp_remote_request($URL);
-            if (!is_wp_error($request)) {
-                $response = json_decode(wp_remote_retrieve_body($request), true);
-                set_transient(self::GET_LOCAL_PLUGINS, $response, 10 * DAY_IN_SECONDS);
-            } else {
-                $response = $request->get_error_message();
-            }
-        }
-        $this->get_plugins = $response;
     }
 }

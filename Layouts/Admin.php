@@ -112,7 +112,8 @@ class Admin {
             $this->render();
         }
     }
-       public function str_replace_first($from, $to, $content) {
+
+    public function str_replace_first($from, $to, $content) {
         $from = '/' . preg_quote($from, '/') . '/';
         return preg_replace($from, $to, $content, 1);
     }
@@ -133,6 +134,16 @@ class Admin {
             ],
             'showing' => TRUE,
         ]);
+    }
+
+    public function thumbnail_sizes() {
+        $default_image_sizes = get_intermediate_image_sizes();
+        $thumbnail_sizes = array();
+        foreach ($default_image_sizes as $size) {
+            $image_sizes[$size] = $size . ' - ' . intval(get_option("{$size}_size_w")) . ' x ' . intval(get_option("{$size}_size_h"));
+            $thumbnail_sizes[$size] = str_replace('_', ' ', ucfirst($image_sizes[$size]));
+        }
+        return $thumbnail_sizes;
     }
 
     /**
@@ -322,23 +333,23 @@ class Admin {
         ?>
         <div class="wrap">
             <div class="oxi-addons-wrapper">
-                <?php
-                apply_filters('oxi-accordions-plugin/admin_menu', TRUE);
-                ?>
+        <?php
+        apply_filters('oxi-accordions-plugin/admin_menu', TRUE);
+        ?>
                 <div class="oxi-addons-style-20-spacer"></div>
                 <div class="oxi-addons-row">
-                    <?php
-                    apply_filters('oxi-accordions-plugin/support-and-comments', TRUE);
-                    ?>
+        <?php
+        apply_filters('oxi-accordions-plugin/support-and-comments', TRUE);
+        ?>
                     <div class="oxi-addons-wrapper oxi-addons-image-tabs-mode">
                         <div class="oxi-addons-settings" id="oxisettingsreload">
                             <div class="oxi-addons-style-left">
                                 <form method="post" id="oxi-addons-form-submit">
                                     <div class="oxi-addons-style-settings">
                                         <div class="oxi-addons-tabs-wrapper">
-                                            <?php
-                                            $this->register_controls();
-                                            ?>
+        <?php
+        $this->register_controls();
+        ?>
                                         </div>
                                         <div class="oxi-addons-setting-save">
                                             <button type="button" class="btn btn-danger" id="oxi-addons-setting-reload">Reload</button>
@@ -416,7 +427,8 @@ class Admin {
         </div>
         <?php
     }
-       /**
+
+    /**
      * Template hooks
      *
      * @since 2.0.1
@@ -493,19 +505,5 @@ class Admin {
         $this->end_controls_section();
         $this->end_section_tabs();
     }
-
- 
-
-    public function thumbnail_sizes() {
-        $default_image_sizes = get_intermediate_image_sizes();
-        $thumbnail_sizes = array();
-        foreach ($default_image_sizes as $size) {
-            $image_sizes[$size] = $size . ' - ' . intval(get_option("{$size}_size_w")) . ' x ' . intval(get_option("{$size}_size_h"));
-            $thumbnail_sizes[$size] = str_replace('_', ' ', ucfirst($image_sizes[$size]));
-        }
-        return $thumbnail_sizes;
-    }
-
- 
 
 }

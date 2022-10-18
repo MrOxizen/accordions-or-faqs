@@ -143,28 +143,7 @@ class Template
         endif;
     }
 
-    public function defualt_value($id)
-    {
-        return [
-            'oxi-accordions-modal-default' => '',
-            'oxi-accordions-modal-title' => '',
-            'oxi-accordions-modal-sub-title' => '',
-            'oxi-accordions-modal-title-additional' => '',
-            'oxi-accordions-modal-icon' => '',
-            'oxi-accordions-modal-number' => '',
-            'oxi-accordions-modal-image-select' => 'media-library',
-            'oxi-accordions-modal-image-image' => '',
-            'oxi-accordions-modal-image-image-alt' => '',
-            'oxi-accordions-modal-image-url' => '',
-            'oxi-accordions-modal-components-type' => 'wysiwyg',
-            'oxi-accordions-modal-link-url' => '',
-            'oxi-accordions-modal-desc' => '',
-            'shortcodeitemid' => $id,
-            'oxi-accordions-modal-link-target' => '0',
-            'oxi-accordions-modal-nested-tabs' => '',
-            'oxi-accordions-modal-nested-accordions' => ''
-        ];
-    }
+  
 
     /**
      * Current element loader
@@ -737,5 +716,27 @@ class Template
                     </div>';
         endif;
         return $data;
+    }
+      public function defualt_value($id)
+    {
+        return [
+            'oxi-accordions-modal-default' => '',
+            'oxi-accordions-modal-title' => '',
+            'oxi-accordions-modal-sub-title' => '',
+            'oxi-accordions-modal-title-additional' => '',
+            'oxi-accordions-modal-icon' => '',
+            'oxi-accordions-modal-number' => '',
+            'oxi-accordions-modal-image-select' => 'media-library',
+            'oxi-accordions-modal-image-image' => '',
+            'oxi-accordions-modal-image-image-alt' => '',
+            'oxi-accordions-modal-image-url' => '',
+            'oxi-accordions-modal-components-type' => 'wysiwyg',
+            'oxi-accordions-modal-link-url' => '',
+            'oxi-accordions-modal-desc' => '',
+            'shortcodeitemid' => $id,
+            'oxi-accordions-modal-link-target' => '0',
+            'oxi-accordions-modal-nested-tabs' => '',
+            'oxi-accordions-modal-nested-accordions' => ''
+        ];
     }
 }

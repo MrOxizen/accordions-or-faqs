@@ -17,6 +17,36 @@ trait Additional {
         }
     }
 
+    public function admin_elements_editior_loader() {
+        $this->admin_css();
+        $this->admin_jquery();
+        wp_enqueue_script("jquery");
+        wp_enqueue_script('jquery-ui-core');
+        wp_enqueue_script('jquery-ui-widget');
+        wp_enqueue_script('jquery-ui-mouse');
+        wp_enqueue_script('jquery-ui-accordion');
+        wp_enqueue_script('jquery-ui-autocomplete');
+        wp_enqueue_script('jquery-ui-slider');
+        wp_enqueue_script('jquery-ui-draggable');
+        wp_enqueue_script('jquery-ui-sortable');
+        wp_enqueue_style('jquery.coloring-pick.min.js', OXI_ACCORDIONS_URL . 'assets/backend/css/jquery.coloring-pick.min.js.css', false, OXI_ACCORDIONS_PLUGIN_VERSION);
+        wp_enqueue_script('jquery.coloring-pick.min', OXI_ACCORDIONS_URL . 'assets/backend/js/jquery.coloring-pick.min.js', false, OXI_ACCORDIONS_PLUGIN_VERSION);
+        wp_enqueue_style('jquery.minicolors', OXI_ACCORDIONS_URL . 'assets/backend/css/minicolors.css', false, OXI_ACCORDIONS_PLUGIN_VERSION);
+        wp_enqueue_script('jquery.minicolors', OXI_ACCORDIONS_URL . 'assets/backend/js/minicolors.js', false, OXI_ACCORDIONS_PLUGIN_VERSION);
+        wp_enqueue_style('nouislider', OXI_ACCORDIONS_URL . 'assets/backend/css/nouislider.css', false, OXI_ACCORDIONS_PLUGIN_VERSION);
+        wp_enqueue_script('nouislider', OXI_ACCORDIONS_URL . 'assets/backend/js/nouislider.js', false, OXI_ACCORDIONS_PLUGIN_VERSION);
+        wp_enqueue_style('fontawesome-iconpicker', OXI_ACCORDIONS_URL . 'assets/backend/css/fontawesome-iconpicker.css', false, OXI_ACCORDIONS_PLUGIN_VERSION);
+        wp_enqueue_script('fontawesome-iconpicker', OXI_ACCORDIONS_URL . 'assets/backend/js/fontawesome-iconpicker.js', false, OXI_ACCORDIONS_PLUGIN_VERSION);
+        wp_enqueue_style('jquery.coloring-pick.min.js', OXI_ACCORDIONS_URL . 'assets/backend/css/jquery.coloring-pick.min.js.css', false, OXI_ACCORDIONS_PLUGIN_VERSION);
+        wp_enqueue_script('jquery.coloring-pick.min', OXI_ACCORDIONS_URL . 'assets/backend/js/jquery.coloring-pick.min.js', false, OXI_ACCORDIONS_PLUGIN_VERSION);
+        wp_enqueue_script('jquery.conditionize2.min', OXI_ACCORDIONS_URL . 'assets/backend/js/jquery.conditionize2.min.js', false, OXI_ACCORDIONS_PLUGIN_VERSION);
+        wp_enqueue_style('select2.min', OXI_ACCORDIONS_URL . 'assets/backend/css/select2.min.css', false, OXI_ACCORDIONS_PLUGIN_VERSION);
+        wp_enqueue_script('select2.min', OXI_ACCORDIONS_URL . 'assets/backend/js/select2.min.js', false, OXI_ACCORDIONS_PLUGIN_VERSION);
+        wp_enqueue_style('jquery.fontselect', OXI_ACCORDIONS_URL . 'assets/backend/css/jquery.fontselect.css', false, OXI_ACCORDIONS_PLUGIN_VERSION);
+        wp_enqueue_script('oxi-accordions--editor', OXI_ACCORDIONS_URL . 'assets/backend/custom/editor.js', false, OXI_ACCORDIONS_PLUGIN_VERSION);
+        $this->admin_media_scripts();
+    }
+
     /**
      * Admin Media Scripts.
      * Most of time using into Style Editing Page
@@ -91,36 +121,6 @@ trait Additional {
         wp_enqueue_script('jquery-ui-slider');
         wp_enqueue_script('jquery-ui-draggable');
         wp_enqueue_script('oxi-accordions-front-page', OXI_ACCORDIONS_URL . '/assets/backend/custom/template.js', false, 'accordions-or-faqs');
-    }
-
-    public function admin_elements_editior_loader() {
-        $this->admin_css();
-        $this->admin_jquery();
-        wp_enqueue_script("jquery");
-        wp_enqueue_script('jquery-ui-core');
-        wp_enqueue_script('jquery-ui-widget');
-        wp_enqueue_script('jquery-ui-mouse');
-        wp_enqueue_script('jquery-ui-accordion');
-        wp_enqueue_script('jquery-ui-autocomplete');
-        wp_enqueue_script('jquery-ui-slider');
-        wp_enqueue_script('jquery-ui-draggable');
-        wp_enqueue_script('jquery-ui-sortable');
-        wp_enqueue_style('jquery.coloring-pick.min.js', OXI_ACCORDIONS_URL . 'assets/backend/css/jquery.coloring-pick.min.js.css', false, OXI_ACCORDIONS_PLUGIN_VERSION);
-        wp_enqueue_script('jquery.coloring-pick.min', OXI_ACCORDIONS_URL . 'assets/backend/js/jquery.coloring-pick.min.js', false, OXI_ACCORDIONS_PLUGIN_VERSION);
-        wp_enqueue_style('jquery.minicolors', OXI_ACCORDIONS_URL . 'assets/backend/css/minicolors.css', false, OXI_ACCORDIONS_PLUGIN_VERSION);
-        wp_enqueue_script('jquery.minicolors', OXI_ACCORDIONS_URL . 'assets/backend/js/minicolors.js', false, OXI_ACCORDIONS_PLUGIN_VERSION);
-        wp_enqueue_style('nouislider', OXI_ACCORDIONS_URL . 'assets/backend/css/nouislider.css', false, OXI_ACCORDIONS_PLUGIN_VERSION);
-        wp_enqueue_script('nouislider', OXI_ACCORDIONS_URL . 'assets/backend/js/nouislider.js', false, OXI_ACCORDIONS_PLUGIN_VERSION);
-        wp_enqueue_style('fontawesome-iconpicker', OXI_ACCORDIONS_URL . 'assets/backend/css/fontawesome-iconpicker.css', false, OXI_ACCORDIONS_PLUGIN_VERSION);
-        wp_enqueue_script('fontawesome-iconpicker', OXI_ACCORDIONS_URL . 'assets/backend/js/fontawesome-iconpicker.js', false, OXI_ACCORDIONS_PLUGIN_VERSION);
-        wp_enqueue_style('jquery.coloring-pick.min.js', OXI_ACCORDIONS_URL . 'assets/backend/css/jquery.coloring-pick.min.js.css', false, OXI_ACCORDIONS_PLUGIN_VERSION);
-        wp_enqueue_script('jquery.coloring-pick.min', OXI_ACCORDIONS_URL . 'assets/backend/js/jquery.coloring-pick.min.js', false, OXI_ACCORDIONS_PLUGIN_VERSION);
-        wp_enqueue_script('jquery.conditionize2.min', OXI_ACCORDIONS_URL . 'assets/backend/js/jquery.conditionize2.min.js', false, OXI_ACCORDIONS_PLUGIN_VERSION);
-        wp_enqueue_style('select2.min', OXI_ACCORDIONS_URL . 'assets/backend/css/select2.min.css', false, OXI_ACCORDIONS_PLUGIN_VERSION);
-        wp_enqueue_script('select2.min', OXI_ACCORDIONS_URL . 'assets/backend/js/select2.min.js', false, OXI_ACCORDIONS_PLUGIN_VERSION);
-        wp_enqueue_style('jquery.fontselect', OXI_ACCORDIONS_URL . 'assets/backend/css/jquery.fontselect.css', false, OXI_ACCORDIONS_PLUGIN_VERSION);
-        wp_enqueue_script('oxi-accordions--editor', OXI_ACCORDIONS_URL . 'assets/backend/custom/editor.js', false, OXI_ACCORDIONS_PLUGIN_VERSION);
-        $this->admin_media_scripts();
     }
 
     public function import_font_family() {

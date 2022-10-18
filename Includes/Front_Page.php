@@ -39,16 +39,7 @@ class Front_Page
         apply_filters('oxi-accordions-plugin/admin_menu', TRUE);
     }
 
-    /**
-     * Generate safe path
-     * @since v2.0.1
-     */
-    public function safe_path($path)
-    {
-
-        $path = str_replace(['//', '\\\\'], ['/', '\\'], $path);
-        return str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $path);
-    }
+  
     public function database_data()
     {
         return $this->database->wpdb->get_results($this->database->wpdb->prepare('SELECT * FROM ' . $this->database->parent_table . ' WHERE type = %s ', 'accordions-or-faqs'), ARRAY_A);
@@ -241,5 +232,15 @@ class Front_Page
             <br>
             <br></div>');
         echo $return;
+    }
+      /**
+     * Generate safe path
+     * @since v2.0.1
+     */
+    public function safe_path($path)
+    {
+
+        $path = str_replace(['//', '\\\\'], ['/', '\\'], $path);
+        return str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $path);
     }
 }

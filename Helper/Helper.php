@@ -12,24 +12,6 @@ if (!defined('ABSPATH'))
 trait Helper
 {
 
-    public function admin_menu()
-    {
-        $user_role = get_option('oxi_accordions_user_permission');
-        $role_object = get_role($user_role);
-        $first_key = '';
-        if (isset($role_object->capabilities) && is_array($role_object->capabilities)) {
-            reset($role_object->capabilities);
-            $first_key = key($role_object->capabilities);
-        } else {
-            $first_key = 'manage_options';
-        }
-        add_menu_page('Accordions', 'Accordions', $first_key, 'oxi-accordions-ultimate', [$this, 'home_page']);
-        add_submenu_page('oxi-accordions-ultimate', 'Accordions', 'Shortcode', $first_key, 'oxi-accordions-ultimate', [$this, 'home_page']);
-        add_submenu_page('oxi-accordions-ultimate', 'Create New', 'Create New', $first_key, 'oxi-accordions-ultimate-new', [$this, 'create_new']);
-        add_submenu_page('oxi-accordions-ultimate', 'Settings', 'Settings', 'manage_options', 'oxi-accordions-ultimate-settings', [$this, 'user_settings']);
-        add_submenu_page('oxi-accordions-ultimate', 'Oxilab Plugins', 'Oxilab Plugins', 'manage_options', 'oxi-accordions-ultimate-plugins', [$this, 'oxilab_plugins']);
-        add_submenu_page('oxi-accordions-ultimate', 'Welcome To Accordions - Multiple Accordions or FAQs Builders', 'Support', $first_key, 'oxi-accordions-ultimate-welcome', [$this, 'welcome_page']);
-    }
 
     public function allowed_html($rawdata)
     {
@@ -427,5 +409,24 @@ trait Helper
             return;
         endif;
         new \OXI_ACCORDIONS_PLUGINS\Oxilab\Reviews();
+    }
+    
+    public function admin_menu()
+    {
+        $user_role = get_option('oxi_accordions_user_permission');
+        $role_object = get_role($user_role);
+        $first_key = '';
+        if (isset($role_object->capabilities) && is_array($role_object->capabilities)) {
+            reset($role_object->capabilities);
+            $first_key = key($role_object->capabilities);
+        } else {
+            $first_key = 'manage_options';
+        }
+        add_menu_page('Accordions', 'Accordions', $first_key, 'oxi-accordions-ultimate', [$this, 'home_page']);
+        add_submenu_page('oxi-accordions-ultimate', 'Accordions', 'Shortcode', $first_key, 'oxi-accordions-ultimate', [$this, 'home_page']);
+        add_submenu_page('oxi-accordions-ultimate', 'Create New', 'Create New', $first_key, 'oxi-accordions-ultimate-new', [$this, 'create_new']);
+        add_submenu_page('oxi-accordions-ultimate', 'Settings', 'Settings', 'manage_options', 'oxi-accordions-ultimate-settings', [$this, 'user_settings']);
+        add_submenu_page('oxi-accordions-ultimate', 'Oxilab Plugins', 'Oxilab Plugins', 'manage_options', 'oxi-accordions-ultimate-plugins', [$this, 'oxilab_plugins']);
+        add_submenu_page('oxi-accordions-ultimate', 'Welcome To Accordions - Multiple Accordions or FAQs Builders', 'Support', $first_key, 'oxi-accordions-ultimate-welcome', [$this, 'welcome_page']);
     }
 }

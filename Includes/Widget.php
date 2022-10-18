@@ -31,11 +31,6 @@ class Widget extends \WP_Widget {
         endif;
         echo $args['after_widget'];
     }
-     public function update($new_instance, $old_instance) {
-        $instance = array();
-        $instance['title'] = (!empty($new_instance['title']) ) ? strip_tags($new_instance['title']) : '';
-        return $instance;
-    }
 
     public function form($instance) {
         if (isset($instance['title'])) {
@@ -51,6 +46,10 @@ class Widget extends \WP_Widget {
         <?php
     }
 
-   
+    public function update($new_instance, $old_instance) {
+        $instance = array();
+        $instance['title'] = (!empty($new_instance['title']) ) ? strip_tags($new_instance['title']) : '';
+        return $instance;
+    }
 
 }
