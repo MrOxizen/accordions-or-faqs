@@ -212,16 +212,20 @@ class Template {
      */
     public function render_accordion_global_schema() {
         $schema = get_option('accordions_or_faqs_global_schema');
-
         if ($schema == 'yes' && count($this->global_schema) > 0) :
-            ?>
-            <!-- FAQ Schema : Starts-->
-            <script type="application/ld+json">
-            <?php echo json_encode($this->global_schema); ?>
-            </script>
-            <!-- FAQ Schema : Ends-->
-            <?php
+
+            add_action('wp_footer', [$this, 'global_schema']);
         endif;
+    }
+
+    public function global_schema() {
+        ?>
+        <!-- FAQ Schema : Starts-->
+        <script type="application/ld+json">
+        <?php echo json_encode($this->global_schema, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE); ?>
+        </script>
+        <!-- FAQ Schema : Ends-->
+        <?php
     }
 
     /**
