@@ -27,34 +27,6 @@ class Frontend {
     public $database;
 
     /**
-     * Template constructor.
-     */
-    public function __construct() {
-        $this->database = new \OXI_ACCORDIONS_PLUGINS\Helper\Database();
-        if (!function_exists('wp_print_media_templates')) {
-            require_once ABSPATH . WPINC . '/media-template.php';
-        }
-        add_action('admin_init', array($this, 'maybe_load_template'));
-        add_action('admin_menu', array($this, 'add_dashboard_page'));
-        add_action('network_admin_menu', array($this, 'add_dashboard_page'));
-    }
-
-    public function validate_post($files = '') {
-
-        $rawdata = [];
-        if (!empty($files)):
-            $data = json_decode(stripslashes($files), true);
-        endif;
-        if (is_array($data)):
-            $rawdata = array_map(array($this, 'allowed_html'), $data);
-        else:
-            $rawdata = $this->allowed_html($files);
-        endif;
-
-        return $rawdata;
-    }
-
-    /**
      * Register page through WordPress's hooks.
      */
     public function add_dashboard_page() {
@@ -100,29 +72,29 @@ class Frontend {
             <meta name="viewport" content="width=device-width"/>
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
             <title><?php esc_html_e('Accordions - Multiple Accordions or FAQs Builders', 'accordions-or-faqs'); ?></title>
-            <?php wp_head(); ?>
+        <?php wp_head(); ?>
         </head>
         <body class="shortcode-addons-template-body" id="shortcode-addons-template-body">
-            <?php
-        }
+        <?php
+    }
 
-        /**
-         * Outputs the content of the current step.
-         */
-        public function template_content() {
-            if ($this->oxiid > 0):
-                $CLASS = '\OXI_ACCORDIONS_PLUGINS\Includes\Shortcode';
-                if (class_exists($CLASS)):
-                    new $CLASS($this->oxiid, 'admin');
-                endif;
+    /**
+     * Outputs the content of the current step.
+     */
+    public function template_content() {
+        if ($this->oxiid > 0):
+            $CLASS = '\OXI_ACCORDIONS_PLUGINS\Includes\Shortcode';
+            if (class_exists($CLASS)):
+                new $CLASS($this->oxiid, 'admin');
             endif;
-        }
+        endif;
+    }
 
-        /**
-         * Outputs the simplified footer.
-         */
-        public function template_footer() {
-            ?>
+    /**
+     * Outputs the simplified footer.
+     */
+    public function template_footer() {
+        ?>
             <?php wp_footer(); ?>
         </body>
         </html>
@@ -221,6 +193,34 @@ class Frontend {
         else:
             return wp_kses($rawdata, $allowed_tags);
         endif;
+    }
+
+    /**
+     * Template constructor.
+     */
+    public function __construct() {
+        $this->database = new \OXI_ACCORDIONS_PLUGINS\Helper\Database();
+        if (!function_exists('wp_print_media_templates')) {
+            require_once ABSPATH . WPINC . '/media-template.php';
+        }
+        add_action('admin_init', array($this, 'maybe_load_template'));
+        add_action('admin_menu', array($this, 'add_dashboard_page'));
+        add_action('network_admin_menu', array($this, 'add_dashboard_page'));
+    }
+
+    public function validate_post($files = '') {
+
+        $rawdata = [];
+        if (!empty($files)):
+            $data = json_decode(stripslashes($files), true);
+        endif;
+        if (is_array($data)):
+            $rawdata = array_map(array($this, 'allowed_html'), $data);
+        else:
+            $rawdata = $this->allowed_html($files);
+        endif;
+
+        return $rawdata;
     }
 
 }

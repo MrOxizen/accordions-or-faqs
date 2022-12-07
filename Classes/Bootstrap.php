@@ -42,15 +42,6 @@ class Bootstrap {
         }
     }
 
-    public function User_Admin() {
-        add_filter('oxi-accordions-plugin/support-and-comments', array($this, $this->fixed_data('737570706f7274616e64636f6d6d656e7473')));
-        add_filter('oxi-accordions-plugin/pro_version', array($this, $this->fixed_data('636865636b5f63757272656e745f6163636f7264696f6e73')));
-        add_filter('oxi-accordions-plugin/admin_menu', array($this, $this->fixed_data('6f78696c61625f61646d696e5f6d656e75')));
-        add_action('admin_menu', [$this, 'admin_menu']);
-        add_action('admin_head', [$this, 'admin_icon']);
-        add_action('admin_init', array($this, 'redirect_on_activation'));
-    }
-
     public function load_shortcode() {
         add_shortcode('oxi_accordions', [$this, 'accordions_shortcode']);
         $Widget = new \OXI_ACCORDIONS_PLUGINS\Includes\Widget();

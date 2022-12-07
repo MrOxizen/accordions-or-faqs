@@ -36,9 +36,9 @@ class Settings {
     public function Render() {
         ?>
         <div class="wrap">
-        <?php
-        echo apply_filters('oxi-accordions-plugin/admin_menu', TRUE);
-        ?>
+            <?php
+            echo apply_filters('oxi-accordions-plugin/admin_menu', TRUE);
+            ?>
             <div class="oxi-addons-row oxi-addons-admin-settings">
                 <form method="post">
                     <h2>General</h2>
@@ -51,9 +51,9 @@ class Settings {
                                 <td>
                                     <fieldset>
                                         <select name="oxi_accordions_user_permission" id="oxi_accordions_user_permission">
-        <?php foreach ($this->roles as $key => $role) { ?>
+                                            <?php foreach ($this->roles as $key => $role) { ?>
                                                 <option value="<?php echo esc_attr($key); ?>" <?php selected($this->saved_role, $key); ?>><?php echo esc_html($role); ?></option>
-        <?php } ?>
+                                            <?php } ?>
                                         </select>
                                         <span class="oxi-addons-settings-connfirmation oxi_accordions_user_permission"></span>
                                         <br>
@@ -63,7 +63,24 @@ class Settings {
                             </tr>
                             <tr>
                                 <th scope="row">
-                                    <label for="oxi_addons_font_awesome">Font Awesome Support</label>
+                                    <label for="accordions_or_faqs_global_schema">FAQ Schema</label>
+                                </th>
+                                <td>
+                                    <fieldset>
+                                        <label for="accordions_or_faqs_global_schema[yes]">
+                                            <input type="radio" class="radio" id="accordions_or_faqs_global_schema[yes]" name="accordions_or_faqs_global_schema" value="yes" <?php checked('yes', get_option('accordions_or_faqs_global_schema'), true); ?>>Yes</label>
+                                        <label for="accordions_or_faqs_global_schema[no]">
+                                            <input type="radio" class="radio" id="accordions_or_faqs_global_schema[no]" name="accordions_or_faqs_global_schema" value="" <?php checked('', get_option('accordions_or_faqs_global_schema'), true); ?>>No
+                                        </label>
+                                        <span class="oxi-addons-settings-connfirmation accordions_or_faqs_global_schema"></span>
+                                        <br>
+                                        <p class="description">Active Globally Accordions Schema for Google or SEO Plugins</p>
+                                    </fieldset>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    <label for="accordions_or_faqs_global_schema">Font Awesome Support</label>
                                 </th>
                                 <td>
                                     <fieldset>
@@ -109,19 +126,19 @@ class Settings {
                                     <label for="accordions_or_faqs_license_key">License Key</label>
                                 </th>
                                 <td class="valid">
-                                    <input type="text" class="regular-text" id="accordions_or_faqs_license_key" name="accordions_or_faqs_license_key" value="<?php echo $this->license; ?>">
+                                    <input type="text" class="regular-text" id="accordions_or_faqs_license_key" name="accordions_or_faqs_license_key" value="<?php echo esc_attr($this->license); ?>">
                                     <span class="oxi-addons-settings-connfirmation accordions_or_faqs_license_massage">
-        <?php
-        if ($this->status == 'valid' && empty($this->license)) :
-            echo _e('<span class="oxi-confirmation-success"></span>');
-        elseif ($this->status == 'valid' && !empty($this->license)) :
-            echo _e('<span class="oxi-confirmation-success"></span>');
-        elseif (!empty($this->license)) :
-            echo _e('<span class="oxi-confirmation-failed"></span>');
-        else :
-            echo _e('<span class="oxi-confirmation-blank"></span>');
-        endif;
-        ?>
+                                        <?php
+                                        if ($this->status == 'valid' && empty($this->license)) :
+                                            echo _e('<span class="oxi-confirmation-success"></span>');
+                                        elseif ($this->status == 'valid' && !empty($this->license)) :
+                                            echo _e('<span class="oxi-confirmation-success"></span>');
+                                        elseif (!empty($this->license)) :
+                                            echo _e('<span class="oxi-confirmation-failed"></span>');
+                                        else :
+                                            echo _e('<span class="oxi-confirmation-blank"></span>');
+                                        endif;
+                                        ?>
                                     </span>
                                     <span class="oxi-addons-settings-connfirmation accordions_or_faqs_license_text">
                                         <?php

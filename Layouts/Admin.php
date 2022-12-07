@@ -102,22 +102,6 @@ class Admin {
     public $Popover_Condition = true;
     public $Get_Nested_Accordions = [];
 
-    public function __construct($type = '') {
-        $this->database = new \OXI_ACCORDIONS_PLUGINS\Helper\Database();
-        $this->oxiid = (!empty($_GET['styleid']) ? (int) $_GET['styleid'] : '');
-        $this->WRAPPER = '.oxi-accordions-wrapper-' . $this->oxiid;
-        $this->CSSWRAPPER = '.oxi-accordions-wrapper-' . $this->oxiid . ' > .oxi-addons-row';
-        if ($type != 'admin') {
-            $this->hooks();
-            $this->render();
-        }
-    }
-
-    public function str_replace_first($from, $to, $content) {
-        $from = '/' . preg_quote($from, '/') . '/';
-        return preg_replace($from, $to, $content, 1);
-    }
-
     /**
      * Template Modal opener
      * Define Multiple Data With Single Data
@@ -361,13 +345,13 @@ class Admin {
                                 </form>
                             </div>
                             <div class="oxi-addons-style-right">
-                                <?php
-                                $this->modal_opener();
-                                $this->shortcode_name();
-                                $this->shortcode_info();
-                                $this->shortcode_rearrange();
-                                $this->modal_form();
-                                ?>
+        <?php
+        $this->modal_opener();
+        $this->shortcode_name();
+        $this->shortcode_info();
+        $this->shortcode_rearrange();
+        $this->modal_form();
+        ?>
                             </div>
                         </div>
                         <div class="oxi-addons-Preview" id="oxipreviewreload">
@@ -504,6 +488,22 @@ class Admin {
         );
         $this->end_controls_section();
         $this->end_section_tabs();
+    }
+
+    public function __construct($type = '') {
+        $this->database = new \OXI_ACCORDIONS_PLUGINS\Helper\Database();
+        $this->oxiid = (!empty($_GET['styleid']) ? (int) $_GET['styleid'] : '');
+        $this->WRAPPER = '.oxi-accordions-wrapper-' . $this->oxiid;
+        $this->CSSWRAPPER = '.oxi-accordions-wrapper-' . $this->oxiid . ' > .oxi-addons-row';
+        if ($type != 'admin') {
+            $this->hooks();
+            $this->render();
+        }
+    }
+
+    public function str_replace_first($from, $to, $content) {
+        $from = '/' . preg_quote($from, '/') . '/';
+        return preg_replace($from, $to, $content, 1);
     }
 
 }

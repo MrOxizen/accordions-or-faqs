@@ -291,6 +291,20 @@ class API {
      * Admin Settings
      * @return void
      */
+    public function post_global_schema() {
+        if (!current_user_can('manage_options')) {
+            return;
+        }
+        $rawdata = $this->validate_post();
+        $value = sanitize_text_field($rawdata['value']);
+        update_option('accordions_or_faqs_global_schema', $value);
+        return '<span class="oxi-confirmation-success"></span>';
+    }
+
+    /**
+     * Admin Settings
+     * @return void
+     */
     public function post_oxi_accordions_support_massage() {
         if (!current_user_can('manage_options')) {
             return;

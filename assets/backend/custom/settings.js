@@ -50,6 +50,18 @@ jQuery.noConflict();
             }, 8000);
         });
     });
+    $("input[name=accordions_or_faqs_global_schema] ").on("change", function (e) {
+        var $This = $(this), name = $This.attr('name'), $value = $This.val();
+        var rawdata = JSON.stringify({ value: $value });
+        var functionname = "global_schema";
+        $('.' + name).html('<span class="spinner sa-spinner-open"></span>');
+        Oxi_Accordions_Settings(functionname, rawdata, styleid, childid, function (callback) {
+            $('.' + name).html(callback);
+            setTimeout(function () {
+                $('.' + name).html('');
+            }, 8000);
+        });
+    });
     $("input[name=oxi_accordions_support_massage] ").on("change", function (e) {
         var $This = $(this), name = $This.attr('name'), $value = $This.val();
         var rawdata = JSON.stringify({ value: $value });
