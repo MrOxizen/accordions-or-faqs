@@ -3,7 +3,7 @@ jQuery.noConflict();
     var styleid = '';
     var childid = '';
 
-    async function OxiAccordionsRestApi(functionname, rawdata, styleid, childid, callback) {
+    async function OxiAccordionsApi(functionname, rawdata, styleid, childid, callback) {
         if (functionname === "") {
             alert('Confirm Function Name');
             return false;
@@ -11,24 +11,33 @@ jQuery.noConflict();
         let result;
         try {
             result = await $.ajax({
-                url: oxiaccordionsultimate.root + 'oxiaccordionsultimate/v1/' + functionname,
-                method: 'POST',
-                dataType: "json",
-
+                url: oxi_accordions_ultimate.ajaxurl,
+                method: 'post',
                 data: {
-                    _wpnonce: oxiaccordionsultimate.nonce,
+                    action: 'oxi_accordions_ultimate',
+                    _wpnonce: oxi_accordions_ultimate.nonce,
+                    functionname: functionname,
                     styleid: styleid,
                     childid: childid,
                     rawdata: rawdata
                 }
             });
-            console.log(result);
-            return callback(result);
+
+            if (result) {
+                try {
+                    console.log(JSON.parse(result));
+                    return callback(JSON.parse(result));
+                } catch (e) {
+                    console.log(result);
+                    return callback(result)
+                }
+            }
 
         } catch (error) {
             console.error(error);
         }
     }
+
     jQuery(".oxi-addons-style-clone").on("click", function () {
         var dataid = jQuery(this).attr('oxiaddonsdataid'), HTMl = $(this).closest('tr').find('td').eq(1).html();
         jQuery('#oxistyleid').val(dataid);
@@ -42,7 +51,7 @@ jQuery.noConflict();
         var styleid = $('#oxistyleid').val();
         var functionname = "create_new";
         $('.modal-footer').prepend('<span class="spinner sa-spinner-open-left"></span>');
-        OxiAccordionsRestApi(functionname, rawdata, styleid, childid, function (callback) {
+        OxiAccordionsApi(functionname, rawdata, styleid, childid, function (callback) {
             console.log(callback);
             setTimeout(function () {
                 document.location.href = callback;
@@ -57,7 +66,7 @@ jQuery.noConflict();
         var styleid = $This.children('#oxideleteid').val();
         var functionname = "shortcode_delete";
         $(this).append('<span class="spinner sa-spinner-open"></span>');
-        OxiAccordionsRestApi(functionname, rawdata, styleid, childid, function (callback) {
+        OxiAccordionsApi(functionname, rawdata, styleid, childid, function (callback) {
             console.log(callback);
             setTimeout(function () {
                 if (callback === "done") {

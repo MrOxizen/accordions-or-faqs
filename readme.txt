@@ -3,7 +3,7 @@ Contributors: biplob018
 Donate link: https://www.oxilabdemos.com/accordions/
 Tags: accordions, accordions plugin, FAQ, collapse, accordions plugin jquery, accordions plugin wordpress, accordions shortcode
 Requires at least: 3.8
-Stable tag: 2.3.0
+Stable tag: 2.3.1
 Tested up to: 6.1.1
 Requires PHP: 5.4
 License: GPLv2 or later
@@ -316,6 +316,11 @@ Check our icon set from the arrow icon. We give three types of arrow icons and y
 3. Customization Page 
 
 == Changelog ==
+= 2.3.1 =
+* Update XSS issues
+* Modify SEO schema
+* Modify Admin Data
+
 = 2.3.0 =
 *Compatible with 6.1.1
 * Update SEO schema
@@ -364,6 +369,11 @@ Check our icon set from the arrow icon. We give three types of arrow icons and y
 * Initial Release
 
 == Upgrade Notice ==
+= 2.3.1 =
+Update XSS issues
+Modify SEO schema
+Modify Admin Data
+
 = 2.3.0 =
 Compatible with 6.1.1
 Update SEO schema
