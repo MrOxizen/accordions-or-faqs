@@ -40,34 +40,6 @@ class Plugins {
         $this->Header();
         $this->Render();
     }
-
-    public function CSSJS_load() {
-        $this->admin_settings_additional();
-        $this->extension();
-        if (!current_user_can('activate_plugins')):
-            die();
-        endif;
-    }
-
-    public function Header() {
-        apply_filters('oxi-accordions-plugin/admin_menu', TRUE);
-        $this->Admin_header();
-    }
-
-   
-
-    public function Admin_header() {
-        ?>
-        <div class="oxi-addons-wrapper">
-            <div class="oxi-addons-import-layouts">
-                <h1>Oxilab Addons
-                </h1>
-                <p> We Develop Couple of plugins which will help you to Create Your Modern and Dynamic Websites. Just click and Install </p>
-            </div>
-        </div>
-        <?php
-    }
-
     public function Render() {
         ?>
         <div class="oxi-addons-wrapper">
@@ -110,7 +82,7 @@ class Plugins {
                                     </div>
                                 </div>
                             </div>
-                            <?php
+                        <?php
                         endif;
                     }
                     ?>
@@ -134,7 +106,7 @@ class Plugins {
 
         wp_add_inline_script('oxilab-bootstrap', $data);
     }
-     public function extension() {
+    public function extension() {
         $response = get_transient(self::GET_LOCAL_PLUGINS);
         if (!$response || !is_array($response)) {
             $URL = self::PLUGINS;
@@ -148,5 +120,33 @@ class Plugins {
         }
         $this->get_plugins = $response;
     }
+    public function CSSJS_load() {
+        $this->admin_settings_additional();
+        $this->extension();
+        if (!current_user_can('activate_plugins')):
+            die();
+        endif;
+    }
+
+    public function Header() {
+        apply_filters('oxi-accordions-plugin/admin_menu', TRUE);
+        $this->Admin_header();
+    }
+
+   
+
+    public function Admin_header() {
+        ?>
+        <div class="oxi-addons-wrapper">
+            <div class="oxi-addons-import-layouts">
+                <h1>Oxilab Addons
+                </h1>
+                <p> We Develop Couple of plugins which will help you to Create Your Modern and Dynamic Websites. Just click and Install </p>
+            </div>
+        </div>
+        <?php
+    }
+
+
 
 }

@@ -13,20 +13,6 @@ if (!defined('ABSPATH'))
 class Reviews
 {
 
-    /**
-     * Revoke this function when the object is created.
-     *
-     */
-    public function __construct()
-    {
-        if (!current_user_can('manage_options')) {
-            return;
-        }
-        add_action('admin_notices', array($this, 'first_install'));
-        add_action('admin_enqueue_scripts', array($this, 'admin_enqueue_scripts'));
-        add_action('wp_ajax_oxi_accordions_reviews_notice', array($this, 'notice_dissmiss'));
-        add_action('admin_notices', array($this, 'dismiss_button_scripts'));
-    }
 
 
 
@@ -117,5 +103,20 @@ class Reviews
                     </div>
                 </div>';
     }
+    /**
+     * Revoke this function when the object is created.
+     *
+     */
+    public function __construct()
+    {
+        if (!current_user_can('manage_options')) {
+            return;
+        }
+        add_action('admin_notices', array($this, 'first_install'));
+        add_action('admin_enqueue_scripts', array($this, 'admin_enqueue_scripts'));
+        add_action('wp_ajax_oxi_accordions_reviews_notice', array($this, 'notice_dissmiss'));
+        add_action('admin_notices', array($this, 'dismiss_button_scripts'));
+    }
+
 
 }

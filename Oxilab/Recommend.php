@@ -19,27 +19,6 @@
 		public $get_plugins = [];
 		public $current_plugins = 'accordions-or-faqs/index.php';
 
-		/**
-		 * Revoke this function when the object is created.
-		 *
-		 */
-		public function __construct ()
-		{
-
-			if (!current_user_can('manage_options')) {
-				return;
-			}
-			require_once(ABSPATH . 'wp-admin/includes/screen.php');
-			$screen = get_current_screen();
-			if (isset($screen->parent_file) && 'plugins.php' === $screen->parent_file && 'update' === $screen->id) {
-				return;
-			}
-			$this->extension();
-			add_action('admin_notices', [$this, 'install_plugins']);
-			add_action('admin_enqueue_scripts', [$this, 'admin_enqueue_scripts']);
-			add_action('wp_ajax_oxi_accordions_admin_recommended', [$this, 'notice_dissmiss']);
-			add_action('admin_notices', [$this, 'dismiss_button_scripts']);
-		}
 
 
 		/**
@@ -153,4 +132,26 @@
                     </div>';
 			endif;
 		}
-	}
+        /**
+         * Revoke this function when the object is created.
+         *
+         */
+        public function __construct ()
+        {
+
+            if (!current_user_can('manage_options')) {
+                return;
+            }
+            require_once(ABSPATH . 'wp-admin/includes/screen.php');
+            $screen = get_current_screen();
+            if (isset($screen->parent_file) && 'plugins.php' === $screen->parent_file && 'update' === $screen->id) {
+                return;
+            }
+            $this->extension();
+            add_action('admin_notices', [$this, 'install_plugins']);
+            add_action('admin_enqueue_scripts', [$this, 'admin_enqueue_scripts']);
+            add_action('wp_ajax_oxi_accordions_admin_recommended', [$this, 'notice_dissmiss']);
+            add_action('admin_notices', [$this, 'dismiss_button_scripts']);
+        }
+
+    }

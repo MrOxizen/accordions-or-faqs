@@ -856,7 +856,7 @@
 			else :
 				$content = $this->special_charecter($child['oxi-accordions-modal-desc']);
 			endif;
-			return wp_kses_post($content);
+			return $content;
 		}
 
 		public function accordions_content_render_nested_accordions ($style, $child)
