@@ -26,38 +26,6 @@ class Frontend {
      */
     public $database;
 
-    /**
-     * Register page through WordPress's hooks.
-     */
-    public function add_dashboard_page() {
-        add_dashboard_page('', '', 'read', 'oxi-accordions-style-view', '');
-    }
-
-    public function maybe_load_template() {
-        $this->oxiid = (!empty($_GET['styleid']) ? (int) $_GET['styleid'] : '');
-        $page = (isset($_GET['page']) ? $this->validate_post($_GET['page']) : '');
-        if ('oxi-accordions-style-view' !== $page || $this->oxiid < 0) {
-            return;
-        }
-        // Don't load the interface if doing an ajax call.
-        if (defined('DOING_AJAX') && DOING_AJAX) {
-            return;
-        }
-        set_current_screen();
-        // Remove an action in the Gutenberg plugin ( not core Gutenberg ) which throws an error.
-        remove_action('admin_print_styles', 'gutenberg_block_editor_admin_print_styles');
-        $this->load_template();
-    }
-
-    private function load_template() {
-        $this->enqueue_scripts();
-        $this->template_header();
-        $this->template_content();
-        $this->template_footer();
-
-        exit;
-    }
-
     public function enqueue_scripts() {
         wp_enqueue_style('oxilab-tabs-bootstrap', OXI_ACCORDIONS_URL . 'assets/backend/css/bootstrap.min.css', false, OXI_ACCORDIONS_PLUGIN_VERSION);
         wp_enqueue_style('font-awsome.min', OXI_ACCORDIONS_URL . 'assets/frontend/css/font-awsome.min.css', false, OXI_ACCORDIONS_PLUGIN_VERSION);
@@ -88,6 +56,38 @@ class Frontend {
                 new $CLASS($this->oxiid, 'admin');
             endif;
         endif;
+    }
+
+    /**
+     * Register page through WordPress's hooks.
+     */
+    public function add_dashboard_page() {
+        add_dashboard_page('', '', 'read', 'oxi-accordions-style-view', '');
+    }
+
+    public function maybe_load_template() {
+        $this->oxiid = (!empty($_GET['styleid']) ? (int) $_GET['styleid'] : '');
+        $page = (isset($_GET['page']) ? $this->validate_post($_GET['page']) : '');
+        if ('oxi-accordions-style-view' !== $page || $this->oxiid < 0) {
+            return;
+        }
+        // Don't load the interface if doing an ajax call.
+        if (defined('DOING_AJAX') && DOING_AJAX) {
+            return;
+        }
+        set_current_screen();
+        // Remove an action in the Gutenberg plugin ( not core Gutenberg ) which throws an error.
+        remove_action('admin_print_styles', 'gutenberg_block_editor_admin_print_styles');
+        $this->load_template();
+    }
+
+    private function load_template() {
+        $this->enqueue_scripts();
+        $this->template_header();
+        $this->template_content();
+        $this->template_footer();
+
+        exit;
     }
 
     /**

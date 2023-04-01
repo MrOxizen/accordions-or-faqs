@@ -18,20 +18,6 @@ class Widget extends \WP_Widget {
         );
     }
 
-    public function register_accordions_widget() {
-        register_widget($this);
-    }
-
-    public function widget($args, $instance) {
-        $title = apply_filters('widget_title', $instance['title']);
-        echo $args['before_widget'];
-        $CLASS = '\OXI_ACCORDIONS_PLUGINS\Includes\Shortcode';
-        if (class_exists($CLASS)):
-            new $CLASS($title, 'user');
-        endif;
-        echo $args['after_widget'];
-    }
-
     public function form($instance) {
         if (isset($instance['title'])) {
             $title = $instance['title'];
@@ -44,6 +30,20 @@ class Widget extends \WP_Widget {
             <input class="widefat" id="<?php echo esc_attr($this->get_field_id('title')); ?>" name="<?php echo esc_attr($this->get_field_name('title')); ?>" type="text" value="<?php echo esc_attr($title); ?>" />
         </p>
         <?php
+    }
+
+    public function register_accordions_widget() {
+        register_widget($this);
+    }
+
+    public function widget($args, $instance) {
+        $title = apply_filters('widget_title', $instance['title']);
+        echo $args['before_widget'];
+        $CLASS = '\OXI_ACCORDIONS_PLUGINS\Includes\Shortcode';
+        if (class_exists($CLASS)):
+            new $CLASS($title, 'user');
+        endif;
+        echo $args['after_widget'];
     }
 
     public function update($new_instance, $old_instance) {

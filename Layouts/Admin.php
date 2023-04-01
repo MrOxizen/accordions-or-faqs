@@ -103,34 +103,6 @@ class Admin {
     public $Get_Nested_Accordions = [];
 
     /**
-     * Template Modal opener
-     * Define Multiple Data With Single Data
-     *
-     * @since 2.0.1
-     */
-    public function modal_opener() {
-        $this->add_substitute_control('', [], [
-            'type' => Controls::MODALOPENER,
-            'title' => esc_html__('Accordions Data Form', 'accordions-or-faqs'),
-            'sub-title' => esc_html__('Open Form', 'accordions-or-faqs'),
-            'condition' => [
-                'oxi-accordions-content-type' => 'content'
-            ],
-            'showing' => TRUE,
-        ]);
-    }
-
-    public function thumbnail_sizes() {
-        $default_image_sizes = get_intermediate_image_sizes();
-        $thumbnail_sizes = array();
-        foreach ($default_image_sizes as $size) {
-            $image_sizes[$size] = $size . ' - ' . intval(get_option("{$size}_size_w")) . ' x ' . intval(get_option("{$size}_size_h"));
-            $thumbnail_sizes[$size] = str_replace('_', ' ', ucfirst($image_sizes[$size]));
-        }
-        return $thumbnail_sizes;
-    }
-
-    /**
      * Template Name
      * Define Name
      *
@@ -217,6 +189,34 @@ class Admin {
                 ],
             ]);
         endif;
+    }
+
+    /**
+     * Template Modal opener
+     * Define Multiple Data With Single Data
+     *
+     * @since 2.0.1
+     */
+    public function modal_opener() {
+        $this->add_substitute_control('', [], [
+            'type' => Controls::MODALOPENER,
+            'title' => esc_html__('Accordions Data Form', 'accordions-or-faqs'),
+            'sub-title' => esc_html__('Open Form', 'accordions-or-faqs'),
+            'condition' => [
+                'oxi-accordions-content-type' => 'content'
+            ],
+            'showing' => TRUE,
+        ]);
+    }
+
+    public function thumbnail_sizes() {
+        $default_image_sizes = get_intermediate_image_sizes();
+        $thumbnail_sizes = array();
+        foreach ($default_image_sizes as $size) {
+            $image_sizes[$size] = $size . ' - ' . intval(get_option("{$size}_size_w")) . ' x ' . intval(get_option("{$size}_size_h"));
+            $thumbnail_sizes[$size] = str_replace('_', ' ', ucfirst($image_sizes[$size]));
+        }
+        return $thumbnail_sizes;
     }
 
     /**
@@ -317,23 +317,23 @@ class Admin {
         ?>
         <div class="wrap">
             <div class="oxi-addons-wrapper">
-        <?php
-        apply_filters('oxi-accordions-plugin/admin_menu', TRUE);
-        ?>
+                <?php
+                apply_filters('oxi-accordions-plugin/admin_menu', TRUE);
+                ?>
                 <div class="oxi-addons-style-20-spacer"></div>
                 <div class="oxi-addons-row">
-        <?php
-        apply_filters('oxi-accordions-plugin/support-and-comments', TRUE);
-        ?>
+                    <?php
+                    apply_filters('oxi-accordions-plugin/support-and-comments', TRUE);
+                    ?>
                     <div class="oxi-addons-wrapper oxi-addons-image-tabs-mode">
                         <div class="oxi-addons-settings" id="oxisettingsreload">
                             <div class="oxi-addons-style-left">
                                 <form method="post" id="oxi-addons-form-submit">
                                     <div class="oxi-addons-style-settings">
                                         <div class="oxi-addons-tabs-wrapper">
-        <?php
-        $this->register_controls();
-        ?>
+                                            <?php
+                                            $this->register_controls();
+                                            ?>
                                         </div>
                                         <div class="oxi-addons-setting-save">
                                             <button type="button" class="btn btn-danger" id="oxi-addons-setting-reload">Reload</button>
@@ -345,13 +345,13 @@ class Admin {
                                 </form>
                             </div>
                             <div class="oxi-addons-style-right">
-        <?php
-        $this->modal_opener();
-        $this->shortcode_name();
-        $this->shortcode_info();
-        $this->shortcode_rearrange();
-        $this->modal_form();
-        ?>
+                                <?php
+                                $this->modal_opener();
+                                $this->shortcode_name();
+                                $this->shortcode_info();
+                                $this->shortcode_rearrange();
+                                $this->modal_form();
+                                ?>
                             </div>
                         </div>
                         <div class="oxi-addons-Preview" id="oxipreviewreload">

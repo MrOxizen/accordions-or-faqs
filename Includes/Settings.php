@@ -20,6 +20,15 @@ class Settings {
     public $status;
 
     /**
+     * Admin Notice JS file loader
+     * @return void
+     */
+    public function admin_ajax() {
+        $this->admin_settings_additional();
+        wp_enqueue_script('oxi-accordions-settings-page', OXI_ACCORDIONS_URL . '/assets/backend/custom/settings.js', false, 'accordions-or-faqs');
+    }
+
+    /**
      * Constructor of Oxilab Accordions Home Page
      *
      * @since 2.0.0
@@ -162,15 +171,6 @@ class Settings {
             </div>
         </div>
         <?php
-    }
-
-    /**
-     * Admin Notice JS file loader
-     * @return void
-     */
-    public function admin_ajax() {
-        $this->admin_settings_additional();
-        wp_enqueue_script('oxi-accordions-settings-page', OXI_ACCORDIONS_URL . '/assets/backend/custom/settings.js', false, 'accordions-or-faqs');
     }
 
     public function admin() {

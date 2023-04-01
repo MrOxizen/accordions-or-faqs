@@ -40,6 +40,35 @@ class Plugins {
         $this->Header();
         $this->Render();
     }
+
+    public function extension() {
+        $response = get_transient(self::GET_LOCAL_PLUGINS);
+        if (!$response || !is_array($response)) {
+            $URL = self::PLUGINS;
+            $request = wp_remote_request($URL);
+            if (!is_wp_error($request)) {
+                $response = json_decode(wp_remote_retrieve_body($request), true);
+                set_transient(self::GET_LOCAL_PLUGINS, $response, 10 * DAY_IN_SECONDS);
+            } else {
+                $response = $request->get_error_message();
+            }
+        }
+        $this->get_plugins = $response;
+    }
+
+    public function CSSJS_load() {
+        $this->admin_settings_additional();
+        $this->extension();
+        if (!current_user_can('activate_plugins')):
+            die();
+        endif;
+    }
+
+    public function Header() {
+        apply_filters('oxi-accordions-plugin/admin_menu', TRUE);
+        $this->Admin_header();
+    }
+
     public function Render() {
         ?>
         <div class="oxi-addons-wrapper">
@@ -82,7 +111,7 @@ class Plugins {
                                     </div>
                                 </div>
                             </div>
-                        <?php
+                            <?php
                         endif;
                     }
                     ?>
@@ -106,34 +135,6 @@ class Plugins {
 
         wp_add_inline_script('oxilab-bootstrap', $data);
     }
-    public function extension() {
-        $response = get_transient(self::GET_LOCAL_PLUGINS);
-        if (!$response || !is_array($response)) {
-            $URL = self::PLUGINS;
-            $request = wp_remote_request($URL);
-            if (!is_wp_error($request)) {
-                $response = json_decode(wp_remote_retrieve_body($request), true);
-                set_transient(self::GET_LOCAL_PLUGINS, $response, 10 * DAY_IN_SECONDS);
-            } else {
-                $response = $request->get_error_message();
-            }
-        }
-        $this->get_plugins = $response;
-    }
-    public function CSSJS_load() {
-        $this->admin_settings_additional();
-        $this->extension();
-        if (!current_user_can('activate_plugins')):
-            die();
-        endif;
-    }
-
-    public function Header() {
-        apply_filters('oxi-accordions-plugin/admin_menu', TRUE);
-        $this->Admin_header();
-    }
-
-   
 
     public function Admin_header() {
         ?>
@@ -146,7 +147,5 @@ class Plugins {
         </div>
         <?php
     }
-
-
 
 }

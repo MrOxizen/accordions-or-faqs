@@ -11,124 +11,6 @@ if (!defined('ABSPATH'))
  */
 trait Helper {
 
-    public function User_Admin() {
-        add_filter('oxi-accordions-plugin/support-and-comments', [$this, $this->fixed_data('737570706f7274616e64636f6d6d656e7473')]);
-        add_filter('oxi-accordions-plugin/pro_version', [$this, $this->fixed_data('636865636b5f63757272656e745f6163636f7264696f6e73')]);
-        add_filter('oxi-accordions-plugin/admin_menu', [$this, $this->fixed_data('6f78696c61625f61646d696e5f6d656e75')]);
-        add_action('admin_menu', [$this, 'admin_menu']);
-        add_action('admin_head', [$this, 'admin_icon']);
-        add_action('admin_init', [$this, 'redirect_on_activation']);
-    }
-
-    public function allowed_html($rawdata) {
-        $allowed_tags = [
-                'a'          => [
-                        'class' => [],
-                        'href'  => [],
-                        'rel'   => [],
-                        'title' => [],
-                ],
-                'abbr'       => [
-                        'title' => [],
-                ],
-                'b'          => [],
-                'br'         => [],
-                'blockquote' => [
-                        'cite' => [],
-                ],
-                'cite'       => [
-                        'title' => [],
-                ],
-                'code'       => [],
-                'del'        => [
-                        'datetime' => [],
-                        'title'    => [],
-                ],
-                'dd'         => [],
-                'div'        => [
-                        'class' => [],
-                        'title' => [],
-                        'style' => [],
-                        'id'    => [],
-                ],
-                'table'      => [
-                        'class' => [],
-                        'id'    => [],
-                        'style' => [],
-                ],
-                'button'     => [
-                        'class' => [],
-                        'type'  => [],
-                        'value' => [],
-                ],
-                'thead'      => [],
-                'tbody'      => [],
-                'tr'         => [],
-                'td'         => [],
-                'dt'         => [],
-                'em'         => [],
-                'h1'         => [],
-                'h2'         => [],
-                'h3'         => [],
-                'h4'         => [],
-                'h5'         => [],
-                'h6'         => [],
-                'i'          => [
-                        'class' => [],
-                ],
-                'img'        => [
-                        'alt'    => [],
-                        'class'  => [],
-                        'height' => [],
-                        'src'    => [],
-                        'width'  => [],
-                ],
-                'li'         => [
-                        'class' => [],
-                ],
-                'ol'         => [
-                        'class' => [],
-                ],
-                'p'          => [
-                        'class' => [],
-                ],
-                'q'          => [
-                        'cite'  => [],
-                        'title' => [],
-                ],
-                'span'       => [
-                        'class' => [],
-                        'title' => [],
-                        'style' => [],
-                ],
-                'strike'     => [],
-                'strong'     => [],
-                'ul'         => [
-                        'class' => [],
-                ],
-        ];
-        if (is_array($rawdata)) :
-            return $rawdata = array_map([$this, 'allowed_html'], $rawdata);
-        else :
-            return wp_kses($rawdata, $allowed_tags);
-        endif;
-    }
-
-    public function validate_post($files = '') {
-
-        $rawdata = [];
-        if (!empty($files)) :
-            $data = json_decode(stripslashes($files), true);
-        endif;
-        if (is_array($data)) :
-            $rawdata = array_map([$this, 'allowed_html'], $data);
-        else :
-            $rawdata = $this->allowed_html($files);
-        endif;
-
-        return $rawdata;
-    }
-
     public function redirect_on_activation() {
         if (get_transient('accordions_or_faqs_activation_redirect')) :
             delete_transient('accordions_or_faqs_activation_redirect');
@@ -146,62 +28,62 @@ trait Helper {
      */
     public function oxilab_admin_menu($agr) {
         $response = [
-                'Shortcode'  => [
-                        'name'     => 'Shortcode',
-                        'homepage' => 'oxi-accordions-ultimate'
-                ],
-                'Create New' => [
-                        'name'     => 'Create New',
-                        'homepage' => 'oxi-accordions-ultimate-new'
-                ],
+            'Shortcode' => [
+                'name' => 'Shortcode',
+                'homepage' => 'oxi-accordions-ultimate'
+            ],
+            'Create New' => [
+                'name' => 'Create New',
+                'homepage' => 'oxi-accordions-ultimate-new'
+            ],
         ];
         ?>
 
         <div class="oxi-addons-wrapper">
-                <div class="oxilab-new-admin-menu">
-                        <div class="oxi-site-logo">
-                                <a href="<?php echo esc_url($this->admin_url_convert('oxi-accordions-ultimate')) ?>"
-                                   class="header-logo"
-                                   style=" background-image: url(<?php echo esc_url(OXI_ACCORDIONS_URL . 'assets/image/sa-logo.png') ?>);">
-                                </a>
-                        </div>
-                        <nav class="oxilab-sa-admin-nav">
-                                <ul class="oxilab-sa-admin-menu">
-                                    <?php
-                                    $GETPage  = $this->validate_post($_GET['page']);
-                                    foreach ($response as $key => $value) {
-                                        ?>
-                                            <li <?php echo $GETPage == $value['homepage'] ? ' class="active" ' : '' ?>>
-                                                    <a href="<?php echo esc_url($this->admin_url_convert($value['homepage'])) ?>"><?php echo esc_html($this->name_converter($value['name'])) ?></a>
-                                            </li>
-
-                                            <?php
-                                        }
-                                        ?>
-                                </ul>
-                                <ul class="oxilab-sa-admin-menu2">
-                                    <?php if (apply_filters(OXI_ACCORDIONS_PREMIUM, false) == false) { ?>
-                                            <li class="fazil-class">
-                                                    <a target="_blank" href="https://www.oxilabdemos.com/accordions/pricing">Upgrade</a>
-                                            </li>
-                                        <?php } ?>
-
-                                        <li class="saadmin-doc">
-                                                <a target="_black" href="https://www.oxilabdemos.com/accordions/docs">Docs</a>
-                                        </li>
-                                        <li class="saadmin-doc">
-                                                <a target="_black"
-                                                   href="https://wordpress.org/support/plugin/accordions-or-faqs/">Support
-                                                </a>
-                                        </li>
-                                        <li class="saadmin-set">
-                                                <a href="<?php echo admin_url('admin.php?page=oxi-accordions-ultimate-settings') ?>">
-                                                        <span class="dashicons dashicons-admin-generic"></span>
-                                                </a>
-                                        </li>
-                                </ul>
-                        </nav>
+            <div class="oxilab-new-admin-menu">
+                <div class="oxi-site-logo">
+                    <a href="<?php echo esc_url($this->admin_url_convert('oxi-accordions-ultimate')) ?>"
+                       class="header-logo"
+                       style=" background-image: url(<?php echo esc_url(OXI_ACCORDIONS_URL . 'assets/image/sa-logo.png') ?>);">
+                    </a>
                 </div>
+                <nav class="oxilab-sa-admin-nav">
+                    <ul class="oxilab-sa-admin-menu">
+        <?php
+        $GETPage = $this->validate_post($_GET['page']);
+        foreach ($response as $key => $value) {
+            ?>
+                            <li <?php echo $GETPage == $value['homepage'] ? ' class="active" ' : '' ?>>
+                                <a href="<?php echo esc_url($this->admin_url_convert($value['homepage'])) ?>"><?php echo esc_html($this->name_converter($value['name'])) ?></a>
+                            </li>
+
+            <?php
+        }
+        ?>
+                    </ul>
+                    <ul class="oxilab-sa-admin-menu2">
+        <?php if (apply_filters(OXI_ACCORDIONS_PREMIUM, false) == false) { ?>
+                            <li class="fazil-class">
+                                <a target="_blank" href="https://www.oxilabdemos.com/accordions/pricing">Upgrade</a>
+                            </li>
+        <?php } ?>
+
+                        <li class="saadmin-doc">
+                            <a target="_black" href="https://www.oxilabdemos.com/accordions/docs">Docs</a>
+                        </li>
+                        <li class="saadmin-doc">
+                            <a target="_black"
+                               href="https://wordpress.org/support/plugin/accordions-or-faqs/">Support
+                            </a>
+                        </li>
+                        <li class="saadmin-set">
+                            <a href="<?php echo admin_url('admin.php?page=oxi-accordions-ultimate-settings') ?>">
+                                <span class="dashicons dashicons-admin-generic"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </div>
         <?php
     }
@@ -227,9 +109,9 @@ trait Helper {
     public function admin_icon() {
         ?>
         <style type='text/css' media='screen'>
-                #adminmenu #toplevel_page_oxi-accordions-ultimate div.wp-menu-image:before {
-                    content: "\f163";
-                }
+            #adminmenu #toplevel_page_oxi-accordions-ultimate div.wp-menu-image:before {
+                content: "\f163";
+            }
         </style>
         <?php
     }
@@ -238,7 +120,7 @@ trait Helper {
         extract(shortcode_atts(['id' => ' ',], $atts));
         $styleid = $atts['id'];
         ob_start();
-        $CLASS   = '\OXI_ACCORDIONS_PLUGINS\Includes\Shortcode';
+        $CLASS = '\OXI_ACCORDIONS_PLUGINS\Includes\Shortcode';
         if (class_exists($CLASS)) :
             new $CLASS($styleid, 'user');
         endif;
@@ -283,30 +165,30 @@ trait Helper {
         }
         ?>
         <div class="oxi-addons-admin-notifications">
-                <h3>
-                        <span class="dashicons dashicons-flag"></span>
-                        Trouble or Need Support?
-                </h3>
-                <p></p>
-                <div class="oxi-addons-admin-notifications-holder">
-                        <div class="oxi-addons-admin-notifications-alert">
-                                <p>Unable to create your desire design or need any help? You can
-                                        <a href="https://wordpress.org/support/plugin/accordions-or-faqs#new-post">Ask any question</a>
-                                        and get reply from our expert members. We will be glad to answer any question you may have about our plugin.
-                                </p>
-                                <?php if (apply_filters(OXI_ACCORDIONS_PREMIUM, false) == false) { ?>
-                                    <p>By the way, did you know we also have a
-                                            <a href="https://www.oxilabdemos.com/accordions/pricing">Premium Version</a>
-                                            ? It offers lots of options with automatic update. It also comes with 16/5 personal support.
-                                    </p>
-                                    <?php
-                                }
-                                ?>
-                                <p>Thanks Again!</p>
-                                <p></p>
-                        </div>
+            <h3>
+                <span class="dashicons dashicons-flag"></span>
+                Trouble or Need Support?
+            </h3>
+            <p></p>
+            <div class="oxi-addons-admin-notifications-holder">
+                <div class="oxi-addons-admin-notifications-alert">
+                    <p>Unable to create your desire design or need any help? You can
+                        <a href="https://wordpress.org/support/plugin/accordions-or-faqs#new-post">Ask any question</a>
+                        and get reply from our expert members. We will be glad to answer any question you may have about our plugin.
+                    </p>
+        <?php if (apply_filters(OXI_ACCORDIONS_PREMIUM, false) == false) { ?>
+                        <p>By the way, did you know we also have a
+                            <a href="https://www.oxilabdemos.com/accordions/pricing">Premium Version</a>
+                            ? It offers lots of options with automatic update. It also comes with 16/5 personal support.
+                        </p>
+            <?php
+        }
+        ?>
+                    <p>Thanks Again!</p>
+                    <p></p>
                 </div>
-                <p></p>
+            </div>
+            <p></p>
         </div>
         <?php
     }
@@ -319,7 +201,7 @@ trait Helper {
         $styleid = (!empty($_GET['styleid']) ? (int) $_GET['styleid'] : '');
         if (!empty($styleid) && $styleid > 0) :
             $database = new \OXI_ACCORDIONS_PLUGINS\Helper\Database();
-            $style    = $database->wpdb->get_row($database->wpdb->prepare('SELECT * FROM ' . $database->parent_table . ' WHERE id = %d ', $styleid), ARRAY_A);
+            $style = $database->wpdb->get_row($database->wpdb->prepare('SELECT * FROM ' . $database->parent_table . ' WHERE id = %d ', $styleid), ARRAY_A);
             if (is_array($style)) :
                 $cls = '\OXI_ACCORDIONS_PLUGINS\Layouts\Helper';
                 if (class_exists($cls)) :
@@ -348,9 +230,9 @@ trait Helper {
     }
 
     public function User_Reviews() {
-        $user_role   = get_option('oxi_accordions_user_permission');
+        $user_role = get_option('oxi_accordions_user_permission');
         $role_object = get_role($user_role);
-        $first_key   = '';
+        $first_key = '';
         if (isset($role_object->capabilities) && is_array($role_object->capabilities)) {
             reset($role_object->capabilities);
             $first_key = key($role_object->capabilities);
@@ -422,10 +304,128 @@ trait Helper {
         new \OXI_ACCORDIONS_PLUGINS\Oxilab\Reviews();
     }
 
+    public function User_Admin() {
+        add_filter('oxi-accordions-plugin/support-and-comments', [$this, $this->fixed_data('737570706f7274616e64636f6d6d656e7473')]);
+        add_filter('oxi-accordions-plugin/pro_version', [$this, $this->fixed_data('636865636b5f63757272656e745f6163636f7264696f6e73')]);
+        add_filter('oxi-accordions-plugin/admin_menu', [$this, $this->fixed_data('6f78696c61625f61646d696e5f6d656e75')]);
+        add_action('admin_menu', [$this, 'admin_menu']);
+        add_action('admin_head', [$this, 'admin_icon']);
+        add_action('admin_init', [$this, 'redirect_on_activation']);
+    }
+
+    public function allowed_html($rawdata) {
+        $allowed_tags = [
+            'a' => [
+                'class' => [],
+                'href' => [],
+                'rel' => [],
+                'title' => [],
+            ],
+            'abbr' => [
+                'title' => [],
+            ],
+            'b' => [],
+            'br' => [],
+            'blockquote' => [
+                'cite' => [],
+            ],
+            'cite' => [
+                'title' => [],
+            ],
+            'code' => [],
+            'del' => [
+                'datetime' => [],
+                'title' => [],
+            ],
+            'dd' => [],
+            'div' => [
+                'class' => [],
+                'title' => [],
+                'style' => [],
+                'id' => [],
+            ],
+            'table' => [
+                'class' => [],
+                'id' => [],
+                'style' => [],
+            ],
+            'button' => [
+                'class' => [],
+                'type' => [],
+                'value' => [],
+            ],
+            'thead' => [],
+            'tbody' => [],
+            'tr' => [],
+            'td' => [],
+            'dt' => [],
+            'em' => [],
+            'h1' => [],
+            'h2' => [],
+            'h3' => [],
+            'h4' => [],
+            'h5' => [],
+            'h6' => [],
+            'i' => [
+                'class' => [],
+            ],
+            'img' => [
+                'alt' => [],
+                'class' => [],
+                'height' => [],
+                'src' => [],
+                'width' => [],
+            ],
+            'li' => [
+                'class' => [],
+            ],
+            'ol' => [
+                'class' => [],
+            ],
+            'p' => [
+                'class' => [],
+            ],
+            'q' => [
+                'cite' => [],
+                'title' => [],
+            ],
+            'span' => [
+                'class' => [],
+                'title' => [],
+                'style' => [],
+            ],
+            'strike' => [],
+            'strong' => [],
+            'ul' => [
+                'class' => [],
+            ],
+        ];
+        if (is_array($rawdata)) :
+            return $rawdata = array_map([$this, 'allowed_html'], $rawdata);
+        else :
+            return wp_kses($rawdata, $allowed_tags);
+        endif;
+    }
+
+    public function validate_post($files = '') {
+
+        $rawdata = [];
+        if (!empty($files)) :
+            $data = json_decode(stripslashes($files), true);
+        endif;
+        if (is_array($data)) :
+            $rawdata = array_map([$this, 'allowed_html'], $data);
+        else :
+            $rawdata = $this->allowed_html($files);
+        endif;
+
+        return $rawdata;
+    }
+
     public function admin_menu() {
-        $user_role   = get_option('oxi_accordions_user_permission');
+        $user_role = get_option('oxi_accordions_user_permission');
         $role_object = get_role($user_role);
-        $first_key   = '';
+        $first_key = '';
         if (isset($role_object->capabilities) && is_array($role_object->capabilities)) {
             reset($role_object->capabilities);
             $first_key = key($role_object->capabilities);

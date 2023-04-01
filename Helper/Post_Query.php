@@ -8,37 +8,8 @@ if (!defined('ABSPATH')) {
 
 trait Post_Query {
 
-   
-
     public function post_type() {
         return get_post_types(array('public' => true, 'show_in_nav_menus' => true), 'names');
-    }
-
-    public function post_author() {
-        $us = [];
-        $users = get_users();
-        if ($users) {
-            foreach ($users as $user) {
-                $us[$user->ID] = ucfirst($user->display_name);
-            }
-        }
-        return $us;
-    }
-
-    public function post_category($type) {
-        $cat = [];
-        $categories = get_terms(array(
-            'taxonomy' => $type == 'post' ? 'category' : $type . '_category',
-            'hide_empty' => true,
-        ));
-        if (empty($categories) || is_wp_error($categories)):
-            return [];
-        endif;
-
-        foreach ($categories as $categorie) {
-            $cat[$categorie->term_id] = ucfirst($categorie->name);
-        }
-        return $cat;
     }
 
     public function post_tags($type) {
@@ -91,7 +62,8 @@ trait Post_Query {
         }
         return $posts;
     }
-     public function thumbnail_sizes() {
+
+    public function thumbnail_sizes() {
         $default_image_sizes = get_intermediate_image_sizes();
         $thumbnail_sizes = array();
         foreach ($default_image_sizes as $size) {
@@ -99,6 +71,33 @@ trait Post_Query {
             $thumbnail_sizes[$size] = str_replace('_', ' ', ucfirst($image_sizes[$size]));
         }
         return $thumbnail_sizes;
+    }
+
+    public function post_author() {
+        $us = [];
+        $users = get_users();
+        if ($users) {
+            foreach ($users as $user) {
+                $us[$user->ID] = ucfirst($user->display_name);
+            }
+        }
+        return $us;
+    }
+
+    public function post_category($type) {
+        $cat = [];
+        $categories = get_terms(array(
+            'taxonomy' => $type == 'post' ? 'category' : $type . '_category',
+            'hide_empty' => true,
+        ));
+        if (empty($categories) || is_wp_error($categories)):
+            return [];
+        endif;
+
+        foreach ($categories as $categorie) {
+            $cat[$categorie->term_id] = ucfirst($categorie->name);
+        }
+        return $cat;
     }
 
 }

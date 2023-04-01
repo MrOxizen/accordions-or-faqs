@@ -25,23 +25,6 @@ class Bootstrap {
         return self::$instance;
     }
 
-    public function __construct() {
-
-        do_action('oxi-accordions-plugin/before_init');
-        // Load translation
-        add_action('init', array($this, 'i18n'));
-        new \OXI_ACCORDIONS_PLUGINS\Classes\API();
-        $this->load_shortcode();
-
-        if (is_admin()) {
-            $this->User_Admin();
-            $this->User_Reviews();
-            if (isset($_GET['page']) && 'oxi-accordions-style-view' === sanitize_text_field($_GET['page'])) {
-                new \OXI_ACCORDIONS_PLUGINS\Includes\Frontend();
-            }
-        }
-    }
-
     public function load_shortcode() {
         add_shortcode('oxi_accordions', [$this, 'accordions_shortcode']);
         $Widget = new \OXI_ACCORDIONS_PLUGINS\Includes\Widget();
@@ -57,6 +40,23 @@ class Bootstrap {
      */
     public function i18n() {
         load_plugin_textdomain('oxi-accordions-plugin');
+    }
+
+    public function __construct() {
+
+        do_action('oxi-accordions-plugin/before_init');
+        // Load translation
+        add_action('init', array($this, 'i18n'));
+        new \OXI_ACCORDIONS_PLUGINS\Classes\API();
+        $this->load_shortcode();
+
+        if (is_admin()) {
+            $this->User_Admin();
+            $this->User_Reviews();
+            if (isset($_GET['page']) && 'oxi-accordions-style-view' === sanitize_text_field($_GET['page'])) {
+                new \OXI_ACCORDIONS_PLUGINS\Includes\Frontend();
+            }
+        }
     }
 
 }
