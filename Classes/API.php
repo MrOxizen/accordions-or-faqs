@@ -237,6 +237,12 @@ class API {
      */
     public function post_elements_template_style() {
         $settings = json_decode(stripslashes($this->rawdata), true);
+        
+         $custom = strtolower($settings['oxi-accordions-custom-css']);
+        if(preg_match('/style/i', $custom) || preg_match('/script/i', $custom)){
+            return 'Don\'t be smart, Kindly add validated data.';
+        }
+        
         $stylesheet = '';
         if ((int) $this->styleid) :
             $transient = 'accordions-or-faqs-template-' . $this->styleid;
@@ -620,11 +626,18 @@ class API {
         if ($name != 'truee') :
             $style['name'] = $name;
         endif;
+        
+        $raw = json_decode(stripslashes($style['rawdata']), true);
+         $custom = strtolower($raw['oxi-accordions-custom-css']);
+        if(preg_match('/style/i', $custom) || preg_match('/script/i', $custom)){
+            return 'Don\'t be smart, Kindly add validated data.';
+        }
+        
+        
         $this->database->wpdb->query($this->database->wpdb->prepare("INSERT INTO {$this->database->parent_table} (name, type, rawdata) VALUES ( %s, %s, %s)", [$style['name'], 'accordions-or-faqs', $style['rawdata']]));
         $redirect_id = $this->database->wpdb->insert_id;
 
         if ($redirect_id > 0) :
-            $raw = json_decode(stripslashes($style['rawdata']), true);
             $raw['style-id'] = $redirect_id;
             $CLASS = '\OXI_ACCORDIONS_PLUGINS\Layouts\Helper';
             $CLASS = new $CLASS('admin');
