@@ -26,26 +26,6 @@ class Frontend {
      */
     public $database;
 
-    public function enqueue_scripts() {
-        wp_enqueue_style('oxilab-tabs-bootstrap', OXI_ACCORDIONS_URL . 'assets/backend/css/bootstrap.min.css', false, OXI_ACCORDIONS_PLUGIN_VERSION);
-        wp_enqueue_style('font-awsome.min', OXI_ACCORDIONS_URL . 'assets/frontend/css/font-awsome.min.css', false, OXI_ACCORDIONS_PLUGIN_VERSION);
-        wp_enqueue_style('oxilab-template-css', OXI_ACCORDIONS_URL . 'assets/backend/css/template.css', false, OXI_ACCORDIONS_PLUGIN_VERSION);
-        wp_enqueue_script('oxilab-template-js', OXI_ACCORDIONS_URL . 'assets/backend/custom/frontend.js', false, OXI_ACCORDIONS_PLUGIN_VERSION);
-    }
-
-    public function template_header() {
-        ?>
-        <!DOCTYPE html>
-        <html <?php language_attributes(); ?>>
-            <meta name="viewport" content="width=device-width"/>
-            <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-            <title><?php esc_html_e('Accordions - Multiple Accordions or FAQs Builders', 'accordions-or-faqs'); ?></title>
-        <?php wp_head(); ?>
-        </head>
-        <body class="shortcode-addons-template-body" id="shortcode-addons-template-body">
-        <?php
-    }
-
     /**
      * Outputs the content of the current step.
      */
@@ -90,11 +70,31 @@ class Frontend {
         exit;
     }
 
-    /**
-     * Outputs the simplified footer.
-     */
-    public function template_footer() {
+    public function enqueue_scripts() {
+        wp_enqueue_style('oxilab-tabs-bootstrap', OXI_ACCORDIONS_URL . 'assets/backend/css/bootstrap.min.css', false, OXI_ACCORDIONS_PLUGIN_VERSION);
+        wp_enqueue_style('font-awsome.min', OXI_ACCORDIONS_URL . 'assets/frontend/css/font-awsome.min.css', false, OXI_ACCORDIONS_PLUGIN_VERSION);
+        wp_enqueue_style('oxilab-template-css', OXI_ACCORDIONS_URL . 'assets/backend/css/template.css', false, OXI_ACCORDIONS_PLUGIN_VERSION);
+        wp_enqueue_script('oxilab-template-js', OXI_ACCORDIONS_URL . 'assets/backend/custom/frontend.js', false, OXI_ACCORDIONS_PLUGIN_VERSION);
+    }
+
+    public function template_header() {
         ?>
+        <!DOCTYPE html>
+        <html <?php language_attributes(); ?>>
+            <meta name="viewport" content="width=device-width"/>
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+            <title><?php esc_html_e('Accordions - Multiple Accordions or FAQs Builders', 'accordions-or-faqs'); ?></title>
+            <?php wp_head(); ?>
+        </head>
+        <body class="shortcode-addons-template-body" id="shortcode-addons-template-body">
+            <?php
+        }
+
+        /**
+         * Outputs the simplified footer.
+         */
+        public function template_footer() {
+            ?>
             <?php wp_footer(); ?>
         </body>
         </html>
@@ -222,5 +222,4 @@ class Frontend {
 
         return $rawdata;
     }
-
 }

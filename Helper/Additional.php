@@ -11,31 +11,6 @@ if (!defined('ABSPATH'))
  */
 trait Additional {
 
-    public function loader_font_familly_validation($data = []) {
-        foreach ($data as $value) {
-            wp_enqueue_style('' . $value . '', 'https://fonts.googleapis.com/css?family=' . $value . '');
-        }
-    }
-
-    /**
-     * Admin Media Scripts.
-     * Most of time using into Style Editing Page
-     *
-     * @since 2.0.1
-     */
-    public function admin_media_scripts() {
-        wp_enqueue_media();
-        wp_register_script('oxi_accordions_media_scripts', OXI_ACCORDIONS_URL . '/assets/backend/custom/media-uploader.js', false, OXI_ACCORDIONS_PLUGIN_VERSION);
-        wp_enqueue_script('oxi_accordions_media_scripts');
-    }
-
-    public function admin_css() {
-        $this->loader_font_familly_validation(['Bree+Serif', 'Source+Sans+Pro']);
-        wp_enqueue_style('oxi-accordions-bootstrap', OXI_ACCORDIONS_URL . 'assets/backend/css/bootstrap.min.css', false, OXI_ACCORDIONS_PLUGIN_VERSION);
-        wp_enqueue_style('font-awsome.min', OXI_ACCORDIONS_URL . 'assets/frontend/css/font-awsome.min.css', false, OXI_ACCORDIONS_PLUGIN_VERSION);
-        wp_enqueue_style('oxi-accordions-admin', OXI_ACCORDIONS_URL . 'assets/backend/css/admin.css', false, OXI_ACCORDIONS_PLUGIN_VERSION);
-    }
-
     public function admin_jquery() {
         wp_enqueue_script("jquery");
         wp_enqueue_script('oxi-accordions-popper', OXI_ACCORDIONS_URL . 'assets/backend/js/popper.min.js', false, OXI_ACCORDIONS_PLUGIN_VERSION);
@@ -472,4 +447,28 @@ trait Additional {
         $this->admin_media_scripts();
     }
 
+    public function loader_font_familly_validation($data = []) {
+        foreach ($data as $value) {
+            wp_enqueue_style('' . $value . '', 'https://fonts.googleapis.com/css?family=' . $value . '');
+        }
+    }
+
+    /**
+     * Admin Media Scripts.
+     * Most of time using into Style Editing Page
+     *
+     * @since 2.0.1
+     */
+    public function admin_media_scripts() {
+        wp_enqueue_media();
+        wp_register_script('oxi_accordions_media_scripts', OXI_ACCORDIONS_URL . '/assets/backend/custom/media-uploader.js', false, OXI_ACCORDIONS_PLUGIN_VERSION);
+        wp_enqueue_script('oxi_accordions_media_scripts');
+    }
+
+    public function admin_css() {
+        $this->loader_font_familly_validation(['Bree+Serif', 'Source+Sans+Pro']);
+        wp_enqueue_style('oxi-accordions-bootstrap', OXI_ACCORDIONS_URL . 'assets/backend/css/bootstrap.min.css', false, OXI_ACCORDIONS_PLUGIN_VERSION);
+        wp_enqueue_style('font-awsome.min', OXI_ACCORDIONS_URL . 'assets/frontend/css/font-awsome.min.css', false, OXI_ACCORDIONS_PLUGIN_VERSION);
+        wp_enqueue_style('oxi-accordions-admin', OXI_ACCORDIONS_URL . 'assets/backend/css/admin.css', false, OXI_ACCORDIONS_PLUGIN_VERSION);
+    }
 }

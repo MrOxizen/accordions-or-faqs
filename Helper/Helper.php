@@ -11,83 +11,6 @@ if (!defined('ABSPATH'))
  */
 trait Helper {
 
-    public function redirect_on_activation() {
-        if (get_transient('accordions_or_faqs_activation_redirect')) :
-            delete_transient('accordions_or_faqs_activation_redirect');
-            if (is_network_admin() || isset($_GET['activate-multi'])) :
-                return;
-            endif;
-            wp_safe_redirect(admin_url("admin.php?page=oxi-accordions-ultimate-welcome"));
-        endif;
-    }
-
-    /**
-     * Plugin Admin Top Menu
-     *
-     * @since 2.0.1
-     */
-    public function oxilab_admin_menu($agr) {
-        $response = [
-            'Shortcode' => [
-                'name' => 'Shortcode',
-                'homepage' => 'oxi-accordions-ultimate'
-            ],
-            'Create New' => [
-                'name' => 'Create New',
-                'homepage' => 'oxi-accordions-ultimate-new'
-            ],
-        ];
-        ?>
-
-        <div class="oxi-addons-wrapper">
-            <div class="oxilab-new-admin-menu">
-                <div class="oxi-site-logo">
-                    <a href="<?php echo esc_url($this->admin_url_convert('oxi-accordions-ultimate')) ?>"
-                       class="header-logo"
-                       style=" background-image: url(<?php echo esc_url(OXI_ACCORDIONS_URL . 'assets/image/sa-logo.png') ?>);">
-                    </a>
-                </div>
-                <nav class="oxilab-sa-admin-nav">
-                    <ul class="oxilab-sa-admin-menu">
-        <?php
-        $GETPage = $this->validate_post($_GET['page']);
-        foreach ($response as $key => $value) {
-            ?>
-                            <li <?php echo $GETPage == $value['homepage'] ? ' class="active" ' : '' ?>>
-                                <a href="<?php echo esc_url($this->admin_url_convert($value['homepage'])) ?>"><?php echo esc_html($this->name_converter($value['name'])) ?></a>
-                            </li>
-
-            <?php
-        }
-        ?>
-                    </ul>
-                    <ul class="oxilab-sa-admin-menu2">
-        <?php if (apply_filters(OXI_ACCORDIONS_PREMIUM, false) == false) { ?>
-                            <li class="fazil-class">
-                                <a target="_blank" href="https://www.oxilabdemos.com/accordions/pricing">Upgrade</a>
-                            </li>
-        <?php } ?>
-
-                        <li class="saadmin-doc">
-                            <a target="_black" href="https://www.oxilabdemos.com/accordions/docs">Docs</a>
-                        </li>
-                        <li class="saadmin-doc">
-                            <a target="_black"
-                               href="https://wordpress.org/support/plugin/accordions-or-faqs/">Support
-                            </a>
-                        </li>
-                        <li class="saadmin-set">
-                            <a href="<?php echo admin_url('admin.php?page=oxi-accordions-ultimate-settings') ?>">
-                                <span class="dashicons dashicons-admin-generic"></span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-        <?php
-    }
-
     /**
      * Plugin fixed
      *
@@ -440,4 +363,80 @@ trait Helper {
         add_submenu_page('oxi-accordions-ultimate', 'Welcome To Accordions - Multiple Accordions or FAQs Builders', 'Support', $first_key, 'oxi-accordions-ultimate-welcome', [$this, 'welcome_page']);
     }
 
+    public function redirect_on_activation() {
+        if (get_transient('accordions_or_faqs_activation_redirect')) :
+            delete_transient('accordions_or_faqs_activation_redirect');
+            if (is_network_admin() || isset($_GET['activate-multi'])) :
+                return;
+            endif;
+            wp_safe_redirect(admin_url("admin.php?page=oxi-accordions-ultimate-welcome"));
+        endif;
+    }
+
+    /**
+     * Plugin Admin Top Menu
+     *
+     * @since 2.0.1
+     */
+    public function oxilab_admin_menu($agr) {
+        $response = [
+            'Shortcode' => [
+                'name' => 'Shortcode',
+                'homepage' => 'oxi-accordions-ultimate'
+            ],
+            'Create New' => [
+                'name' => 'Create New',
+                'homepage' => 'oxi-accordions-ultimate-new'
+            ],
+        ];
+        ?>
+
+        <div class="oxi-addons-wrapper">
+            <div class="oxilab-new-admin-menu">
+                <div class="oxi-site-logo">
+                    <a href="<?php echo esc_url($this->admin_url_convert('oxi-accordions-ultimate')) ?>"
+                       class="header-logo"
+                       style=" background-image: url(<?php echo esc_url(OXI_ACCORDIONS_URL . 'assets/image/sa-logo.png') ?>);">
+                    </a>
+                </div>
+                <nav class="oxilab-sa-admin-nav">
+                    <ul class="oxilab-sa-admin-menu">
+                        <?php
+                        $GETPage = $this->validate_post($_GET['page']);
+                        foreach ($response as $key => $value) {
+                            ?>
+                            <li <?php echo $GETPage == $value['homepage'] ? ' class="active" ' : '' ?>>
+                                <a href="<?php echo esc_url($this->admin_url_convert($value['homepage'])) ?>"><?php echo esc_html($this->name_converter($value['name'])) ?></a>
+                            </li>
+
+                            <?php
+                        }
+                        ?>
+                    </ul>
+                    <ul class="oxilab-sa-admin-menu2">
+                        <?php if (apply_filters(OXI_ACCORDIONS_PREMIUM, false) == false) { ?>
+                            <li class="fazil-class">
+                                <a target="_blank" href="https://www.oxilabdemos.com/accordions/pricing">Upgrade</a>
+                            </li>
+                        <?php } ?>
+
+                        <li class="saadmin-doc">
+                            <a target="_black" href="https://www.oxilabdemos.com/accordions/docs">Docs</a>
+                        </li>
+                        <li class="saadmin-doc">
+                            <a target="_black"
+                               href="https://wordpress.org/support/plugin/accordions-or-faqs/">Support
+                            </a>
+                        </li>
+                        <li class="saadmin-set">
+                            <a href="<?php echo admin_url('admin.php?page=oxi-accordions-ultimate-settings') ?>">
+                                <span class="dashicons dashicons-admin-generic"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <?php
+    }
 }

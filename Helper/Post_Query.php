@@ -8,44 +8,6 @@ if (!defined('ABSPATH')) {
 
 trait Post_Query {
 
-    public function post_type() {
-        return get_post_types(array('public' => true, 'show_in_nav_menus' => true), 'names');
-    }
-
-    public function post_tags($type) {
-        $tg = [];
-        $tags = get_terms(array(
-            'taxonomy' => $type . '_tag',
-            'hide_empty' => true,
-        ));
-        if (empty($tags) || is_wp_error($tags)):
-            return [];
-        endif;
-
-        foreach ($tags as $tag) {
-            $tg[$tag->term_id] = ucfirst($tag->name);
-        }
-
-        return $tg;
-    }
-
-    public function post_include($type) {
-        $post_list = get_posts(array(
-            'post_type' => $type,
-            'orderby' => 'date',
-            'order' => 'DESC',
-            'posts_per_page' => -1,
-        ));
-        if (empty($post_list) && is_wp_error($post_list)):
-            return [];
-        endif;
-        $posts = array();
-        foreach ($post_list as $post) {
-            $posts[$post->ID] = ucfirst($post->post_title);
-        }
-        return $posts;
-    }
-
     public function post_exclude($type) {
         $post_list = get_posts(array(
             'post_type' => $type,
@@ -100,4 +62,41 @@ trait Post_Query {
         return $cat;
     }
 
+    public function post_type() {
+        return get_post_types(array('public' => true, 'show_in_nav_menus' => true), 'names');
+    }
+
+    public function post_tags($type) {
+        $tg = [];
+        $tags = get_terms(array(
+            'taxonomy' => $type . '_tag',
+            'hide_empty' => true,
+        ));
+        if (empty($tags) || is_wp_error($tags)):
+            return [];
+        endif;
+
+        foreach ($tags as $tag) {
+            $tg[$tag->term_id] = ucfirst($tag->name);
+        }
+
+        return $tg;
+    }
+
+    public function post_include($type) {
+        $post_list = get_posts(array(
+            'post_type' => $type,
+            'orderby' => 'date',
+            'order' => 'DESC',
+            'posts_per_page' => -1,
+        ));
+        if (empty($post_list) && is_wp_error($post_list)):
+            return [];
+        endif;
+        $posts = array();
+        foreach ($post_list as $post) {
+            $posts[$post->ID] = ucfirst($post->post_title);
+        }
+        return $posts;
+    }
 }

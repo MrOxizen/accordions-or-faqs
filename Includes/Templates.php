@@ -21,6 +21,151 @@ class Templates {
     public $totalpage = 1;
     public $TEMPLATE;
 
+    public function template_body() {
+        ?>
+        <div class="oxi-addons-row">
+        <?php
+        foreach ($this->local_template as $key => $value) {
+            $template_data = json_decode(file_get_contents($this->safe_path(OXI_ACCORDIONS_PATH . 'demo-template/') . $value), true);
+            $Cls = 'OXI_ACCORDIONS_PLUGINS\Layouts\Template';
+            ?>
+                <div class="oxi-addons-col-1">
+                    <div class="oxi-addons-style-preview">
+                        <div class="oxi-addons-style-preview-top">
+            <?php
+            if (class_exists($Cls) && isset($template_data['style']['rawdata'])) :
+                new $Cls($template_data['style'], $template_data['child']);
+            endif;
+            ?>
+                        </div>
+                        <div class="oxi-addons-style-preview-bottom">
+                            <div class="oxi-addons-style-preview-bottom-left">
+            <?php echo esc_html($template_data['style']['name']); ?>
+                            </div>
+                            <div class="oxi-addons-style-preview-bottom-right">
+            <?php
+            if ($key > 10 && apply_filters(OXI_ACCORDIONS_PREMIUM, true) == false) :
+                ?>
+                                    <button class="btn btn-warning oxi-addons-addons-style-btn-warning"
+                                            title="Pro Only" type="submit" value="pro only"
+                                            name="addonsstyleproonly">Pro Only
+                                    </button>
+                <?php
+            else :
+                ?>
+                                    <button type="button"
+                                            class="btn btn-success oxi-addons-addons-template-create oxi-addons-addons-js-create"
+                                            data-toggle="modal"
+                                            template-id="<?php echo esc_attr($value) ?>">Create Style
+                                    </button>
+            <?php
+            endif;
+            ?>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php
+        }
+        ?>
+        </div>
+            <?php
+            $this->create_new_modal();
+        }
+
+        public function rec_listFiles($from = '.') {
+            if (!is_dir($from))
+                return false;
+
+            $files = [];
+            if ($dh = opendir($from)) {
+                while (false !== ($file = readdir($dh))) {
+                    // Skip '.' and '..'
+                    if ($file == '.' || $file == '..')
+                        continue;
+                    $path = $from . '/' . $file;
+                    if (is_dir($path))
+                        $files += $this->rec_listFiles($path);
+                    else
+                        $folder = explode("/demo-template/", $path);
+                    $file = explode("template-", explode(".json", $folder[1])[0]);
+
+                    if (isset($folder[1]) && isset($file[1])) {
+                        $files[$file[1]] = $folder[1];
+                    }
+                }
+                closedir($dh);
+            }
+            ksort($files);
+            return $files;
+        }
+
+        public function get_local_tempalte() {
+
+            $temp = $this->rec_listFiles(OXI_ACCORDIONS_PATH . 'demo-template');
+            $this->totalpage = ceil(count($temp) / 10);
+            $c = $this->imported * 10;
+            foreach ($temp as $key => $value) {
+                $onlyname = explode('faqs-template-', str_replace('.json', '', $value))[1];
+                $count = ((int) $onlyname - $c);
+                if ((int) $onlyname && $count > 0 && $count < 11) :
+                    $this->local_template[$onlyname] = $value;
+                endif;
+            }
+        }
+
+        public function render_html() {
+            ?>
+        <div class="oxi-addons-row">
+        <?php
+        $this->template_header();
+        $this->template_body();
+        ?>
+        </div>
+            <?php
+        }
+
+        /**
+         * Constructor of Oxilab Accordions Home Page
+         *
+         * @since 2.0.0
+         */
+        public function __construct() {
+            $this->css_js_load();
+            $this->render_html();
+        }
+
+        public function css_js_load() {
+            $this->admin_template_additional();
+            apply_filters('oxi-accordions-plugin/admin_menu', true);
+
+            $this->imported = isset($_GET['layouts']) ? $this->validate_post($_GET['layouts']) : 0;
+            $this->get_local_tempalte();
+        }
+
+        /**
+         * Generate safe path
+         * @since v1.0.0
+         */
+        public function safe_path($path) {
+
+            $path = str_replace(['//', '\\\\'], ['/', '\\'], $path);
+            return str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $path);
+        }
+
+        public function template_header() {
+            apply_filters('oxi-accordions-plugin/support-and-comments', true);
+            ?>
+        <div class="oxi-addons-wrapper">
+            <div class="oxi-addons-import-layouts">
+                <h1>Oxilab Accordions › Create New</h1>
+                <p> Select Accordions layouts, give your Accordions name and create new Accordions.</p>
+            </div>
+        </div>
+        <?php
+    }
+
     public function create_new_modal() {
         //  echo '';
         if (($this->imported + 1) < $this->totalpage) :
@@ -74,150 +219,4 @@ class Templates {
         </div>
         <?php
     }
-
-    public function template_body() {
-        ?>
-        <div class="oxi-addons-row">
-            <?php
-            foreach ($this->local_template as $key => $value) {
-                $template_data = json_decode(file_get_contents($this->safe_path(OXI_ACCORDIONS_PATH . 'demo-template/') . $value), true);
-                $Cls = 'OXI_ACCORDIONS_PLUGINS\Layouts\Template';
-                ?>
-                <div class="oxi-addons-col-1">
-                    <div class="oxi-addons-style-preview">
-                        <div class="oxi-addons-style-preview-top">
-                            <?php
-                            if (class_exists($Cls) && isset($template_data['style']['rawdata'])) :
-                                new $Cls($template_data['style'], $template_data['child']);
-                            endif;
-                            ?>
-                        </div>
-                        <div class="oxi-addons-style-preview-bottom">
-                            <div class="oxi-addons-style-preview-bottom-left">
-                                <?php echo esc_html($template_data['style']['name']); ?>
-                            </div>
-                            <div class="oxi-addons-style-preview-bottom-right">
-                                <?php
-                                if ($key > 10 && apply_filters(OXI_ACCORDIONS_PREMIUM, true) == false) :
-                                    ?>
-                                    <button class="btn btn-warning oxi-addons-addons-style-btn-warning"
-                                            title="Pro Only" type="submit" value="pro only"
-                                            name="addonsstyleproonly">Pro Only
-                                    </button>
-                                    <?php
-                                else :
-                                    ?>
-                                    <button type="button"
-                                            class="btn btn-success oxi-addons-addons-template-create oxi-addons-addons-js-create"
-                                            data-toggle="modal"
-                                            template-id="<?php echo esc_attr($value) ?>">Create Style
-                                    </button>
-                                <?php
-                                endif;
-                                ?>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <?php
-            }
-            ?>
-        </div>
-        <?php
-        $this->create_new_modal();
-    }
-
-    public function rec_listFiles($from = '.') {
-        if (!is_dir($from))
-            return false;
-
-        $files = [];
-        if ($dh = opendir($from)) {
-            while (false !== ($file = readdir($dh))) {
-                // Skip '.' and '..'
-                if ($file == '.' || $file == '..')
-                    continue;
-                $path = $from . '/' . $file;
-                if (is_dir($path))
-                    $files += $this->rec_listFiles($path);
-                else
-                    $folder = explode("/demo-template/", $path);
-                $file = explode("template-", explode(".json", $folder[1])[0]);
-
-                if (isset($folder[1]) && isset($file[1])) {
-                    $files[$file[1]] = $folder[1];
-                }
-            }
-            closedir($dh);
-        }
-        ksort($files);
-        return $files;
-    }
-
-    public function get_local_tempalte() {
-
-        $temp = $this->rec_listFiles(OXI_ACCORDIONS_PATH . 'demo-template');
-        $this->totalpage = ceil(count($temp) / 10);
-        $c = $this->imported * 10;
-        foreach ($temp as $key => $value) {
-            $onlyname = explode('faqs-template-', str_replace('.json', '', $value))[1];
-            $count = ((int) $onlyname - $c);
-            if ((int) $onlyname && $count > 0 && $count < 11) :
-                $this->local_template[$onlyname] = $value;
-            endif;
-        }
-    }
-
-    public function render_html() {
-        ?>
-        <div class="oxi-addons-row">
-            <?php
-            $this->template_header();
-            $this->template_body();
-            ?>
-        </div>
-        <?php
-    }
-
-    /**
-     * Constructor of Oxilab Accordions Home Page
-     *
-     * @since 2.0.0
-     */
-    public function __construct() {
-        $this->css_js_load();
-        $this->render_html();
-    }
-
-    public function css_js_load() {
-        $this->admin_template_additional();
-        apply_filters('oxi-accordions-plugin/admin_menu', true);
-
-        $this->imported = isset($_GET['layouts']) ? $this->validate_post($_GET['layouts']) : 0;
-        $this->get_local_tempalte();
-    }
-
-    /**
-     * Generate safe path
-     * @since v1.0.0
-     */
-    public function safe_path($path) {
-
-        $path = str_replace(['//', '\\\\'], ['/', '\\'], $path);
-        return str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $path);
-    }
-
-    public function template_header() {
-        apply_filters('oxi-accordions-plugin/support-and-comments', true);
-        ?>
-        <div class="oxi-addons-wrapper">
-            <div class="oxi-addons-import-layouts">
-                <h1>Oxilab Accordions › Create New</h1>
-                <p> Select Accordions layouts, give your Accordions name and create new Accordions.</p>
-            </div>
-        </div>
-        <?php
-    }
-
 }

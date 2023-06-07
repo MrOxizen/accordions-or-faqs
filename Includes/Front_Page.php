@@ -21,6 +21,50 @@ class Front_Page {
      */
     public $database;
 
+    public function manual_import_json() {
+        if (!empty($_REQUEST['_wpnonce'])) {
+            $nonce = $_REQUEST['_wpnonce'];
+        }
+
+        if (!empty($_POST['importdatasubmit']) && sanitize_text_field($_POST['importdatasubmit']) == 'Save') {
+            if (!wp_verify_nonce($nonce, 'oxi-accordions-ultimate-import')) {
+                die('You do not have sufficient permissions to access this page.');
+            } else {
+                if (isset($_FILES['importaccordionsfile'])) :
+
+                    if (!current_user_can('upload_files')) :
+                        wp_die(esc_html('You do not have permission to upload files.'));
+                    endif;
+
+                    $allowedMimes = [
+                        'json' => 'text/plain'
+                    ];
+
+                    $fileInfo = wp_check_filetype(basename($_FILES['importaccordionsfile']['name']), $allowedMimes);
+                    if (empty($fileInfo['ext'])) {
+                        wp_die(esc_html('You do not have permission to upload files.'));
+                    }
+
+                    $content = json_decode(file_get_contents($_FILES['importaccordionsfile']['tmp_name']), true);
+
+                    if (empty($content)) {
+                        return new \WP_Error('file_error', 'Invalid File');
+                    }
+                    $style = $content['style'];
+
+                    if (!is_array($style) || $style['type'] != 'accordions-or-faqs') {
+                        return new \WP_Error('file_error', 'Invalid Content In File');
+                    }
+
+                    $ImportApi = new \OXI_ACCORDIONS_PLUGINS\Classes\API();
+                    $new_slug = $ImportApi->post_json_import($content);
+                    echo '<script type="text/javascript"> document.location.href = "' . $new_slug . '"; </script>';
+                    exit;
+                endif;
+            }
+        }
+    }
+
     public function admin_header() {
         apply_filters('oxi-accordions-plugin/support-and-comments', true);
         ?>
@@ -109,50 +153,6 @@ class Front_Page {
                                ' . wp_nonce_field("oxi-accordions-ultimate-import") . '
                         </form>
                     </div>';
-    }
-
-    public function manual_import_json() {
-        if (!empty($_REQUEST['_wpnonce'])) {
-            $nonce = $_REQUEST['_wpnonce'];
-        }
-
-        if (!empty($_POST['importdatasubmit']) && sanitize_text_field($_POST['importdatasubmit']) == 'Save') {
-            if (!wp_verify_nonce($nonce, 'oxi-accordions-ultimate-import')) {
-                die('You do not have sufficient permissions to access this page.');
-            } else {
-                if (isset($_FILES['importaccordionsfile'])) :
-
-                    if (!current_user_can('upload_files')) :
-                        wp_die(esc_html('You do not have permission to upload files.'));
-                    endif;
-
-                    $allowedMimes = [
-                        'json' => 'text/plain'
-                    ];
-
-                    $fileInfo = wp_check_filetype(basename($_FILES['importaccordionsfile']['name']), $allowedMimes);
-                    if (empty($fileInfo['ext'])) {
-                        wp_die(esc_html('You do not have permission to upload files.'));
-                    }
-
-                    $content = json_decode(file_get_contents($_FILES['importaccordionsfile']['tmp_name']), true);
-
-                    if (empty($content)) {
-                        return new \WP_Error('file_error', 'Invalid File');
-                    }
-                    $style = $content['style'];
-
-                    if (!is_array($style) || $style['type'] != 'accordions-or-faqs') {
-                        return new \WP_Error('file_error', 'Invalid Content In File');
-                    }
-
-                    $ImportApi = new \OXI_ACCORDIONS_PLUGINS\Classes\API();
-                    $new_slug = $ImportApi->post_json_import($content);
-                    echo '<script type="text/javascript"> document.location.href = "' . $new_slug . '"; </script>';
-                    exit;
-                endif;
-            }
-        }
     }
 
     public function public_render() {
@@ -244,5 +244,4 @@ class Front_Page {
     public function database_data() {
         return $this->database->wpdb->get_results($this->database->wpdb->prepare('SELECT * FROM ' . $this->database->parent_table . ' WHERE type = %s ', 'accordions-or-faqs'), ARRAY_A);
     }
-
 }

@@ -26,28 +26,6 @@ class API {
     public $styleid;
     public $childid;
 
-    public function save_action() {
-        if (!$this->get_permissions_check()) {
-            return new WP_REST_Request('Invalid URL', 422);
-            die();
-        }
-        $wpnonce = sanitize_key(wp_unslash($_REQUEST['_wpnonce']));
-        if (!wp_verify_nonce($wpnonce, 'oxi_accordions_ultimate')) :
-            return new WP_REST_Request('Invalid URL', 422);
-            die();
-        endif;
-
-        $functionname = isset($_REQUEST['functionname']) ? sanitize_text_field($_REQUEST['functionname']) : '';
-        $this->rawdata = isset($_REQUEST['rawdata']) ? sanitize_post($_REQUEST['rawdata']) : '';
-        $this->styleid = isset($_REQUEST['styleid']) ? (int) $_REQUEST['styleid'] : '';
-        $this->childid = isset($_REQUEST['childid']) ? (int) $_REQUEST['childid'] : '';
-        $action_class = 'post_' . sanitize_key($functionname);
-        if (method_exists($this, $action_class)) {
-            echo $this->{$action_class}();
-        }
-        die();
-    }
-
     public function post_shortcode_delete() {
         $styleid = (int) $this->styleid;
         if ($styleid) :
@@ -237,12 +215,12 @@ class API {
      */
     public function post_elements_template_style() {
         $settings = json_decode(stripslashes($this->rawdata), true);
-        
-         $custom = strtolower($settings['oxi-accordions-custom-css']);
-        if(preg_match('/style/i', $custom) || preg_match('/script/i', $custom)){
+
+        $custom = strtolower($settings['oxi-accordions-custom-css']);
+        if (preg_match('/style/i', $custom) || preg_match('/script/i', $custom)) {
             return 'Don\'t be smart, Kindly add validated data.';
         }
-        
+
         $stylesheet = '';
         if ((int) $this->styleid) :
             $transient = 'accordions-or-faqs-template-' . $this->styleid;
@@ -626,14 +604,14 @@ class API {
         if ($name != 'truee') :
             $style['name'] = $name;
         endif;
-        
+
         $raw = json_decode(stripslashes($style['rawdata']), true);
-         $custom = strtolower($raw['oxi-accordions-custom-css']);
-        if(preg_match('/style/i', $custom) || preg_match('/script/i', $custom)){
+        $custom = strtolower($raw['oxi-accordions-custom-css']);
+        if (preg_match('/style/i', $custom) || preg_match('/script/i', $custom)) {
             return 'Don\'t be smart, Kindly add validated data.';
         }
-        
-        
+
+
         $this->database->wpdb->query($this->database->wpdb->prepare("INSERT INTO {$this->database->parent_table} (name, type, rawdata) VALUES ( %s, %s, %s)", [$style['name'], 'accordions-or-faqs', $style['rawdata']]));
         $redirect_id = $this->database->wpdb->insert_id;
 
@@ -659,6 +637,28 @@ class API {
         add_action('wp_ajax_oxi_accordions_ultimate', [$this, 'save_action']);
     }
 
+    public function save_action() {
+        if (!$this->get_permissions_check()) {
+            return new WP_REST_Request('Invalid URL', 422);
+            die();
+        }
+        $wpnonce = sanitize_key(wp_unslash($_REQUEST['_wpnonce']));
+        if (!wp_verify_nonce($wpnonce, 'oxi_accordions_ultimate')) :
+            return new WP_REST_Request('Invalid URL', 422);
+            die();
+        endif;
+
+        $functionname = isset($_REQUEST['functionname']) ? sanitize_text_field($_REQUEST['functionname']) : '';
+        $this->rawdata = isset($_REQUEST['rawdata']) ? sanitize_post($_REQUEST['rawdata']) : '';
+        $this->styleid = isset($_REQUEST['styleid']) ? (int) $_REQUEST['styleid'] : '';
+        $this->childid = isset($_REQUEST['childid']) ? (int) $_REQUEST['childid'] : '';
+        $action_class = 'post_' . sanitize_key($functionname);
+        if (method_exists($this, $action_class)) {
+            echo $this->{$action_class}();
+        }
+        die();
+    }
+
     public function get_permissions_check() {
         $transient = get_transient('oxi_accordions_user_permission_role');
 
@@ -678,5 +678,4 @@ class API {
         }
         return current_user_can($transient);
     }
-
 }

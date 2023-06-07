@@ -14,32 +14,6 @@ class Installation {
 
     protected static $lfe_instance = NULL;
 
-    public function __construct() {
-
-    }
-
-    /**
-     * Plugin activation hook
-     *
-     * @since 2.0.1
-     */
-    public function plugin_activation_hook() {
-        $database = new \OXI_ACCORDIONS_PLUGINS\Helper\Database();
-        $database->update_database();
-
-        set_transient('accordions_or_faqs_activation_redirect', true, 30);
-    }
-
-    /**
-     * Plugin upgrade hook
-     *
-     * @since 2.0.1
-     */
-    public function plugin_upgrade_hook() {
-        $database = new \OXI_ACCORDIONS_PLUGINS\Helper\Database();
-        $database->update_database();
-    }
-
     /**
      * Plugin fixed
      *
@@ -68,4 +42,29 @@ class Installation {
         return self::$lfe_instance;
     }
 
+    public function __construct() {
+
+    }
+
+    /**
+     * Plugin activation hook
+     *
+     * @since 2.0.1
+     */
+    public function plugin_activation_hook() {
+        $database = new \OXI_ACCORDIONS_PLUGINS\Helper\Database();
+        $database->update_database();
+
+        set_transient('accordions_or_faqs_activation_redirect', true, 30);
+    }
+
+    /**
+     * Plugin upgrade hook
+     *
+     * @since 2.0.1
+     */
+    public function plugin_upgrade_hook() {
+        $database = new \OXI_ACCORDIONS_PLUGINS\Helper\Database();
+        $database->update_database();
+    }
 }

@@ -14,17 +14,6 @@ class Bootstrap {
 
     use \OXI_ACCORDIONS_PLUGINS\Helper\Helper;
 
-    // instance container
-    private static $instance = null;
-
-    public static function instance() {
-        if (self::$instance == null) {
-            self::$instance = new self;
-        }
-
-        return self::$instance;
-    }
-
     public function load_shortcode() {
         add_shortcode('oxi_accordions', [$this, 'accordions_shortcode']);
         $Widget = new \OXI_ACCORDIONS_PLUGINS\Includes\Widget();
@@ -59,4 +48,14 @@ class Bootstrap {
         }
     }
 
+    // instance container
+    private static $instance = null;
+
+    public static function instance() {
+        if (self::$instance == null) {
+            self::$instance = new self;
+        }
+
+        return self::$instance;
+    }
 }

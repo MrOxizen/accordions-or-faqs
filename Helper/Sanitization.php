@@ -13,20 +13,6 @@ use OXI_ACCORDIONS_PLUGINS\Helper\Controls as Controls;
 
 trait Sanitization {
     /*
-     * Oxi Accordions Style Admin Panel header
-     *
-     * @since 2.0.1
-     */
-
-    public function start_section_header($id, array $arg = []) {
-        echo '<ul class="oxi-addons-tabs-ul">   ';
-        foreach ($arg['options'] as $key => $value) {
-            echo '<li ref="#shortcode-addons-section-' . esc_attr($key) . '">' . esc_html($value) . '</li>';
-        }
-        echo '</ul>';
-    }
-
-    /*
      * Oxi Accordions Style Admin Panel end Entry Divider
      *
      * @since 2.0.1
@@ -631,6 +617,20 @@ trait Sanitization {
         echo '  <div class="shortcode-form-control-input-wrapper">
                     <input id="' . $id . '" name="' . $id . '" type="number" min="' . $arg['min'] . '" max="' . $arg['max'] . '" step="' . $arg['step'] . '" value="' . $value . '"  responsive="' . $arg['responsive'] . '" retundata=\'' . $retunvalue . '\'>
                 </div>';
+    }
+
+    /*
+     * Oxi Accordions Style Admin Panel header
+     *
+     * @since 2.0.1
+     */
+
+    public function start_section_header($id, array $arg = []) {
+        echo '<ul class="oxi-addons-tabs-ul">   ';
+        foreach ($arg['options'] as $key => $value) {
+            echo '<li ref="#shortcode-addons-section-' . esc_attr($key) . '">' . esc_html($value) . '</li>';
+        }
+        echo '</ul>';
     }
 
     /*
@@ -2651,5 +2651,4 @@ trait Sanitization {
     public function start_section_devider() {
         echo '<div class="oxi-addons-col-6">';
     }
-
 }

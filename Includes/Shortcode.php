@@ -49,6 +49,26 @@ class Shortcode {
     public $define_user;
 
     /**
+     * Get Data From Database
+     *
+     * @since 2.0.1
+     */
+    public function get_data() {
+        //style Data
+        $this->style_table = $this->database->wpdb->get_row($this->database->wpdb->prepare('SELECT * FROM ' . $this->database->parent_table . ' WHERE id = %d ', $this->styleid), ARRAY_A);
+
+        if (!is_array($this->style_table)) :
+            return;
+        endif;
+        //Trasient
+        $this->get_transient();
+        //Child Data
+        $this->child_table = $this->database->wpdb->get_results($this->database->wpdb->prepare("SELECT * FROM {$this->database->child_table} WHERE styleid = %d ORDER by id ASC", $this->styleid), ARRAY_A);
+
+        $this->render_html();
+    }
+
+    /**
      * Constructor
      *
      * @since 2.0.0
@@ -87,25 +107,4 @@ class Shortcode {
             endif;
         endif;
     }
-
-    /**
-     * Get Data From Database
-     *
-     * @since 2.0.1
-     */
-    public function get_data() {
-        //style Data
-        $this->style_table = $this->database->wpdb->get_row($this->database->wpdb->prepare('SELECT * FROM ' . $this->database->parent_table . ' WHERE id = %d ', $this->styleid), ARRAY_A);
-
-        if (!is_array($this->style_table)) :
-            return;
-        endif;
-        //Trasient
-        $this->get_transient();
-        //Child Data
-        $this->child_table = $this->database->wpdb->get_results($this->database->wpdb->prepare("SELECT * FROM {$this->database->child_table} WHERE styleid = %d ORDER by id ASC", $this->styleid), ARRAY_A);
-
-        $this->render_html();
-    }
-
 }
