@@ -14,7 +14,8 @@ if (!defined('ABSPATH'))
  *
  * author @biplob018
  */
-class API {
+class API
+{
 
     /**
      * Define $wpdb
@@ -26,29 +27,9 @@ class API {
     public $styleid;
     public $childid;
 
-    public function post_shortcode_delete() {
-        $styleid = (int) $this->styleid;
-        if ($styleid) :
-            $this->database->wpdb->query($this->database->wpdb->prepare("DELETE FROM {$this->database->parent_table} WHERE id = %d", $styleid));
-            $this->database->wpdb->query($this->database->wpdb->prepare("DELETE FROM {$this->database->child_table} WHERE styleid = %d", $styleid));
-            return 'done';
-        else :
-            return 'Silence is Golden';
-        endif;
-    }
 
-    public function post_shortcode_deactive() {
-        $params = $this->validate_post();
-        $id = (int) $params['oxideletestyle'];
-        if ($id > 0) :
-            $this->database->wpdb->query($this->database->wpdb->prepare("DELETE FROM {$this->database->import_table} WHERE name = %s and type = %s", $id, 'accordions-or-faqs'));
-            return 'done';
-        else :
-            return 'Silence is Golden';
-        endif;
-    }
-
-    public function validate_post($data = '') {
+    public function validate_post($data = '')
+    {
         $rawdata = [];
         if (!empty($data)) :
             $arrfiles = json_decode(stripslashes($data), true);
@@ -64,7 +45,8 @@ class API {
         return $rawdata;
     }
 
-    public function allowed_html($rawdata) {
+    public function allowed_html($rawdata)
+    {
         $allowed_tags = [
             'a' => [
                 'class' => [],
@@ -158,7 +140,8 @@ class API {
         endif;
     }
 
-    public function post_shortcode_active() {
+    public function post_shortcode_active()
+    {
         $params = $this->validate_post();
         $id = (int) $params['oxiimportstyle'];
         if ($id > 0) :
@@ -169,7 +152,8 @@ class API {
         endif;
     }
 
-    public function post_shortcode_export() {
+    public function post_shortcode_export()
+    {
 
 
         $styleid = (int) $this->styleid;
@@ -199,7 +183,8 @@ class API {
      * @param string $file_name File name.
      * @param int $file_size File size.
      */
-    private function send_file_headers($file_name, $file_size) {
+    private function send_file_headers($file_name, $file_size)
+    {
         header('Content-Type: application/octet-stream');
         header('Content-Disposition: attachment; filename=' . $file_name);
         header('Expires: 0');
@@ -213,7 +198,8 @@ class API {
      *
      * @since 2.0.1
      */
-    public function post_elements_template_style() {
+    public function post_elements_template_style()
+    {
         $settings = json_decode(stripslashes($this->rawdata), true);
 
         $custom = strtolower($settings['oxi-accordions-custom-css']);
@@ -237,7 +223,8 @@ class API {
      *
      * @since 2.0.1
      */
-    public function post_template_name() {
+    public function post_template_name()
+    {
         $settings = $this->validate_post();
         $name = sanitize_text_field($settings['addonsstylename']);
         $id = $settings['addonsstylenameid'];
@@ -253,7 +240,8 @@ class API {
      *
      * @since 2.0.1
      */
-    public function post_elements_rearrange_modal_data() {
+    public function post_elements_rearrange_modal_data()
+    {
         if ((int) $this->styleid) :
             $child = $this->database->wpdb->get_results($this->database->wpdb->prepare("SELECT * FROM {$this->database->child_table} WHERE styleid = %d ORDER by id ASC", $this->styleid), ARRAY_A);
             $render = [];
@@ -271,7 +259,8 @@ class API {
      *
      * @since 2.0.1
      */
-    public function post_elements_template_rearrange_save_data() {
+    public function post_elements_template_rearrange_save_data()
+    {
         $params = explode(',', $this->validate_post());
         foreach ($params as $value) {
             if ((int) $value) :
@@ -294,7 +283,8 @@ class API {
      *
      * @since 2.0.1
      */
-    public function post_elements_template_modal_data() {
+    public function post_elements_template_modal_data()
+    {
         if ((int) $this->styleid) :
             if ((int) $this->childid) :
                 $this->database->wpdb->query($this->database->wpdb->prepare("UPDATE {$this->database->child_table} SET rawdata = %s WHERE id = %d", $this->rawdata, $this->childid));
@@ -310,7 +300,8 @@ class API {
      *
      * @since 2.0.1
      */
-    public function post_elements_template_render_data() {
+    public function post_elements_template_render_data()
+    {
         $transient = 'accordions-or-faqs-template-' . $this->styleid;
         set_transient($transient, $this->rawdata, 1 * HOUR_IN_SECONDS);
         return 'Transient Done';
@@ -321,7 +312,8 @@ class API {
      *
      * @since 2.0.1
      */
-    public function post_elements_template_modal_data_edit() {
+    public function post_elements_template_modal_data_edit()
+    {
         if ((int) $this->childid) :
             $listdata = $this->database->wpdb->get_row($this->database->wpdb->prepare("SELECT * FROM {$this->database->child_table} WHERE id = %d ", $this->childid), ARRAY_A);
             $returnfile = json_decode(stripslashes($listdata['rawdata']), true);
@@ -337,7 +329,8 @@ class API {
      *
      * @since 2.0.1
      */
-    public function post_elements_template_modal_data_delete() {
+    public function post_elements_template_modal_data_delete()
+    {
         if ((int) $this->childid) :
             $this->database->wpdb->query($this->database->wpdb->prepare("DELETE FROM {$this->database->child_table} WHERE id = %d ", $this->childid));
             return 'done';
@@ -351,7 +344,8 @@ class API {
      * @return void
      * @return void
      */
-    public function post_oxi_recommended() {
+    public function post_oxi_recommended()
+    {
         $data = 'done';
         update_option('accordions-or-faqs-recommended', $data);
         return $data;
@@ -361,7 +355,8 @@ class API {
      * Admin Notice Recommended  loader
      * @return void
      */
-    public function post_notice_dissmiss() {
+    public function post_notice_dissmiss()
+    {
         $notice = sanitize_text_field($this->request['notice']);
         if ($notice == 'maybe') :
             $data = strtotime("now");
@@ -376,7 +371,8 @@ class API {
      * Admin Settings
      * @return void
      */
-    public function post_user_permission() {
+    public function post_user_permission()
+    {
         if (!current_user_can('manage_options')) {
             return;
         }
@@ -391,7 +387,8 @@ class API {
      * Admin Settings
      * @return void
      */
-    public function post_font_awesome() {
+    public function post_font_awesome()
+    {
         if (!current_user_can('manage_options')) {
             return;
         }
@@ -405,7 +402,8 @@ class API {
      * Admin Settings
      * @return void
      */
-    public function post_global_schema() {
+    public function post_global_schema()
+    {
         if (!current_user_can('manage_options')) {
             return;
         }
@@ -419,7 +417,8 @@ class API {
      * Admin Settings
      * @return void
      */
-    public function post_oxi_accordions_support_massage() {
+    public function post_oxi_accordions_support_massage()
+    {
         if (!current_user_can('manage_options')) {
             return;
         }
@@ -433,7 +432,8 @@ class API {
      * Admin License
      * @return void
      */
-    public function post_oxi_license() {
+    public function post_oxi_license()
+    {
         if (!current_user_can('manage_options')) {
             return;
         }
@@ -460,7 +460,8 @@ class API {
         return json_encode($data);
     }
 
-    public function deactivate_license($key) {
+    public function deactivate_license($key)
+    {
         $api_params = [
             'edd_action' => 'deactivate_license',
             'license' => $key,
@@ -485,7 +486,8 @@ class API {
         return 'success';
     }
 
-    public function activate_license($key) {
+    public function activate_license($key)
+    {
         $api_params = [
             'edd_action' => 'activate_license',
             'license' => $key,
@@ -511,8 +513,8 @@ class API {
                     case 'expired':
 
                         $message = sprintf(
-                                'Your license key expired on %s.',
-                                date_i18n(get_option('date_format'), strtotime($license_data->expires, current_time('timestamp'))),
+                            'Your license key expired on %s.',
+                            date_i18n(get_option('date_format'), strtotime($license_data->expires, current_time('timestamp'))),
                         );
                         break;
 
@@ -557,14 +559,16 @@ class API {
         return 'success';
     }
 
-    public function array_replace($arr = [], $search = '', $replace = '') {
+    public function array_replace($arr = [], $search = '', $replace = '')
+    {
         array_walk($arr, function (&$v) use ($search, $replace) {
             $v = str_replace($search, $replace, $v);
         });
         return $arr;
     }
 
-    public function post_create_new_accordions() {
+    public function post_create_new_accordions()
+    {
         $params = $this->validate_post();
         $folder = $this->safe_path(OXI_ACCORDIONS_PATH . 'demo-template/');
         $filename = sanitize_text_field($params['template-id']);
@@ -588,13 +592,15 @@ class API {
      * Generate safe path
      * @since v1.0.0
      */
-    public function safe_path($path) {
+    public function safe_path($path)
+    {
 
         $path = str_replace(['//', '\\\\'], ['/', '\\'], $path);
         return str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $path);
     }
 
-    public function post_json_import($params, $name = 'truee') {
+    public function post_json_import($params, $name = 'truee')
+    {
 
         if (!is_array($params) || $params['style']['type'] != 'accordions-or-faqs') {
             return new WP_Error('file_error', 'Invalid Content In File');
@@ -632,12 +638,14 @@ class API {
      *
      * @since 2.0.1
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->database = new Database();
         add_action('wp_ajax_oxi_accordions_ultimate', [$this, 'save_action']);
     }
 
-    public function save_action() {
+    public function save_action()
+    {
         if (!$this->get_permissions_check()) {
             return new WP_REST_Request('Invalid URL', 422);
             die();
@@ -658,8 +666,32 @@ class API {
         }
         die();
     }
+    public function post_shortcode_delete()
+    {
+        $styleid = (int) $this->styleid;
+        if ($styleid) :
+            $this->database->wpdb->query($this->database->wpdb->prepare("DELETE FROM {$this->database->parent_table} WHERE id = %d", $styleid));
+            $this->database->wpdb->query($this->database->wpdb->prepare("DELETE FROM {$this->database->child_table} WHERE styleid = %d", $styleid));
+            return 'done';
+        else :
+            return 'Silence is Golden';
+        endif;
+    }
 
-    public function get_permissions_check() {
+    public function post_shortcode_deactive()
+    {
+        $params = $this->validate_post();
+        $id = (int) $params['oxideletestyle'];
+        if ($id > 0) :
+            $this->database->wpdb->query($this->database->wpdb->prepare("DELETE FROM {$this->database->import_table} WHERE name = %s and type = %s", $id, 'accordions-or-faqs'));
+            return 'done';
+        else :
+            return 'Silence is Golden';
+        endif;
+    }
+
+    public function get_permissions_check()
+    {
         $transient = get_transient('oxi_accordions_user_permission_role');
 
         if (false === $transient) {

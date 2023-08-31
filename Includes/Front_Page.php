@@ -10,7 +10,8 @@ if (!defined('ABSPATH'))
  *
  * author @biplob018
  */
-class Front_Page {
+class Front_Page
+{
 
     use \OXI_ACCORDIONS_PLUGINS\Helper\Additional;
 
@@ -21,53 +22,11 @@ class Front_Page {
      */
     public $database;
 
-    public function manual_import_json() {
-        if (!empty($_REQUEST['_wpnonce'])) {
-            $nonce = $_REQUEST['_wpnonce'];
-        }
 
-        if (!empty($_POST['importdatasubmit']) && sanitize_text_field($_POST['importdatasubmit']) == 'Save') {
-            if (!wp_verify_nonce($nonce, 'oxi-accordions-ultimate-import')) {
-                die('You do not have sufficient permissions to access this page.');
-            } else {
-                if (isset($_FILES['importaccordionsfile'])) :
-
-                    if (!current_user_can('upload_files')) :
-                        wp_die(esc_html('You do not have permission to upload files.'));
-                    endif;
-
-                    $allowedMimes = [
-                        'json' => 'text/plain'
-                    ];
-
-                    $fileInfo = wp_check_filetype(basename($_FILES['importaccordionsfile']['name']), $allowedMimes);
-                    if (empty($fileInfo['ext'])) {
-                        wp_die(esc_html('You do not have permission to upload files.'));
-                    }
-
-                    $content = json_decode(file_get_contents($_FILES['importaccordionsfile']['tmp_name']), true);
-
-                    if (empty($content)) {
-                        return new \WP_Error('file_error', 'Invalid File');
-                    }
-                    $style = $content['style'];
-
-                    if (!is_array($style) || $style['type'] != 'accordions-or-faqs') {
-                        return new \WP_Error('file_error', 'Invalid Content In File');
-                    }
-
-                    $ImportApi = new \OXI_ACCORDIONS_PLUGINS\Classes\API();
-                    $new_slug = $ImportApi->post_json_import($content);
-                    echo '<script type="text/javascript"> document.location.href = "' . $new_slug . '"; </script>';
-                    exit;
-                endif;
-            }
-        }
-    }
-
-    public function admin_header() {
+    public function admin_header()
+    {
         apply_filters('oxi-accordions-plugin/support-and-comments', true);
-        ?>
+?>
         <div class="oxi-addons-wrapper">
             <div class="oxi-addons-import-layouts">
                 <h1>Oxilab Accordions › Home
@@ -75,7 +34,7 @@ class Front_Page {
                 <p> Collect Accordions Shortcode, Edit, Delect, Clone or Export it.</p>
             </div>
         </div>
-        <?php
+    <?php
     }
 
     /**
@@ -83,12 +42,14 @@ class Front_Page {
      *
      * @since 2.0.1
      */
-    public function name_converter($data) {
+    public function name_converter($data)
+    {
         $data = str_replace('tyle', 'tyle ', $data);
         return ucwords($data);
     }
 
-    public function create_new() {
+    public function create_new()
+    {
         echo '<div class="oxi-addons-row">
                         <div class="oxi-addons-col-1 oxi-import">
                             <div class="oxi-addons-style-preview">
@@ -154,9 +115,54 @@ class Front_Page {
                         </form>
                     </div>';
     }
+    public function manual_import_json()
+    {
+        if (!empty($_REQUEST['_wpnonce'])) {
+            $nonce = $_REQUEST['_wpnonce'];
+        }
 
-    public function public_render() {
-        ?>
+        if (!empty($_POST['importdatasubmit']) && sanitize_text_field($_POST['importdatasubmit']) == 'Save') {
+            if (!wp_verify_nonce($nonce, 'oxi-accordions-ultimate-import')) {
+                die('You do not have sufficient permissions to access this page.');
+            } else {
+                if (isset($_FILES['importaccordionsfile'])) :
+
+                    if (!current_user_can('upload_files')) :
+                        wp_die(esc_html('You do not have permission to upload files.'));
+                    endif;
+
+                    $allowedMimes = [
+                        'json' => 'text/plain'
+                    ];
+
+                    $fileInfo = wp_check_filetype(basename($_FILES['importaccordionsfile']['name']), $allowedMimes);
+                    if (empty($fileInfo['ext'])) {
+                        wp_die(esc_html('You do not have permission to upload files.'));
+                    }
+
+                    $content = json_decode(file_get_contents($_FILES['importaccordionsfile']['tmp_name']), true);
+
+                    if (empty($content)) {
+                        return new \WP_Error('file_error', 'Invalid File');
+                    }
+                    $style = $content['style'];
+
+                    if (!is_array($style) || $style['type'] != 'accordions-or-faqs') {
+                        return new \WP_Error('file_error', 'Invalid Content In File');
+                    }
+
+                    $ImportApi = new \OXI_ACCORDIONS_PLUGINS\Classes\API();
+                    $new_slug = $ImportApi->post_json_import($content);
+                    echo '<script type="text/javascript"> document.location.href = "' . $new_slug . '"; </script>';
+                    exit;
+                endif;
+            }
+        }
+    }
+
+    public function public_render()
+    {
+    ?>
         <div class="oxi-addons-row">
             <?php
             $this->admin_header();
@@ -164,24 +170,26 @@ class Front_Page {
             $this->create_new();
             ?>
         </div>
-        <?php
+<?php
     }
 
-    private function get_export_link($template_id) {
+    private function get_export_link($template_id)
+    {
 
         return add_query_arg(
-                [
-                    'action' => 'oxi_accordions_ultimate',
-                    'functionname' => 'shortcode_export',
-                    '_wpnonce' => wp_create_nonce('oxi_accordions_ultimate'),
-                    'rawdata' => 'Get Export Data',
-                    'styleid' => $template_id,
-                ],
-                admin_url('admin-ajax.php'),
+            [
+                'action' => 'oxi_accordions_ultimate',
+                'functionname' => 'shortcode_export',
+                '_wpnonce' => wp_create_nonce('oxi_accordions_ultimate'),
+                'rawdata' => 'Get Export Data',
+                'styleid' => $template_id,
+            ],
+            admin_url('admin-ajax.php'),
         );
     }
 
-    public function created_shortcode() {
+    public function created_shortcode()
+    {
         $return = ' <div class="oxi-addons-row"> <div class="oxi-addons-row table-responsive abop" style="margin-bottom: 20px; opacity: 0; height: 0px">
                         <table class="table table-hover widefat oxi_addons_table_data" style="background-color: #fff; border: 1px solid #ccc">
                             <thead>
@@ -199,7 +207,7 @@ class Front_Page {
             $return .= _('<td>' . esc_html($id) . '</td>');
             $return .= _('<td>' . esc_html(ucwords($value['name'])) . '</td>');
             $return .= _('<td><span>Shortcode &nbsp;&nbsp;<input type="text" onclick="this.setSelectionRange(0, this.value.length)" value="[oxi_accordions id=&quot;' . esc_attr($id) . '&quot;]"></span> <br>'
-                    . '<span>Php Code &nbsp;&nbsp; <input type="text" onclick="this.setSelectionRange(0, this.value.length)" value="&lt;?php echo do_shortcode(&#039;[oxi_accordions id=&quot;' . esc_attr($id) . '&quot;]&#039;); ?&gt;"></span></td>');
+                . '<span>Php Code &nbsp;&nbsp; <input type="text" onclick="this.setSelectionRange(0, this.value.length)" value="&lt;?php echo do_shortcode(&#039;[oxi_accordions id=&quot;' . esc_attr($id) . '&quot;]&#039;); ?&gt;"></span></td>');
             $return .= _('<td>
                        <a href="' . esc_url(admin_url("admin.php?page=oxi-accordions-ultimate-new&styleid=" . esc_attr($id) . "")) . '"  title="Edit"  class="btn btn-info" style="float:left; margin-right: 5px; margin-left: 5px;">Edit</a>
                        <form method="post" class="oxi-addons-style-delete">
@@ -222,26 +230,30 @@ class Front_Page {
      * Generate safe path
      * @since v2.0.1
      */
-    public function safe_path($path) {
+    public function safe_path($path)
+    {
 
         $path = str_replace(['//', '\\\\'], ['/', '\\'], $path);
         return str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $path);
     }
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->database = new \OXI_ACCORDIONS_PLUGINS\Helper\Database;
         $this->additional_load();
         $this->public_render();
     }
 
-    public function additional_load() {
+    public function additional_load()
+    {
         $this->database_data();
         $this->admin_front_additional();
         $this->manual_import_json();
         apply_filters('oxi-accordions-plugin/admin_menu', true);
     }
 
-    public function database_data() {
+    public function database_data()
+    {
         return $this->database->wpdb->get_results($this->database->wpdb->prepare('SELECT * FROM ' . $this->database->parent_table . ' WHERE type = %s ', 'accordions-or-faqs'), ARRAY_A);
     }
 }

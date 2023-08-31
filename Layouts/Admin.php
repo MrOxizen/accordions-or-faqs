@@ -10,9 +10,11 @@ if (!defined('ABSPATH'))
  *
  * author @biplob018
  */
+
 use OXI_ACCORDIONS_PLUGINS\Helper\Controls as Controls;
 
-class Admin {
+class Admin
+{
 
     use \OXI_ACCORDIONS_PLUGINS\Helper\Additional;
     use \OXI_ACCORDIONS_PLUGINS\Helper\Sanitization;
@@ -108,7 +110,8 @@ class Admin {
      *
      * @since 2.0.1
      */
-    public function shortcode_name() {
+    public function shortcode_name()
+    {
         $this->add_substitute_control('', $this->dbdata, [
             'type' => Controls::SHORTCODENAME,
             'title' => esc_html__('Shortcode Name', 'accordions-or-faqs'),
@@ -123,7 +126,8 @@ class Admin {
      *
      * @since 2.0.1
      */
-    public function shortcode_info() {
+    public function shortcode_info()
+    {
         $this->add_substitute_control($this->oxiid, $this->dbdata, [
             'type' => Controls::SHORTCODEINFO,
             'title' => esc_html__('Shortcode', 'accordions-or-faqs'),
@@ -137,39 +141,20 @@ class Admin {
      *
      * @since 2.0.1
      */
-    public function modal_form_data() {
+    public function modal_form_data()
+    {
         $this->form = 'single';
     }
 
-    /**
-     * Template Parent Modal Form
-     *
-     * @since 2.0.1
-     */
-    public function modal_form() {
 
-        echo '<div class="modal fade" id="oxi-addons-list-data-modal" >
-                <div class="modal-dialog modal-lg">
-                    <form method="post" id="oxi-template-modal-form">
-                         <div class="modal-content">';
-        $this->modal_form_data();
-        echo '              <div class="modal-footer">
-                                <input type="hidden" id="shortcodeitemid" name="shortcodeitemid" value="">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-success" id="oxi-template-modal-submit">Submit</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-              </div>';
-    }
 
     /**
      * Template Parent Item Data Rearrange
      *
      * @since 2.0.0
      */
-    public function Rearrange() {
+    public function Rearrange()
+    {
         return '<li class="list-group-item" id="{{id}}">{{oxi-accordions-modal-title}}</li>';
     }
 
@@ -178,9 +163,10 @@ class Admin {
      *
      * @since 2.0.1
      */
-    public function shortcode_rearrange() {
+    public function shortcode_rearrange()
+    {
         $rearrange = $this->Rearrange();
-        if (!empty($rearrange)):
+        if (!empty($rearrange)) :
             $this->add_substitute_control($rearrange, [], [
                 'type' => Controls::REARRANGE,
                 'showing' => TRUE,
@@ -197,7 +183,8 @@ class Admin {
      *
      * @since 2.0.1
      */
-    public function modal_opener() {
+    public function modal_opener()
+    {
         $this->add_substitute_control('', [], [
             'type' => Controls::MODALOPENER,
             'title' => esc_html__('Accordions Data Form', 'accordions-or-faqs'),
@@ -209,7 +196,8 @@ class Admin {
         ]);
     }
 
-    public function thumbnail_sizes() {
+    public function thumbnail_sizes()
+    {
         $default_image_sizes = get_intermediate_image_sizes();
         $thumbnail_sizes = array();
         foreach ($default_image_sizes as $size) {
@@ -224,7 +212,8 @@ class Admin {
      *
      * @since 2.0.1
      */
-    public function template_css_render($style) {
+    public function template_css_render($style)
+    {
         $styleid = $style['style-id'];
         $this->oxiid = $styleid;
         $this->WRAPPER = '.oxi-accordions-wrapper-' . $this->oxiid;
@@ -245,13 +234,13 @@ class Admin {
                 }
                 $tempcss .= '}';
             }
-            if ($key == 'laptop'):
+            if ($key == 'laptop') :
                 $fullcssfile .= $tempcss;
-            elseif ($key == 'tab'):
+            elseif ($key == 'tab') :
                 $fullcssfile .= '@media only screen and (min-width : 769px) and (max-width : 993px){';
                 $fullcssfile .= $tempcss;
                 $fullcssfile .= '}';
-            elseif ($key == 'mobile'):
+            elseif ($key == 'mobile') :
                 $fullcssfile .= '@media only screen and (max-width : 768px){';
                 $fullcssfile .= $tempcss;
                 $fullcssfile .= '}';
@@ -268,7 +257,8 @@ class Admin {
      *
      * @since 2.0.1
      */
-    public function inline_template_css_render($style) {
+    public function inline_template_css_render($style)
+    {
         $styleid = $style['style-id'];
         $this->style = $style;
         $this->oxiid = $styleid;
@@ -289,13 +279,13 @@ class Admin {
                 }
                 $tempcss .= '}';
             }
-            if ($key == 'laptop'):
+            if ($key == 'laptop') :
                 $fullcssfile .= $tempcss;
-            elseif ($key == 'tab'):
+            elseif ($key == 'tab') :
                 $fullcssfile .= '@media only screen and (min-width : 769px) and (max-width : 993px){';
                 $fullcssfile .= $tempcss;
                 $fullcssfile .= '}';
-            elseif ($key == 'mobile'):
+            elseif ($key == 'mobile') :
                 $fullcssfile .= '@media only screen and (max-width : 768px){';
                 $fullcssfile .= $tempcss;
                 $fullcssfile .= '}';
@@ -313,8 +303,9 @@ class Admin {
      *
      * @since 2.0.1
      */
-    public function render() {
-        ?>
+    public function render()
+    {
+?>
         <div class="wrap">
             <div class="oxi-addons-wrapper">
                 <?php
@@ -337,8 +328,8 @@ class Admin {
                                         </div>
                                         <div class="oxi-addons-setting-save">
                                             <button type="button" class="btn btn-danger" id="oxi-addons-setting-reload">Reload</button>
-                                            <input type="hidden"  id="oxilab-preview-color" name="oxilab-preview-color" value="<?php echo is_array($this->style) ? array_key_exists('oxilab-preview-color', $this->style) ? esc_attr($this->style['oxilab-preview-color']) : '#FFF' : '#FFF'; ?>">
-                                            <input type="hidden"  id="style-id" name="style-id" value="<?php echo esc_attr($this->dbdata['id']); ?>">
+                                            <input type="hidden" id="oxilab-preview-color" name="oxilab-preview-color" value="<?php echo is_array($this->style) ? array_key_exists('oxilab-preview-color', $this->style) ? esc_attr($this->style['oxilab-preview-color']) : '#FFF' : '#FFF'; ?>">
+                                            <input type="hidden" id="style-id" name="style-id" value="<?php echo esc_attr($this->dbdata['id']); ?>">
                                             <button type="button" class="btn btn-success" id="oxi-addons-templates-submit"> Save</button>
                                         </div>
                                     </div>
@@ -373,16 +364,12 @@ class Admin {
                                             </div>
                                         </div>
                                         <div class="oxi-addons-style-left-preview-heading-right">
-                                            <input type="text" data-format="rgb" data-opacity="TRUE" class="oxi-addons-minicolor" id="oxi-addons-2-0-color" name="oxi-addons-2-0-color" value="<?php echo(is_array($this->style) ? array_key_exists('oxilab-preview-color', $this->style) ? $this->style['oxilab-preview-color'] : '#FFF' : '#FFF'); ?>">
+                                            <input type="text" data-format="rgb" data-opacity="TRUE" class="oxi-addons-minicolor" id="oxi-addons-2-0-color" name="oxi-addons-2-0-color" value="<?php echo (is_array($this->style) ? array_key_exists('oxilab-preview-color', $this->style) ? $this->style['oxilab-preview-color'] : '#FFF' : '#FFF'); ?>">
                                         </div>
                                     </div>
                                     <div class="oxi-addons-preview-wrapper">
                                         <div class="oxi-addons-preview-data" id="oxi-addons-preview-data" template-wrapper="<?php echo esc_attr($this->WRAPPER); ?> > .oxi-addons-row" template-id="#oxi-<?php echo esc_attr(strtolower($this->dbdata['type'])); ?>-wrapper-<?php echo esc_attr($this->dbdata['id']); ?>">
-                                            <iframe  src="<?php echo esc_url(admin_url('admin.php?page=oxi-accordions-style-view&styleid=' . $this->oxiid)); ?>"
-                                                     id="oxi-addons-preview-iframe"
-                                                     class="oxi-addons-preview-iframe"
-                                                     width="100%" scrolling="no"
-                                                     frameborder="0"></iframe>
+                                            <iframe src="<?php echo esc_url(admin_url('admin.php?page=oxi-accordions-style-view&styleid=' . $this->oxiid)); ?>" id="oxi-addons-preview-iframe" class="oxi-addons-preview-iframe" width="100%" scrolling="no" frameborder="0"></iframe>
                                         </div>
 
                                     </div>
@@ -409,7 +396,7 @@ class Admin {
                 </div>
             </div>
         </div>
-        <?php
+<?php
     }
 
     /**
@@ -417,42 +404,68 @@ class Admin {
      *
      * @since 2.0.1
      */
-    public function hooks() {
+    public function hooks()
+    {
         $this->admin_elements_editior_loader();
         $this->dbdata = $this->database->wpdb->get_row($this->database->wpdb->prepare('SELECT * FROM ' . $this->database->parent_table . ' WHERE id = %d ', $this->oxiid), ARRAY_A);
 
         $Get_Nested_Accordions = $this->database->wpdb->get_results($this->database->wpdb->prepare("SELECT id, name FROM {$this->database->parent_table} WHERE type = %s ORDER by id ASC", 'accordions-or-faqs'), ARRAY_A);
         foreach ($Get_Nested_Accordions as $key => $value) {
-            if ($value['id'] != $this->oxiid):
+            if ($value['id'] != $this->oxiid) :
                 $this->Get_Nested_Accordions[$value['id']] = !empty($value['name']) ? $value['name'] : 'Accordions id ' . $value['id'];
             endif;
         }
 
         $this->child = $this->database->wpdb->get_results($this->database->wpdb->prepare("SELECT * FROM {$this->database->child_table} WHERE styleid = %d ORDER by id ASC", $this->oxiid), ARRAY_A);
-        if (!empty($this->dbdata['rawdata'])):
+        if (!empty($this->dbdata['rawdata'])) :
             $s = json_decode(stripslashes($this->dbdata['rawdata']), true);
-            if (is_array($s)):
+            if (is_array($s)) :
                 $this->style = $s;
             endif;
         endif;
         $this->import_font_family();
     }
+    /**
+     * Template Parent Modal Form
+     *
+     * @since 2.0.1
+     */
+    public function modal_form()
+    {
 
-    public function register_controls() {
+        echo '<div class="modal fade" id="oxi-addons-list-data-modal" >
+                <div class="modal-dialog modal-lg">
+                    <form method="post" id="oxi-template-modal-form">
+                         <div class="modal-content">';
+        $this->modal_form_data();
+        echo '              <div class="modal-footer">
+                                <input type="hidden" id="shortcodeitemid" name="shortcodeitemid" value="">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-success" id="oxi-template-modal-submit">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+              </div>';
+    }
+    public function register_controls()
+    {
         $this->start_section_header(
-                'shortcode-addons-start-tabs', [
-            'options' => [
-                'button-settings' => esc_html__('General Settings', 'accordions-or-faqs'),
-                'custom' => esc_html__('Custom CSS', 'accordions-or-faqs'),
-            ]
+            'shortcode-addons-start-tabs',
+            [
+                'options' => [
+                    'button-settings' => esc_html__('General Settings', 'accordions-or-faqs'),
+                    'custom' => esc_html__('Custom CSS', 'accordions-or-faqs'),
                 ]
+            ]
         );
         $this->start_section_tabs(
-                'oxi-accordions-start-tabs', [
-            'condition' => [
-                'oxi-tabs-start-tabs' => esc_html__('button-settings', 'accordions-or-faqs'),
-            ]
+            'oxi-accordions-start-tabs',
+            [
+                'condition' => [
+                    'oxi-tabs-start-tabs' => esc_html__('button-settings', 'accordions-or-faqs'),
                 ]
+            ]
         );
         $this->start_section_devider();
         $this->register_general();
@@ -464,33 +477,38 @@ class Admin {
         $this->end_section_tabs();
 
         $this->start_section_tabs(
-                'oxi-tabs-start-tabs', [
-            'condition' => [
-                'oxi-tabs-start-tabs' => 'custom'
-            ],
-            'padding' => '10px'
-                ]
+            'oxi-tabs-start-tabs',
+            [
+                'condition' => [
+                    'oxi-tabs-start-tabs' => 'custom'
+                ],
+                'padding' => '10px'
+            ]
         );
 
         $this->start_controls_section(
-                'oxi-tabs-start-tabs-css', [
-            'label' => esc_html__('Custom CSS', 'accordions-or-faqs'),
-            'showing' => TRUE,
-                ]
+            'oxi-tabs-start-tabs-css',
+            [
+                'label' => esc_html__('Custom CSS', 'accordions-or-faqs'),
+                'showing' => TRUE,
+            ]
         );
         $this->add_control(
-                'oxi-tabs-custom-css', $this->style, [
-            'label' => esc_html__('', 'accordions-or-faqs'),
-            'type' => Controls::TEXTAREA,
-            'default' => '',
-            'description' => esc_html__('Custom CSS Section. You can add custom css into textarea.')
-                ]
+            'oxi-tabs-custom-css',
+            $this->style,
+            [
+                'label' => esc_html__('', 'accordions-or-faqs'),
+                'type' => Controls::TEXTAREA,
+                'default' => '',
+                'description' => esc_html__('Custom CSS Section. You can add custom css into textarea.')
+            ]
         );
         $this->end_controls_section();
         $this->end_section_tabs();
     }
 
-    public function __construct($type = '') {
+    public function __construct($type = '')
+    {
         $this->database = new \OXI_ACCORDIONS_PLUGINS\Helper\Database();
         $this->oxiid = (!empty($_GET['styleid']) ? (int) $_GET['styleid'] : '');
         $this->WRAPPER = '.oxi-accordions-wrapper-' . $this->oxiid;
@@ -501,9 +519,9 @@ class Admin {
         }
     }
 
-    public function str_replace_first($from, $to, $content) {
+    public function str_replace_first($from, $to, $content)
+    {
         $from = '/' . preg_quote($from, '/') . '/';
         return preg_replace($from, $to, $content, 1);
     }
-
 }

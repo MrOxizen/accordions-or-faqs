@@ -10,28 +10,15 @@ if (!defined('ABSPATH'))
  *
  * author @biplob018
  */
-class Bootstrap {
+class Bootstrap
+{
 
     use \OXI_ACCORDIONS_PLUGINS\Helper\Helper;
 
-    public function load_shortcode() {
-        add_shortcode('oxi_accordions', [$this, 'accordions_shortcode']);
-        $Widget = new \OXI_ACCORDIONS_PLUGINS\Includes\Widget();
-        add_filter('widget_text', 'do_shortcode');
-        add_action('widgets_init', array($Widget, 'register_accordions_widget'));
-    }
 
-    /**
-     * Load Textdomain
-     *
-     * @since 2.0.1
-     * @access public
-     */
-    public function i18n() {
-        load_plugin_textdomain('oxi-accordions-plugin');
-    }
 
-    public function __construct() {
+    public function __construct()
+    {
 
         do_action('oxi-accordions-plugin/before_init');
         // Load translation
@@ -51,11 +38,30 @@ class Bootstrap {
     // instance container
     private static $instance = null;
 
-    public static function instance() {
+    public static function instance()
+    {
         if (self::$instance == null) {
             self::$instance = new self;
         }
 
         return self::$instance;
+    }
+    public function load_shortcode()
+    {
+        add_shortcode('oxi_accordions', [$this, 'accordions_shortcode']);
+        $Widget = new \OXI_ACCORDIONS_PLUGINS\Includes\Widget();
+        add_filter('widget_text', 'do_shortcode');
+        add_action('widgets_init', array($Widget, 'register_accordions_widget'));
+    }
+
+    /**
+     * Load Textdomain
+     *
+     * @since 2.0.1
+     * @access public
+     */
+    public function i18n()
+    {
+        load_plugin_textdomain('oxi-accordions-plugin');
     }
 }

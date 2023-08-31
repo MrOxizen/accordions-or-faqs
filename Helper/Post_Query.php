@@ -6,36 +6,13 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-trait Post_Query {
+trait Post_Query
+{
 
-    public function post_exclude($type) {
-        $post_list = get_posts(array(
-            'post_type' => $type,
-            'orderby' => 'date',
-            'order' => 'DESC',
-            'posts_per_page' => -1,
-        ));
-        if (empty($post_list) && is_wp_error($post_list)):
-            return [];
-        endif;
-        $posts = array();
-        foreach ($post_list as $post) {
-            $posts[$post->ID] = ucfirst($post->post_title);
-        }
-        return $posts;
-    }
 
-    public function thumbnail_sizes() {
-        $default_image_sizes = get_intermediate_image_sizes();
-        $thumbnail_sizes = array();
-        foreach ($default_image_sizes as $size) {
-            $image_sizes[$size] = $size . ' - ' . intval(get_option("{$size}_size_w")) . ' x ' . intval(get_option("{$size}_size_h"));
-            $thumbnail_sizes[$size] = str_replace('_', ' ', ucfirst($image_sizes[$size]));
-        }
-        return $thumbnail_sizes;
-    }
 
-    public function post_author() {
+    public function post_author()
+    {
         $us = [];
         $users = get_users();
         if ($users) {
@@ -46,13 +23,14 @@ trait Post_Query {
         return $us;
     }
 
-    public function post_category($type) {
+    public function post_category($type)
+    {
         $cat = [];
         $categories = get_terms(array(
             'taxonomy' => $type == 'post' ? 'category' : $type . '_category',
             'hide_empty' => true,
         ));
-        if (empty($categories) || is_wp_error($categories)):
+        if (empty($categories) || is_wp_error($categories)) :
             return [];
         endif;
 
@@ -62,17 +40,19 @@ trait Post_Query {
         return $cat;
     }
 
-    public function post_type() {
+    public function post_type()
+    {
         return get_post_types(array('public' => true, 'show_in_nav_menus' => true), 'names');
     }
 
-    public function post_tags($type) {
+    public function post_tags($type)
+    {
         $tg = [];
         $tags = get_terms(array(
             'taxonomy' => $type . '_tag',
             'hide_empty' => true,
         ));
-        if (empty($tags) || is_wp_error($tags)):
+        if (empty($tags) || is_wp_error($tags)) :
             return [];
         endif;
 
@@ -82,15 +62,43 @@ trait Post_Query {
 
         return $tg;
     }
-
-    public function post_include($type) {
+    public function post_exclude($type)
+    {
         $post_list = get_posts(array(
             'post_type' => $type,
             'orderby' => 'date',
             'order' => 'DESC',
             'posts_per_page' => -1,
         ));
-        if (empty($post_list) && is_wp_error($post_list)):
+        if (empty($post_list) && is_wp_error($post_list)) :
+            return [];
+        endif;
+        $posts = array();
+        foreach ($post_list as $post) {
+            $posts[$post->ID] = ucfirst($post->post_title);
+        }
+        return $posts;
+    }
+
+    public function thumbnail_sizes()
+    {
+        $default_image_sizes = get_intermediate_image_sizes();
+        $thumbnail_sizes = array();
+        foreach ($default_image_sizes as $size) {
+            $image_sizes[$size] = $size . ' - ' . intval(get_option("{$size}_size_w")) . ' x ' . intval(get_option("{$size}_size_h"));
+            $thumbnail_sizes[$size] = str_replace('_', ' ', ucfirst($image_sizes[$size]));
+        }
+        return $thumbnail_sizes;
+    }
+    public function post_include($type)
+    {
+        $post_list = get_posts(array(
+            'post_type' => $type,
+            'orderby' => 'date',
+            'order' => 'DESC',
+            'posts_per_page' => -1,
+        ));
+        if (empty($post_list) && is_wp_error($post_list)) :
             return [];
         endif;
         $posts = array();

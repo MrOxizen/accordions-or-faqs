@@ -10,7 +10,8 @@ if (!defined('ABSPATH'))
  *
  * author @biplob018
  */
-class Template {
+class Template
+{
 
     /**
      * Current Elements id
@@ -125,43 +126,15 @@ class Template {
      */
     public $keys;
 
-    public function __construct(array $dbdata = [], array $child = [], $admin = 'user', array $arg = [], array $keys = []) {
-        if (count($dbdata) > 0) :
-            $this->dbdata = $dbdata;
-            $this->child = $child;
-            $this->admin = $admin;
-            $this->arg = $arg;
-            $this->keys = $keys;
-            $this->database = new \OXI_ACCORDIONS_PLUGINS\Helper\Database();
-            if (array_key_exists('id', $this->dbdata)) :
-                $this->oxiid = $this->dbdata['id'];
-            else :
-                $this->oxiid = rand(100000, 200000);
-            endif;
-            $this->loader();
-        endif;
-    }
 
-    /**
-     * Current element loader
-     *
-     * @since 2.0.1
-     */
-    public function loader() {
-        $this->style = json_decode(stripslashes($this->dbdata['rawdata']), true);
-        $this->CSSDATA = $this->dbdata['stylesheet'];
-        $this->WRAPPER = 'oxi-accordions-wrapper-' . $this->dbdata['id'];
-        $this->hooks();
-
-        $this->render_accordion_global_schema();
-    }
 
     /**
      * load css and js hooks
      *
      * @since 2.0.1
      */
-    public function hooks() {
+    public function hooks()
+    {
 
         $this->public_jquery();
         $this->public_css();
@@ -210,22 +183,23 @@ class Template {
      *
      * @return void
      */
-    public function render_accordion_global_schema() {
+    public function render_accordion_global_schema()
+    {
         $schema = get_option('accordions_or_faqs_global_schema');
         if ($schema == 'yes' && count($this->global_schema) > 0) :
             add_action('wp_footer', [$this, 'global_schema']);
         endif;
     }
 
-    public function global_schema() {
-        ?>
+    public function global_schema()
+    {
+?>
         <!-- FAQ Schema : Starts-->
         <script type="application/ld+json">
-        <?php echo json_encode($this->global_schema, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE); ?>
-
+            <?php echo json_encode($this->global_schema, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE); ?>
         </script>
         <!-- FAQ Schema : Ends-->
-        <?php
+    <?php
     }
 
     /**
@@ -233,7 +207,8 @@ class Template {
      *
      * @since 2.0.1
      */
-    public function public_frontend_loader() {
+    public function public_frontend_loader()
+    {
         wp_enqueue_script("jquery");
         wp_enqueue_style('oxi-accordions-ultimate', OXI_ACCORDIONS_URL . 'assets/frontend/css/style.css', false, OXI_ACCORDIONS_PLUGIN_VERSION);
         wp_enqueue_style('oxi-plugin-animate', OXI_ACCORDIONS_URL . 'assets/frontend/css/animate.css', false, OXI_ACCORDIONS_PLUGIN_VERSION);
@@ -246,33 +221,32 @@ class Template {
      *
      * @since 2.0.1
      */
-    public function render() {
-        ?>
-        <div class="oxi-addons-container oxi-accordions-wrapper <?php echo esc_attr($this->WRAPPER) ?>"
-             id="<?php echo esc_attr($this->WRAPPER) ?>">
+    public function render()
+    {
+    ?>
+        <div class="oxi-addons-container oxi-accordions-wrapper <?php echo esc_attr($this->WRAPPER) ?>" id="<?php echo esc_attr($this->WRAPPER) ?>">
             <div class="oxi-addons-row">
                 <?php
                 if ($this->admin == 'admin') :
-                    ?>
-                    <input type="hidden" id="oxi-addons-iframe-background-color"
-                           name="oxi-addons-iframe-background-color" value=" <?php
-                           if (is_array($this->style)) :
-                               if (array_key_exists('oxilab-preview-color', $this->style)) :
-                                   echo esc_attr($this->style['oxilab-preview-color']);
-                               else :
-                                   echo '#FFF';
-                               endif;
-                           else :
-                               echo '#FFF';
-                           endif;
-                           ?>">
-                           <?php
-                       endif;
-                       $this->default_render($this->style, $this->child, $this->admin);
-                       ?>
+                ?>
+                    <input type="hidden" id="oxi-addons-iframe-background-color" name="oxi-addons-iframe-background-color" value=" <?php
+                                                                                                                                    if (is_array($this->style)) :
+                                                                                                                                        if (array_key_exists('oxilab-preview-color', $this->style)) :
+                                                                                                                                            echo esc_attr($this->style['oxilab-preview-color']);
+                                                                                                                                        else :
+                                                                                                                                            echo '#FFF';
+                                                                                                                                        endif;
+                                                                                                                                    else :
+                                                                                                                                        echo '#FFF';
+                                                                                                                                    endif;
+                                                                                                                                    ?>">
+                <?php
+                endif;
+                $this->default_render($this->style, $this->child, $this->admin);
+                ?>
             </div>
         </div>
-        <?php
+<?php
     }
 
     /**
@@ -280,7 +254,8 @@ class Template {
      *
      * @since 2.0.1
      */
-    public function public_attribute() {
+    public function public_attribute()
+    {
         $this->style;
         $data = ' data-oxi-trigger="' . (array_key_exists('oxi-accordions-trigger', $this->style) ? $this->style['oxi-accordions-trigger'] . '' : 'click') . '" ';
         $data .= 'data-oxi-accordions-type="' . (array_key_exists('oxi-accordions-type', $this->style) ? '' . $this->style['oxi-accordions-type'] . '' : 'toggle') . '" ';
@@ -300,7 +275,8 @@ class Template {
      *
      * @since 2.0.1
      */
-    public function public_jquery() {
+    public function public_jquery()
+    {
         echo _('');
     }
 
@@ -309,7 +285,8 @@ class Template {
      *
      * @since 2.0.1
      */
-    public function public_css() {
+    public function public_css()
+    {
         echo _('');
     }
 
@@ -318,7 +295,8 @@ class Template {
      *
      * @since 2.0.1
      */
-    public function inline_public_jquery() {
+    public function inline_public_jquery()
+    {
         echo _('');
     }
 
@@ -327,11 +305,13 @@ class Template {
      *
      * @since 2.0.1
      */
-    public function inline_public_css() {
+    public function inline_public_css()
+    {
         echo _('');
     }
 
-    public function default_render($style, $child, $admin) {
+    public function default_render($style, $child, $admin)
+    {
 
 
         echo '<div class="oxi-accordions-ultimate-style oxi-accordions-ultimate-template-' . esc_attr($this->oxiid) . '  oxi-accordions-clearfix oxi-accordions-preloader" ' . $this->public_attribute . ' ' . $this->accordions_preloader . '>';
@@ -395,11 +375,11 @@ class Template {
             echo $content;
             if ($style['oxi-accordions-content-height'] == 'oxi-accordions-content-height' && $style['oxi-accordions-content-mx-height-interface'] == 'oxi-accordions-content-mx-height-interface-button') :
                 echo '<div class="oxi-accordions-content-expand-button">'
-                . '        <div class="oxi-accordions-content-expand-body">'
-                . '             <div class="oxi-accordions-content-expand-open">' . $this->text_render($style['oxi-accordions-content-mx-height-expand-text']) . '</div> '
-                . '             <div class="oxi-accordions-content-expand-close">' . $this->text_render($style['oxi-accordions-content-mx-height-collapse-text']) . '</div>'
-                . '        </div>'
-                . ' </div>';
+                    . '        <div class="oxi-accordions-content-expand-body">'
+                    . '             <div class="oxi-accordions-content-expand-open">' . $this->text_render($style['oxi-accordions-content-mx-height-expand-text']) . '</div> '
+                    . '             <div class="oxi-accordions-content-expand-close">' . $this->text_render($style['oxi-accordions-content-mx-height-collapse-text']) . '</div>'
+                    . '        </div>'
+                    . ' </div>';
             endif;
 
             if ($this->admin == 'admin' && $style['oxi-accordions-content-type'] != 'post') :
@@ -425,7 +405,8 @@ class Template {
         echo '</div>';
     }
 
-    public static function allowed_tags() {
+    public static function allowed_tags()
+    {
         return [
             'a' => [
                 'href' => [],
@@ -622,7 +603,8 @@ class Template {
         ];
     }
 
-    public function admin_edit_panel($id) {
+    public function admin_edit_panel($id)
+    {
         $data = '';
         if ($this->admin == 'admin') :
             $data = '   <div class="oxi-addons-admin-absulote">
@@ -637,7 +619,8 @@ class Template {
         return $data;
     }
 
-    public function post_query() {
+    public function post_query()
+    {
         $style = $this->style;
         $args = [
             'post_status' => 'publish',
@@ -710,11 +693,13 @@ class Template {
      *
      * @since 2.0.1
      */
-    public function Json_Decode($rawdata) {
+    public function Json_Decode($rawdata)
+    {
         return $rawdata != '' ? json_decode(stripcslashes($rawdata), true) : [];
     }
 
-    public function font_familly_validation($data = []) {
+    public function font_familly_validation($data = [])
+    {
         $api = get_option('oxi_addons_google_font');
         if ($api == 'no') :
             return;
@@ -724,18 +709,21 @@ class Template {
         }
     }
 
-    public function array_render($id, $style) {
+    public function array_render($id, $style)
+    {
         if (array_key_exists($id, $style)) :
             return $style[$id];
         endif;
     }
 
-    public function text_render($data) {
+    public function text_render($data)
+    {
         $r = do_shortcode(str_replace('spTac', '&nbsp;', str_replace('spBac', '<br>', html_entity_decode($data))), $ignore_html = false);
         return wp_kses($r, $this->allowed_tags());
     }
 
-    public function url_render($id, $style) {
+    public function url_render($id, $style)
+    {
         $link = [];
         if (array_key_exists($id . '-url', $style) && $style[$id . '-url'] != '') :
             $link['url'] = $style[$id . '-url'];
@@ -748,7 +736,8 @@ class Template {
         return $link;
     }
 
-    public function media_render($id, $style) {
+    public function media_render($id, $style)
+    {
         $url = '';
         if (array_key_exists($id . '-select', $style)) :
             if ($style[$id . '-select'] == 'media-library') :
@@ -765,7 +754,8 @@ class Template {
         endif;
     }
 
-    public function excerpt($limit = 10) {
+    public function excerpt($limit = 10)
+    {
         $limit++;
         $excerpt = explode(' ', get_the_excerpt(), $limit);
         if (count($excerpt) >= $limit) {
@@ -778,7 +768,8 @@ class Template {
         return $excerpt;
     }
 
-    public function post_title($limit = 10) {
+    public function post_title($limit = 10)
+    {
         $limit++;
         $title = explode(' ', get_the_title(), $limit);
         if (count($title) >= $limit) {
@@ -790,7 +781,8 @@ class Template {
         return $title;
     }
 
-    public function truncate($str, $length = 24) {
+    public function truncate($str, $length = 24)
+    {
         if (mb_strlen($str) > $length) {
             return mb_substr($str, 0, $length) . '...';
         } else {
@@ -798,7 +790,8 @@ class Template {
         }
     }
 
-    public function accordions_url_render($style) {
+    public function accordions_url_render($style)
+    {
         if (isset($style['oxi-accordions-modal-components-type']) && $style['oxi-accordions-modal-components-type'] == 'link') :
             $data = $this->url_render('oxi-accordions-modal-link', $style);
             if (count($data) >= 1) :
@@ -808,13 +801,15 @@ class Template {
         endif;
     }
 
-    public function default_open($value) {
+    public function default_open($value)
+    {
         if (isset($value['oxi-accordions-modal-default']) && $value['oxi-accordions-modal-default'] == 'yes') :
             return 'show';
         endif;
     }
 
-    public function accordions_content_render($style, $child) {
+    public function accordions_content_render($style, $child)
+    {
         $content = '';
         if ($child['oxi-accordions-modal-components-type'] == 'nested-accordions') :
             $$content = $this->accordions_content_render_nested_accordions($style, $child);
@@ -830,7 +825,8 @@ class Template {
         return $content;
     }
 
-    public function accordions_content_render_nested_accordions($style, $child) {
+    public function accordions_content_render_nested_accordions($style, $child)
+    {
         $shortcode = array_key_exists('oxi-accordions-modal-nested-accordions', $child) ? $child['oxi-accordions-modal-nested-accordions'] : '';
         if ($shortcode > 0) :
             ob_start();
@@ -840,7 +836,8 @@ class Template {
         return;
     }
 
-    public function accordions_content_special_charecter($data) {
+    public function accordions_content_special_charecter($data)
+    {
         $data = html_entity_decode($data);
         $data = str_replace("\'", "'", $data);
         $data = str_replace('\"', '"', $data);
@@ -848,7 +845,8 @@ class Template {
         return $data;
     }
 
-    public function special_charecter($data) {
+    public function special_charecter($data)
+    {
         $data = html_entity_decode($data);
         $data = str_replace("\'", "'", $data);
         $data = str_replace('\"', '"', $data);
@@ -856,7 +854,8 @@ class Template {
         return wp_kses_post($data);
     }
 
-    public function title_special_charecter($array, $title, $subtitle) {
+    public function title_special_charecter($array, $title, $subtitle)
+    {
         $r = '<div class=\'oxi-accordions-header-title\'>';
         $t = false;
         if (!empty($array[$title]) && $array[$title] != '') :
@@ -873,27 +872,63 @@ class Template {
         endif;
     }
 
-    public function number_special_charecter($data) {
+    public function number_special_charecter($data)
+    {
         if (!empty($data) && $data != '') :
             return '<div class="oxi-accordions-header-li-number ' . (isset($this->style['oxi-accordions-head-additional-interface']) ? $this->style['oxi-accordions-head-additional-interface'] : '') . '">' . $this->special_charecter($data) . '</div>';
         endif;
     }
 
-    public function image_special_render($id = '', $array = []) {
+    public function image_special_render($id = '', $array = [])
+    {
         $value = $this->media_render($id, $array);
         if (!empty($value)) :
             return ' <img  class="oxi-accordions-header-li-image ' . (isset($this->style['oxi-accordions-head-additional-interface']) ? $this->style['oxi-accordions-head-additional-interface'] : '') . '" ' . $value . '>';
         endif;
     }
 
-    public function icon_special_rander($id = '') {
+    public function icon_special_rander($id = '')
+    {
         $value = $this->font_awesome_render($id);
         if (!empty($value)) :
             return ' <div class="oxi-accordions-additional-icon oxi-accordions-additional-icon-' . esc_attr($this->oxiid) . ' ' . (isset($this->style['oxi-accordions-head-additional-interface']) ? $this->style['oxi-accordions-head-additional-interface'] : '') . '"> ' . $value . '</div>';
         endif;
     }
+    public function __construct(array $dbdata = [], array $child = [], $admin = 'user', array $arg = [], array $keys = [])
+    {
+        if (count($dbdata) > 0) :
+            $this->dbdata = $dbdata;
+            $this->child = $child;
+            $this->admin = $admin;
+            $this->arg = $arg;
+            $this->keys = $keys;
+            $this->database = new \OXI_ACCORDIONS_PLUGINS\Helper\Database();
+            if (array_key_exists('id', $this->dbdata)) :
+                $this->oxiid = $this->dbdata['id'];
+            else :
+                $this->oxiid = rand(100000, 200000);
+            endif;
+            $this->loader();
+        endif;
+    }
 
-    public function font_awesome_render($data) {
+    /**
+     * Current element loader
+     *
+     * @since 2.0.1
+     */
+    public function loader()
+    {
+        $this->style = json_decode(stripslashes($this->dbdata['rawdata']), true);
+        $this->CSSDATA = $this->dbdata['stylesheet'];
+        $this->WRAPPER = 'oxi-accordions-wrapper-' . $this->dbdata['id'];
+        $this->hooks();
+
+        $this->render_accordion_global_schema();
+    }
+
+    public function font_awesome_render($data)
+    {
         if (empty($data) || $data == '') :
             return;
         endif;
@@ -905,7 +940,8 @@ class Template {
         return $files;
     }
 
-    public function expand_collapse_icon_number_render($style = [], $number = 0) {
+    public function expand_collapse_icon_number_render($style = [], $number = 0)
+    {
         $data = '';
         if (isset($style['oxi-accordions-head-start-number'])) :
             $data .= '<div class="oxi-accordions-expand-collapse-number">' . ($style['oxi-accordions-head-start-number'] + $number - 1) . '</div>';
@@ -923,7 +959,8 @@ class Template {
         return $data;
     }
 
-    public function defualt_value($id) {
+    public function defualt_value($id)
+    {
         return [
             'oxi-accordions-modal-default' => '',
             'oxi-accordions-modal-title' => '',
@@ -944,5 +981,4 @@ class Template {
             'oxi-accordions-modal-nested-accordions' => ''
         ];
     }
-
 }

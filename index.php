@@ -2,7 +2,7 @@
 
 /*
   Plugin Name: Accordions - Multiple Accordions or FAQs Builders
-  Plugin URI: https://www.oxilabdemos.com/accordions
+  Plugin URI: https://www.oxilabdemos.com/accordion
   Description: Accordions, Most easiest accordions or faqs builder Plugin. Create multiple accordion or  collapse faqs with this.
   Author: Biplob Adhikari
   Author URI: http://www.oxilab.org/

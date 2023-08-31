@@ -10,7 +10,8 @@ if (!defined('ABSPATH'))
  *
  * author @biplob018
  */
-class Recommend {
+class Recommend
+{
 
     const GET_LOCAL_PLUGINS = 'get_all_oxilab_plugins';
     const PLUGINS = 'https://www.oxilab.org/wp-json/oxilabplugins/v2/all_plugins';
@@ -18,26 +19,13 @@ class Recommend {
     public $get_plugins = [];
     public $current_plugins = 'accordions-or-faqs/index.php';
 
-    public function extension() {
-        $response = get_transient(self::GET_LOCAL_PLUGINS);
-        if (!$response || !is_array($response)) {
-            $URL = self::PLUGINS;
-            $request = wp_remote_request($URL);
-            if (!is_wp_error($request)) {
-                $response = json_decode(wp_remote_retrieve_body($request), true);
-                set_transient(self::GET_LOCAL_PLUGINS, $response, 10 * DAY_IN_SECONDS);
-            } else {
-                $response = [];
-            }
-        }
-        $this->get_plugins = $response;
-    }
 
     /**
      * First Installation Track
      * @return void
      */
-    public function install_plugins() {
+    public function install_plugins()
+    {
         $installed_plugins = get_plugins();
 
         $plugin = [];
@@ -95,7 +83,8 @@ class Recommend {
      * Admin Notice CSS file loader
      * @return void
      */
-    public function admin_enqueue_scripts() {
+    public function admin_enqueue_scripts()
+    {
         wp_enqueue_script("jquery");
         wp_enqueue_style('oxilab_accorions-admin-notice-css', OXI_ACCORDIONS_URL . '/Oxilab/css/notice.css', false, 'accordions-or-faqs');
         $this->dismiss_button_scripts();
@@ -105,16 +94,33 @@ class Recommend {
      * Admin Notice JS file loader
      * @return void
      */
-    public function dismiss_button_scripts() {
+    public function dismiss_button_scripts()
+    {
         wp_enqueue_script('oxi-accordions-admin-recommend', OXI_ACCORDIONS_URL . '/Oxilab/js/recommend.js', false, 'accordions-or-faqs');
         wp_localize_script('oxi-accordions-admin-recommend', 'oxi_accordions_admin_recommended', ['ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxi_accordions_admin_recommended')]);
+    }
+    public function extension()
+    {
+        $response = get_transient(self::GET_LOCAL_PLUGINS);
+        if (!$response || !is_array($response)) {
+            $URL = self::PLUGINS;
+            $request = wp_remote_request($URL);
+            if (!is_wp_error($request)) {
+                $response = json_decode(wp_remote_retrieve_body($request), true);
+                set_transient(self::GET_LOCAL_PLUGINS, $response, 10 * DAY_IN_SECONDS);
+            } else {
+                $response = [];
+            }
+        }
+        $this->get_plugins = $response;
     }
 
     /**
      * Admin Notice Ajax  loader
      * @return void
      */
-    public function notice_dissmiss() {
+    public function notice_dissmiss()
+    {
         if (isset($_POST['_wpnonce']) || wp_verify_nonce(sanitize_key(wp_unslash($_POST['_wpnonce'])), 'oxi_accordions_admin_recommended')) :
             $data = 'done';
             update_option('accordions_or_faqs_recommended', $data);
@@ -129,7 +135,8 @@ class Recommend {
      * Revoke this function when the object is created.
      *
      */
-    public function __construct() {
+    public function __construct()
+    {
 
         if (!current_user_can('manage_options')) {
             return;
@@ -145,5 +152,4 @@ class Recommend {
         add_action('wp_ajax_oxi_accordions_admin_recommended', [$this, 'notice_dissmiss']);
         add_action('admin_notices', [$this, 'dismiss_button_scripts']);
     }
-
 }
